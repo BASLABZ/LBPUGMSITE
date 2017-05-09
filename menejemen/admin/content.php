@@ -17,7 +17,7 @@
                         
                   </div> 
                   <div class="col-md-12">
-                        
+                                
                                     <div class="col-lg-3">
                                         <div class="widget style1 lazur-bg dim_about" style="background-color: #f8ac59;">
                                             <div class="row">
@@ -26,12 +26,14 @@
                                                 </div>
                                                 <div class="col-xs-8 text-right">
                                                     
-                                                    <h5 class="font-bold">TARNSAKSI PENGAJUAN</h5>
+                                                    <h5 class="font-bold">  TARNSAKSI PENGAJUAN </h5>
                                                     <a href="index.php?hal=peminjaman/pengajuan/list" style="color: white;">Lihat Data <span class="fa fa-arrow-right"></span></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                
+                                    
                                      <div class="col-lg-3">
                                         <div class="widget style1 lazur-bg dim_about">
                                             <div class="row">
