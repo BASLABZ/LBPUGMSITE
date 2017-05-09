@@ -17,12 +17,12 @@ $emails = $row['member_email'];
   <title></title>
 </head>
 <body>
-	<center><h3>Laboratorium Bioantropologi 
+	<h3>Laboratorium Bioantropologi 
 				Paleantropologi LBP
 				Universitas Gajah Mada [LBP-UGM]
 			</h3>
-	</center>
 	<p>Terima Kasih Telah Bergabung Dengan Kami </p>
-	<p>untuk <b>Aktifasi</b> Silahkan Klik Link Berikut <a href="http://localhost/LBPUGM/member/SENDEMAIL/konfirmasi.php?id=<?php echo $id; ?>&email=<?php echo $emails; ?>">Aktifasi Akun</a> </p>
+	<p>Silahkan klik link dibawah ini untuk mengaktifkan akun Anda : <br/>
+	<a href="http://localhost/LBPUGM/member/SENDEMAIL/konfirmasi.php?id=<?php echo $id; ?>&email=<?php echo $emails; ?>">Aktifasi Akun</a> </p>
 </body>
 </html>

@@ -16,7 +16,7 @@
                     <div class="panel-heading">
                        <div class="row">
                             <div class="col-md-4">
-                             <span class="fa fa-users"></span> MASTER MEMBER
+                             <span class="fa fa-users"></span> Data Member
                         </div>
                         <div class="col-md-8">
                             <div class="text-right"><b><i><span class="fa fa-home"></span> Home / <span class="fa fa-list"></span> Master Data / <span class="fa fa-users"> </span> Member</i></b></div>
@@ -31,7 +31,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-primary" style="border-color:#f8f8f8;">
                         <div class="panel-heading">
-                            <span class="fa fa-users"></span> Data Member
+                            <span class=""></span> 
                         </div>
                         <div class="panel-body dim_about">
                             <div class="table-responsive">

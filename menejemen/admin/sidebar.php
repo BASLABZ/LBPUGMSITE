@@ -6,7 +6,7 @@
                 </a>
                 <br />
                 <div class="media-body">
-                    <h5 class="media-heading" style="color:white; "> <?php echo $_SESSION['operator_username']; ?></h5>
+                    <h5 class="media-heading" style="color:white; "><br/> <?php echo $_SESSION['operator_username']; ?></h5>
                 </div>
                 <br />
             </div>

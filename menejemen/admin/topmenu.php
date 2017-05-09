@@ -5,9 +5,11 @@
             <a data-original-title="Show/Hide Menu" data-placement="bottom" data-tooltip="tooltip" class="accordion-toggle btn btn-primary btn-sm visible-xs" data-toggle="collapse" href="#menu" id="menu-toggle">
                 <i class="icon-align-justify"></i>
             </a>
+           
             <header class="navbar-header">
-                <a href="index.php" class="navbar-brand">
-                <img src="assets/img/logo-ugm.png" class="img-responsive dim_about" style="width: 50%; height:auto;" /></a>
+                <?php  $getoperator = mysql_fetch_array(mysql_query("SELECT operator_name from ref_operator a join ref_level b on a.level_id_fk=b.level_id where operator_id = '".$_SESSION['operator_id']."'")) ?>
+                <h4 style="color: white">  Selamat Datang <?php echo $getoperator['operator_name']; ?> | Level Anda  : &nbsp <?php echo $_SESSION['level_name']; ?></h4>
+                
             </header>
             <ul class="nav navbar-top-links navbar-right" >
                 <li class="dropdown  dim_about  ">

@@ -14,7 +14,7 @@
                     <div class="panel-heading">
                        <div class="row">
                             <div class="col-md-4">
-                             <span class="fa fa-sitemap"></span> MASTER LEVEL
+                             <span class="fa fa-sitemap"></span> Data Level
                         </div>
                         <div class="col-md-8">
                             <div class="text-right"><b><i><span class="fa fa-home"></span> Home / <span class="fa fa-list"></span> Master Data / <span class="fa fa-sitemap"> </span> Level</i></b></div>
@@ -29,7 +29,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-primary" style="border-color:#f8f8f8;">
                         <div class="panel-heading">
-                            <span class="fa fa-list"></span> Master Level <a href="index.php?hal=level/add" class="btn btn-sm btn-success dim_about"><span class="fa fa-plus"></span> Tambah Data</a>
+                            <a href="index.php?hal=level/add" class="btn btn-sm btn-success dim_about"><span class="fa fa-plus"></span> Tambah Data</a>
                         </div>
                         <div class="panel-body dim_about">
                                 <table class="table table-striped table-hover" id="dataTables-example">

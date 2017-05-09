@@ -67,7 +67,7 @@
               }   
         ?> 
     </div>
-    <div id="footer" style="background-color: #1ab394; border-color: #1ab394; color: white;"><p class="pull-right">@copyright <?php echo date('Y'); ?> Develope by Amanda</p></div>
+    <div id="footer" style="background-color: #1ab394; border-color: #1ab394; color: white;"><p class="pull-right">@copyright <?php echo date('Y'); ?> LBP UGM</p></div>
     
     
     <script type="text/javascript">
