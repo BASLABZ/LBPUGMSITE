@@ -8,10 +8,11 @@
             			<div class="panel-heading  dim_about" style="background-color:#1ab394; border-color: #1ab394; ">
             				<img src="assets/img/logo-ugm.png" class="img-responsive" >
             				<br>
-            				<p style="color:white;" align="center"> <b>Sistem Informasi Penyewaan Alat Laboratorium 
-            					Bioantropologi dan Paleantropologi 
+            				<p style="color:white;" align="center"> <b>Sistem Informasi Peminjaman Alat Penelitian Antropometri Laboratorium 
+            					Bio- & Paleantropologi 
 								Fakultas Kedokteran 
-								Universitas Gadjah Mada <?php echo $_SESSION['level_name']; ?></b></p>
+								Universitas Gadjah Mada <br/> 
+                                </b></p>
             			</div>
             		</div>            
                         

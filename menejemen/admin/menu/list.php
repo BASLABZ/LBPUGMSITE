@@ -15,7 +15,7 @@
                     <div class="panel-heading">
                        <div class="row">
                             <div class="col-md-4">
-                             <span class="fa fa-list"></span> MASTER MENU
+                             <span class="fa fa-list"></span> Data Menu
                         </div>
                         <div class="col-md-8">
                             <div class="text-right"><b><i><span class="fa fa-home"></span> Home / <span class="fa fa-list"></span> Master Data / <span class="fa fa-list"> </span> Menu</i></b></div>
@@ -30,7 +30,7 @@
                 <div class="col-lg-12">
                     <div class="panel panel-primary" style="border-color:#f8f8f8;">
                         <div class="panel-heading">
-                            <span class="fa fa-list"></span> Master Operator <a href="index.php?hal=menu/add" class="btn btn-sm btn-success dim_about"><span class="fa fa-plus"></span> Tambah Data</a>
+                             <a href="index.php?hal=menu/add" class="btn btn-sm btn-success dim_about"><span class="fa fa-plus"></span> Tambah Data</a>
                         </div>
                         <div class="panel-body dim_about">
                             <div class="table-responsive">
