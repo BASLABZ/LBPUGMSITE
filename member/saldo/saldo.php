@@ -23,7 +23,7 @@
 					<div class="panel-body">
 					<center>
 						 <?php 
-			    $querySaldo = mysql_query("SELECT sum(saldo_nominal) as total_saldo FROM tbl_saldo where member_id_fk='".$_SESSION['member_id']."'");
+			    $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
 			    $total_saldo = mysql_fetch_array($querySaldo);
 			    if ($total_saldo['total_saldo']=='') {
 			      echo "Rp.0";
@@ -101,4 +101,3 @@
 	</div>
 
 </div>
-a675[;66666666666666666666666666[[[uuuuu56hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh76ht[[[[[[[[[[[[[[[[[kkuuuuuuuuuuuuuu-ukkm-uhpljk.l]]]]]]]]]]]]]]]]]]]]]00000000kkkkkmmmk

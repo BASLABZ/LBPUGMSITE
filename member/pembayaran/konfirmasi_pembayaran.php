@@ -222,14 +222,15 @@
                                         </div>
                                         <div class="form-group row">
                                         <?php 
-                                               $querySaldo = mysql_query("SELECT sum(saldo_nominal) as total_saldo FROM tbl_saldo where member_id_fk='".$_SESSION['member_id']."'");
+                                               $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
+                                              
                                              ?>
                                           <label class="col-md-4">MENGGUNAKAN SALDO</label>
                                           <div class="col-md-6">
                                             <div class="input-group">
                                             <span class="input-group-addon">
                                               <?php 
-                                                $querySaldo = mysql_query("SELECT sum(saldo_nominal) as total_saldo FROM tbl_saldo where member_id_fk='".$_SESSION['member_id']."'");
+                                                $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
                                                   $cekNominalsaldo = mysql_fetch_array($querySaldo);
                                                   if ($cekNominalsaldo['total_saldo']=='' OR $cekNominalsaldo['total_saldo']=='0' ) {
                                                ?>
@@ -241,7 +242,7 @@
                                             <input type="text" class="form-control"  id="txtSaldo" disabled="disabled">
                                             <?php  
                                             $total_saldo = mysql_fetch_array($querySaldo);
-                                        if ($total_saldo['total_saldo']=='') {
+                                        if ($total_saldo['total_saldo'] <= 0) {
                                           echo "Rp.";
                                         }
                                         echo "".rupiah($total_saldo['total_saldo'])."</h2>";

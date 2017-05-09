@@ -18,7 +18,7 @@
                         
                   </div> 
                   <div class="col-md-12">
-       <!-- hhh -->
+
                         <?php 
                             if ($_SESSION['level_name'] != 'admin' && $_SESSION['level_name'] != 'kepala laboratorium') {
                                 
@@ -31,6 +31,7 @@
                                                     <i class="fa fa-file-text fa-5x"></i>
                                                 </div>
                                                 <div class="col-xs-8 text-right">
+
                                                     
                                                     <h5 class="font-bold">TRANSAKSI PENGAJUAN</h5>
 
