@@ -14,7 +14,7 @@ $mail->Port = 587;
 $mail->SMTPSecure = 'tls';
 $mail->SMTPAuth = true;
 $mail->Username = "ahmad.bastian8@gmail.com";
-$mail->Password = "W0r3&Tr0j43";
+$mail->Password = "4m4nd4b4s";
 $mail->setFrom('ahmad.bastian8@gmail.com', 'Verifikasi Pembayaran');
 $namaPenerimaEmail  = "$emails";
 $mail->addAddress($emails, 'John Doe');

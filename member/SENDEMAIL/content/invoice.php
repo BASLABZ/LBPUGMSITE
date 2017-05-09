@@ -23,6 +23,6 @@ $emails = $row['member_email'];
 			</h3>
 	<p>Terima Kasih Telah Bergabung Dengan Kami </p>
 	<p>Silahkan klik link dibawah ini untuk mengaktifkan akun Anda : <br/>
-	<a href="http://localhost/LBPUGM/member/SENDEMAIL/konfirmasi.php?id=<?php echo $id; ?>&email=<?php echo $emails; ?>">Aktifasi Akun</a> </p>
+	<a href="http://localhost/LBPUGMSITE/member/SENDEMAIL/konfirmasi.php?id=<?php echo $id; ?>&email=<?php echo $emails; ?>">Aktifasi Akun</a> </p>
 </body>
 </html>

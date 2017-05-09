@@ -157,12 +157,16 @@
 		<div class="col-md-12">
 			<p align="right">
 				<?php  
-				$queryUbahstatus = "SELECT loan_invoice,loan_status,loan_date_return,member_id_fk,loan_total_fee FROM trx_loan_application where loan_invoice  = '".$invoice."' ";
+				$queryUbahstatus = "SELECT loan_invoice,loan_status,loan_date_return,member_id_fk,loan_total_fee,loan_app_id FROM trx_loan_application where loan_invoice  = '".$invoice."' ";
 				$ubahstatus = mysql_fetch_array(mysql_query($queryUbahstatus));
 					$statusKonfirmasi = $ubahstatus['loan_status'];
-					
+					// $statusPembayaran = 
+					$querystatuspembayaran = mysql_fetch_array(mysql_query("SELECT * FROM trx_payment where loan_app_id_fk = '".$ubahstatus['loan_app_id']."'"));
+
                                    if ($statusKonfirmasi == 'MEMBAYAR TAGIHAN') {
-                                     echo "<a class='btn btn-info dim_about' href='index.php?hal=pembayaran/preview_rekappembayaran_perinvoice&id=".$invoice."'> <span class='fa fa-print'></span> Cetak<a>";
+                    					if ($querystatuspembayaran['payment_valid'] == 'VALID') {
+                    						echo "<a href='index.php?hal=pembayaran/preview_rekappembayaran_perinvoice&id=".$invoice."' h class='btn  btn-info dim_about'><span class='fa fa-print'></span> CETAK</a>";
+                    					}                 
                                   
                                    }else if ($statusKonfirmasi == 'ACC FINAL') {
                                    	echo "<div class='well'><b>KETERANGAN : <br/>Silahkan klik button Konfirmasi Pembayaran untuk dapat melanjutkan proses selanjutnya. Waktu yang diberikan untuk Konfirmasi Pembayaran adalah 3 Jam setelah pengajuan Anda dinyatakan di ACC. Apabila dalam waktu 3 jam Anda tidak melakukan konfirmasi pembayaran maka pengajuan peminjaman alat akan dibatalkan secara otomatis. </b></div>";
