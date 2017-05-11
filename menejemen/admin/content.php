@@ -32,9 +32,6 @@
                                                 </div>
                                                 <div class="col-xs-8 text-right">
 
-                                                    
-                                                    <h5 class="font-bold">TRANSAKSI PENGAJUAN</h5>
-
                                                     <h5 class="font-bold">  TARNSAKSI PENGAJUAN </h5>
 
                                                     <a href="index.php?hal=peminjaman/pengajuan/list" style="color: white;">Lihat Data <span class="fa fa-arrow-right"></span></a>

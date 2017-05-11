@@ -84,14 +84,14 @@
                                 </div>
 
                                     <div class="row">
-                                        <div class="col-md-1"></div>
-                                        <div class="col-md-10">
+                                       <div class="col-md-1"></div>
+                                        <div class="col-md-10" align="center">
                                             <div class="row well dim_about">
                                             <form class="role" method="POST">
                                                 <div class="col-md-3" style="padding-top: 5px; margin-right: 5px;" ><b>STATUS PENGAJUAN </b></div> 
                                                 <input type="hidden" value="<?php echo $rowStatusLoan['loan_app_id']; ?>" name='loan_app_id'>
                                                 <input type="hidden" value="<?php echo $invoice; ?>" name='loan_invoice'>
-                                                <div class="col-md-7">
+                                                <div class="col-md-5">
                                                         <select class="form-control" name="loan_status">
                                                             <?php 
                                                                 if ($_SESSION['level_name'] != 'kepala laboratorium'){ 
@@ -119,9 +119,10 @@
                                                 </select>
                                                 </div>
                                                 <div class="col-md-1">
-                                                    <button type="submit" name="ubah" class="btn btn-info btn-md dim_about"> <span class="fa fa-save"></span> Konfirmasi <br>Pengajuan</button>
+                                                    <button type="submit" name="ubah" class="btn btn-primary btn-md dim_about"> <span class="fa fa-check"></span> Konfirmasi Pengajuan</button>
                                                     
                                                 </div>
+                                                <div class="col-md-1"></div>  
                                                 </form>
                                                 
                                             </div>

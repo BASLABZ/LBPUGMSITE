@@ -55,7 +55,7 @@
          <div class="col-lg-12">
           <div class="ibox">
               <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;">
-                  <h5><span class="fa fa-list"></span> KERANJANG PEMINJAMAN ALAT</h5>
+                  <h5><span class="fa fa-list-alt"></span> Ringkasan Peminjaman</h5>
                   <div class="ibox-tools" >
                       <a class="fullscreen-link">
                           <i class="fa fa-expand fa-3x"style="color: white;"></i>
@@ -63,8 +63,8 @@
                   </div>
               </div>
               <div class="ibox-content">
-                  <p><label class="btn btn-info dim_about"><span class="fa fa-tags"></span> Kode Peminjaman : #<?php echo $invoice; ?></label>
-                              <a href="index.php?hal=pengajuan-member/pengajuan" class="btn btn-warning btn-sm dim_about"><span class="fa fa-arrow-left"></span> Kembali Ke Instrument</a>
+                  <p><label class="btn btn-info dim_about"><span class="fa fa-tag"></span> No Invoice : <?php echo $invoice; ?></label>
+                              <a href="index.php?hal=pengajuan-member/pengajuan" class="btn btn-warning btn-sm dim_about"><span class="fa fa-arrow-left"></span> Kembali Ke Daftar Alat</a>
                            </p><br><br>
           
             <form class="role" method="POST" enctype="multipart/form-data" action="index.php?hal=pengajuan-member/proses_pengajuan">
@@ -146,7 +146,7 @@
                               </div>
                               <div class="form-group row">
                                  <div class="col-md-6">
-                                     <label>Lama Pinjma (Hari)</label>
+                                     <label>Lama Pinjam (Hari)</label>
                                   </div>
                                    <div class="col-md-6">
                                      <input type="text" id="totaldays" class="form-control" disabled>
@@ -182,7 +182,7 @@
                         <?php 
                             if ($kategori_member['category_id']=='1') {
 
-                              echo "Anda Mendapat Potongan 50 %";
+                              echo "Potongan : 50%";
                               echo "<br>
                                     <label>Potongan : </label>
                                     <input type='hidden' name='category_member' value='".$kategori_member['category_id']."' id='mhs_s1'>
@@ -226,7 +226,7 @@
                  </div>
                   <div class="col-md-4">
                     <div class="panel panel-primary">
-                      <div class="panel-heading"><label class="control-label">Upload File</label></div>
+                      <div class="panel-heading"><label class="control-label">Upload File Pengajuan</label></div>
                       <div class="panel-body">
                         <div class="form-group row">
                                         <div class="col-lg-12">
@@ -234,12 +234,12 @@
                                                 <div class="input-group">
 
                                                         <span class="btn btn-file btn-info">
-                                                            <span class="fileupload-new">Select file</span>
-                                                            <span class="fileupload-exists"><span class="fa fa-refresh"></span> Change</span>
+                                                            <span class="fileupload-new">Pilih file</span>
+                                                            <span class="fileupload-exists"><span class="fa fa-refresh"></span> Ubah</span>
 
                                                             <input type="file" name="frm_file" accept="application/pdf" id="ifile" onchange="cekberkas()" />
                                                         </span>
-                                                    <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><span class="fa fa-times"></span> Remove</a>
+                                                    <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><span class="fa fa-times"></span> Hapus</a>
                                                     <div class="col-lg-12">
                                                         <br>
                                                         <i class="fa fa-file fa-2x" ></i>

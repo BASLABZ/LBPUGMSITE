@@ -80,9 +80,11 @@
                             <h2 class="no-margins">
                                 <?php echo $identitasMember['member_name']; ?>
                             </h2>
-                            <h4>Member LBP</h4>
+                           
                             <small>
-                               <b> Category member : <?php echo $identitasMember['category_name']; ?> | Instansi : <?php echo $identitasMember['member_institution']; ?> | Fakultas / Bidang : <?php echo $identitasMember['member_faculty']; ?></b>
+                               <b> Kategori Member : <?php echo $identitasMember['category_name']; ?><br/>
+                               Fakultas / Bidang : <?php echo $identitasMember['member_faculty']; ?><br/>
+                                Instansi : <?php echo $identitasMember['member_institution']; ?></b>
                             </small>
                         </div>
                     </div>
@@ -176,7 +178,7 @@
                         $member_phone_number_cek !='' AND $member_address_cek  != '') {
                          echo "
                                   <div class='col-md-4'>
-                                       <a href='index.php?hal=pengajuan-member/pengajuan' class='btn btn-danger btn-lg dim_about'><span class='fa fa-search'></span> CARI ALAT / INSTRUMENT </a>
+                                       <a href='index.php?hal=pengajuan-member/pengajuan' class='btn btn-danger btn-lg dim_about'><span class='fa fa-search'></span> DAFTAR ALAT</a>
                                    </div>
                               ";
                           echo "<div class='col-md-8'>
@@ -195,7 +197,7 @@
                                             <div class='panel-heading'>
                                               <h4 class='panel-title'>
                                                 <a data-toggle='collapse' href='#peringatan'>
-                                                        <span class='fa fa-search'></span> CARI ALAT / INSTRUMENT 
+                                                        <span class='fa fa-search'></span> DAFTAR ALAT
                                                 </a>
                                               </h4>
                                             </div>
@@ -204,7 +206,7 @@
                                                     <p>Silahkan Lengkapi Data Anda Terlebih Dahulu Sebelum Melakukan Pengajuan Alat Agar Data Pengajuan Anda Segera Di ACC Oleh Petugas Kami, </p><br>
                                                         Terima Kasih
                                               </div>
-                                              <div class='panel-footer dim_about'><span class='fa fa-arrow-right'></span> <a href='index.php?hal=akun/profil'>LENGAKAPI IDENTITAS ANDA</a></div>
+                                              <div class='panel-footer dim_about'><span class='fa fa-arrow-right'></span> <a href='index.php?hal=akun/profil'>LENGAKAPI IDENTITAS</a></div>
                                             </div>
                                           </div>
                                         </div>
@@ -214,7 +216,7 @@
                           <div class='alert alert-danger alert-dismissable dim_about red-bg' style='border-color: #f8ac59; color: white;'>
                               <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
                                 <span class='fa fa-times'></span>
-                               LENGKAPI DATA ANDA
+                               LENGKAPI DATA
                                 </b>
                              </div>
                         </div>";
