@@ -90,8 +90,8 @@
                                     $totaljumlah = $totaljumlah+$jumlah;
                                     $totalbayar = $totalbayar+($biaya*$jumlah);
                                     $batasQuantity = $row['instrument_quantity']-$row['intrument_quantity_temp'];
-                                    echo "$batasQuantity";
-                                    echo $row['intrument_quantity_temp'];
+                                    // $batasQuantity;
+                                    // echo $row['intrument_quantity_temp'];
                                     echo "<tr>
                                             <td >".++$no."</td>
                                             <td><input type='hidden' name='instrument_id_fk[]' value='".$row['instrument_id_fk']."' />".$row['instrument_name']."</td>
