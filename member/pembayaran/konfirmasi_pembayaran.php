@@ -13,8 +13,10 @@
                   $penguranganSaldo = $transfer-$paymentBill;
                   $saldoawal = $_POST['payment_amount_saldo'];
                   $tanggal_konfirmasi_pembayaran_member = date('Y-m-d',strtotime($_POST['payment_confirm_date']));
-             $move = move_uploaded_file($_FILES['frm_file']['tmp_name'], '../surat/'.$fileName);
+                  $move = move_uploaded_file($_FILES['frm_file']['tmp_name'], '../surat/'.$fileName);
              if ($move) {
+                
+
                 if ($Ceksaldo <= 0) {
                   $querySimpanPayment = "INSERT INTO trx_payment (payment_bankname,payment_bill,
                                                                   payment_amount_transfer,
@@ -53,6 +55,7 @@
                     echo "<script> alert('Terimakasih Data Konfirmasi Pembayaran Berhasil Disimpan'); location.href='index.php?hal=pengajuan-member/pengajuan-alat' </script>";exit;
                  }
                 }elseif ($Ceksaldo >  0) {
+
 
                                                   $saldobertambah = $penguranganSaldo+$saldoAwal;
                                                   $querySimpanSaldo = mysql_query("INSERT INTO tbl_saldo 
@@ -223,41 +226,26 @@
                                         <div class="form-group row">
                                         <?php 
                                                $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
-                                              
-                                             ?>
-                                          <label class="col-md-4">MENGGUNAKAN SALDO</label>
+                                                 $rowsaldo = mysql_fetch_array($querySaldo);
+                                        ?>
+                                          <label class="col-md-4">MENGGUNAKAN SALDO </label>
                                           <div class="col-md-6">
                                             <div class="input-group">
                                             <span class="input-group-addon">
-                                              <?php 
-                                                $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
-                                                  $cekNominalsaldo = mysql_fetch_array($querySaldo);
-                                                  if ($cekNominalsaldo['total_saldo']=='' OR $cekNominalsaldo['total_saldo']=='0' ) {
-                                               ?>
                                                <input type="hidden" onclick="disabledSaldo(this)"   id="cek">
-                                               <?php }else{ ?>
-                                               <input type="checkbox" onclick="disabledSaldo(this)"   id="cek">
-                                               <?php } ?> 
+                                               <input type="checkbox" onclick="disabledSaldo(this)" id="cek">
                                             </span> 
                                             <input type="text" class="form-control"  id="txtSaldo" disabled="disabled">
-                                            <?php  
-                                            $total_saldo = mysql_fetch_array($querySaldo);
-                                        if ($total_saldo['total_saldo'] <= 0) {
-                                          echo "Rp.";
-                                        }
-                                        echo "".rupiah($total_saldo['total_saldo'])."</h2>";
-                                     ?>
                                             <input type="hidden" name="cekSaldos" value="0">
                                             <input type="hidden" class="form-control"   name="payment_amount_saldo" value="0">
                                           </div>
                                           <!-- INFROMASI SALDO MEMBER -->
                                            <label id="saldosementara" hidden>
                                             <?php 
-                                               $total_saldo = mysql_fetch_array($querySaldo);
-                                                if ($total_saldo['total_saldo']=='') {
+                                                if ($rowsaldo['total_saldo'] <= 0) {
                                                   echo "Rp.0";
                                                 }else{
-                                                   echo "".$total_saldo['total_saldo']."";
+                                                   echo "Rp.".rupiah($rowsaldo['total_saldo'])."";
                                                 }
                                              ?>
                                           </label>

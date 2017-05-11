@@ -33,7 +33,7 @@
                              <div class="panel panel-primary" style="border-color:white; ">
                                 <div class="panel-heading dim_about">
                                     <span class=""></span> <?php 
-                                    $inv = mysql_fetch_array(mysql_query("SELECT loan_invoice from trx_loan_application"));
+                                    $inv = mysql_fetch_array(mysql_query("SELECT loan_invoice from trx_loan_application where loan_invoice='".$invoice."'"));
                                      ?>
                                      No Invoice <?php echo $inv['loan_invoice']; ?>
                                 </div>

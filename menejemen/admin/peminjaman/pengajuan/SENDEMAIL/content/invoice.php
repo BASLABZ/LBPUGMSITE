@@ -29,6 +29,7 @@ $email = $_GET['email'];
                                                     <th>Tanggal Pinjam</th>
                                                     <th>Tanggal Kembali</th>
                                                     <th>Status</th>
+                                                    <th>Keterangan</th>
                                                 </thead>
                                                 <tbody>
                                                 <?php 
@@ -46,9 +47,11 @@ $email = $_GET['email'];
                                                         <td><b><?php echo $roPeminjaman['loan_status']; ?></b></td>
                                                         <td>
                                                         	<?php 
-                                            		if ($roPeminjaman['loan_status']=='ACC') {
+                                            		if ($roPeminjaman['loan_status']=='MENUNGGU ACC FINAL') {
                                             			echo "SILAHKAN MELAKUKAN PEMBAYARAN , WAKTU PEMBAYARAN HANYA 3 JAM  DARI DITERIMANYA EMAIL INI. JIKA TIDAK MELAKUKAN PEMBAYARAN MAKA TRANSAKSI PEMINJAMAN ANDA AKAN KAMI BATALKAN SECARA OTOMATIS";
-                                            		} 
+                                            		}else if($roPeminjaman['loan_status']=='ACC FINAL') {
+                                                        echo "PENGAJUAN ANDA TELAH DI ACC OLEH KEPALA LAPORATORIUM , SILAHKAN MELAKUKAN PENGAMBILAN ALAT DI LAPORATORIUM";
+                                                    } 
                                             		?>
                                                         </td>
                                                     </tr>
