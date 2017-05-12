@@ -9,7 +9,7 @@
           <div class="col-md-12">
        <?php 
             // peringatan pengajuan
-              $queryPeringatan = mysql_query("SELECT loan_status, loan_invoice, member_name from trx_loan_application join tbl_member on trx_loan_application.member_id_fk=tbl_member.member_id where member_id_fk='".$_SESSION['member_id']."' order by loan_app_id DESC  limit 1");
+              $queryPeringatan = mysql_query("SELECT loan_status, loan_invoice,loan_app_id, member_name from trx_loan_application join tbl_member on trx_loan_application.member_id_fk=tbl_member.member_id where member_id_fk='".$_SESSION['member_id']."' order by loan_app_id DESC  limit 1");
             while ($rowPeringatan = mysql_fetch_array($queryPeringatan)) {
                  $statusKonfirmasi = $rowPeringatan['loan_status'];
         ?>
@@ -50,15 +50,21 @@
         <?php } ?> 
         <!-- peringatan pembayaran -->
         <?php 
-            $queryPeringatanPembayaran  = mysql_query("SELECT payment_valid,payment_notif from trx_payment where member_id_fk = '".$_SESSION['member_id']."'");
+            $queryPeringatanPembayaran  = mysql_query("SELECT payment_valid,payment_notif,loan_app_id_fk from trx_payment where member_id_fk = '".$_SESSION['member_id']."' AND loan_app_id_fk = '".$rowPeringatan['loan_app_id']."'");
             $runperingatanpembayaran = mysql_fetch_array($queryPeringatanPembayaran);
             $valid = $runperingatanpembayaran['payment_valid'];
+            
             if ($valid == 'VALID') {
+              if ($rowPeringatan['loan_status']=='DIPINJAM') {
+              
+            }else{
                   echo " <div class='alert alert-success alert-dismissable dim_about yellow-bg' style='border-color: #f8ac59; color: white;'>
                               <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
                                 <span class='fa fa-check'></span> <b>STATUS PENGAJUAN ALAT:</b></br>
                                 Hi ".$rowPeringatan['member_name'].", Pembayaran anda VALID silahkan lakukan pengambilan alat </br>
                              </div>";
+            }
+              
              }elseif ($valid == 'TIDAK VALID') {
                   echo " <div class='alert alert-success alert-dismissable dim_about yellow-bg' style='border-color: #f8ac59; color: white;'>
                               <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>

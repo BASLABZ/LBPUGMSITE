@@ -51,24 +51,24 @@
                             <tbody>
                                 <?php 
                                     $no = 0;
-                                    $query_rekap_pembayaran = mysql_query("SELECT * FROM trx_loan_application p JOIN trx_payment_temp t ON t.loan_app_id_fk = p.loan_app_id where t.payment_status != 'TANPA SALDO & MEMBAYAR DENDA' AND t.payment_status != 'SALDO & MEMBAYAR DENDA' AND p.member_id_fk = '".$_SESSION['member_id']."'");
+                                    $query_rekap_pembayaran = mysql_query("SELECT * FROM trx_loan_application p JOIN trx_payment t ON t.loan_app_id_fk = p.loan_app_id where t.payment_status != 'TANPA SALDO & MEMBAYAR DENDA' AND t.payment_status != 'SALDO & MEMBAYAR DENDA' AND p.member_id_fk = '".$_SESSION['member_id']."'");
                                     while ($rowRekap = mysql_fetch_array($query_rekap_pembayaran)) {
                                  ?>
                                         <tr>
                                             <td><?php echo ++$no; ?></td>
                                             <td><?php echo $rowRekap['loan_invoice']; ?></td>
-                                            <td><?php echo $rowRekap['payment_temp_date']; ?></td>
-                                            <td><?php echo $rowRekap['payment_temp_confirm_date']; ?></td>
-                                            <td><?php echo $rowRekap['bankname']; ?></td>
-                                            <td><a href="../surat/<?php echo $rowRekap['payment_temp_photo']; ?>" class="label label-primary"><span class="fa fa-download"></span> BUKTI TRANSAFER</a></td>
-                                            <td>Rp. <?php echo rupiah($rowRekap['payment_temp_amount_transfer']); ?></td>
-                                            <td><?php echo $rowRekap['payment_temp_info']; ?></td>
+                                            <td><?php echo $rowRekap['payment_date']; ?></td>
+                                            <td><?php echo $rowRekap['payment_confirm_date']; ?></td>
+                                            <td><?php echo $rowRekap['payment_bankname']; ?></td>
+                                            <td><a href="../surat/<?php echo $rowRekap['payment_photo']; ?>" class="label label-primary"><span class="fa fa-download"></span> BUKTI TRANSAFER</a></td>
+                                            <td>Rp. <?php echo rupiah($rowRekap['payment_amount_transfer']); ?></td>
+                                            <td><?php echo $rowRekap['payment_info']; ?></td>
                                             <td><?php echo $rowRekap['loan_status']; ?></td>
                                             <td><?php echo $rowRekap['payment_status']; ?></td>
                                             
                                             <td>
                                                <?php 
-                                                    if ($rowRekap['payment_notif']=='VALID') {
+                                                    if ($rowRekap['payment_valid']=='VALID') {
                                                         
                                                 ?>
                                                  <a href="index.php?hal=pembayaran/preview_rekappembayaran_perinvoice&id=<?php echo $rowRekap['loan_invoice']; ?>" class="btn btn-primary dim_about" target="_BLANK">
@@ -107,19 +107,20 @@
                             <tbody>
                                 <?php 
                                     $no = 0;
-                                    $query_rekap_pembayaran = mysql_query("SELECT * FROM trx_loan_application p JOIN trx_payment_temp t ON t.loan_app_id_fk = p.loan_app_id where t.payment_status = 'SALDO & MEMBAYAR DENDA'  AND p.member_id_fk = '".$_SESSION['member_id']."'");
+
+                                    $query_rekap_pembayaran = mysql_query("SELECT * FROM trx_loan_application p JOIN trx_payment t ON t.loan_app_id_fk = p.loan_app_id where t.payment_status = 'SALDO & MEMBAYAR DENDA'  AND p.member_id_fk = '".$_SESSION['member_id']."'");
                                    
                                     while ($rowRekap = mysql_fetch_array($query_rekap_pembayaran)) {
                                  ?>
                                         <tr>
                                             <td><?php echo ++$no; ?></td>
                                             <td><?php echo $rowRekap['loan_invoice']; ?></td>
-                                            <td><?php echo $rowRekap['payment_temp_date']; ?></td>
-                                            <td><?php echo $rowRekap['payment_temp_confirm_date']; ?></td>
-                                            <td><?php echo $rowRekap['bankname']; ?></td>
-                                            <td><a href="../surat/<?php echo $rowRekap['payment_temp_photo']; ?>" class="label label-primary"><span class="fa fa-download"></span> BUKTI TRANSAFER</a></td>
-                                            <td>Rp. <?php echo rupiah($rowRekap['payment_temp_amount_transfer']); ?></td>
-                                            <td><?php echo $rowRekap['payment_temp_info']; ?></td>
+                                            <td><?php echo $rowRekap['payment_date']; ?></td>
+                                            <td><?php echo $rowRekap['payment_confirm_date']; ?></td>
+                                            <td><?php echo $rowRekap['payment_payment_bankname']; ?></td>
+                                            <td><a href="../surat/<?php echo $rowRekap['payment_photo']; ?>" class="label label-primary"><span class="fa fa-download"></span> BUKTI TRANSAFER</a></td>
+                                            <td>Rp. <?php echo rupiah($rowRekap['payment_amount_transfer']); ?></td>
+                                            <td><?php echo $rowRekap['payment_info']; ?></td>
                                             <td><?php echo $rowRekap['loan_status']; ?></td>
                                             <td><?php echo $rowRekap['payment_status']; ?></td>
                                             <td>
@@ -154,19 +155,19 @@
                             <tbody>
                                 <?php 
                                     $no = 0;
-                                    $query_rekap_pembayaran = mysql_query("SELECT * FROM trx_loan_application p JOIN trx_payment_temp t ON t.loan_app_id_fk = p.loan_app_id where t.payment_status = 'TANPA SALDO & MEMBAYAR DENDA'  AND p.member_id_fk = '".$_SESSION['member_id']."'");
+                                    $query_rekap_pembayaran = mysql_query("SELECT * FROM trx_loan_application p JOIN trx_payment t ON t.loan_app_id_fk = p.loan_app_id where t.payment_status = 'TANPA SALDO & MEMBAYAR DENDA'  AND p.member_id_fk = '".$_SESSION['member_id']."'");
                                    
                                     while ($rowRekap = mysql_fetch_array($query_rekap_pembayaran)) {
                                  ?>
                                         <tr>
                                             <td><?php echo ++$no; ?></td>
                                             <td><?php echo $rowRekap['loan_invoice']; ?></td>
-                                            <td><?php echo $rowRekap['payment_temp_date']; ?></td>
-                                            <td><?php echo $rowRekap['payment_temp_confirm_date']; ?></td>
-                                            <td><?php echo $rowRekap['bankname']; ?></td>
-                                            <td><a href="../surat/<?php echo $rowRekap['payment_temp_photo']; ?>" class="label label-primary"><span class="fa fa-download"></span> BUKTI TRANSAFER</a></td>
-                                            <td>Rp. <?php echo rupiah($rowRekap['payment_temp_amount_transfer']); ?></td>
-                                            <td><?php echo $rowRekap['payment_temp_info']; ?></td>
+                                            <td><?php echo $rowRekap['payment_date']; ?></td>
+                                            <td><?php echo $rowRekap['payment_confirm_date']; ?></td>
+                                            <td><?php echo $rowRekap['payment_bankname']; ?></td>
+                                            <td><a href="../surat/<?php echo $rowRekap['payment_photo']; ?>" class="label label-primary"><span class="fa fa-download"></span> BUKTI TRANSAFER</a></td>
+                                            <td>Rp. <?php echo rupiah($rowRekap['payment_amount_transfer']); ?></td>
+                                            <td><?php echo $rowRekap['payment_info']; ?></td>
                                             <td><?php echo $rowRekap['loan_status']; ?></td>
                                             <td><?php echo $rowRekap['payment_status']; ?></td>
                                             <td>
