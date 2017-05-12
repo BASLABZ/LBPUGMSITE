@@ -28,7 +28,7 @@
     <div class="row animated fadeInRight">
         <div class="col-md-12">
             <div class="ibox">
-                <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class="fa fa-list"></span> Daftar Transaksi Pengajuan Alat</div>
+                <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class="fa fa-list"></span> Data Pengajuan Peminjaman Alat</div>
                 <div class="ibox-content">
                     <form class="role well" method="POST">
                         <div class="form-group row">

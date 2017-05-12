@@ -47,18 +47,18 @@
                                                         Download File Pengajuan
                                                         </a></td>
                                                         <td>
-                                                        <button class="btn btn-warning btn-xs dim_about"><?php echo $roPeminjaman['loan_status']; ?></button>
-                                                        </td>
-                                                        <?php 
-                                                        // if ($roPeminjaman['loan_status']=='MENUNGGU') {
-                                                            // echo "<span class='label label-danger'>MENUNGGU</span>";
-                                                         // } elseif ($roPeminjaman['loan_status']=='ACC'){
-                                                            // echo "<span class='label label-success'>ACC</span>";
-                                                        // } else {
-                                                            // echo "<span class='label label-warning'>MEMBAYAR TAGIHAN</span>"
-                                                        // }
-                                                         ?>
                                                         
+                                                       
+                                                        <?php 
+                                                        if ($roPeminjaman['loan_status']=='MENUNGGU') {
+                                                            echo "<span class='label label-danger'>MENUNGGU</span>";
+                                                         } elseif ($roPeminjaman['loan_status']=='ACC'){
+                                                            echo "<span class='label label-success'>ACC</span>";
+                                                        } elseif ($roPeminjaman['loan_status']=='MEMBAYAR TAGIHAN'){
+                                                            echo "<span class='label label-warning'>MEMBAYAR TAGIHAN</span>";
+                                                        }
+                                                         ?>
+                                                         </td>
                                                         <td>
                                                         <a href="index.php?hal=peminjaman/pengajuan/pengajuan_detail&invoice=<?php echo $roPeminjaman['loan_invoice']; ?>" class='btn btn-info btn-sm dim_about'><span class="fa fa-eye"></span> Detail Pangajuan</a>
                                                         </td>

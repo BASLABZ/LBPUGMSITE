@@ -1,4 +1,3 @@
-
 <table class="table table-responsive table-hover table-bordered">
 		<thead>
 			<th>NO</th>
@@ -30,9 +29,9 @@
 				<td><?php echo $no++; ?></td>
 				<td><?php echo $rowDetailPeminjaman['instrument_name']; ?></td>
 				<td>
-					<label class="label label-warning dim_about"><span class=""></span> <?php echo $rowDetailPeminjaman['loan_status_detail']; ?></label>
+					<center><label class="label label-warning dim_about"><span class=""></span> <?php echo $rowDetailPeminjaman['loan_status_detail']; ?></label></center>
 				</td>
-				<td class="text-right"><?php echo $rowDetailPeminjaman['loan_amount']; ?></td>
+				<td class="text-right"><center><?php echo $rowDetailPeminjaman['loan_amount']; ?></center></td>
 				<td class="text-right">Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
 				<td>
 					<?php if ($status == 'DITOLAK' ) {
@@ -68,24 +67,20 @@
 					$diskons3= $totals3*0.25;
 					$hasil_akhirs3 = $totals3-$diskons3;
 		 ?>
-	</table>
-		<tfoot>
-		<div class="row">
-			<div class="col-md-4"></div>
-			<div class="col-md-6 pull-right">
-				 
+	
+		<tfoot>		 
 			<tr>
-				<td colspan="3" class="pull-right"><b>Jumlah Item</b></td>
-				<td><?php echo $roTotal['loan_total_item']; ?> /Buah</td>
+				<td colspan="3"><b>Jumlah Alat</b></td>
+				<td><center><?php echo $roTotal['loan_total_item']; ?></center></td>
 				<td></td>
 			</tr> </br>
 			<tr>
 				<td colspan="3"><b>Lama Pinjam</b></td>
-				<td><?php echo $roTotal['long_loan']; ?>/Minggu  </td>
+				<td><center><?php echo $roTotal['long_loan']; ?>Minggu</center></td>
 				<td></td> <br/>
 			</tr>
 			<tr>
-				<td colspan="3"><b>Jumlah Subtotal : </b></td>
+				<td colspan="3"><b>Subtotal </b></td>
 				<td></td>
 				<td>Rp.<?php echo rupiah($sub); ?></td>
 			</tr> <br/>
@@ -96,31 +91,31 @@
 			 ?>
 			
 			<tr>
-				<td colspan="3"><b>Total</b> </td>
+				<td colspan="4"><b>Total = (Lama Pinjam x Subtotal)</b> </td>
 				<td>Rp.<?php echo rupiah($hasil_akhirs1); ?></td>
 			</tr> <br/>
 			<tr>
-				<td colspan="3"><b>Potongan (50%)</b></td>
+				<td colspan="4"><b>Potongan (50%)</b></td>
 				<td>Rp.<?php echo rupiah($potongan);  ?></td>
 			</tr> <br/>
 			<tr>
-				<td colspan="3"><b>Total Bayar = (Lama Pinjam x Jumlah Subtotal)x 50 %</b></td>
-				<td>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></td>
+				<td colspan="4"><b>Total Bayar = (Total - Potongan)</b></td>
+				<td><b>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></b></td>
 			</tr> <br/>
 			<?php } else if ($roTotal['category_id_fk']==5) {
 				
 			?>
 			
 			<tr>
-				<td colspan="3">Total </td>
+				<td colspan="4">Total </td>
 				<td>Rp.<?php echo rupiah($totals2);?></td>
 			</tr>
 			<tr>
-				<td colspan="3">Potongan (25%)</td>
+				<td colspan="4">Potongan (25%)</td>
 				<td>Rp.<?php echo rupiah($diskons2);  ?></td>
 			</tr>
 			<tr>
-				<td colspan="3">Total Bayar </td>
+				<td colspan="4">Total Bayar </td>
 				<td>Rp.<?php 
 				echo rupiah($roTotal['loan_total_fee']); ?></td>
 			</tr>
@@ -128,29 +123,28 @@
 				
 			 ?>
 			<tr>
-				<td colspan="3">Total </td>
+				<td colspan="4">Total </td>
 				<td>Rp.<?php echo rupiah($totals3); ?></td>
 			</tr>
 			<tr>
-				<td colspan="3">Potongan (25%)</td>
+				<td colspan="4">Potongan (25%)</td>
 				<td>Rp.<?php echo rupiah($diskons3);  ?></td>
 			</tr>
 			
 			<tr>
-				<td colspan="3">Total Bayar </td>
+				<td colspan="4">Total Bayar </td>
 				<td>Rp.<?php echo rupiah($hasil_akhirs3); ?></td>
 			</tr> 
 			 <?php }else {
 			 	?>
 			 	<tr>
-				<td colspan="3">Total </td>
+				<td colspan="4">Total </td>
 				<td>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></td>
 			</tr>
 			 	<?php
 			 } ?>
-			</div>
-		</div>
 		</tfoot>
+	</table>
 		<?php } ?>
 	
 	<div class="row">
@@ -169,7 +163,7 @@
                     					}                 
                                   
                                    }else if ($statusKonfirmasi == 'ACC FINAL') {
-                                   	echo "<div class='well'><b>KETERANGAN : <br/>Silahkan klik button Konfirmasi Pembayaran untuk dapat melanjutkan proses selanjutnya. Waktu yang diberikan untuk Konfirmasi Pembayaran adalah 3 Jam setelah pengajuan Anda dinyatakan di ACC. Apabila dalam waktu 3 jam Anda tidak melakukan konfirmasi pembayaran maka pengajuan peminjaman alat akan dibatalkan secara otomatis. </b></div>";
+                                   	echo "<div class='well'><b>KETERANGAN : <br/>Silahkan klik button Konfirmasi Pembayaran untuk dapat melanjutkan proses selanjutnya. Waktu yang diberikan untuk Konfirmasi Pembayaran adalah 3 Jam setelah Anda mendapat konfirmasi ACC FINAL. Apabila dalam waktu 3 jam Anda tidak melakukan konfirmasi pembayaran maka pengajuan peminjaman alat akan dibatalkan secara otomatis. </b></div>";
                                      echo " <a href='index.php?hal=pembayaran/konfirmasi_pembayaran&id=".$ubahstatus['loan_invoice']."' class='btn btn-info btn-xl pull-right dim_about'
                                     ><span class=''></span> KONFIRMASI PEMBAYARAN</a>";
                                    }else if ($statusKonfirmasi == 'DIBATALKAN') {

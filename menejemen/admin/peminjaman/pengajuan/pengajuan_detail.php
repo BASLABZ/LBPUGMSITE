@@ -1,5 +1,6 @@
  <?php 
       $invoice = $_GET['invoice'];
+      
         $rowStatusLoan = mysql_fetch_array(mysql_query("SELECT loan_app_id,loan_status,member_id_fk,loan_invoice FROM trx_loan_application where loan_invoice = '".$invoice."'"));
         $idmember = $rowStatusLoan['member_id_fk'];
         if (isset($_POST['ubah'])) {
@@ -23,6 +24,7 @@
                         <span class="fa fa-home pull-right"> <i>
                             Home / <span class="fa fa-list"></span> Konfirmasi / <span class="fa fa-pencil">
                             </span>
+            
                             Pengajuan Pinjaman
                         </i></span>
                     </div>
@@ -33,7 +35,7 @@
                              <div class="panel panel-primary" style="border-color:white; ">
                                 <div class="panel-heading dim_about">
                                     <span class=""></span> <?php 
-                                    $inv = mysql_fetch_array(mysql_query("SELECT loan_invoice from trx_loan_application"));
+                                    $inv = mysql_fetch_array(mysql_query("SELECT loan_invoice from trx_loan_application where loan_invoice = '".$invoice."'"));
                                      ?>
                                      No Invoice <?php echo $inv['loan_invoice']; ?>
                                 </div>
@@ -42,9 +44,9 @@
                                 <div class="row" style="padding-top: 10px; padding-right: 10px; padding-left: 10px;">
                                 <div class="col-md-2"></div>
                                     <div class="col-md-8">
-                                        <div class="row well" style="border-color: #7FFFD4;">
+                                        <div class="row well">
                                             <?php 
-                                                $detail = mysql_query("SELECT * from trx_loan_application a join tbl_member b on a.member_id_fk=b.member_id");
+                                                $detail = mysql_query("SELECT * from trx_loan_application a join tbl_member b on a.member_id_fk=b.member_id where a.loan_invoice = '".$invoice."'");
                                                 $rundetail = mysql_fetch_array($detail);  
                                              ?>
                                             <table>
@@ -84,14 +86,14 @@
                                 </div>
 
                                     <div class="row">
-                                       <div class="col-md-1"></div>
-                                        <div class="col-md-10" align="center">
+                                       <div class="col-md-2"></div>
+                                        <div class="col-md-8" align="center">
                                             <div class="row well dim_about">
                                             <form class="role" method="POST">
-                                                <div class="col-md-3" style="padding-top: 5px; margin-right: 5px;" ><b>STATUS PENGAJUAN </b></div> 
+                                                <div class="col-md-4" style="padding-top: 5px; margin-right: 5px;" ><b>Status Pengajuan </b></div> 
                                                 <input type="hidden" value="<?php echo $rowStatusLoan['loan_app_id']; ?>" name='loan_app_id'>
                                                 <input type="hidden" value="<?php echo $invoice; ?>" name='loan_invoice'>
-                                                <div class="col-md-5">
+                                                <div class="col-md-4">
                                                         <select class="form-control" name="loan_status">
                                                             <?php 
                                                                 if ($_SESSION['level_name'] != 'kepala laboratorium'){ 
@@ -118,11 +120,11 @@
                                                             <?php } ?>
                                                 </select>
                                                 </div>
-                                                <div class="col-md-1">
+                                                
                                                     <button type="submit" name="ubah" class="btn btn-primary btn-md dim_about"> <span class="fa fa-check"></span> Konfirmasi Pengajuan</button>
                                                     
-                                                </div>
-                                                <div class="col-md-1"></div>  
+                                               
+                                                <div class="col-md-2"></div>  
                                                 </form>
                                                 
                                             </div>

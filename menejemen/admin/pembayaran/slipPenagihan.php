@@ -66,8 +66,9 @@
 			 ?>
 
 			<tr>
-				<td colspan="3"><label>Jumlah</label></td>
-				<td><label><?php echo $totalItem; ?> / Buah</label></td> 
+				<td colspan="2"><label>Jumlah</label></td>
+				<td><label><?php echo $totalItem; ?></label></td>
+				<td></td> 
 			</tr>
 			<tr>
 				<td colspan="3"><label>Total </label></td>
@@ -122,7 +123,7 @@
 	</table>
 	<div class="row well">
 		<form class="role" method="POST" action="index.php?hal=pembayaran/verifikasi_status_pembayaran">
-						<div class="col-md-12">
+						<div class="col-md-6">
 							<input type="hidden" name="idpayment" value="<?php echo $rowPenagihan['payment_id']; ?>" >
 							<select class="form-control" name="payment_valid" required id="konfirmasivalidasi">
 								<option value=""
@@ -150,9 +151,9 @@
 						<p>
 								<?php echo $rowPenagihan['payment_notif']; ?>
 							</p>
-						<div class="col-md-3 pull-right" style="padding-top: 3px;">
+						<div class="col-md-3" style="padding-top: 3px;">
 							<button type="submit" class="btn btn-info btn-sm"><span class="fa fa-check
-							"></span> VERIFIKASI</button>
+							"></span> VERIFIKASI PEMBAYARAN</button>
 						</div>
 
 					</form>
