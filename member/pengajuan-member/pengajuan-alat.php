@@ -10,16 +10,16 @@
  ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>PENGAJUAN ALAT</h2>
+        <br/>
         <ol class="breadcrumb">
             <li>
                 <a href="index-2.html">Home</a>
             </li>
             <li>
-                <a>PENGAJUAN-ALAT</a>
+                <a>Pengajuan</a>
             </li>
             <li class="active">
-                <strong>Daftar Pengajuan</strong>
+                <strong>Daftar Pengajuan Peminjaman Alat</strong>
             </li>
         </ol>
     </div>
@@ -28,7 +28,7 @@
     <div class="row animated fadeInRight">
         <div class="col-md-12">
             <div class="ibox">
-                <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class="fa fa-list"></span> Data Pengajuan Peminjaman Alat</div>
+                <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class=""></span> Data Pengajuan</div>
                 <div class="ibox-content">
                     <form class="role well" method="POST">
                         <div class="form-group row">
@@ -50,13 +50,13 @@
                         <div class="col-md-12">
                         <table class="table table-responsive table-bordered table-striped table-hover"id="instrument">    
                         <thead>
-                            <th>NO</th>
-                            <th>INVOICE</th>
-                            <th>TANGGAL PENGAJUAN</th>
-                            <th>TANGGAL PINJAM</th>
-                            <th>TANGGAL KEMBALI</th>
-                            <th>STATUS</th>
-                            <th>DETAIL PENGAJUAN</th>
+                            <th><center>NO</center></th>
+                            <th><center>INVOICE</center></th>
+                            <th><center>TANGGAL PENGAJUAN</center></th>
+                            <th><center>TANGGAL PINJAM</center></th>
+                            <th><center>TANGGAL KEMBALI</center></th>
+                            <th><center>STATUS</center></th>
+                            <th><center>DETAIL PENGAJUAN</center></th>
                         </thead>
                         <tbody>
                            <?php 
@@ -65,15 +65,15 @@
                             while ($rowPeminjaman = mysql_fetch_array($queryPeminjaman)) {
                               ?>
                                 <tr>
-                                        <td><?php echo ++$no; ?></td>
-                                        <td><?php echo $rowPeminjaman['loan_invoice']; ?></td>
-                                        <td><?php echo $rowPeminjaman['loan_date_input']; ?></td>
-                                        <td><?php echo $rowPeminjaman['loan_date_start']; ?></td>
-                                        <td><?php echo $rowPeminjaman['loan_date_return']; ?></td>
+                                        <td><center><?php echo ++$no; ?></center></td>
+                                        <td><center><?php echo $rowPeminjaman['loan_invoice']; ?></center></td>
+                                        <td><center><?php echo $rowPeminjaman['loan_date_input']; ?></center></td>
+                                        <td><center><?php echo $rowPeminjaman['loan_date_start']; ?></center></td>
+                                        <td><center><?php echo $rowPeminjaman['loan_date_return']; ?></center></td>
                                         <td>
-                                          <button class='btn btn-info btn-sm dim_about'><span class="fa fa-check"></span> <?php echo $rowPeminjaman['loan_status']; ?></button>
+                                          <center><label class='label label-info label-lg'><?php echo $rowPeminjaman['loan_status']; ?></label></center>
                                         </td>  
-                                        <?php echo "<td><a href='#detail_peminjaman'  class='btn btn-warning btn-sm dim_about' id='custId' data-toggle='modal' data-id='".$rowPeminjaman['loan_invoice']."'><span class=''></span> Detail Pengajuan</a></td>"; ?>
+                                        <?php echo "<td><center><a href='#detail_peminjaman'  class='btn btn-warning btn-sm dim_about' id='custId' data-toggle='modal' data-id='".$rowPeminjaman['loan_invoice']."'><span class=''></span> Lihat Detail</a></center></td>"; ?>
                                 </tr>
                           <?php } ?> 
                         </tbody>
@@ -90,7 +90,7 @@
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #1ab394; color:white;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="fa fa-flask"></span> Detail Peminjaman</h4>
+                    <h4 class="modal-title"><span class=""></span> Detail Pengajuan</h4>
                 </div>
                 <div class="modal-body">
                     <div class="peminjaman-data"></div>

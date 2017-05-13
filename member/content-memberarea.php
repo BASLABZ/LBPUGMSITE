@@ -43,7 +43,7 @@
                     else if($statusKonfirmasi != 'ACC' && $statusKonfirmasi != 'DITOLAK'){
                         echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
                           <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
-                            <span class='fa fa-check'></span> Selamat Datang Di LPB - UGM / PEMINJAMAN ALAT LAB.
+                            <span class=''></span> Selamat Datang Di Website Peminjaman Alat Penelitian Antropologi Laboratorium Bio- & Paleoantropologi UGM
                          </div> ";
                     }
              ?>
@@ -184,7 +184,7 @@
                         $member_phone_number_cek !='' AND $member_address_cek  != '') {
                          echo "
                                   <div class='col-md-4'>
-                                       <a href='index.php?hal=pengajuan-member/pengajuan' class='btn btn-danger btn-lg dim_about'><span class='fa fa-search'></span> DAFTAR ALAT</a>
+                                       <a href='index.php?hal=pengajuan-member/pengajuan' class='btn btn-danger btn-lg dim_about'><span class='fa fa-search'></span> DAFTAR KOLEKSI ALAT</a>
                                    </div>
                               ";
                           echo "<div class='col-md-8'>
@@ -203,7 +203,7 @@
                                             <div class='panel-heading'>
                                               <h4 class='panel-title'>
                                                 <a data-toggle='collapse' href='#peringatan'>
-                                                        <span class='fa fa-search'></span> DAFTAR ALAT
+                                                        <span class='fa fa-search'></span> DAFTAR KOLEKSI ALAT
                                                 </a>
                                               </h4>
                                             </div>

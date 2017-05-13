@@ -30,13 +30,13 @@
                         <a href="index.php"><i class="fa fa-home"></i> <span class="nav-label">HOME</span></a>
                     </li>
                     <li>
-                        <a href="index.php?hal=pengajuan-member/pengajuan-alat"><i class="fa fa-file-o"></i> <span class="nav-label">PENGAJUAN</span>
+                        <a href="index.php?hal=pengajuan-member/pengajuan-alat"><i class="fa fa-twitch"></i> <span class="nav-label">PENGAJUAN</span>
                         <!-- peringatan Pengajuan -->
                         <?php include 'peringatan_pengajuan.php'; ?>
                         </a>
                     </li>
                     <li>
-                        <a href="layouts.html"><i class="fa fa-file-o"></i> <span class="nav-label">PEMBAYARAN</span>
+                        <a href="layouts.html"><i class="fa fa-twitch"></i> <span class="nav-label">PEMBAYARAN</span>
                         <span class="label label-warning pull-right"><span class="fa fa-exclamation-triangle"></span> 1 </span>
 
                         </a>
@@ -45,7 +45,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="index.php?hal=saldo/saldo"><i class="fa fa-share"></i> <span class="nav-label">SALDO</span>
+                        <a href="index.php?hal=saldo/saldo"><i class="fa fa-twitch"></i> <span class="nav-label">SALDO</span>
                         </a>
                     </li>
                     <li>

@@ -1,4 +1,5 @@
 <table class="table table-responsive table-hover table-bordered">
+
 		<thead>
 			<th>NO</th>
 			<th>NAMA ALAT</th>
@@ -7,9 +8,7 @@
 			<th>HARGA SEWA</th>
 			<th>AKSI</th>
 		</thead>
-		<tbody>
-
-	
+		<tbody>	
 <?php 
 		include '../../menejemen/inc/inc-db.php';
 		$invoice = $_POST['id'];
@@ -20,19 +19,17 @@
 		$no =1;
 		while ($rowDetailPeminjaman = mysql_fetch_array($sqldetail)) {
 			$status = $rowDetailPeminjaman['loan_status_detail'];
-			
-
- ?>
-			
+ ?>		
 			<tr>
-
 				<td><?php echo $no++; ?></td>
 				<td><?php echo $rowDetailPeminjaman['instrument_name']; ?></td>
 				<td>
-					<center><label class="label label-warning dim_about"><span class=""></span> <?php echo $rowDetailPeminjaman['loan_status_detail']; ?></label></center>
+					<center>
+						<label class="label label-warning dim_about"><span class=""></span> <?php echo $rowDetailPeminjaman['loan_status_detail']; ?></label>
+					</center>
 				</td>
-				<td class="text-right"><center><?php echo $rowDetailPeminjaman['loan_amount']; ?></center></td>
-				<td class="text-right">Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
+				<td><center><?php echo $rowDetailPeminjaman['loan_amount']; ?></center></td>
+				<td>Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
 				<td>
 					<?php if ($status == 'DITOLAK' ) {
 						echo "<a href='index.php?hal=members/list&hapus=".$rowDetailPeminjaman['loan_app_detail_id']."&jumlah=".$rowDetailPeminjaman['loan_amount']."&subtotal=".$rowDetailPeminjaman['loan_subtotal']."&invoice=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-danger dim_about'><span class='fa fa-trash'></span></a>";
@@ -71,17 +68,16 @@
 		<tfoot>		 
 			<tr>
 				<td colspan="3"><b>Jumlah Alat</b></td>
-				<td><center><?php echo $roTotal['loan_total_item']; ?></center></td>
+				<td><center><b><?php echo $roTotal['loan_total_item']; ?></b></center></td>
 				<td></td>
 			</tr> </br>
 			<tr>
 				<td colspan="3"><b>Lama Pinjam</b></td>
-				<td><center><?php echo $roTotal['long_loan']; ?>Minggu</center></td>
+				<td><center><b><?php echo $roTotal['long_loan']; ?> Minggu</b></center></td>
 				<td></td> <br/>
 			</tr>
 			<tr>
-				<td colspan="3"><b>Subtotal </b></td>
-				<td></td>
+				<td colspan="4"><b>Subtotal </b></td>
 				<td>Rp.<?php echo rupiah($sub); ?></td>
 			</tr> <br/>
 			<?php 
@@ -159,7 +155,7 @@
 
                                    if ($statusKonfirmasi == 'MEMBAYAR TAGIHAN') {
                     					if ($querystatuspembayaran['payment_valid'] == 'VALID') {
-                    						echo "<a href='index.php?hal=pembayaran/preview_rekappembayaran_perinvoice&id=".$invoice."' h class='btn  btn-info dim_about'><span class='fa fa-print'></span> CETAK</a>";
+                    						echo "<a href='index.php?hal=pembayaran/preview_rekappembayaran_perinvoice&id=".$invoice."' h class='btn  btn-info dim_about'><span class='fa fa-print'></span> CETAK INVOICE</a>";
                     					}                 
                                   
                                    }else if ($statusKonfirmasi == 'ACC FINAL') {

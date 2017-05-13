@@ -10,14 +10,14 @@
 	<div class="form-group">
 		<table>
 			<tr>
-				<td><b>No Invoice</b></td>
+				<td><b>No Invoice&nbsp</b></td>
 				<td>:</td>
-				<td><?php echo $invoice; ?></td>
+				<td><b>&nbsp<?php echo $invoice; ?></b></td>
 			</tr>
 			<tr>
-				<td><b>Nama Member</b></td>
+				<td><b>Nama Member&nbsp</b></td>
 				<td>:</td>
-				<td><?php echo $rowPenagihan['member_name']; ?></td>
+				<td><b>&nbsp<?php echo $rowPenagihan['member_name']; ?></b></td>
 			</tr>
 	</table>
 </div> 
@@ -25,12 +25,12 @@
 </div> 
   </div>
 <table class="table table-responsive table-hover table-bordered">
-		<thead>
+		<!-- <thead>
 			<th>No</th>
 			<th>Nama Alat</th>
 			<th>Jumlah</th>
 			<th>Subtotal</th>
-		</thead>
+		</thead> -->
 		<tbody>
 		<?php 
 					
@@ -44,12 +44,12 @@
 				$no =1;
 				while ($rowDetailPeminjaman = mysql_fetch_array($sqldetail)) {
 		 ?>
-			<tr>
-				<td><?php echo $no++; ?></td>
-				<td><?php echo $rowDetailPeminjaman['instrument_name']; ?></td>
-				<td><?php echo $rowDetailPeminjaman['loan_amount']; ?></td>
-				<td>Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
-			</tr>
+			<!-- <tr>
+				<td><?php //echo $no++; ?></td>
+				<td><?php //echo $rowDetailPeminjaman['instrument_name']; ?></td>
+				<td><?php //echo $rowDetailPeminjaman['loan_amount']; ?></td>
+				<td>Rp.<?php //echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
+			</tr> -->
 <?php } ?>
 		</tbody>
 		<tfoot>
@@ -65,17 +65,17 @@
 				$totalBiaya = $biaya['totalBiaya'];
 			 ?>
 
-			<tr>
+			<!-- <tr>
 				<td colspan="2"><label>Jumlah</label></td>
-				<td><label><?php echo $totalItem; ?></label></td>
+				<td><label><?php //echo $totalItem; ?></label></td>
 				<td></td> 
-			</tr>
-			<tr>
+			</tr> -->
+			<!-- <tr>
 				<td colspan="3"><label>Total </label></td>
-				<td><label>Rp. <?php echo rupiah($totalBiaya); ?></label></td>	
+				<td><label>Rp. <?php //echo rupiah($totalBiaya); ?></label></td>	
 			</tr>
-			<tr>
-				<td colspan="3"><label>Tagihan : </label></td>
+			<tr> -->
+				<td colspan="3"><label>Tagihan</label></td>
 				<td><label>Rp. <?php echo rupiah($rowPenagihan['payment_bill']); ?></label></td>
 			</tr>
 			<tr>
@@ -84,11 +84,19 @@
 			</tr>
 			<tr>
 				<td colspan="3"><label>Kelebihan Pembayaran</label></td>
-				<td><?php echo $rowPenagihan['payment_amount_saldo']; ?> * Sisa pembayaran akan dimasukkan ke dalam saldo member</td>
+				<td><label>Rp. <?php echo rupiah ($rowPenagihan['payment_amount_saldo']); ?>  * Sisa pembayaran akan dimasukkan ke dalam saldo member</label></td>
 			</tr>
 			<tr>
 				<td colspan="3"><label>Kategori Pembayaran</label></td>
 				<td><?php echo $rowPenagihan['payment_category']; ?></td>
+			</tr>
+			<tr>
+				<td colspan="3"><label>Keterangan Pembayaran</label></td>
+				<td><?php echo $rowPenagihan['payment_info']; ?></td>
+			</tr>
+			<tr>
+				<td colspan="3"><label>Jenis Pembayaran</label></td>
+				<td><?php echo $rowPenagihan['payment_status']; ?></td>
 			</tr>
 			<tr>
 				<td colspan="3"><label>Tanggal Konfirmasi</label></td>
@@ -141,7 +149,7 @@
 						</div>
 						<div class="col-md-12" id="keterangan" hidden>
 						<br>
-							<label>Isi Alasan Tidak Valid</label>
+							<label>Alasan Tidak Valid</label>
 							<textarea class="form-control" name="payment_notif">
 								
 							</textarea>

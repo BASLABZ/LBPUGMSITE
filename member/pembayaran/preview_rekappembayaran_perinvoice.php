@@ -1,21 +1,19 @@
 <?php 
         $id = $_GET['id'];
-        $querypreviewrekap = mysql_query("SELECT * FROM trx_loan_application p JOIN trx_payment_temp t ON t.loan_app_id_fk = p.loan_app_id where p.member_id_fk = '".$_SESSION['member_id']."' and p.loan_invoice = '".$id."'");
+        $querypreviewrekap = mysql_query("SELECT * FROM trx_loan_application p JOIN trx_payment t ON t.loan_app_id_fk = p.loan_app_id where p.member_id_fk = '".$_SESSION['member_id']."' and p.loan_invoice = '".$id."'");
         $row = mysql_fetch_array($querypreviewrekap);
         $idmember = $row['member_id_fk'];
  ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-8">
-        <h2>Invoice</h2>
+    <br/>
+        <h3>Invoice Peminjaman Alat Penelitian</h3>
         <ol class="breadcrumb">
             <li>
                 <a href="#">Home</a>
             </li>
             <li>
                 Transaksi Pembayaran
-            </li>
-            <li>
-                Rekap Transaksi
             </li>
             <li class="active">
                 <strong>Invoice : <?php echo $row['loan_invoice']; ?></strong>
@@ -31,6 +29,12 @@
             <div class="col-lg-12">
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="ibox-content p-xl">
+                    <img src="../../img/landing/UGM.jpg" width="100px" height="100px">
+                    <center><b><font size="4">FAKULTAS KEDOKTERAN UNIVERSITAS GADJAH MADA</font></b></center>
+                    <center><b><font size="3">LABORATORIUM BIAONTROPOLOGI & PALEOANTROPOLOGI</font></b></center>
+                    <center>Jl. Medika, Sekip, Yogyakarta 55281, Indonesia</center>
+                    <center>Telp/Fax : +62-274-552577; Email : lab-biopaleo.fk@ugm.ac.id</center>
+                    <hr>
                             <table>
                                  <tr>
                                      <td>Invoice : </td>
