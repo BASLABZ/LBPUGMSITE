@@ -2,7 +2,7 @@
 <table class="table table-responsive table-hover table-bordered">
 		<thead>
 			<th>NO</th>
-			<th>NAMA INSTRUMENT</th>
+			<th>NAMA ALAT</th>
 			<th>JUMLAH</th>
 		</thead>
 		<tbody>
@@ -19,7 +19,7 @@
 			<tr>
 				<td><?php echo $no++; ?></td>
 				<td><?php echo $rowDetailPeminjaman['instrument_name']; ?></td>
-				<td><?php echo $rowDetailPeminjaman['loan_amount']; ?></td>
+				<td><center><?php echo $rowDetailPeminjaman['loan_amount']; ?></center></td>
 			</tr>
 <?php } ?>
 		</tbody>
@@ -30,9 +30,9 @@
 				<div class="form-group">
 					<input type="hidden" name="invoice" value="<?php echo $invoice; ?>">
 					<?php if ($status_loan == 'DIKEMBALIKAN' ) {
-						echo "ALAT TELAH DIKEMBALIKAN";
+						echo "<b>ALAT TELAH DIKEMBALIKAN</b>";
 					}else if ($status_loan == 'DIPINJAM') {
-						echo "ALAT TELAH DI BERIKAN KEPADA MEMBER";
+						echo "<b>ALAT TELAH DI BERIKAN KEPADA MEMBER</b>";
 					} else{
 						echo "<button type='submit' class='btn btn-block btn-info dim_about'> <span class='fa fa-check'></span> KONFIRMASI PEMBERIAN ALAT</button>";
 						} ?>

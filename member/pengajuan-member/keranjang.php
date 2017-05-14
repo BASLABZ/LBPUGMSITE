@@ -120,8 +120,8 @@
             
               <tr>
                 <td colspan="2" class="text-right"><b>Jumlah :</b> </td>
-                <td><input type="text" readonly id="totaljum" name="totaljumlahSEMUAITEM"> <b>/ Item</b></td>
-                <td><b>Sub total :</b></td>
+                <td><input type="text" readonly id="totaljum" name="totaljumlahSEMUAITEM"> <b> Item</b></td>
+                <td><b>Subtotal</b></td>
                 <td>Rp. <input type="text" readonly id="totalsus"></td>
               </tr>
               

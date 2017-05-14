@@ -89,14 +89,14 @@
                                 </div>
 
                                     <div class="row">
-                                       <div class="col-md-2"></div>
-                                        <div class="col-md-8" align="center">
+                                       <div class="col-md-1"></div>
+                                        <div class="col-md-10" align="center">
                                             <div class="row well dim_about">
                                             <form class="role" method="POST">
-                                                <div class="col-md-4" style="padding-top: 5px; margin-right: 5px;" ><b>Status Pengajuan </b></div> 
+                                                <div class="col-md-3" style="padding-top: 5px; margin-right: 5px;" ><b>Status Pengajuan </b></div> 
                                                 <input type="hidden" value="<?php echo $rowStatusLoan['loan_app_id']; ?>" name='loan_app_id'>
                                                 <input type="hidden" value="<?php echo $invoice; ?>" name='loan_invoice'>
-                                                <div class="col-md-4">
+                                                <div class="col-md-6">
                                                         <select class="form-control" name="loan_status">
                                                             <?php 
                                                                 if ($_SESSION['level_name'] != 'kepala laboratorium'){ 
@@ -127,7 +127,7 @@
                                                     <button type="submit" name="ubah" class="btn btn-primary btn-md dim_about"> <span class="fa fa-check"></span> Konfirmasi Pengajuan</button>
                                                     
                                                
-                                                <div class="col-md-2"></div>  
+                                                <div class="col-md-1"></div>  
                                                 </form>
                                                 
                                             </div>
@@ -175,7 +175,7 @@
                                                      ?>
                                                     <td>
                                                      <a href='#ubahstatuspengajuan' class='btn btn-info dim_about' id='custId' data-toggle='modal' 
-                                                        data-id='<?php echo $rowDetailPeminjaman['loan_app_detail_id']; ?>'><span class="fa fa-eye"></span> Ubah Status </a> 
+                                                        data-id='<?php echo $rowDetailPeminjaman['loan_app_detail_id']; ?>'><span class="fa fa-edit"></span> Ubah Status </a> 
                                                     </td>
                                                      <?php } ?>
                                                 
@@ -298,7 +298,7 @@
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #1ab394; color:white; ">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="fa fa-check"></span> Ubah Status Pengajuan & Penawaran Alat Lain</h4>
+                    <h4 class="modal-title"><span class=""></span> Detail Status Alat</h4>
                 </div>
                 <div class="modal-body" style="padding-top:10px; ">
                     <div class="ubahstatuspengajuan-data"></div>

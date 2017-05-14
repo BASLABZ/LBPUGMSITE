@@ -30,60 +30,66 @@
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="ibox-content p-xl">
                     <img src="../../img/landing/UGM.jpg" width="100px" height="100px">
-                    <center><b><font size="4">FAKULTAS KEDOKTERAN UNIVERSITAS GADJAH MADA</font></b></center>
-                    <center><b><font size="3">LABORATORIUM BIAONTROPOLOGI & PALEOANTROPOLOGI</font></b></center>
-                    <center>Jl. Medika, Sekip, Yogyakarta 55281, Indonesia</center>
-                    <center>Telp/Fax : +62-274-552577; Email : lab-biopaleo.fk@ugm.ac.id</center>
-                    <hr>
+                        <center><b><font size="4">FAKULTAS KEDOKTERAN UNIVERSITAS GADJAH MADA</font></b></center>
+                        <center><b><font size="3">LABORATORIUM BIAONTROPOLOGI & PALEOANTROPOLOGI</font></b></center>
+                        <center>Jl. Medika, Sekip, Yogyakarta 55281, Indonesia</center>
+                        <center>Telp/Fax : +62-274-552577; Email : lab-biopaleo.fk@ugm.ac.id</center>
+                        <hr>
+                        <center><b><font size="2">INVOICE</font></b></center>
+                        <hr>
                             <table>
                                  <tr>
-                                     <td>Invoice : </td>
-                                     <td></td>
-                                     <td><?php echo $row['loan_invoice']; ?></td>
+                                     <td>Invoice No</td>
+                                     <td>&nbsp&nbsp :</td>
+                                     <td>&nbsp<?php echo $row['loan_invoice']; ?></td>
                                  </tr>
                                  <tr>
-                                     <td>Nama Peminjam :</td>
-                                     <td></td>
-                                     <td><?php echo $rowmember['member_name']; ?></td>
+                                     <td>Nama Peminjam</td>
+                                     <td>&nbsp&nbsp :</td>
+                                     <td>&nbsp<?php echo $rowmember['member_name']; ?></td>
                                  </tr>
                                   <tr>
-                                     <td>Institusi :</td>
-                                     <td></td>
-                                     <td><?php echo $rowmember['member_institution']; ?></td>
+                                     <td>Institusi</td>
+                                     <td>&nbsp&nbsp :</td>
+                                     <td>&nbsp<?php echo $rowmember['member_institution']; ?></td>
+                                 </tr>
+                                  </tr>
+                                  <tr>
+                                     <td>Tanggal Pengajuan</td>
+                                     <td>&nbsp&nbsp :</td>
+                                     <td>&nbsp<?php echo $row['loan_date_input']; ?></td>
                                  </tr>
                                   <tr>
-                                     <td>Tgl Pinjam :</td>
-                                     <td></td>
-                                     <td><?php echo $row['loan_date_start']; ?></td>
+                                     <td>Tanggal Pinjam</td>
+                                     <td>&nbsp&nbsp :</td>
+                                     <td>&nbsp<?php echo $row['loan_date_start']; ?></td>
                                  </tr>
                                  <tr>
-                                     <td>Tgl Kembali :</td>
-                                     <td></td>
-                                     <td><?php echo $row['loan_date_return']; ?></td>
+                                     <td>Tangggal Kembali</td>
+                                     <td>&nbsp&nbsp :</td>
+                                     <td>&nbsp<?php echo $row['loan_date_return']; ?></td>
                                  </tr>
                              </table>
                             <div class="table-responsive m-t">
-                                <table class="table table-responsive table-hover table-bordered">
-        <thead>
-            <th>NO</th>
-            <th>NAMA INSTRUMENT</th>
-            <th>JUMLAH</th>
-            <th>SUBTOTAL</th>
-        </thead>
+                              <table class="table table-responsive table-hover table-bordered">
+                                <thead>
+                                    <th><center>NO</center></th>
+                                    <th><center>NAMA ALAT</center></th>
+                                    <th><center>JUMLAH</center></th>
+                                    <th><center>SUBTOTAL</center></th>
+                                </thead>
         <tbody>
-            <?php 
-
-                    
+                      <?php 
                     $sqldetail = mysql_query("SELECT * FROM trx_loan_application_detail d join ref_instrument i on d.instrument_id_fk = i.instrument_id join trx_loan_application a on d.loan_app_id_fk = a.loan_app_id where a.loan_invoice = '".$id."'");
                     $no =1;
                     while ($rowDetailPeminjaman = mysql_fetch_array($sqldetail)) {
                         $status = $rowDetailPeminjaman['loan_status_detail'];
              ?>
                         <tr>
-                            <td><?php echo $no++; ?></td>
+                            <td><center><?php echo $no++; ?></center></td>
                             <td><?php echo $rowDetailPeminjaman['instrument_name']; ?></td>
-                            <td class="text-right"><?php echo $rowDetailPeminjaman['loan_amount']; ?></td>
-                            <td class="text-right">Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
+                            <td><center><?php echo $rowDetailPeminjaman['loan_amount']; ?></center></td>
+                            <td>Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
                         </tr>
             <?php } ?>
         </tbody>
@@ -111,16 +117,16 @@
         <tfoot>
             <tr>
                 <td colspan="2">Jumlah Item</td>
-                <td><?php echo $roTotal['loan_total_item']; ?> /Buah</td>
-                
+                <td><center><?php echo $roTotal['loan_total_item']; ?></center></td>
+                <td></td>
             </tr>
             <tr>
                 <td colspan="2"> Lama Pinjam</td>
-                <td><?php echo rupiah($roTotal['long_loan']); ?>/Minggu  </td>
-                
+                <td><center><?php echo rupiah($roTotal['long_loan']); ?> Minggu</center></td>
+                <td></td>
             </tr>
             <tr>
-                <td colspan="2"> Jumlah Subtotal : </td>
+                <td colspan="3"> Subtotal</td>
                 
                 <td>Rp.<?php echo rupiah($sub); ?></td>
             </tr>
@@ -131,15 +137,15 @@
              ?>
             
             <tr>
-                <td colspan="2">Total </td>
+                <td colspan="3">Total = ( Lama Pinjam x Subtotal )</td>
                 <td>Rp.<?php echo rupiah($hasil_akhirs1); ?></td>
             </tr>
             <tr>
-                <td colspan="2">Potongan (50%)</td>
+                <td colspan="3">Potongan (50%)</td>
                 <td>Rp.<?php echo rupiah($potongan);  ?></td>
             </tr>
             <tr>
-                <td colspan="2">Total Bayar = (Lama Pinjam x Jumlah Subtotal)x 50 %</td>
+                <td colspan="3">Total Bayar = ( Total - Potongan )</td>
                 <td>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></td>
             </tr>
             <?php } else if ($roTotal['category_id_fk']==5) {
@@ -147,15 +153,15 @@
             ?>
             
             <tr>
-                <td colspan="2">Total </td>
+                <td colspan="3">Total ( Lama Pinjam x Subtotal )</td>
                 <td>Rp.<?php echo rupiah($totals2); ?></td>
             </tr>
             <tr>
-                <td colspan="2">Potongan (25%)</td>
+                <td colspan="3">Potongan (25%)</td>
                 <td>Rp.<?php echo rupiah($diskons2);  ?></td>
             </tr>
             <tr>
-                <td colspan="2">Total Bayar </td>
+                <td colspan="3">Total Bayar = ( Total - Potongan )<</td>
                 <td>Rp.<?php 
                 echo rupiah($roTotal['loan_total_fee']); ?></td>
             </tr>
@@ -163,7 +169,7 @@
                 
              ?>
             <tr>
-                <td colspan="2">Total </td>
+                <td colspan="3">Total ( Lama Pinjam x Subtotal )</td>
                 <td>Rp.<?php echo rupiah($totals3); ?></td>
             </tr>
             <tr>
@@ -172,13 +178,13 @@
             </tr>
             
             <tr>
-                <td colspan="2">Total Bayar </td>
+                <td colspan="3">Total Bayar = ( Total - Potongan )<</td>
                 <td>Rp.<?php echo rupiah($hasil_akhirs3); ?></td>
             </tr> 
              <?php }else {
                 ?>
                 <tr>
-                <td colspan="2">Total </td>
+                <td colspan="3">Total ( Lama Pinjam x Subtotal )</td>
                 <td>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></td>
             </tr>
                 <?php
@@ -187,7 +193,9 @@
         <?php } ?>
          </table>
          <p>
-             Keterangan : Silahkan Bawa Identitas Anda, KTP/KTM/SIM Anda Saat Pengambilan Alat
+             Keterangan : <br/>
+             - Silahkan Cetak Invoice Peminjaman <br/>
+             - Syarat yang harus dibawa untuk pengambilan alat adalah membawa print out invoice dan Kartu Tanda Mahasiswa (KTM) / Identitas Pribadi.
          </p>
     </div>  
     

@@ -13,8 +13,8 @@
 	<div class="col-md-12">
 		
 			<div class="form-group row">
-				<label class="col-md-4">INVOICE : </label>
-				<div class="col-md-8">
+				<label class="col-md-8">INVOICE</label>
+				<div class="col-md-4">
 					<input type="text" readonly="" class="form-control"  
 						value="<?php echo $row['loan_invoice']; ?>">
 					<input type="hidden" name="loan_app_id_fk" value="<?php echo $row['loan_app_id_fk']; ?>">
@@ -25,7 +25,7 @@
 		</div>
 		<div class="col-md-12">
 			<div class="form-group row">
-				<label class="col-md-8">TANGGAL HARUS DIKEMBALIKAN  </label>
+				<label class="col-md-8">TANGGAL HARUS KEMBALI  </label>
 				<div class="col-md-4">
 					<input type="text" readonly="" class="form-control" name="tanggalharusdikembalikan"  value="<?php echo $row['loan_date_return']; ?>" >
 				</div>

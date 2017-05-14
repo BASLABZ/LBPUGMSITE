@@ -1,7 +1,7 @@
 <?php 
 		include '../../../inc/inc-db.php';
 		$invoice = $_POST['id'];
-		$query = mysql_query("SELECT loan_amount,instrument_id_fk,loan_status_detail,loan_app_detail_id,loan_app_id_fk,loan_invoice FROM trx_loan_application_detail JOIN trx_loan_application on trx_loan_application_detail.loan_app_id_fk = trx_loan_application.loan_app_id WHERE trx_loan_application_detail.loan_app_detail_id = '".$invoice."' ");
+		$query = mysql_query("SELECT loan_amount, instrument_id_fk, instrument_name, loan_status_detail, loan_app_detail_id, loan_app_id_fk, loan_invoice FROM trx_loan_application_detail JOIN trx_loan_application on trx_loan_application_detail.loan_app_id_fk = trx_loan_application.loan_app_id JOIN ref_instrument on trx_loan_application_detail.instrument_id_fk = ref_instrument.instrument_id WHERE trx_loan_application_detail.loan_app_detail_id = '".$invoice."' ");
 
 		$rowsatus = mysql_fetch_array($query);
 		$jumlahInstrument = $rowsatus['loan_amount'];
@@ -19,7 +19,7 @@
  	<input type="hidden" value="<?php echo $rowsatus['loan_invoice']; ?>" name='loan_invoice'>
  	
  		<div class="row well">
- 			<label class="col-md-4">UBAH STATUS <?php echo $rowsatus['loan_invoice']; ?></label>
+ 			<label class="col-md-4"><?php echo $rowsatus['instrument_name']; ?></label>
  			<div class="col-md-6">
  				<!-- seleisi jumlah yang akan dikurangi dengan nilai yang ada di instrument -->
  				<input type="hidden" value="<?php echo $jumlahInstrument; ?>" name='selisih'>
@@ -105,7 +105,7 @@
 					    </div>
 					  </div>
 					</div>
- 				</div>
+ 				</div> <br/>
  				<button class="btn btn-sm btn-primary dim_about pull-right" name="ubahstatus"><span class="fa fa-check"></span> SIMPAN</button>
  			</div>
  		</div>
