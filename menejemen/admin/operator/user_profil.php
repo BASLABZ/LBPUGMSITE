@@ -45,7 +45,7 @@
                             <div class="panel-body dim_about" >
                                 <form class="role" method="POST">
                                     <div class="form-group row">
-                                        <label class="col-md-4">NAMA OPERATOR</label>
+                                        <label class="col-md-4">Nama </label>
                                         <div class="col-md-8">
                                             <input type="text" class="form-control" name="operator_name" value="<?php echo $row['operator_name']; ?>">
                                         </div>
@@ -54,10 +54,10 @@
                                         <label class="col-md-4" >Jenis Kelamin</label>
                                         <div class="col-md-8">
                                             <label class="radio-inline">
-                                                <input type="radio" name="operator_gender" value="Laki-laki" required  />Laki-laki
+                                                <input type="radio" name="operator_gender" value="Laki-laki"; <?php if ($row['operator_gender']=='Laki-laki') {echo "checked=checked";} ?> required  />Laki-laki
                                             </label>
                                             <label class="radio-inline">
-                                                <input type="radio" name="operator_gender" value="Perempuan" required />Perempuan
+                                                <input type="radio" name="operator_gender" value="Perempuan"; <?php if ($row['operator_gender']=='Perempuan') { echo "checked=checked";} ?> required />Perempuan
                                             </label>
                                         </div>
                                     </div>
@@ -68,16 +68,7 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-4">
-                                            Password
-                                        </label>
-                                        <div class="col-md-8">
-                                            <input class="form-control" type="password" name="operator_password" placeholder="Password"
-                                           data-original-title="Please use your secure password" data-placement="top" required value="<?php echo $row['operator_password']; ?>" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-4">Hint Question</label>
+                                        <label class="col-md-4">Pertanyaan Keamanan</label>
                                         <div class="col-lg-8">
                                          <select class="form-control" name="operator_hint_question">
                                             <option value="Apa warna favorit anda?"
@@ -99,21 +90,9 @@
                                      </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label class="col-md-4">Answer Question</label>
+                                        <label class="col-md-4">Jawaban Keamanan</label>
                                         <div class="col-md-8">
                                              <input type="text" placeholder="Answer Question" class="form-control" name="operator_answer_question" required value="<?php echo $row['operator_answer_question']; ?>" />
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <label class="col-md-4">Level Operator</label>
-                                        <div class="col-md-8">
-                                             <select class="form-control" name="level_id_fk">
-                                                    <?php
-                                                        $tampil = mysql_query("SELECT level_id, level_name from ref_level");
-                                                        while ($level = mysql_fetch_array($tampil)){ ?>
-                                                            <option value="<?php echo $level['level_id'] ?>"><?php echo $level['level_name']; ?></option>
-                                                    <?php } ?>
-                                                </select>
                                         </div>
                                     </div>
                                     <div class="form-group row">
