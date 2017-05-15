@@ -25,12 +25,6 @@
 </div> 
   </div>
 <table class="table table-responsive table-hover table-bordered">
-		<!-- <thead>
-			<th>No</th>
-			<th>Nama Alat</th>
-			<th>Jumlah</th>
-			<th>Subtotal</th>
-		</thead> -->
 		<tbody>
 		<?php 
 					
@@ -44,12 +38,6 @@
 				$no =1;
 				while ($rowDetailPeminjaman = mysql_fetch_array($sqldetail)) {
 		 ?>
-			<!-- <tr>
-				<td><?php //echo $no++; ?></td>
-				<td><?php //echo $rowDetailPeminjaman['instrument_name']; ?></td>
-				<td><?php //echo $rowDetailPeminjaman['loan_amount']; ?></td>
-				<td>Rp.<?php //echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
-			</tr> -->
 <?php } ?>
 		</tbody>
 		<tfoot>
@@ -64,23 +52,32 @@
 				$biaya = mysql_fetch_array($queryTotalBayar);
 				$totalBiaya = $biaya['totalBiaya'];
 			 ?>
-
-			<!-- <tr>
-				<td colspan="2"><label>Jumlah</label></td>
-				<td><label><?php //echo $totalItem; ?></label></td>
-				<td></td> 
-			</tr> -->
-			<!-- <tr>
-				<td colspan="3"><label>Total </label></td>
-				<td><label>Rp. <?php //echo rupiah($totalBiaya); ?></label></td>	
-			</tr>
-			<tr> -->
 				<td colspan="3"><label>Tagihan</label></td>
 				<td><label>Rp. <?php echo rupiah($rowPenagihan['payment_bill']); ?></label></td>
 			</tr>
 			<tr>
 				<td colspan="3"><label>Jumlah Pembayaran</label></td>
-				<td><label>Rp. <?php echo rupiah($rowPenagihan['payment_amount_transfer']); ?></label></td>
+				<td>
+					<label>Pembayaran Transfer : Rp. <?php echo rupiah($rowPenagihan['payment_amount_transfer']); ?> 
+					<?php 
+
+
+							$pertambahandengansaldo = mysql_fetch_array(mysql_query("SELECT * from trx_saldo where loan_app_id_fk = '".$rowPenagihan['loan_app_id']."'"));
+							if ($pertambahandengansaldo['saldo_total'] >= 0) {
+								echo " + Rp.";
+								 $penambahantransaksi = $rowPenagihan['payment_bill']-$rowPenagihan['payment_amount_transfer'] + $pertambahandengansaldo['saldo_total'];
+								 echo rupiah($penambahantransaksi);
+								echo "= Rp";
+
+								 $jumlahpembayarandansaldo = $rowPenagihan['payment_amount_transfer'] + $penambahantransaksi;
+								 echo rupiah($jumlahpembayarandansaldo);
+								 echo "<i>* <br><small>Jumlah Pembayaran =  Transfer + Jumlah Nominal Saldo Yang Digunakan</small></i> ";
+							}else{
+
+							}
+					 ?>
+					 </label>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="3"><label>Kelebihan Pembayaran</label></td>
@@ -112,17 +109,29 @@
 					<label>
 						<?php 
 								
-								$tagihan  = $rowPenagihan['payment_bill'];
-								$bayar  =$rowPenagihan['payment_amount_transfer'];
-								$cekPembayaran = $bayar-$tagihan;
-								if ($cekPembayaran == 0) {
-									echo "VALID";
-								}else if ($cekPembayaran > 0 ) {
-									echo "VALID DAN SISA PEMBAYARAN DI MASUKKAN KE SALDO";
+								$pertambahandengansaldo2 = mysql_fetch_array(mysql_query("SELECT * from trx_saldo where loan_app_id_fk = '".$rowPenagihan['loan_app_id']."'"));
+							if ($pertambahandengansaldo2['saldo_total'] >= 0) {
+								
+								 $penambahantransaksi2 = $rowPenagihan['payment_bill']-$rowPenagihan['payment_amount_transfer'] + $pertambahandengansaldo2['saldo_total'];
+								 rupiah($penambahantransaksi2);
+								
+
+								 $jumlahpembayarandansaldo2 = $rowPenagihan['payment_amount_transfer'] + $penambahantransaksi2;
+								if ($penambahantransaksi2 > 0) {
+									
+									echo "PEMBAYARAN VALID";
+									
+								}else if ($penambahantransaksi2 < 0) {
+									echo "PEMBAYARAN TIDAK VALID";
+
 								}
-								else if ($cekPembayaran < 0){
-									echo "PEMBAYARAN TIDAK SESUAI : $cekPembayaran ";
-								}
+								 
+							}else{
+
+							}
+
+
+								
 						 ?>
 					</label>
 				</td>
@@ -138,26 +147,11 @@
 								<option value="VALID">VALID</option>
 								<option value="TIDAK VALID">TIDAK VALID</option>
 							</select>
-							<!-- <select class="form-control" name="payment_valid" required id="konfirmasivalidasi">
-								<option value=""
-                                                <?php //if($rowPenagihan['payment_valid']=='MENUNGGU KONFIRMASI'){echo "selected=selected";}?>>MENUNGGU KONFIRMASI
-                                            </option>
-								<option value="VALID"
-                                                <?php //if($rowPenagihan['payment_valid']=='VALID'){echo "selected=selected";}?>>VALID
-                                            </option>
-                                            <option value="TIDAK VALID"
-                                                <?php //if($rowPenagihan['payment_valid']=='TIDAK VALID'){echo "selected=selected";}?>>TIDAK VALID
-                                            </option>
-								
-							</select> -->
-
 						</div>
 						<div class="col-md-12" id="keterangan" hidden>
 						<br>
 							<label>Alasan Tidak Valid</label>
-							<textarea class="form-control" name="payment_notif">
-								
-							</textarea>
+							<textarea class="form-control" name="payment_notif"></textarea>
 							
 						<br>
 						</div>

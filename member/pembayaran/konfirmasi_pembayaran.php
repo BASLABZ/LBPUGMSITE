@@ -62,7 +62,7 @@
                              $runqueryupdatestatuspengajuan = mysql_query($updateStatusPeminjaman);
 
                              if ($runqueryupdatestatuspengajuan) {
-                                 echo "<script> alert('Data Anda Berhasil Dan Tunggu Konfirmasi Dari Kami'); location.href='index.php?hal=pembayaran/konfirmasi_pembayaran&id=".$invoice."' </script>";exit;
+                                 echo "<script> alert('Data Anda Berhasil Dan Tunggu Konfirmasi Dari Kami'); location.href='index.php?hal=pengajuan-member/pengajuan-alat' </script>";exit;
                              }
 
                     }
@@ -78,6 +78,7 @@
 
                     }else if ($hasiljumlahSaldoDanTransfer >= $tagihan ) {
                        $nominalkesaldo = $hasiljumlahSaldoDanTransfer-$tagihan;
+                       print_r($nominalkesaldo); 
                        $querySimpanPayment2 = "INSERT INTO trx_payment (payment_bankname,payment_bill,
                                                                   payment_amount_transfer,
                                                                   payment_amount_saldo,payment_date,
@@ -97,7 +98,7 @@
                                                         '".$_POST['loan_app_id_fk']."',
                                                         '".$_SESSION['member_id']."',
                                                         '',
-                                                        'TANPA SALDO',
+                                                        'SALDO',
                                                         '".$_POST['payment_category']."',
                                                         '','MENUNGGU KONFIRMASI')";
 
@@ -111,7 +112,7 @@
                              $updateStatusPeminjaman2 = "UPDATE trx_loan_application set loan_status = 'MEMBAYAR TAGIHAN' where loan_app_id='".$_POST['loan_app_id_fk']."'";
                              $runqueryupdatestatuspengajuan2 = mysql_query($updateStatusPeminjaman2);
                              if ($runqueryupdatestatuspengajuan2) {
-                               echo "<script> alert('Data Anda Berhasil Dan Tunggu Konfirmasi Dari Kami'); location.href='index.php?hal=pembayaran/konfirmasi_pembayaran&id=".$invoice."' </script>";exit;
+                               echo "<script> alert('Data Anda Berhasil Dan Tunggu Konfirmasi Dari Kami'); location.href='index.php?hal=pengajuan-member/pengajuan-alat' </script>";exit;
                              }
                     }
                    
