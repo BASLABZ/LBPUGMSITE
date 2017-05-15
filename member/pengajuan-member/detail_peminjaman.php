@@ -1,5 +1,4 @@
-<table class="table table-responsive table-hover table-bordered">
-
+<table class="table table-responsive table-hover table-bordered" >
 		<thead>
 			<th>NO</th>
 			<th>NAMA ALAT</th>
@@ -30,6 +29,7 @@
 				</td>
 				<td><center><?php echo $rowDetailPeminjaman['loan_amount']; ?></center></td>
 				<td>Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
+
 				<td>
 					<?php if ($status == 'DITOLAK' ) {
 						echo "<a href='index.php?hal=members/list&hapus=".$rowDetailPeminjaman['loan_app_detail_id']."&jumlah=".$rowDetailPeminjaman['loan_amount']."&subtotal=".$rowDetailPeminjaman['loan_subtotal']."&invoice=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-danger dim_about'><span class='fa fa-trash'></span></a>";
@@ -140,8 +140,8 @@
 			 	<?php
 			 } ?>
 		</tfoot>
-	</table>
 		<?php } ?>
+	</table>
 	
 	<div class="row">
 		<div class="col-md-12">

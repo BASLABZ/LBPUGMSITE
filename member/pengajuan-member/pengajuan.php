@@ -158,8 +158,7 @@
                                                             ".$runBooking['member_institution']."
                                                         </label>
                                                         </button>
-                                                        <br>
-                                                        <br>
+                                                        
                                                     ";
                                             }
                                              ?>

@@ -134,17 +134,22 @@
 						<div class="col-md-6">
 							<input type="hidden" name="idpayment" value="<?php echo $rowPenagihan['payment_id']; ?>" >
 							<select class="form-control" name="payment_valid" required id="konfirmasivalidasi">
+								<option value="MENUNGGU KONFIRMASI">MENUNGGU KONFIRMASI</option>
+								<option value="VALID">VALID</option>
+								<option value="TIDAK VALID">TIDAK VALID</option>
+							</select>
+							<!-- <select class="form-control" name="payment_valid" required id="konfirmasivalidasi">
 								<option value=""
-                                                <?php if($rowPenagihan['payment_valid']=='MENUNGGU KONFIRMASI'){echo "selected=selected";}?>>MENUNGGU KONFIRMASI
+                                                <?php //if($rowPenagihan['payment_valid']=='MENUNGGU KONFIRMASI'){echo "selected=selected";}?>>MENUNGGU KONFIRMASI
                                             </option>
 								<option value="VALID"
-                                                <?php if($rowPenagihan['payment_valid']=='VALID'){echo "selected=selected";}?>>VALID
+                                                <?php //if($rowPenagihan['payment_valid']=='VALID'){echo "selected=selected";}?>>VALID
                                             </option>
                                             <option value="TIDAK VALID"
-                                                <?php if($rowPenagihan['payment_valid']=='TIDAK VALID'){echo "selected=selected";}?>>TIDAK VALID
+                                                <?php //if($rowPenagihan['payment_valid']=='TIDAK VALID'){echo "selected=selected";}?>>TIDAK VALID
                                             </option>
 								
-							</select>
+							</select> -->
 
 						</div>
 						<div class="col-md-12" id="keterangan" hidden>
@@ -171,9 +176,9 @@
 		  $('#konfirmasivalidasi').on('change',function () {
 		  	if(this.value == "MENUNGGU KONFIRMASI") {
 	          $('#keterangan').hide();
-       		 }else if (this.value == 'VALID') {
+       		 } if (this.value == 'VALID') {
        		 	 $('#keterangan').hide();
-       		 	}else if (this.value == 'TIDAK VALID') {
+       		 	} if (this.value == 'TIDAK VALID') {
        		 		$('#keterangan').show();
        		 	}
 		  });

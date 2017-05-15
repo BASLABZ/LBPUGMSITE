@@ -14,11 +14,21 @@
                   $saldoawal = $_POST['payment_amount_saldo'];
                   $tanggal_konfirmasi_pembayaran_member = date('Y-m-d',strtotime($_POST['payment_confirm_date']));
                   $move = move_uploaded_file($_FILES['frm_file']['tmp_name'], '../surat/'.$fileName);
+
              if ($move) {
                 
+                $cekPenggunaan_saldo = $_POST['paymensaldo_'];
+                if ($cekPenggunaan_saldo == '') {
+                  
+                  if ($_POST['payment_amount_transfer'] < $_POST['payment_bill']) {
 
-                if ($Ceksaldo <= 0) {
-                  $querySimpanPayment = "INSERT INTO trx_payment (payment_bankname,payment_bill,
+                       echo "<script> alert('Jumlah Transfer Anda Kurang Dari Tagihan'); location.href='index.php?hal=pembayaran/konfirmasi_pembayaran&id=".$invoice."' </script>";exit;
+
+                  }else{
+                    
+                    $hasilkondisi_sisa_saldo = $_POST['payment_amount_transfer'] - $_POST['payment_bill'];
+                    
+                    $querySimpanPayment1 = "INSERT INTO trx_payment (payment_bankname,payment_bill,
                                                                   payment_amount_transfer,
                                                                   payment_amount_saldo,payment_date,
                                                                   payment_confirm_date,payment_photo,
@@ -30,7 +40,7 @@
                                                         ('".$_POST['payment_bankname']."',
                                                         '".$_POST['payment_bill']."',
                                                         '".$_POST['payment_amount_transfer']."',
-                                                        '".$penguranganSaldo."',
+                                                        '".$hasilkondisi_sisa_saldo."',
                                                         NOW(),NOW(),
                                                         '".$fileName."',
                                                         '".$_POST['payment_info']."',
@@ -41,8 +51,8 @@
                                                         '".$_POST['payment_category']."',
                                                         '','MENUNGGU KONFIRMASI')";
                                                         
-                             $runQueryPayment = mysql_query($querySimpanPayment);
-                             $saldobertambah = $penguranganSaldo+$saldoAwal;
+                             $runQueryPayment = mysql_query($querySimpanPayment1);
+                             $saldobertambah = $hasilkondisi_sisa_saldo+$saldoAwal;
 
                              $querySimpanSaldo = "INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
                              ('".$saldobertambah."','','','','DEBIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
@@ -50,33 +60,98 @@
                              $runquerysimpansaldo = mysql_query($querySimpanSaldo);
                              $updateStatusPeminjaman = "UPDATE trx_loan_application set loan_status = 'MEMBAYAR TAGIHAN' where loan_app_id='".$_POST['loan_app_id_fk']."'";
                              $runqueryupdatestatuspengajuan = mysql_query($updateStatusPeminjaman);
-                                
-                    if ($runqueryupdatestatuspengajuan) {
-                    echo "<script> alert('Terimakasih Data Konfirmasi Pembayaran Berhasil Disimpan'); location.href='index.php?hal=pengajuan-member/pengajuan-alat' </script>";exit;
-                 }
-                }elseif ($Ceksaldo >  0) {
+
+                             if ($runqueryupdatestatuspengajuan) {
+                                 echo "<script> alert('Data Anda Berhasil Dan Tunggu Konfirmasi Dari Kami'); location.href='index.php?hal=pembayaran/konfirmasi_pembayaran&id=".$invoice."' </script>";exit;
+                             }
+
+                    }
+
+                }else if ($cekPenggunaan_saldo >= 0 ) {
+                    
+                    $tagihan =  $_POST['payment_bill'];
+                    $transfer_pembayaran =  $_POST['payment_amount_transfer'];
+                    $transfer_saldo = $_POST['paymensaldo_'];
+                    $hasiljumlahSaldoDanTransfer = $_POST['payment_amount_transfer'] + $_POST['paymensaldo_'];
+                    if ($hasiljumlahSaldoDanTransfer < $tagihan) {
+                      echo "<script> alert('Jumlah Transfer Anda Kurang Dari Tagihan'); location.href='index.php?hal=pembayaran/konfirmasi_pembayaran&id=".$invoice."' </script>";exit;
+
+                    }else if ($hasiljumlahSaldoDanTransfer >= $tagihan ) {
+                       $nominalkesaldo = $hasiljumlahSaldoDanTransfer-$tagihan;
+                       $querySimpanPayment2 = "INSERT INTO trx_payment (payment_bankname,payment_bill,
+                                                                  payment_amount_transfer,
+                                                                  payment_amount_saldo,payment_date,
+                                                                  payment_confirm_date,payment_photo,
+                                                                  payment_info,loan_app_id_fk,
+                                                                  member_id_fk,payment_notif,payment_status,
+                                                                  payment_category,payment_verification_date,
+                                                                  payment_valid)
+                                                 VALUES
+                                                        ('".$_POST['payment_bankname']."',
+                                                        '".$_POST['payment_bill']."',
+                                                        '".$_POST['payment_amount_transfer']."',
+                                                        '".$nominalkesaldo."',
+                                                        NOW(),NOW(),
+                                                        '".$fileName."',
+                                                        '".$_POST['payment_info']."',
+                                                        '".$_POST['loan_app_id_fk']."',
+                                                        '".$_SESSION['member_id']."',
+                                                        '',
+                                                        'TANPA SALDO',
+                                                        '".$_POST['payment_category']."',
+                                                        '','MENUNGGU KONFIRMASI')";
+
+                             $runQueryPayment2 = mysql_query($querySimpanPayment2);
 
 
-                                                  $saldobertambah = $penguranganSaldo+$saldoAwal;
-                                                  $querySimpanSaldo = mysql_query("INSERT INTO tbl_saldo 
-                                                                                    (loan_app_id_fk,saldo_nominal,member_id_fk) 
-                                                                                    VALUES ('".$_POST['loan_app_id_fk']."','".$saldobertambah."','".$_SESSION['member_id']."') ");
-                                                  $querySimpanPayment = mysql_query( "INSERT INTO trx_payment_temp 
-                                                    (bankname,payment_bill,payment_temp_amount_transfer,
-                                                    payment_temp_amount_saldo,payment_temp_date,
-                                                    payment_temp_confirm_date,payment_temp_photo,
-                                                    payment_temp_info,loan_app_id_fk,member_id_fk,payment_status
-                                                    ) 
-                                                VALUES ('".$_POST['bankname']."','".$_POST['payment_bill']."',
-                                                        '".$_POST['payment_temp_amount_transfer']."','".$saldobertambah."',NOW(),
-                                                        '".$tanggal_konfirmasi_pembayaran_member."','".$fileName."','".$_POST['payment_temp_info']."',
-                                                        '".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."','SALDO')");
+                             $querySimpanSaldo2 = "INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
+                             ('".$nominalkesaldo."','','','','DEBIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
+                             ";
+                             $runquerysimpansaldo2 = mysql_query($querySimpanSaldo2);
+                             $updateStatusPeminjaman2 = "UPDATE trx_loan_application set loan_status = 'MEMBAYAR TAGIHAN' where loan_app_id='".$_POST['loan_app_id_fk']."'";
+                             $runqueryupdatestatuspengajuan2 = mysql_query($updateStatusPeminjaman2);
+                             if ($runqueryupdatestatuspengajuan2) {
+                               echo "<script> alert('Data Anda Berhasil Dan Tunggu Konfirmasi Dari Kami'); location.href='index.php?hal=pembayaran/konfirmasi_pembayaran&id=".$invoice."' </script>";exit;
+                             }
+                    }
+                   
+                  //  if ($totalPembayarandgSaldo < $_POST['payment_bill']) {
+                  //    echo "KURANG";
+                  //    print_r($totalPembayarandgSaldo);
+                  //    print_r($_POST['payment_bill']);
+                  //     // echo "<script> alert('Jumlah Transfer Anda Kurang Dari Tagihan'); location.href='index.php?hal=pembayaran/konfirmasi_pembayaran&id=".$invoice."' </script>";exit;
 
-                            $updateStatusPeminjaman = mysql_query("UPDATE trx_loan_application set loan_status = 'MEMBAYAR TAGIHAN' where loan_app_id='".$_POST['loan_app_id_fk']."'");
-                           } 
-                if ($updateStatusPeminjaman) {
-                              echo "<script> alert('Terimakasih Data Konfirmasi Pembayaran Berhasil Disimpan'); location.href='index.php?hal=pengajuan-member/pengajuan-alat' </script>";exit;
-                           }
+                  // }else if ($totalPembayarandgSaldo > $_POST['payment_bill']){
+                  //   echo "PAS DAN LEBIH";
+                  //   print_r($totalPembayarandgSaldo);
+                  //   print_r($_POST['payment_bill']);
+                   
+                  //   $querySimpanPayment = "INSERT INTO trx_payment (payment_bankname,payment_bill,
+                  //                                                 payment_amount_transfer,
+                  //                                                 payment_amount_saldo,payment_date,
+                  //                                                 payment_confirm_date,payment_photo,
+                  //                                                 payment_info,loan_app_id_fk,
+                  //                                                 member_id_fk,payment_notif,payment_status,
+                  //                                                 payment_category,payment_verification_date,
+                  //                                                 payment_valid)
+                  //                                VALUES
+                  //                                       ('".$_POST['payment_bankname']."',
+                  //                                       '".$_POST['payment_bill']."',
+                  //                                       '".$_POST['payment_amount_transfer']."',
+                  //                                       '".$hasilkondisi_sisa_saldo."',
+                  //                                       NOW(),NOW(),
+                  //                                       '".$fileName."',
+                  //                                       '".$_POST['payment_info']."',
+                  //                                       '".$_POST['loan_app_id_fk']."',
+                  //                                       '".$_SESSION['member_id']."',
+                  //                                       '',
+                  //                                       'TANPA SALDO',
+                  //                                       '".$_POST['payment_category']."',
+                  //                                       '','MENUNGGU KONFIRMASI')";
+                  //                                       print_r($querySimpanPayment); die();
+                  // }
+                }
+               
              }
              
         }
@@ -235,9 +310,9 @@
                                                <input type="hidden" onclick="disabledSaldo(this)"   id="cek">
                                                <input type="checkbox" onclick="disabledSaldo(this)" id="cek">
                                             </span> 
-                                            <input type="text" class="form-control"  id="txtSaldo" disabled="disabled">
+                                            <input type="text" class="form-control"  id="txtSaldo" disabled="disabled" name="paymensaldo_" >
                                             <input type="hidden" name="cekSaldos" value="0">
-                                            <input type="hidden" class="form-control"   name="payment_amount_saldo" value="0">
+                                            <input type="hidden" class="form-control"   name="payment_amount_saldo" value="<?php echo $rowsaldo['total_saldo']; ?>" id="paymentsaldo">
                                           </div>
                                           <!-- INFROMASI SALDO MEMBER -->
                                            <label id="saldosementara" hidden>
@@ -304,8 +379,10 @@
             if (!Saldo.disabled) {
                 Saldo.focus();
                 $('#saldosementara').show();
+                
             }else{
                 $('#saldosementara').hide();
+
             }
         }
 
