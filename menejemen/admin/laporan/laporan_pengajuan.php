@@ -9,10 +9,10 @@ session_start();
                     <div class="panel-heading">
                        <div class="row">
                             <div class="col-md-4">
-                             <span class="fa fa-users"></span> LAPORAN PENGAJUAN
+                             <span class=""></span>
                         </div>
                         <div class="col-md-8">
-                            <div class="text-right"><b><i><span class="fa fa-home"></span> Home / <span class="fa fa-list"></span> Laporan / <span class="fa fa-users"> </span> Operator</i></b></div>
+                            <div class="text-right"><b><i><span class="fa fa-home"></span> Home / <span class="fa fa-list"></span> Laporan / <span class="fa fa-users"> </span> Pengajuan</i></b></div>
                             
                         </div>
                        </div>
@@ -24,15 +24,15 @@ session_start();
                 <div class="col-lg-12">
                     <div class="panel panel-primary" style="border-color:#f8f8f8;">
                         <div class="panel-heading">
-                            <span class="fa fa-users"></span> Laporan Transaksi Pengajuan
+                            <span class=""></span> Laporan Peminjaman
                         </div>
                         <div class="panel-body dim_about">
                             <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                <table class="table table-striped table-hover" id="dataTables-example">
                                     <thead>
                                         <tr>
                                             <th>NO</th>
-                                            <th>NO INVOICE</th>
+                                            <th>INVOICE</th>
                                             <th>NAMA</th>
                                             <th>INSTANSI</th>
                                             <th>TANGGAL PINJAM</th>
@@ -62,11 +62,14 @@ session_start();
                                         ?>
                                     </tbody>
                                 </table>
+                            <div align="center">
+                                <button class="btn btn-success"><span class="fa fa-file-excel-o"></span> Export to Excel</button>
+                                <button class="btn btn-warning"><span class="fa fa-file-pdf-o"></span> Export to PDF</button>
                             </div>
-                           
-                        </div>
+                        </div>   
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
+</div>
