@@ -1,4 +1,14 @@
- <div class="row wrapper border-bottom white-bg page-heading">
+<?php 
+	if (isset($_POST['simpan'])) {
+		$querySubmit = mysql_query("INSERT INTO trx_saldo (bank_name, bank_account, cashout_amount) VALUES ('".$_POST['bank_name']."', '".$_POST['bank_account']."', '".$_POST['cashout_amount']."')");
+		if ($querySubmit) {
+			 echo "<script> alert('Data Berhasil Disimpan'); location.href='index.php?hal=saldo/saldo' </script>";exit; 
+		} else {
+			 echo "<script> alert('Data Gagal Disimpan'); location.href='index.php?hal=saldo/saldo' </script>";exit;
+		}
+	}
+ ?> 
+<div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
         <h2>SALDO</h2>
         <ol class="breadcrumb">
@@ -39,31 +49,43 @@
 			 <div class="col-md-12">
             <div class="ibox">
 				<div class="panel panel-primary dim_about">
-					<div class="panel-heading">Pengajuan Pencairan Saldo</div>
+					<div class="panel-heading">Pencairan Saldo</div>
 					<div class="panel-body">
 						<form class="role" method="POST" enctype="multipart/form-data">
 							<div class="form-group row">
-								<label class="col-md-4">NAMA LENGKAP</label>
+								<label class="col-md-4">Nama Member</label>
 								<div class="col-md-6">
 									<input type="text" class="form-control" value="<?php echo $_SESSION['member_name']; ?>" disabled>
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-md-4">TOTAL SALDO</label>
+								<label class="col-md-4">Total Saldo</label>
 								<div class="col-md-6">
 									<input type="text" class="form-control" value="<?php echo $total_saldo['total_saldo']; ?>" disabled>
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-md-4">NOMILNAL SALDO YANG DICAIRKAN</label>
+								<label class="col-md-4">Nama Bank</label>
 								<div class="col-md-6">
-									<input type="text" class="form-control">
+									<input type="text" name="bank_name" class="form-control">
 								</div>
 							</div>
 							<div class="form-group row">
-								<label class="col-md-4">FILE PENGAJUAN</label>
+								<label class="col-md-4">Nomor Rekening</label>
 								<div class="col-md-6">
-									<input type="file">
+									<input type="text"  name="bank_account" class="form-control">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-md-4">Jumlah Penarikan</label>
+								<div class="col-md-6">
+									<input type="text" name="cashout_amount" class="form-control">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-md-4">Password Akun</label>
+								<div class="col-md-6">
+									<input type="text" name="password_account" class="form-control">
 								</div>
 							</div>
 							<div class="form-group row">
@@ -80,10 +102,10 @@
 						                  if ($member_birth_date_cek  != '0000-00-00' OR $member_gender_cek  != '' OR 
 						                        $member_phone_number_cek !='' OR $member_address_cek  != '') {
 											if ($total_saldo['total_saldo'] < 50000) {
-												echo "<button type='button' disabled class='btn btn-primary dim_about'>AJUKAN PENCAIRAN</button>";
+												echo "<button type='button' name='simpan' disabled class='btn btn-primary dim_about'>KONFIRMASI PENCAIRAN</button>";
 												echo "<p>Maaf Saldo Anda Tidak Dapat Dicairkan Dikarenakan Nominal Kurang Dari Rp. 50.000,<br> SALDO ANDA SEKARANG SENILAI : <b> Rp. ".rupiah($total_saldo['total_saldo'])."</b></p>";
 											}else{
-												echo "<button type='submit' class='btn btn-primary dim_about'>AJUKAN PENCAIRAN</button>";
+												echo "<button type='submit' name='simpan' class='btn btn-primary dim_about'>KONFIRMASI PENCAIRAN</button>";
 											}
 										}else{
 											echo "<a href='index.php?hal=akun/profil' class='btn btn-danger'><span class='fa fa-check'></span> Lengkapi Data Diri Anda </a>";
