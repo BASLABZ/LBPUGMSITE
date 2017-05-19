@@ -7,9 +7,18 @@
             $selectQuery = mysql_query("SELECT * FROM tbl_member where member_id = '".$idmember."'");
             $runq = mysql_fetch_array($selectQuery);
             $email = $runq['member_email'];
-            $queryUpdateStatusLoanAPP = mysql_query("UPDATE trx_loan_application set loan_status = '".$_POST['loan_status']."' where loan_app_id = '".$_POST['loan_app_id']."'");
+            if ($_POST['loan_status'] != 'MENUNGGU' ) {
+                    $queryUpdateStatusLoanAPP = mysql_query("UPDATE trx_loan_application set loan_status = '".$_POST['loan_status']."' where loan_app_id = '".$_POST['loan_app_id']."'");
                  // echo "<script>  location.href='index.php?hal=peminjaman/pengajuan/list' </script>";exit;
-                 echo "<script>  location.href='peminjaman/pengajuan/SENDEMAIL/sendEmailDebug.php?invoice=".$invoice."&email=".$email."' </script>";exit;
+                 echo "<script>  location.href='peminjaman/pengajuan/SENDEMAIL/sendEmailDebug.php?invoice=".$invoice."&email=".$email."' </script>";exit;    
+            }else{
+                    $queryUpdateStatusLoanAPP_menunggu = mysql_query("UPDATE trx_loan_application set loan_status = '".$_POST['loan_status']."' where loan_app_id = '".$_POST['loan_app_id']."'");
+                    if ($queryUpdateStatusLoanAPP_menunggu) {
+                        
+                         echo "<script>alert ('Data berhasil disimpan'); location.href='index.php?hal=peminjaman/pengajuan/pengajuan_detail&invoice=".$invoice."'</script>";
+                    }
+            }
+            
         }
         
        ?>
@@ -93,11 +102,12 @@
                                         <div class="col-md-10" align="center">
                                             <div class="row well dim_about">
                                             <form class="role" method="POST">
-                                                <div class="col-md-3" style="padding-top: 5px; margin-right: 5px;" ><b>Status Pengajuan </b></div> 
+                                                <div class="col-md-2" style="padding-top: 5px; margin-right: 1px;" ><b>Status  </b></div> 
                                                 <input type="hidden" value="<?php echo $rowStatusLoan['loan_app_id']; ?>" name='loan_app_id'>
                                                 <input type="hidden" value="<?php echo $invoice; ?>" name='loan_invoice'>
-                                                <div class="col-md-6">
-                                                        <select class="form-control" name="loan_status">
+                                                <div class="col-md-8">
+                                                        <p align="left">
+                                                                <select class="form-control" name="loan_status">
                                                             <?php 
                                                                 if ($_SESSION['level_name'] != 'kepala laboratorium'){ 
                                                              ?>
@@ -122,9 +132,10 @@
                                                             <!-- end bu ketu -->
                                                             <?php } ?>
                                                 </select>
+                                                         </p>
                                                 </div>
                                                 
-                                                    <button type="submit" name="ubah" class="btn btn-primary btn-md dim_about"> <span class="fa fa-check"></span> Konfirmasi Pengajuan</button>
+                                                    <button type="submit" name="ubah" class="btn btn-primary btn-md dim_about"> <span class="fa fa-check"></span> Konfirmasi <br>Pengajuan</button>
                                                     
                                                
                                                 <div class="col-md-1"></div>  
@@ -174,8 +185,17 @@
                                                         if ($_SESSION['level_name'] != 'kepala laboratorium') {
                                                      ?>
                                                     <td>
+                                                    <?php  
+                                                                if ($rowDetailPeminjaman['loan_status_detail'] != 'DITOLAK') {
+                                                     ?>
                                                      <a href='#ubahstatuspengajuan' class='btn btn-info dim_about' id='custId' data-toggle='modal' 
                                                         data-id='<?php echo $rowDetailPeminjaman['loan_app_detail_id']; ?>'><span class="fa fa-edit"></span> Ubah Status </a> 
+                                                        <?php  }else{ 
+                                                                $queryreject = mysql_query("SELECT * FROM trx_rejected where loan_app_detail_id_fk = '".$rowDetailPeminjaman['loan_app_detail_id']."'");
+                                                                    $roreject =mysql_fetch_array($queryreject); 
+                                                         ?>
+                                                                <a href='index.php?hal=peminjaman/pengajuan/penawaran&rejected_id=<?php echo $roreject['rejected_id']; ?>' class='btn btn-warning dim_about' ><span class="fa fa-edit"></span> Lihat Penawaran </a> 
+                                                        <?php  } ?>
                                                     </td>
                                                      <?php } ?>
                                                 

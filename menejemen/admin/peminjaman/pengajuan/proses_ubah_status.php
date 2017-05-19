@@ -58,7 +58,7 @@
 
 
 
-			 	$insertPenawarans = "INSERT INTO trx_rejected(loan_app_detail_id_fk,instrument_id_fk,rejected_text) VALUES ('".$idDetail_loans."','".$iddetail_instrumen."','".$reject_note."')";
+			 	$insertPenawarans = "INSERT INTO trx_rejected(loan_app_detail_id_fk,instrument_id_fk) VALUES ('".$idDetail_loans."','".$iddetail_instrumen."')";
 			 		$querys = mysql_query($insertPenawarans);
 			 	 	$queryAmbil_idreject = "SELECT rejected_id from trx_rejected where loan_app_detail_id_fk = '".$idDetail_loans."'  AND instrument_id_fk='".$iddetail_instrumen."'";
 						 	 $rowIDreject = mysql_fetch_array(mysql_query($queryAmbil_idreject));
@@ -66,10 +66,10 @@
 						 	 
 			 	 		// detail reject dengan alat yang ditawarkan
 						$queryInsert_detail_reject = mysql_query("INSERT INTO trx_rejected_detail
-															 (rejected_id_fk,instrument_id_rejected_fk,rejected_detail_loan_amount,rejected_detail_loan_subtotal) 
+															 (rejected_id_fk,instrument_id_rejected_fk,rejected_detail_loan_amount,rejected_detail_loan_subtotal,rejected_text) 
 															 VALUES
 															 ('".$idreject."','".$cek."',
-															 '1','".$_POST['instrument_fee']."')");
+															 '1','".$_POST['instrument_fee']."','".$reject_note."')");
 			 	
             
 			$update_detail_loan = "UPDATE trx_loan_application_detail SET loan_status_detail='DITOLAK'  WHERE loan_app_detail_id = '".$idDetail_loans."' AND instrument_id_fk='".$iddetail_instrumen."'";

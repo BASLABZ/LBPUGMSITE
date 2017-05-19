@@ -2,14 +2,12 @@
 		include '../../../inc/inc-db.php';
 		$invoice = $_POST['id'];
 		$query = mysql_query("SELECT loan_amount, instrument_id_fk, instrument_name, loan_status_detail, loan_app_detail_id, loan_app_id_fk, loan_invoice FROM trx_loan_application_detail JOIN trx_loan_application on trx_loan_application_detail.loan_app_id_fk = trx_loan_application.loan_app_id JOIN ref_instrument on trx_loan_application_detail.instrument_id_fk = ref_instrument.instrument_id WHERE trx_loan_application_detail.loan_app_detail_id = '".$invoice."' ");
-
 		$rowsatus = mysql_fetch_array($query);
 		$jumlahInstrument = $rowsatus['loan_amount'];
 		$QueryInstrument  = mysql_query("SELECT instrument_quantity FROM ref_instrument where instrument_id = '".$rowsatus['instrument_id_fk']."' ");
 		$runQueryInstrument = mysql_fetch_array($QueryInstrument);
 		$kolomInstrument = $runQueryInstrument['instrument_quantity'];  
 		// $selisiPengurangan_instrumentv = $kolomInstrument - $jumlahInstrument;
-		
  ?>
  <div class="row">
  	<form class="role" method="POST" action="index.php?hal=peminjaman/pengajuan/proses_ubah_status">
@@ -49,10 +47,17 @@
  				<?php 
  					if ($status == 'DITOLAK') {
  						echo "<div id='hiddenStatusTolak'>";
- 					}else if ($status != 'DITOAL') {
+ 								
+ 					}else if ($status != 'DITOLAK') {
  						echo "<div id='hiddenStatusTolak' hidden>";
  					}
  				 ?>
+ 				 <?php  
+ 				 	$queryreject = mysql_query("SELECT * FROM trx_rejected where loan_app_detail_id_fk = '".$rowsatus['loan_app_detail_id']."'");
+ 								while ($roreject =mysql_fetch_array($queryreject)) {
+ 									echo $roreject['instrument_id_fk'];
+ 								}
+ 				  ?>
  					<label>Alasan Penolakan</label>
  					<textarea class="form-control" style="height: 200px;" placeholder="Isi Dengan Keterangan Penolakan" name="reject_note"></textarea>
  					<br>
@@ -66,42 +71,39 @@
 					    <div id="collapse1" class="panel-collapse collapse">
 					      <div class="panel-body">
 					      	<table class="table table-bordered table-hover table-striped" id="tablePenawaran">
-	 					<thead>
-	 						<th>Pilih</th>
-	 						<th>No</th>
-	 						<th>Nama Instrument</th>
-	 						<th>Jumlah Stok</th>
-	 						<th>Ketersediaan</th>
-	 						<th>Gambar</th>
-	 						
-	 					</thead>
-	 					<tbody>
-	 					<?php 
-	 						$no = 0;
-	 						$queryAlat = mysql_query("SELECT * FROM ref_instrument where instrument_id != '".$rowsatus['instrument_id_fk']."' order by instrument_id ASC");
-	 						while ($rowAlat = mysql_fetch_array($queryAlat)) {
-	 					 ?>
-	 						<tr>
-	 							<?php echo "<td><input type='radio' onchange='radio($no)'  value='".$rowAlat['instrument_id']."' name='cek' id='cekEd".$no."'></td>"; ?>
-	 							<!-- hidden id loan_app -->
+			 					<thead>
+			 						<th>Pilih</th>
+			 						<th>No</th>
+			 						<th>Nama Instrument</th>
+			 						<th>Jumlah Stok</th>
+			 						<th>Ketersediaan</th>
+			 						<th>Gambar</th>
+			 					</thead>
+			 					<tbody>
+			 					<?php 
+			 						$no = 0;
+			 						$queryAlat = mysql_query("SELECT * FROM ref_instrument where instrument_id != '".$rowsatus['instrument_id_fk']."' order by instrument_id ASC");
+			 						while ($rowAlat = mysql_fetch_array($queryAlat)) {
+			 					 ?>
+			 						<tr>
+			 							<?php echo "<td><input type='radio' onchange='radio($no)'  value='".$rowAlat['instrument_id']."' name='cek' id='cekEd".$no."'></td>"; ?>
+			 							<!-- hidden id loan_app -->
 
-	 							<td><?php echo ++$no; ?></td>
-	 							<td><?php echo $rowAlat['instrument_name']; ?></td>
-	 							<td><?php echo $rowAlat['instrument_quantity']; ?><input type="hidden" name="instrument_fee" value="<?php echo $rowAlat['instrument_fee']; ?>"></td>
-	 							<td>
-	 								<?php $jumlah_sementara = $rowAlat['instrument_quantity'];
-	                                                            $jumlah_temp = $rowAlat['intrument_quantity_temp'];
-	                                                            $ketersediaan = $jumlah_sementara-$jumlah_temp;
-	                                                            echo $ketersediaan;   ?>
-	 							</td>
-	 							<td><img src="../image/<?php echo $rowAlat['instrument_picture']; ?>" class='img-responsive' width='200px'></td>
-	 						</tr>
-	 						<?php } ?>
-	 					</tbody>
- 					</table>
+			 							<td><?php echo ++$no; ?></td>
+			 							<td><?php echo $rowAlat['instrument_name']; ?></td>
+			 							<td><?php echo $rowAlat['instrument_quantity']; ?><input type="hidden" name="instrument_fee" value="<?php echo $rowAlat['instrument_fee']; ?>"></td>
+			 							<td>
+			 								<?php $jumlah_sementara = $rowAlat['instrument_quantity'];
+			                                                            $jumlah_temp = $rowAlat['intrument_quantity_temp'];
+			                                                            $ketersediaan = $jumlah_sementara-$jumlah_temp;
+			                                                            echo $ketersediaan;   ?>
+			 							</td>
+			 							<td><img src="../image/<?php echo $rowAlat['instrument_picture']; ?>" class='img-responsive' width='200px'></td>
+			 						</tr>
+			 						<?php } ?>
+			 					</tbody>
+ 							</table>
 					      </div>
-					      	
-					      
 					    </div>
 					  </div>
 					</div>
@@ -120,9 +122,4 @@
 				$('#hiddenStatusTolak').hide();
  		   }
  	}
- 	
- 	
-
- 	
- 	
  </script>

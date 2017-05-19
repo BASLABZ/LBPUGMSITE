@@ -32,12 +32,15 @@
 
 				<td>
 					<?php if ($status == 'DITOLAK' ) {
-						echo "<a href='index.php?hal=members/list&hapus=".$rowDetailPeminjaman['loan_app_detail_id']."&jumlah=".$rowDetailPeminjaman['loan_amount']."&subtotal=".$rowDetailPeminjaman['loan_subtotal']."&invoice=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-danger dim_about'><span class='fa fa-trash'></span></a>";
+						echo "<a style='margin-left:10px;' href='index.php?hal=pengajuan-member/lihat_penawaran&id=".$rowDetailPeminjaman['loan_app_detail_id']."&idpengajuan=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-info btn-xs dim_about'><span class='fa fa-eye'></span></a>";
+						// echo "<a style='margin-left:10px;' href='index.php?hal=members/list&hapus=".$rowDetailPeminjaman['loan_app_detail_id']."&jumlah=".$rowDetailPeminjaman['loan_amount']."&subtotal=".$rowDetailPeminjaman['loan_subtotal']."&invoice=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-danger'><span class='fa fa-trash'></span></a>";
+						
+						
 					}else if ($status == 'PENAWARAN') {
 						echo "<a href='index.php?hal=members/list&hapus=".$rowDetailPeminjaman['loan_app_detail_id']."&jumlah=".$rowDetailPeminjaman['loan_amount']."&subtotal=".$rowDetailPeminjaman['loan_subtotal']."&invoice=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-danger dim_about'><span class='fa fa-trash'></span></a>";
 					}
 					else{
-						echo "<button class='btn btn-success dim_about btn-xs'><span class='fa fa-check'></span></button>";
+						echo "<center><button class='btn btn-success dim_about btn-xs'><span class='fa fa-check'></span></button></center>";
 						} ?>
 				</td>
 			</tr>
