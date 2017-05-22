@@ -198,6 +198,7 @@
                                   </div> 
                                 </div> 
                                   </div>
+
                                 <table class="table table-responsive table-hover table-bordered">
                                     <thead>
                                       <th>NO</th>
@@ -247,15 +248,35 @@
                                             <td><?php echo $roTotal['long_loan']; ?>/Minggu  </td>
                                             <td></td>
                                         </tr>
+
                                         <tr>
                                             <td colspan="2"> Jumlah Subtotal : </td>
                                             <td></td>
                                             <td>Rp.<?php echo rupiah($sub); ?></td>
                                         </tr>
+                                       <!--  -->
+                                       <?php 
+                                          $category_member = $rowPenagihan['category_id_fk'];
+                                          if ($category_member == '1') {
+                                            // potongannya 50%
+                                        ?>
                                         <tr>
                                             <td colspan="3">Total = Lama Pinjam x Jumlah Subtotal</td>
-                                            <td>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></td>
+                                            <td>Rp.<?php echo rupiah($roTotal['long_loan']*$sub); ?></td>
                                         </tr>
+                                         <tr>
+                                            <td colspan="2"> Potongan : </td>
+                                            <td></td>
+                                            <td>Rp.<?php echo rupiah($roTotal['long_loan']*$sub/2); ?></td>
+                                        </tr>
+                                         <tr>
+                                            <td colspan="2"> Total Bayar : </td>
+                                            <td></td>
+                                            <td>Rp.<?php echo rupiah($roTotal['long_loan']*$sub/2); ?></td>
+                                        </tr>
+                                        <?php }else{
+                                          echo "selanjutnya untuk kategori berikut nya";
+                                          } ?>
                                     </tfoot>
                                     <?php } ?>
                                   </table>
