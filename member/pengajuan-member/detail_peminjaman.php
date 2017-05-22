@@ -91,15 +91,15 @@
 			
 			<tr>
 				<td colspan="4"><b>Total = (Lama Pinjam x Subtotal)</b> </td>
-				<td>Rp.<?php echo rupiah($hasil_akhirs1); ?></td>
+				<td>Rp.<?php echo rupiah($roTotal['long_loan'] * $sub ); ?></td>
 			</tr> <br/>
 			<tr>
 				<td colspan="4"><b>Potongan (50%)</b></td>
-				<td>Rp.<?php echo rupiah($potongan);  ?></td>
+				<td>Rp.<?php echo rupiah($roTotal['long_loan'] * $sub/2);  ?></td>
 			</tr> <br/>
 			<tr>
 				<td colspan="4"><b>Total Bayar = (Total - Potongan)</b></td>
-				<td><b>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></b></td>
+				<td><b>Rp.<?php echo  rupiah($roTotal['long_loan'] * $sub/2); ?></b></td>
 			</tr> <br/>
 			<?php } else if ($roTotal['category_id_fk']==5) {
 				
