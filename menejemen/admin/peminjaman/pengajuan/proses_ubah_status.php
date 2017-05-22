@@ -12,7 +12,7 @@
 			$query_detail_status = mysql_query("SELECT loan_status_detail from trx_loan_application_detail where instrument_id_fk = '".$iddetail_instrumen."' AND loan_app_detail_id='".$_POST['loan_app_detail_id']."' ");
 			$rowStatus_detail = mysql_fetch_array($query_detail_status);
 			$status_loan_detail = $rowStatus_detail['loan_status_detail'];
-
+			
 			// query update intrument_quantity sebagai penguarang jumlah dan update status pinjam= booked dari proses loan_detail-> query saya jadikan satu
 			if ($status_loan_detail == 'MENUNGGU') {
 				$query = "UPDATE trx_loan_application_detail INNER JOIN ref_instrument 
