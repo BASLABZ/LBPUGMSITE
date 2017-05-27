@@ -46,8 +46,6 @@
                                     <span class=""></span> <?php 
 
                                     $inv = mysql_fetch_array(mysql_query("SELECT loan_invoice from trx_loan_application where loan_invoice = '".$invoice."'"));
-                                    $inv = mysql_fetch_array(mysql_query("SELECT loan_invoice from trx_loan_application where loan_invoice='".$invoice."'"));
-
                                      ?>
                                      No Invoice <?php echo $inv['loan_invoice']; ?>
                                 </div>
@@ -105,7 +103,7 @@
                                                 <div class="col-md-2" style="padding-top: 5px; margin-right: 1px;" ><b>Status  </b></div> 
                                                 <input type="hidden" value="<?php echo $rowStatusLoan['loan_app_id']; ?>" name='loan_app_id'>
                                                 <input type="hidden" value="<?php echo $invoice; ?>" name='loan_invoice'>
-                                                <div class="col-md-8">
+                                                <div class="col-md-7">
                                                         <p align="left">
                                                                 <select class="form-control" name="loan_status">
                                                             <?php 
@@ -135,7 +133,7 @@
                                                          </p>
                                                 </div>
                                                 
-                                                    <button type="submit" name="ubah" class="btn btn-primary btn-md dim_about"> <span class="fa fa-check"></span> Konfirmasi <br>Pengajuan</button>
+                                                    <button type="submit" name="ubah" class="btn btn-primary btn-md dim_about"> <span class="fa fa-check"></span> Konfirmasi Pengajuan</button>
                                                     
                                                
                                                 <div class="col-md-1"></div>  
@@ -161,7 +159,9 @@
                                              ?>
                                         </thead>
                                         <tbody>
-                                        <?php $sqldetail = mysql_query("SELECT * FROM trx_loan_application_detail d join ref_instrument i on d.instrument_id_fk = i.instrument_id join trx_loan_application a on d.loan_app_id_fk = a.loan_app_id where a.loan_invoice = '".$invoice."'");
+                                        <?php 
+                                        // query utk menampilkan data pengajuan
+                                        $sqldetail = mysql_query("SELECT * FROM trx_loan_application_detail d join ref_instrument i on d.instrument_id_fk = i.instrument_id join trx_loan_application a on d.loan_app_id_fk = a.loan_app_id where a.loan_invoice = '".$invoice."'");
                                         $no =1;
                                         while ($rowDetailPeminjaman = mysql_fetch_array($sqldetail)) { 
                                                 $Temp_tersedia = $rowDetailPeminjaman['intrument_quantity_temp'];
@@ -171,22 +171,32 @@
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $rowDetailPeminjaman['instrument_name']; ?></td>
-                                                <td><center><span class="label label-warning"><?php echo $rowDetailPeminjaman['loan_status_detail']; ?></span></center></td>
-                                                <td><center><?php if ($stokTersedia != 0 ) {
+                                                <td><center>
+                                                        <span class="label label-warning"><?php echo $rowDetailPeminjaman['loan_status_detail']; ?></span>
+                                                    </center>
+                                                </td>
+                                                <td><center>
+                                                <?php 
+                                                    // jumlah alat yg tersedia
+                                                    if ($stokTersedia != 0 ) {
                                                     echo "".$stokTersedia."";
-                                                }else{
-                                                    echo "<label class='btn btn-warning btn-xs'>STOK TELAH DI BOOKING SEMUA</label>";
-                                                    }  ?></td>
-                                                <td><center><?php echo "".$rowDetailPeminjaman['loan_amount'].""; ?></center></td>
-                                                
+                                                    }else{
+                                                    echo "<label class='btn btn-warning btn-xs'>ALAT TELAH DI BOOK SEMUA</label>";
+                                                    }  ?>
+                                                    </center>
+                                                </td>
+                                                <td><center>
+                                                    <?php 
+                                                    // jumlah alat dipinjam (per jenis alat)
+                                                    echo "".$rowDetailPeminjaman['loan_amount'].""; ?>
+                                                    </center></td>
                                                 <td>Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
-                                              
                                                     <?php 
                                                         if ($_SESSION['level_name'] != 'kepala laboratorium') {
                                                      ?>
                                                     <td>
                                                     <?php  
-                                                                if ($rowDetailPeminjaman['loan_status_detail'] != 'DITOLAK') {
+                                                                 if ($rowDetailPeminjaman['loan_status_detail'] != 'DITOLAK') {
                                                      ?>
                                                      <a href='#ubahstatuspengajuan' class='btn btn-info dim_about' id='custId' data-toggle='modal' 
                                                         data-id='<?php echo $rowDetailPeminjaman['loan_app_detail_id']; ?>'><span class="fa fa-edit"></span> Ubah Status </a> 
@@ -194,7 +204,7 @@
                                                                 $queryreject = mysql_query("SELECT * FROM trx_rejected where loan_app_detail_id_fk = '".$rowDetailPeminjaman['loan_app_detail_id']."'");
                                                                     $roreject =mysql_fetch_array($queryreject); 
                                                          ?>
-                                                                <a href='index.php?hal=peminjaman/pengajuan/penawaran&rejected_id=<?php echo $roreject['rejected_id']; ?>' class='btn btn-warning dim_about' ><span class="fa fa-edit"></span> Lihat Penawaran </a> 
+                                                                <a href='index.php?hal=peminjaman/pengajuan/penawaran&rejected_id=<?php echo $roreject['rejected_id']; ?>' class='btn btn-warning dim_about' ><span class="fa fa-edit"></span> Lihat Detail </a> 
                                                         <?php  } ?>
                                                     </td>
                                                      <?php } ?>
@@ -202,26 +212,28 @@
                                             </tr>
                                             <?php } ?>
                                         </tbody>
-                                        <?php 
+                <?php 
+                // query utk menghitung subtotal di tfoot
                 $rowjumlahsubtotal = mysql_query("SELECT sum(loan_subtotal) as sub   FROM trx_loan_application_detail d join trx_loan_application x 
                       on d.loan_app_id_fk = x.loan_app_id  where x.loan_invoice ='".$invoice."' ");
                 $xs = mysql_fetch_array($rowjumlahsubtotal);
                 $sub = $xs['sub'];
-                $queryTotal = mysql_query("SELECT a.loan_total_item,a.loan_total_fee, a.long_loan,m.category_id_fk FROM trx_loan_application a
-                                        JOIN tbl_member m ON a.member_id_fk = m.member_id
-                    where a.loan_invoice ='".$invoice."'");
+                // query utk menampilkan total alat, lama pinjam
+                $queryTotal = mysql_query("SELECT a.loan_total_item, a.loan_total_fee, a.long_loan, m.category_id_fk FROM trx_loan_application a JOIN tbl_member m ON a.member_id_fk = m.member_id where a.loan_invoice ='".$invoice."'");
                 while ($roTotal = mysql_fetch_array($queryTotal)){  
                     $potongan = $roTotal['loan_total_fee'];
-                    $hasil_akhirs1 = $potongan+$potongan;
-                    // hitung potongan/diskon s2 
-                    $lama =  $roTotal['long_loan'];
-                    $totals2 = $sub *  $lama;
-                    $diskons2 = $totals2*0.25;
-                    $hasil_akhirs2 = $potongan-$diskons2;
-                    // hasil akhir s3
-                    $totals3 = $sub *  $lama;
-                    $diskons3= $totals3*0.25;
-                    $hasil_akhirs3 = $totals3-$diskons3;
+                    $hasil_akhirs1 = $potongan+$potongan; 
+                    
+                    // s2 
+                    $lama       =  $roTotal['long_loan']; 
+                    $totals2    = $sub *  $lama; // total =  subtotal * lama pinjam
+                    $diskons2   = $totals2*0.25; // diskon = total * 25%
+                    $hasil_akhirs2 = $potongan-$diskons2; // hasil akhir yg harus dibayar =   
+                    
+                    // s3
+                    $totals3 = $sub *  $lama; // total =  subtotal * lama pinjam
+                    $diskons3= $totals3*0.25; // diskon = total * 25%
+                    $hasil_akhirs3 = $totals3-$diskons3; // hasil akhir = total - diskon
          ?>
         <tfoot>
             <tr>
@@ -251,7 +263,7 @@
             <tr>
                 <td colspan="5"><b>Total Bayar = ( Total - Potongan ) </b></td>
                 <td><b>Rp.<?php echo rupiah(($roTotal['long_loan']*$sub/2)); ?></b></td>
-            </tr>
+            </tr> 
             <?php } else if ($roTotal['category_id_fk']==5) {
                 
             ?>

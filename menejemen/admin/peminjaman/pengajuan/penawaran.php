@@ -17,6 +17,7 @@
                                         JOIN trx_loan_application lp ON
                                         dl.loan_app_id_fk = lp.loan_app_id
                                          where re.rejected_id= '".$rejected_id."'"));
+            echo $row_query;
             $invoice = $row_query['loan_invoice'];
 
  ?>
@@ -43,33 +44,29 @@
                         <div class="panel-body dim_about">
 
                             <div class="col-md-12">
-                                <a href="index.php?hal=peminjaman/pengajuan/pengajuan_detail&invoice=<?php echo $invoice; ?>" class="btn btn-success">Kembali</a>
-                            	<label>INSTRUMENT YANG DITOLAK</label>
+                                <a href="index.php?hal=peminjaman/pengajuan/pengajuan_detail&invoice=<?php echo $invoice; ?>" class="btn btn-warning"><span class=" fa fa-arrow-circle-o-left"> Kembali</span></a><br/><br/>
+                            	<label>Data Alat Ditolak</label>
                             	<hr>
                             	
                                 <table class="table table-responsive table-stripped table-bordered">
                                 	<thead>
-                                		<th>Nama Instrument</th>
-                                		<th>Status Peminjaman</th>
-                                		<th>Alat Yang Diminta</th>
-                                		<th>Subtutotal</th>
+                                		<th>Nama Alat</th>
+                                		<th>Status Alat</th>
+                                        <th>Biaya Alat</th>
+                                		<th>Jumlah Pinjam</th>
+                                		<th>Subtotal</th>
                                 	</thead>
                                 	<tbody>
                                 		<?php 
-                                			$queryPermintaan = mysql_query("SELECT * FROM trx_rejected_detail de join trx_rejected re 
-										ON de.rejected_id_fk = re.rejected_id
-										JOIN trx_loan_application_detail dl 
-										ON re.loan_app_detail_id_fk = dl.loan_app_detail_id
-										JOIN ref_instrument i
-										ON dl.instrument_id_fk = i.instrument_id
-										 where re.rejected_id= '".$rejected_id."'");
+                                			$queryPermintaan = mysql_query("SELECT * FROM trx_rejected_detail de join trx_rejected re ON de.rejected_id_fk = re.rejected_id JOIN trx_loan_application_detail dl ON re.loan_app_detail_id_fk = dl.loan_app_detail_id JOIN ref_instrument i ON dl.instrument_id_fk = i.instrument_id where re.rejected_id= '".$rejected_id."'");
                                 			while ($rowPenolakan = mysql_fetch_array($queryPermintaan)) {
                                 		 ?>
                                 		 <tr>
                                 		 	<td><?php echo $rowPenolakan['instrument_name']; ?></td>
-                                		 	<td><?php echo $rowPenolakan['loan_status_detail']; ?></td>
+                                		 	<td><span class="label label-danger"><?php echo $rowPenolakan['loan_status_detail']; ?></span></td>
+                                            <td><?php echo $rowPenolakan['instrument_fee']; ?></td>
                                 		 	<td><?php echo $rowPenolakan['loan_amount']; ?></td>
-                                		 	<td><?php echo $rowPenolakan['loan_status_detail']; ?></td>
+                                		 	<td><?php echo $rowPenolakan['loan_subtotal']; ?></td>
                                 		 </tr>
 
                                 		<?php } ?>
@@ -77,14 +74,15 @@
                                 </table>
                             </div>
                             <div class="col-md-12">
-                            	<label>PENAWARAN ALAT</label>
+                            	<label>Data Alat Yang Disarankan</label>
                             	<hr>
                             	<table class="table table-responsive table-bordered table-stripped">
                             		<thead>
-                            			<th>Nama Instrument</th>
-                            			<th>Jumlah Ketersediaan Alat</th>
-                            			<th>Jumlah Alat Yang Ditawarkan</th>
-                            			<th>Sub total</th>
+                            			<th>Nama Alat</th>
+                                        <th>Biaya Alat</th>
+                            			<th>Jumlah Alat Tersedia</th>
+                            			<th>Jumlah Alat Yang Disarankan</th>
+                            			<th>Subtotal</th>
                                         <th>Keterangan</th>
                             		</thead>
                             		<tbody>
@@ -103,6 +101,7 @@
 
                             			 <tr>
                             			 	<td><?php echo $rowpenawaran['instrument_name']; ?></td>
+                                            <td><?php echo $rowpenawaran['instrument_fee']; ?></td>
                             			 	<td><?php echo $rowpenawaran['instrument_quantity']-$rowpenawaran['intrument_quantity_temp']; ?> </td>
                             			 	<td>
                                                     <form method="POST" >
