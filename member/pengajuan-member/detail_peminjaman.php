@@ -172,7 +172,7 @@
                                    		echo "<a href='index.php?hal=pengajuan-member/pengajuan-alat&konfirmasi=".$ubahstatus['loan_invoice']."' class='btn btn-danger dim_about'> <span class='fa fa-share'> </span>
                                          BATALKAN PENGAJUAN</a>";   
                                    }else if($statusKonfirmasi == 'DIPINJAM'){
-
+                                   		
                                    		 // jika time limit 
                                    		 	$queryLamaPinjam = mysql_query("SELECT trx_loan_application.* , current_date tanggal , datediff(current_date,loan_date_return) selisih , case when datediff(current_date,loan_date_return)>0 then 'Habis' else 'aktif' end status from trx_loan_application where member_id_fk= '".$ubahstatus['member_id_fk']."' AND loan_app_id = '".$ubahstatus['loan_app_id']."' ");
                                    		 	$hariH = mysql_fetch_array($queryLamaPinjam);
