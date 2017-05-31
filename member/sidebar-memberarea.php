@@ -17,7 +17,7 @@
                             </strong>
                              </span> <span class="text-muted text-xs block">Akun <b class="caret"></b></span> </span> </a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="index.php?hal=akun/profil"><span class="fa fa-user"></span> Profil</a></li>
+                                
                                 <li><a href="index.php?hal=akun/profil"><span class="fa fa-gear"></span> Pengaturan</a></li>
                                 <li><a href="index.php?logout=1"><span class="fa fa-sign-out"></span> Keluar</a></li>
                             </ul>
