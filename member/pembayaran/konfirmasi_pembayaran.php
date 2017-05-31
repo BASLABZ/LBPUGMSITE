@@ -306,6 +306,11 @@
                                         ?>
                                           <label class="col-md-4">MENGGUNAKAN SALDO </label>
                                           <div class="col-md-6">
+                                            <?php 
+                                            if ($rowsaldo['total_saldo'] == '' OR $rowsaldo['total_saldo'] < 1 ) {
+                                              echo "ANDA TIDAK MEMILIKI SALDO";
+                                            }else{
+                                           ?>
                                             <div class="input-group">
                                             <span class="input-group-addon">
                                                <input type="hidden" onclick="disabledSaldo(this)"   id="cek">
@@ -315,6 +320,7 @@
                                             <input type="hidden" name="cekSaldos" value="0">
                                             <input type="hidden" class="form-control"   name="payment_amount_saldo" value="<?php echo $rowsaldo['total_saldo']; ?>" id="paymentsaldo">
                                           </div>
+                                      
                                           <!-- INFROMASI SALDO MEMBER -->
                                            <label id="saldosementara" hidden>
                                             <?php 
@@ -325,12 +331,13 @@
                                                 }
                                              ?>
                                           </label>
+                                              <?php } ?>
                                           </div>
                                         </div>
                                         <div class="form-group row">
                                           <label class="col-md-4"> JUMLAH TRANSFER</label>
                                           <div class="col-md-6">
-                                            <input type="text" class="form-control" name="payment_amount_transfer"  id="nominaltransfer"  required />
+                                            <input type="number" class="form-control" name="payment_amount_transfer"  id="nominaltransfer"  required />
                                           </div>
                                         </div>  
                                           Inputlah sesuai dengan jumlah uang yang Anda transfer.
