@@ -54,7 +54,7 @@
                             <th><center>INVOICE</center></th>
                             <th><center>TANGGAL PENGAJUAN</center></th>
                             <th><center>TANGGAL PINJAM</center></th>
-                            <th><center>TANGGAL KEMBALI</center></th>
+                            <th><center>TANGGAL HARUS KEMBALI</center></th>
                             <th><center>STATUS</center></th>
                             <th><center>DETAIL PENGAJUAN</center></th>
                         </thead>
@@ -63,6 +63,7 @@
                             $queryPeminjaman = mysql_query("SELECT * FROM trx_loan_application where member_id_fk  = '".$_SESSION['member_id']."' ORDER BY loan_app_id desc");
                             $no=0;
                             while ($rowPeminjaman = mysql_fetch_array($queryPeminjaman)) {
+                                $status_peminjaman = $rowPeminjaman['loan_status'];
                               ?>
                                 <tr>
                                         <td><center><?php echo ++$no; ?></center></td>
@@ -71,7 +72,22 @@
                                         <td><center><?php echo $rowPeminjaman['loan_date_start']; ?></center></td>
                                         <td><center><?php echo $rowPeminjaman['loan_date_return']; ?></center></td>
                                         <td>
-                                          <center><label class='label label-info label-lg'><?php echo $rowPeminjaman['loan_status']; ?></label></center>
+                                          <center>
+                                              <?php if ($status_peminjaman == 'MENUNGGU') {
+                                                  echo "<label class='label label-warning'>MENUNGGU</label>";
+                                              } elseif ($status_peminjaman == 'DIBATALKAN') {
+                                                  echo "<label class='label label-danger'>DIBATALKAN</label>";
+                                              } elseif ($status_peminjaman == 'MENUNGGU ACC FINAL') {
+                                                  echo "<label class='label label-default'>MENUNGGU ACC FINAL</label>";
+                                              } elseif ($status_peminjaman == 'ACC FINAL') {
+                                                  echo "<label class='label label-info'>ACC FINAL</label>";                                         
+                                              } elseif ($status_peminjaman == 'MEMBAYAR TAGIHAN') {
+                                                  echo "<label class='label label-info'>ACC FINAL</label>";
+                                              } elseif ($status_peminjaman == '') {
+                                                  # code...
+                                              }
+                                              ?>
+                                          </center>
 
                                           <?php 
                                                 if ($rowPeminjaman['loan_status'] == 'PERPANJANG') {

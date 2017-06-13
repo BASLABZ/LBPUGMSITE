@@ -3,8 +3,9 @@
 			<th>NO</th>
 			<th>NAMA ALAT</th>
 			<th>STATUS ALAT</th>
+			<th>BIAYA SEWA</th>
 			<th>JUMLAH</th>
-			<th>HARGA SEWA</th>
+			<th>SUBTOTAL</th>
 			<th>AKSI</th>
 		</thead>
 		<tbody>	
@@ -27,8 +28,9 @@
 						<label class="label label-warning dim_about"><span class=""></span> <?php echo $rowDetailPeminjaman['loan_status_detail']; ?></label>
 					</center>
 				</td>
+				<td>Rp <?php echo rupiah($rowDetailPeminjaman['instrument_fee']); ?></td>
 				<td><center><?php echo $rowDetailPeminjaman['loan_amount']; ?></center></td>
-				<td>Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
+				<td>Rp <?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
 
 				<td>
 					<?php if ($status == 'DITOLAK' ) {
@@ -46,7 +48,7 @@
 			</tr>
 <?php } ?>
 		</tbody>
-		<?php 
+		<?php 	// query utk tfoot
 				$rowjumlahsubtotal = mysql_query("SELECT sum(loan_subtotal) as sub   FROM trx_loan_application_detail d join trx_loan_application x 
 					  on d.loan_app_id_fk = x.loan_app_id  where x.loan_invoice ='".$invoice."' ");
 				$xs = mysql_fetch_array($rowjumlahsubtotal);
@@ -70,73 +72,73 @@
 	
 		<tfoot>		 
 			<tr>
-				<td colspan="3"><b>Jumlah Alat</b></td>
+				<td colspan="4"><b>Jumlah Alat</b></td>
 				<td><center><b><?php echo $roTotal['loan_total_item']; ?></b></center></td>
 				<td></td>
 			</tr> </br>
 			<tr>
-				<td colspan="3"><b>Lama Pinjam</b></td>
+				<td colspan="4"><b>Lama Pinjam</b></td>
 				<td><center><b><?php echo $roTotal['long_loan']; ?> Minggu</b></center></td>
-				<td></td> <br/>
+				<td></td><br/>
 			</tr>
 			<tr>
-				<td colspan="4"><b>Subtotal </b></td>
+				<td colspan="5"><b>Subtotal </b></td>
 				<td>Rp.<?php echo rupiah($sub); ?></td>
 			</tr> <br/>
 			<?php 
-					if ($roTotal['category_id_fk']==1) {
+					if ($roTotal['category_id_fk']==1) { // Mhs s1 kedokteran ugm
 						
 					
 			 ?>
 			
 			<tr>
-				<td colspan="4"><b>Total = (Lama Pinjam x Subtotal)</b> </td>
+				<td colspan="5"><b>Total = (Lama Pinjam x Subtotal)</b> </td>
 				<td>Rp.<?php echo rupiah($roTotal['long_loan'] * $sub ); ?></td>
 			</tr> <br/>
 			<tr>
-				<td colspan="4"><b>Potongan (50%)</b></td>
+				<td colspan="5"><b>Potongan (50%)</b></td>
 				<td>Rp.<?php echo rupiah($roTotal['long_loan'] * $sub/2);  ?></td>
 			</tr> <br/>
 			<tr>
-				<td colspan="4"><b>Total Bayar = (Total - Potongan)</b></td>
-				<td><b>Rp.<?php echo  rupiah($roTotal['long_loan'] * $sub/2); ?></b></td>
+				<td colspan="5"><b>Total Bayar = (Total - Potongan)</b></td>
+				<td><b>Rp.<?php echo  rupiah($roTotal['loan_total_fee']); ?></b></td>
 			</tr> <br/>
-			<?php } else if ($roTotal['category_id_fk']==5) {
+			<?php } else if ($roTotal['category_id_fk']==5) { // mhs s2 ugm
 				
 			?>
 			
 			<tr>
-				<td colspan="4"><b>Total = (Lama Pinjam x Subtotal)</b></td>
+				<td colspan="5"><b>Total = (Lama Pinjam x Subtotal)</b></td>
 				<td>Rp.<?php echo rupiah($totals2);?></td>
 			</tr>
 			<tr>
-				<td colspan="4"><b>Potongan (25%)</b></td>
+				<td colspan="5"><b>Potongan (25%)</b></td>
 				<td>Rp.<?php echo rupiah($diskons2);  ?></td>
 			</tr>
 			<tr>
-				<td colspan="4"><b>Total Bayar = (Total - Potongan)</b></td>
+				<td colspan="5"><b>Total Bayar = (Total - Potongan)</b></td>
 				<td><b>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></b></td>
 			</tr>
-			<?php }elseif ($roTotal['category_id_fk']==6) {
+			<?php }elseif ($roTotal['category_id_fk']==6) { // mhs s3 ugm
 				
 			 ?>
 			<tr>
-				<td colspan="4"><b>Total = (Lama Pinjam x Subtotal)</b></td>
+				<td colspan="5"><b>Total = (Lama Pinjam x Subtotal)</b></td>
 				<td>Rp.<?php echo rupiah($totals3); ?></td>
 			</tr>
 			<tr>
-				<td colspan="4"><b>Potongan (25%)</b></td>
-				<td>Rp.<?php echo rupiah($diskons3);  ?></td>
+				<td colspan="5"><b>Potongan (25%)</b></td>
+				<td>Rp.<?php echo rupiah($roTotal['loan_total_fee']);  ?></td>
 			</tr>
 			
 			<tr>
-				<td colspan="4"><b>Total Bayar = (Total - Potongan)</b></td>
+				<td colspan="5"><b>Total Bayar = (Total - Potongan)</b></td>
 				<td><b>Rp.<?php echo rupiah($hasil_akhirs3); ?></b></td>
 			</tr> 
 			 <?php }else {
 			 	?>
 			 	<tr>
-					<td colspan="4"><b>Total = (Lama Pinjam x Subtotal)</b></td>
+					<td colspan="5"><b>Total = (Lama Pinjam x Subtotal)</b></td>
 					<td>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></td>
 				</tr>
 			 	<?php
@@ -149,28 +151,35 @@
 		<div class="col-md-12">
 			<p align="right">
 				<?php  
-				$queryUbahstatus = "SELECT loan_invoice,loan_status,loan_date_return,member_id_fk,loan_total_fee,loan_app_id FROM trx_loan_application where loan_invoice  = '".$invoice."' ";
+				$queryUbahstatus = "SELECT loan_invoice, loan_status, loan_date_return, member_id_fk, loan_total_fee, loan_app_id FROM trx_loan_application where loan_invoice  = '".$invoice."' ";
 				$ubahstatus = mysql_fetch_array(mysql_query($queryUbahstatus));
 					$statusKonfirmasi = $ubahstatus['loan_status'];
 					// $statusPembayaran = 
 					$querystatuspembayaran = mysql_fetch_array(mysql_query("SELECT * FROM trx_payment where loan_app_id_fk = '".$ubahstatus['loan_app_id']."'"));
 
+									// jika status peminjaman membayar tagihan & status pembayaran valid maka muncul button untuk cetak invoice
                                    if ($statusKonfirmasi == 'MEMBAYAR TAGIHAN') {
                     					if ($querystatuspembayaran['payment_valid'] == 'VALID') {
                     						echo "<a href='index.php?hal=pembayaran/preview_rekappembayaran_perinvoice&id=".$invoice."' h class='btn  btn-info dim_about'><span class='fa fa-print'></span> CETAK INVOICE</a>";
                     					}                 
                                   
-                                   }else if ($statusKonfirmasi == 'ACC FINAL') {
+                                   } 
+                                   // jika status peminjaman acc final -> button konfirm pmbayaran
+                                   else if ($statusKonfirmasi == 'ACC FINAL') {
                                    	echo "<div class='well'><b>KETERANGAN : <br/>Silahkan klik button Konfirmasi Pembayaran untuk dapat melanjutkan proses selanjutnya. Waktu yang diberikan untuk Konfirmasi Pembayaran adalah 3 Jam setelah Anda mendapat konfirmasi ACC FINAL. Apabila dalam waktu 3 jam Anda tidak melakukan konfirmasi pembayaran maka pengajuan peminjaman alat akan dibatalkan secara otomatis. </b></div>";
                                      echo " <a href='index.php?hal=pembayaran/konfirmasi_pembayaran&id=".$ubahstatus['loan_invoice']."' class='btn btn-info btn-xl pull-right dim_about'
                                     ><span class=''></span> KONFIRMASI PEMBAYARAN</a>";
-                                   }else if ($statusKonfirmasi == 'DIBATALKAN') {
+                                   } 
+                                   // jika status peminjaman dibatalkan -> button ajukan peminjaman
+                                   else if ($statusKonfirmasi == 'DIBATALKAN') {
                                         echo "<a href='index.php?hal=pengajuan-member/pengajuan-alat&batalkan=".$ubahstatus['loan_invoice']."' class='btn btn-success dim_about'> <span class='fa fa-share'> </span>
                                          KIRIM PENGAJUAN</a>";                            
                                    }else if ($statusKonfirmasi == 'DITOLAK'){
                                       echo " <a href='index.php?hal=members/peminjaman/pembayaran&id=".$ubahstatus['loan_invoice']."' class='btn btn-info btn-xs dim_about'
                                     ><span class='fa fa-check'></span> KONFIRMASI <br>PEMBAYARAN</a>";
-                                   }else if($statusKonfirmasi == 'MENUNGGU'){
+                                   } 
+                                   // jika status peminjaman menunggu = ( kondisi blm dikonfirmasi koordinator penelitian) -> button batalkan pengajuan
+                                   else if($statusKonfirmasi == 'MENUNGGU'){
                                    		echo "<a href='index.php?hal=pengajuan-member/pengajuan-alat&konfirmasi=".$ubahstatus['loan_invoice']."' class='btn btn-danger dim_about'> <span class='fa fa-share'> </span>
                                          BATALKAN PENGAJUAN</a>";   
                                    }else if($statusKonfirmasi == 'DIPINJAM'){

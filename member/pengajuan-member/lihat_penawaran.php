@@ -65,7 +65,7 @@
                 <div class="ibox-content">
                    <div class="row">
                        <div class="col-md-6">
-                           <label>Data Alat Yang Di Tolak</label>
+                           <label>Data Alat Yang Ditolak</label><hr>
                          
                        </div>
                        <div class="col-md-12">
@@ -103,7 +103,7 @@
 
                        <div class="col-md-12">
                        
-                       <label>Data Alat Yang ditawarkan</label>
+                       <label>Data Alat Yang Disarankan</label><hr>
                          <form class="role" method="POST">          
                         <input type="hidden" name="idreject" value="<?php echo $rowdetail['rejected_detail_id']; ?>">
                     <button type="submit" name="setujuipenawaran" class="btn btn-warning"><span class="fa fa-save"></span> Setujui Penawaran</button>

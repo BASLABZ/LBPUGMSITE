@@ -1,15 +1,17 @@
- <?php  
+ <?php 
+    // data member
     $query_profilmember= mysql_query("SELECT * from tbl_member where member_id = '".$_SESSION['member_id']."'");
       $peringatan_lengkapi_identitas = mysql_fetch_array($query_profilmember);
          $member_birth_date_cek          = $peringatan_lengkapi_identitas['member_birth_date'];
          $member_gender_cek              = $peringatan_lengkapi_identitas['member_gender'];
          $member_phone_number_cek        = $peringatan_lengkapi_identitas['member_phone_number'];
          $member_address_cek             = $peringatan_lengkapi_identitas['member_address'];
-
+      // validasi kelengkapan profil member utk bisa mengakses kernjang
       if ($member_birth_date_cek  != '' AND $member_gender_cek  != '' AND 
             $member_phone_number_cek !='' AND $member_address_cek  != '') {
             ?>
 <?php 
+        // query utk hapus item dr keranjang (loan temporari)
         if (isset($_GET['hapusitem'])) {
             $queryhapusitem = mysql_query("DELETE FROM trx_loan_temp where member_id_fk = '".$_SESSION['member_id']."' and instrument_id_fk ='".$_GET['hapusitem']."'");
         }
@@ -74,21 +76,22 @@
               <th>NO</th>
                         <th>NAMA ALAT</th>
                         <th>JUMLAH</th>
-                        <th><center>BIAYA SEWA</center></th>
+                        <th>BIAYA SEWA</th>
                         <th>SUBTOTAL</th>
                         <th>AKSI</th>
             </thead>
             <tbody>
                 <?php 
                             $no = 0;
+                            // mengambil data alat yg dipilih berdasarkan id member
                             $query = mysql_query("SELECT instrument_id_fk, instrument_name, instrument_quantity,intrument_quantity_temp , instrument_fee, count(instrument_id) AS jumlah FROM ref_instrument LEFT JOIN trx_loan_temp ON ref_instrument.instrument_id=trx_loan_temp.instrument_id_fk WHERE member_id_fk='".$_SESSION['member_id']."' GROUP BY instrument_id_fk");
                                 $number = 1;
                             while ($row = mysql_fetch_array($query)) {
                                     $biaya = $row['instrument_fee'];
                                     $jumlah = $row['jumlah'];
-                                    $subtotal = $number*$biaya;
-                                    $totaljumlah = $totaljumlah+$jumlah;
-                                    $totalbayar = $totalbayar+($biaya*$jumlah);
+                                    $subtotal = $number*$biaya; 
+                                    $totaljumlah = $totaljumlah+$jumlah; // total alat
+                                    $totalbayar = $totalbayar+($biaya*$jumlah); 
                                     $batasQuantity = $row['instrument_quantity']-$row['intrument_quantity_temp'];
                                     // $batasQuantity;
                                     // echo $row['intrument_quantity_temp'];
@@ -261,7 +264,7 @@
                                          $member_gender_cek              = $peringatan_lengkapi_identitas['member_gender'];
                                          $member_phone_number_cek        = $peringatan_lengkapi_identitas['member_phone_number'];
                                          $member_address_cek             = $peringatan_lengkapi_identitas['member_address'];
-                                   
+                                      // validasi kelengkapan profil member agar tidak bisa mengajukan peminjaman
                                       if ($member_birth_date_cek  != '' AND $member_gender_cek  != '' AND 
                                             $member_phone_number_cek !='' AND $member_address_cek  != '') {
                                               echo "

@@ -1,4 +1,6 @@
 <?php 
+        // memasukkan item ke keranjang
+        // insert multiple checkbox
         if (isset($_POST['pinjam'])) {
             $cek = $_POST['cek'];
             if ($cek != '' ) {
@@ -16,6 +18,7 @@
 
  ?>
  <?php  
+    //query validasi kelengkapan profil member agar bisa melihat daftar alat
     $query_profilmember= mysql_query("SELECT * from tbl_member where member_id = '".$_SESSION['member_id']."'");
       $peringatan_lengkapi_identitas = mysql_fetch_array($query_profilmember);
          $member_birth_date_cek          = $peringatan_lengkapi_identitas['member_birth_date'];
@@ -28,17 +31,15 @@
             ?>
 <div class="row wrapper border-bottom white-bg page-heading">
                 <div class="col-lg-10">
-                    <h2>INSTRUMENT</h2>
+                    <h2>Alat - Alat Penelitian Antropometri</h2>
                     <ol class="breadcrumb">
                         <li>
                             <a href="index-2.html">Home</a>
                         </li>
                         <li>
-                            <a>PENGAJUAN</a>
+                            <a>Daftar Alat</a>
                         </li>
-                        <li class="active">
-                            <strong>INSTRUMENT</strong>
-                        </li>
+                        
                     </ol>
                 </div>
             </div>
@@ -48,7 +49,7 @@
                    <div class="col-lg-12">
                 <div class="ibox">
                     <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;">
-                        <h5><span class="fa fa-list"></span> INSTRUMENT LBP UGM</h5>
+                        <h5><span class=""></span></h5>
                         <div class="ibox-tools" >
                             <a class="fullscreen-link">
                                 <i class="fa fa-expand fa-3x"style="color: white;"></i>
@@ -57,7 +58,7 @@
                     </div>
                     <div class="ibox-content dim_about">
                         <div class="row">
-                            
+                            <div class="col-md-2"></div>
                             <div class="col-md-8 well">
                                 <div class="col-md-2"><p align="right" style="padding-top: 5px;">CARI ALAT</p></div>
                                 <div class="col-md-8">
@@ -71,6 +72,7 @@
                             <div class="col-md-2">
                                  <br>
                                  <?php  
+                                        // menghitung data pada keranjang (loan temporari)
                                         $queryCekKeranjang  = mysql_query("SELECT count(member_id_fk) as jumlah FROM trx_loan_temp where member_id_fk='".$_SESSION['member_id']."'");
                                              $rowcekkeranjang = mysql_fetch_array($queryCekKeranjang);
                                              $cekJumlah = $rowcekkeranjang['jumlah'];
@@ -99,6 +101,7 @@
                                 </thead>
                                 <tbody>
                                     <?php 
+                                            // menampilkan data alat
                                             $queryI = mysql_query("SELECT instrument_id,instrument_name,instrument_quantity,intrument_quantity_temp,instrument_fee,instrument_picture FROM ref_instrument");
                                             
                                             while ($rowI = mysql_fetch_array($queryI)) {
@@ -151,6 +154,7 @@
                                                 
                                             while ($runBooking = mysql_fetch_array($queryBook)) {
                                                  $idIN = $runBooking['instrument_id_fk'];
+                                                 //menampilkan institusi peminjam  
                                                     echo "
                                                         <button type='button' data-toggle='tooltip' title='".$runBooking['member_faculty']."' class='btn btn-success btn-xs dim_about'>
                                                             <span class='fa fa-user'></span>
@@ -165,6 +169,7 @@
                                             </td>
                                             <td width="8%">
                                                 <?php 
+                                                        // menampilkan jumlah yg tersedia
                                                         $total_stok         = $rowI['instrument_quantity'];
                                                         $temp_instrument    = $rowI['intrument_quantity_temp'];
                                                         $stokTersedia       = $total_stok-$temp_instrument;
@@ -207,7 +212,7 @@
                 <div class="modal-content">
                     <div class="modal-header" style="background-color: #1ab394; color:white;">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><span class="fa fa-flask"></span> Detail Instrument</h4>
+                        <h4 class="modal-title"><span class=""></span> Detail Alat</h4>
                     </div>
                     <div class="modal-body">
                         <div class="fetched-data"></div>
