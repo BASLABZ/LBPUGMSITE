@@ -27,10 +27,10 @@
                             <table class="table table-striped table-hover"  id="dataTables-example">
                                                 <thead>
                                                     <th>No</th>
-                                                    <th>No Invoice</th>
+                                                    <th>Invoice</th>
                                                     <th>Nama</th>
                                                     <th>Tanggal Konfirmasi</th>
-                                                    <th>Keterangan</th>
+                                                    <th>Status</th>
                                                     <th>Bukti Pembayaran</th>
                                                     <th>Aksi</th>
                                                 </thead>
@@ -50,7 +50,15 @@
                                                         <td><?php echo $roWPembayaran['loan_invoice']; ?></td>
                                                         <td><?php echo $roWPembayaran['member_name']; ?></td>
                                                         <td><?php echo $roWPembayaran['payment_confirm_date']; ?></td>
-                                                         <td><span class="label label-success"><?php echo $roWPembayaran['payment_valid']; ?></span></td>
+                                                         <td><?php 
+                                                            if ($roWPembayaran ['payment_valid'] == 'MENUNGGU KONFIRMASI') {
+                                                                echo "<label class='label label-warning'>MENUNGU KONFIRMASI</label>";
+                                                            } elseif ($roWPembayaran ['payment_valid'] == 'VALID') {
+                                                                echo "<label class='label label-success'>VALID</label>";
+                                                            } else {
+                                                                echo "<label class='label label-danger'>TIDAK VALID</label>";
+                                                            }
+                                                          ?></td>
                                                         <td><a href="../../surat/<?php echo $roWPembayaran['payment_photo']; ?>"><img width="100" src="../../surat/<?php echo $roWPembayaran['payment_photo']; ?>" class="img-thumbnail img-responsive"></a></td>
                                                         <td><a href="#detail_peminjaman_yangdibayar" data-toggle='modal' data-id='<?php echo $roWPembayaran['loan_invoice']; ?>' class="btn btn-info dim_about"> <span class="fa fa-eye"></span> Lihat Detail</a></td>
                                                     </tr>

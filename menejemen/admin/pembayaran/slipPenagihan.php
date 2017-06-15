@@ -128,9 +128,9 @@
 						<div class="col-md-6">
 							<input type="hidden" name="idpayment" value="<?php echo $rowPenagihan['payment_id']; ?>" >
 							<select class="form-control" name="payment_valid"  id="konfirmasivalidasi">
-								<option value="MENUNGGU KONFIRMASI">MENUNGGU KONFIRMASI</option>
-								<option value="VALID">VALID</option>
-								<option value="TIDAK VALID">TIDAK VALID</option>
+							 	<option value="MENUNGGU KONFIRMASI" <?php if ($rowPenagihan ['payment_valid'] == 'MENUNGGU KONFIRMASI') {echo "selected=selected";} ?>>MENUNGGU KONFIRMASI</option>
+								<option value="VALID" <?php if ($rowPenagihan ['payment_valid'] == 'VALID') {echo "selected=selected";} ?>>VALID</option>
+								<option value="TIDAK VALID" <?php if ($rowPenagihan ['payment_valid'] == 'TIDAK VALID') {echo "selected=selected";} ?>>TIDAK VALID</option>
 							</select>
 						</div>
 						<div class="col-md-12" id="keterangan" hidden>

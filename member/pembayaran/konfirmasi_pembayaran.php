@@ -238,7 +238,7 @@
                                       <tr>
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $rowDetailPeminjaman['instrument_name']; ?></td>
-                                        <td><?php echo $rowDetailPeminjaman['loan_amount']; ?></td>
+                                        <td><center><?php echo $rowDetailPeminjaman['loan_amount']; ?></center></td>
                                         <td>Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
                                       </tr>
                                 <?php } ?>
@@ -249,48 +249,91 @@
                                             $xs = mysql_fetch_array($rowjumlahsubtotal);
                                             $sub = $xs['sub'];
                                             $queryTotal = mysql_query("SELECT loan_total_item,loan_total_fee, long_loan FROM trx_loan_application where loan_invoice ='".$invoice."'");
-                                            while ($roTotal = mysql_fetch_array($queryTotal)){  
+                                            while ($roTotal = mysql_fetch_array($queryTotal)){ 
+                                            $potongan = $roTotal['loan_total_fee'];
+                                                $hasil_akhirs1 = $potongan+$potongan;
+                                                // hitung potongan/diskon s2 
+                                                $lama =  $roTotal['long_loan'];
+                                                $totals2 = $sub *  $lama;
+                                                $diskons2 = $totals2*0.25;
+                                                $hasil_akhirs2 = $potongan-$diskons2;
+                                                // hasil akhir s3
+                                                $totals3 = $sub *  $lama;
+                                                $diskons3= $totals3*0.25;
+                                                $hasil_akhirs3 = $totals3-$diskons3; 
                                      ?>
                                     <tfoot>
                                         <tr>
-                                            <td colspan="2">Jumlah Item</td>
-                                            <td><?php echo $roTotal['loan_total_item']; ?> /Buah</td>
+                                            <td colspan="2">Total Alat</td>
+                                            <td><center><?php echo $roTotal['loan_total_item']; ?></center></td>
                                             <td></td>
                                         </tr>
                                         <tr>
                                             <td colspan="2"> Lama Pinjam</td>
-                                            <td><?php echo $roTotal['long_loan']; ?>/Minggu  </td>
+                                            <td><?php echo $roTotal['long_loan']; ?> Minggu  </td>
                                             <td></td>
                                         </tr>
 
                                         <tr>
-                                            <td colspan="2"> Jumlah Subtotal : </td>
-                                            <td></td>
+                                            <td colspan="3"> Subtotal</td>
                                             <td>Rp.<?php echo rupiah($sub); ?></td>
                                         </tr>
                                        <!--  -->
                                        <?php 
                                           $category_member = $rowPenagihan['category_id_fk'];
-                                          if ($category_member == '1') {
-                                            // potongannya 50%
+                                          if ($category_member == '1') { // mhs kedokteran s1 ugm
                                         ?>
                                         <tr>
-                                            <td colspan="3">Total = Lama Pinjam x Jumlah Subtotal</td>
+                                            <td colspan="3">Total = (Lama Pinjam x Subtotal)</td>
                                             <td>Rp.<?php echo rupiah($roTotal['long_loan']*$sub); ?></td>
                                         </tr>
                                          <tr>
-                                            <td colspan="2"> Potongan : </td>
-                                            <td></td>
+                                            <td colspan="3"> Potongan (50%)</td>
                                             <td>Rp.<?php echo rupiah($roTotal['long_loan']*$sub/2); ?></td>
                                         </tr>
                                          <tr>
-                                            <td colspan="2"> Total Bayar : </td>
-                                            <td></td>
-                                            <td>Rp.<?php echo rupiah($roTotal['long_loan']*$sub/2); ?></td>
+                                            <td colspan="3"> Total Bayar = (Total - Potongan)</td>
+                                            <td>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></td>
                                         </tr>
-                                        <?php }else{
-                                          echo "selanjutnya untuk kategori berikut nya";
-                                          } ?>
+                                        <?php }elseif ($category_member == '5') { // mhs ugm s2
+                                          ?>
+                                          <tr>
+                                            <td colspan="3"><b>Total = (Lama Pinjam x Subtotal)</b></td>
+                                            <td>Rp.<?php echo rupiah($totals2);?></td>
+                                          </tr>
+                                          <tr>
+                                            <td colspan="3"><b>Potongan (25%)</b></td>
+                                            <td>Rp.<?php echo rupiah($diskons2);  ?></td>
+                                          </tr>
+                                          <tr>
+                                            <td colspan="3"><b>Total Bayar = (Total - Potongan)</b></td>
+                                            <td><b>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></b></td>
+                                          </tr>
+                                        <?php
+                                        } elseif ($category_member == '6') { // mhs s3 ugm
+                                        ?>
+                                          <tr>
+                                            <td colspan="5"><b>Total = (Lama Pinjam x Subtotal)</b></td>
+                                            <td>Rp.<?php echo rupiah($totals3); ?></td>
+                                          </tr>
+                                          <tr>
+                                            <td colspan="5"><b>Potongan (25%)</b></td>
+                                            <td>Rp.<?php echo rupiah($roTotal['loan_total_fee']);  ?></td>
+                                          </tr>
+                                          
+                                          <tr>
+                                            <td colspan="5"><b>Total Bayar = (Total - Potongan)</b></td>
+                                            <td><b>Rp.<?php echo rupiah($hasil_akhirs3); ?></b></td>
+                                          </tr> 
+                                        <?php
+                                        } else {
+                                          ?>
+                                          <tr>
+                                            <td colspan="5"><b>Total = (Lama Pinjam x Subtotal)</b></td>
+                                            <td>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></td>
+                                          </tr> <?php
+                                        } 
+                                        ?>
                                     </tfoot>
                                     <?php } ?>
                                   </table>

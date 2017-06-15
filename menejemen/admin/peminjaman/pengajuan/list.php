@@ -38,6 +38,7 @@
                                                     // menampilkan semua data pengajuan kecuali yg statusnya dibatalkan
                                                     $querypengajuan = mysql_query("SELECT * FROM trx_loan_application a  JOIN tbl_member m on a.member_id_fk = m.member_id where a.loan_status != 'DIBATALKAN'   ORDER BY a.loan_app_id DESC");
                                                     while ($roPeminjaman = mysql_fetch_array($querypengajuan)) {
+                                                    $row_status = $roPeminjaman['loan_status'];
                                                  ?>
                                                     <tr>
                                                         <td><?php echo $no++; ?></td>
@@ -48,7 +49,23 @@
                                                         Download File Pengajuan
                                                         </a></td>
                                                         <td>
-                                                            <span class="label label-warning"><?php echo $roPeminjaman['loan_status']; ?></span>
+                                                           <?php 
+                                                            if ($row_status == 'MENUNGGU') {
+                                                                echo "<label class='label label-warning'>MENUNGGU</label>";
+                                                            } elseif ($row_status == 'DIBATALKAN') {
+                                                                echo "<label class='label label-danger'>DIBATALKAN</label>";
+                                                            } elseif ($row_status == 'MENUNGGU ACC FINAL') {
+                                                                echo "<label class='label label-default'>MENUNGGU ACC FINAL</label>";
+                                                            } elseif ($row_status == 'ACC FINAL') {
+                                                               echo "<label class='label label-info'>ACC FINAL</label>";
+                                                            } elseif ($row_status == 'MEMBAYAR TAGIHAN') {
+                                                                echo "<label class='label label-success'>MEMBAYAR TAGIHAN</label>";
+                                                            } elseif ($row_status == 'DIPINJAM') {
+                                                                echo "<label class='label label-primary'>DIPINJAM</label>";
+                                                            } elseif ($row_status == 'PERPANJANG') {
+                                                                echo "<label class='label label-warning'>PERPANJANG</label>";
+                                                            }
+                                                            ?>
                                                          </td>
                                                         <td>
                                                         <a href="index.php?hal=peminjaman/pengajuan/pengajuan_detail&invoice=<?php echo $roPeminjaman['loan_invoice']; ?>" class='btn btn-info btn-sm dim_about'><span class="fa fa-eye"></span> Detail Pangajuan</a>

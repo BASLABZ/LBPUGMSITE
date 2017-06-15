@@ -64,7 +64,7 @@
 <?php 
 		
 		$sqldetail = mysql_query("SELECT * FROM trx_loan_application_detail d join ref_instrument i on d.instrument_id_fk = i.instrument_id join trx_loan_application a on d.loan_app_id_fk = a.loan_app_id where a.loan_invoice = '".$invoice."'");
-		$no =1;
+		$no =1;   
 		while ($rowDetailPeminjaman = mysql_fetch_array($sqldetail)) {
  ?>
 			<tr>

@@ -7,7 +7,7 @@
  ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>PENGAJUAN ALAT</h2>
+        <h2>PENGAJUAN PERPANJANGAN ALAT</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="../index.php">Home</a>
@@ -16,7 +16,7 @@
                 <a>Perpanjang Alat</a>
             </li>
             <li class="active">
-                <strong>Daftar Pengajuan</strong>
+                <strong>Daftar Alat</strong>
             </li>
         </ol>
     </div>
@@ -30,22 +30,22 @@
                    <form class="role" method="POST" action="index.php?hal=perpanjang/proses_perpanjang">
                         <div class="row">
                         <div class="col-md-12" >
-                            <div class="role dim_about col-md-6" style="background-color: #1ab394; color: white;">
+                            <div class="well">
                                  <div class="form-group row">
-                                    <label class="col-md-3" align='right'>INVOICE</label>
+                                    <label class="col-md-2">INVOICE</label>
                                     <input type="hidden" value="<?php echo $rows['loan_invoice']; ?>" name='invoice_perpanjang'>
                                     <div class="col-md-4"><label><?php echo $rows['loan_invoice']; ?></label></div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3" align='right'>Tanggal Awal Pinjam</label>
+                                    <label class="col-md-2">Tanggal Pinjam</label>
                                     <div class="col-md-4"><label><?php echo $tanggalawal; ?></label></div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3" align='right'>Tanggal Pengembalian</label>
+                                    <label class="col-md-2">Tanggal Harus Kembali</label>
                                     <div class="col-md-4"><label><?php echo $tanggalpengembalian; ?></label></div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-md-3" align='right'>STATUS</label>
+                                    <label class="col-md-2">STATUS</label>
                                     <div class="col-md-4"><label><?php echo $rows['loan_status']; ?></label></div>
                                 </div>
                             </div>
@@ -195,7 +195,7 @@
                          
                  </div>
                             <div class="col-md-4 pull-right">
-                                <button type="submit" name="updateperpanjang" class="btn btn-primary btn-block dim_about"><span class="fa fa-arrow-right"></span> Perpanjang Peminjaman</button>
+                                <button type="submit" name="updateperpanjang" class="btn btn-primary btn-block dim_about">Ajukan Perpanjangan <span class="fa fa-arrow-right"></span></button>
                             </div>
                         </div>
                        </div>

@@ -48,7 +48,7 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                        <table class="table table-responsive table-bordered table-striped table-hover"id="instrument">    
+                        <table class="table table-responsive table-bordered table-striped table-hover" id="instrument">    
                         <thead>
                             <th><center>NO</center></th>
                             <th><center>INVOICE</center></th>
@@ -82,9 +82,9 @@
                                               } elseif ($status_peminjaman == 'ACC FINAL') {
                                                   echo "<label class='label label-info'>ACC FINAL</label>";                                         
                                               } elseif ($status_peminjaman == 'MEMBAYAR TAGIHAN') {
-                                                  echo "<label class='label label-info'>ACC FINAL</label>";
-                                              } elseif ($status_peminjaman == '') {
-                                                  # code...
+                                                  echo "<label class='label label-primary'>MEMBAYAR TAGIHAN</label>";
+                                              } elseif ($status_peminjaman == 'DIPINJAM') {
+                                                  echo "<label class='label label-success'>DIPINJAM</label>";
                                               }
                                               ?>
                                           </center>
@@ -98,7 +98,7 @@
                                                 }
                                            ?>
                                         </td>  
-                                        <?php echo "<td><center><a href='#detail_peminjaman'  class='btn btn-warning btn-sm dim_about' id='custId' data-toggle='modal' data-id='".$rowPeminjaman['loan_invoice']."'><span class=''></span> Lihat Detail</a></center></td>"; ?>
+                                        <?php echo "<td><center><a href='#detail_peminjaman'  class='' id='custId' data-toggle='modal' data-id='".$rowPeminjaman['loan_invoice']."'><span class=''></span> Lihat Detail</a></center></td>"; ?>
                                 </tr>
                           <?php } ?> 
                         </tbody>
@@ -115,7 +115,7 @@
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #1ab394; color:white;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class=""></span> Detail Pengajuan</h4>
+                    <h4 class="modal-title"><span class=""></span> Detail Peminjaman</h4>
                 </div>
                 <div class="modal-body">
                     <div class="peminjaman-data"></div>
