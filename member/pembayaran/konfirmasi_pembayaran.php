@@ -5,13 +5,14 @@
             $kodePeminjaman = $rowPenagihan['loan_app_id'];
  ?>
  <?php 
+        // post dr button simpan
         if (isset($_POST['simpanPembayaranAlat'])) {
                   $fileName = $_FILES['frm_file']['name'];
                   $paymentBill = $_POST['payment_bill'];
                   $Ceksaldo = $_POST['cekSaldos'];  
                   $transfer = $_POST['payment_amount_transfer'];
-                  $penguranganSaldo = $transfer-$paymentBill;
-                  $saldoawal = $_POST['payment_amount_saldo'];
+                  $penguranganSaldo = $transfer-$paymentBill; // saldo=jumlah transfer - jumlah hrsbayar
+                  $saldoawal = $_POST['payment_amount_saldo']; // saldo awal
                   $tanggal_konfirmasi_pembayaran_member = date('Y-m-d',strtotime($_POST['payment_confirm_date']));
                   $move = move_uploaded_file($_FILES['frm_file']['tmp_name'], '../surat/'.$fileName);
 
@@ -25,10 +26,10 @@
                        echo "<script> alert('Jumlah Transfer Anda Kurang Dari Tagihan'); location.href='index.php?hal=pembayaran/konfirmasi_pembayaran&id=".$invoice."' </script>";exit;
 
                   }else{
-                    
+                     // kondisi ada saldo = jumlah transfer - total bayar
                     $hasilkondisi_sisa_saldo = $_POST['payment_amount_transfer'] - $_POST['payment_bill'];
                     
-                    $querySimpanPayment1 = "INSERT INTO trx_payment (payment_bankname,payment_bill,
+                    $querySimpanPayment1 = "INSERT INTO trx_payment (payment_bankname, payment_bill,
                                                                   payment_amount_transfer,
                                                                   payment_amount_saldo,payment_date,
                                                                   payment_confirm_date,payment_photo,
@@ -52,7 +53,7 @@
                                                         '','MENUNGGU KONFIRMASI')";
                                                         
                              $runQueryPayment = mysql_query($querySimpanPayment1);
-                             $saldobertambah = $hasilkondisi_sisa_saldo+$saldoAwal;
+                             $saldobertambah = $hasilkondisi_sisa_saldo+$saldoAwal; // saldo awal + sisa pembayaran (saldo baru)
 
                              $querySimpanSaldo = "INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
                              ('".$saldobertambah."','','','','DEBIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')

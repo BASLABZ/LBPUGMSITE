@@ -65,8 +65,9 @@
                   </div>
               </div>
               <div class="ibox-content">
-                  <p><label class="btn btn-info dim_about"><span class="fa fa-tag"></span> No Invoice : <?php echo $invoice; ?></label>
-                              <a href="index.php?hal=pengajuan-member/pengajuan" class="btn btn-warning btn-sm dim_about"><span class="fa fa-arrow-left"></span> Kembali Ke Daftar Alat</a>
+                  <p>
+                    <a href="index.php?hal=pengajuan-member/pengajuan" class="btn btn-warning btn-sm dim_about"><span class="fa fa-arrow-left"></span> Kembali Ke Daftar Alat</a>
+                    <label class="btn btn-info dim_about"><span class="fa fa-tag"></span> No Invoice : <?php echo $invoice; ?></label>
                            </p><br><br>
           
             <form class="role" method="POST" enctype="multipart/form-data" action="index.php?hal=pengajuan-member/proses_pengajuan">
@@ -122,7 +123,7 @@
             <tfoot>
             
               <tr>
-                <td colspan="2" class="text-right"><b>Jumlah :</b> </td>
+                <td colspan="2" class="text-right"><b>Jumlah</b> </td>
                 <td><input type="text" readonly id="totaljum" name="totaljumlahSEMUAITEM"> <b> Item</b></td>
                 <td><b>Subtotal</b></td>
                 <td>Rp. <input type="text" readonly id="totalsus"></td>
@@ -183,17 +184,17 @@
                          ?>
                          <label>Kategori Member : <?php echo $kategori_member['category_name']; ?> </label> 
                         <?php 
-                            if ($kategori_member['category_id']=='1') {
+                            if ($kategori_member['category_id']=='1') { // mhs kedokteran s1 ugm
 
-                              echo "Potongan : 50%";
+                              echo "Potongan 50%";
                               echo "<br>
-                                    <label>Potongan : </label>
+                                    <label>Potongan </label>
                                     <input type='hidden' name='category_member' value='".$kategori_member['category_id']."' id='mhs_s1'>
                                     <input type='text' disabled  class='form-control' id='potongan'>
                                     <br>
-                                    <label>Total Bayar : </label>
+                                    <label>Total Bayar</label>
                                     <input type='text' disabled  class='form-control' id='hasilakahir'>";
-                            }elseif($kategori_member['category_id']=='5'){
+                            }elseif($kategori_member['category_id']=='5'){ // mhs s2 ugm 
                               echo "Anda Mendapat Potongan 25 %";
                               echo "<br>
                                     <label>Potongan : </label>
@@ -202,7 +203,7 @@
                                     <br>
                                     <label>Total Bayar : </label>
                                     <input type='text' disabled  class='form-control' id='hasilakahir'>";
-                            }else if($kategori_member['category_id']=='6'){
+                            }else if($kategori_member['category_id']=='6'){ // mhs s3 ugm
                               echo "Anda Mendapat Potongan 25 %";
                               echo "<br>
                                     <label>Potongan : </label>

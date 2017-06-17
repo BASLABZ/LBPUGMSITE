@@ -62,9 +62,18 @@
                            <?php 
                             $queryPeminjaman = mysql_query("SELECT * FROM trx_loan_application where member_id_fk  = '".$_SESSION['member_id']."' ORDER BY loan_app_id desc");
                             $no=0;
+                            $check_baris = mysql_num_rows($queryPeminjaman);
+                            if ($check_baris == 0) { ?>
+                                      <tr>
+                                          <td align="center" colspan="7">Belum Ada Data Peminjaman</td>
+                                      </tr>
+                                  <?php } 
+                               else {
                             while ($rowPeminjaman = mysql_fetch_array($queryPeminjaman)) {
                                 $status_peminjaman = $rowPeminjaman['loan_status'];
-                              ?>
+
+                             
+                               ?>
                                 <tr>
                                         <td><center><?php echo ++$no; ?></center></td>
                                         <td><center><?php echo $rowPeminjaman['loan_invoice']; ?></center></td>
@@ -100,7 +109,8 @@
                                         </td>  
                                         <?php echo "<td><center><a href='#detail_peminjaman'  class='' id='custId' data-toggle='modal' data-id='".$rowPeminjaman['loan_invoice']."'><span class=''></span> Lihat Detail</a></center></td>"; ?>
                                 </tr>
-                          <?php } ?> 
+                          <?php } 
+                          }?> 
                         </tbody>
                         </table>
                     </div>

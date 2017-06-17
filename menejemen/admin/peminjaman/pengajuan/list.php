@@ -45,7 +45,7 @@
                                                         <td><?php echo $roPeminjaman['loan_date_input']; ?></td>
                                                         <td><?php echo $roPeminjaman['loan_invoice']; ?></td>
                                                         <td><?php echo $roPeminjaman['member_name']; ?></td>
-                                                        <td><a target="_BLANK" href="../../surat/<?php echo $roPeminjaman['loan_file']; ?>" class="btn btn-primary btn-sm dim_about"> <span class="fa fa-download"></span> 
+                                                        <td><a target="_BLANK" href="../../surat/<?php echo $roPeminjaman['loan_file']; ?>"> <span class="fa fa-download"></span> 
                                                         Download File Pengajuan
                                                         </a></td>
                                                         <td>

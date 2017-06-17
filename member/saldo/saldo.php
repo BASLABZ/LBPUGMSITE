@@ -1,10 +1,19 @@
 <?php 
 	if (isset($_POST['simpan'])) {
+
+		$password = md5($_POST['password_account']);
+		$queryPassword = mysql_fetch_array(mysql_query("SELECT member_password from tbl_member where member_id = '".$_SESSION['member_id']."' and member_password='".$password."'"));
+		//$member_password = $queryPassword ['member_password'];
+		if ($queryPassword != $password) { // LOGIKANE PIE
+			echo "<script> alert('Password anda salah'); location.href='index.php?hal=saldo/saldo' </script>";exit;
+		} else {
+		
 		$querySubmit = mysql_query("INSERT INTO trx_saldo (bank_name, bank_account, cashout_amount) VALUES ('".$_POST['bank_name']."', '".$_POST['bank_account']."', '".$_POST['cashout_amount']."')");
 		if ($querySubmit) {
 			 echo "<script> alert('Data Berhasil Disimpan'); location.href='index.php?hal=saldo/saldo' </script>";exit; 
 		} else {
 			 echo "<script> alert('Data Gagal Disimpan'); location.href='index.php?hal=saldo/saldo' </script>";exit;
+		}
 		}
 	}
  ?> 
@@ -35,13 +44,13 @@
 						 <?php 
 			    $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
 			    $total_saldo = mysql_fetch_array($querySaldo);
-			    $query_saldo_terakhir = mysql_fetch_array(mysql_query("SELECT * FROM trx_saldo where member_id = '".$_SESSION['member_id']."' ORDER BY member_id DESC"));
-			    $saldo_terakhir = $query_saldo_terakhir['saldo_total'];
+			    $query_saldo_terakhir = mysql_fetch_array(mysql_query("SELECT * FROM trx_saldo where member_id_fk = '".$_SESSION['member_id']."' ORDER BY member_id_fk DESC"));
+			    $saldo_terakhir = $query_saldo_terakhir['saldo_total']; 
 			    
 			    if ($total_saldo['total_saldo']=='') {
 			      echo "Rp.0";
 			    }
-			    echo "<h1>Rp.".rupiah($saldo_terakhir)."</h1>";
+			    echo "<h1>Rp ".rupiah($total_saldo['total_saldo'])."</h1>";
 			 ?></center>
 					</div>
 				</div>

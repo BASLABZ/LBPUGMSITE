@@ -81,7 +81,7 @@
                                                  <td><b><?php echo $rundetail['loan_date_start']; ?></b></td>
                                              </tr>
                                              <tr>
-                                                 <td><b>Tanggal Kembali</b></td>
+                                                 <td><b>Tanggal Harus Kembali</b></td>
                                                  <td><b>:</b></td>
                                                  <td><b><?php echo $rundetail['loan_date_return']; ?></b></td>
                                              </tr>
@@ -107,7 +107,7 @@
                                                         <p align="left">
                                                                 <select class="form-control" name="loan_status">
                                                             <?php 
-                                                                if ($_SESSION['level_name'] != 'kepala laboratorium'){ 
+                                                                if ($_SESSION['level_name'] != 'kepala laboratorium'){ // jika level bukan kepala lab tampilkan opsi
                                                              ?>
                                                             <option value="MENUNGGU"
                                                                 <?php if($rowStatusLoan['loan_status']=='MENUNGGU'){echo "selected=selected";}?>>
@@ -172,7 +172,13 @@
                                                 <td><?php echo $no++; ?></td>
                                                 <td><?php echo $rowDetailPeminjaman['instrument_name']; ?></td>
                                                 <td><center>
-                                                        <span class="label label-warning"><?php echo $rowDetailPeminjaman['loan_status_detail']; ?></span>
+                                                       <?php 
+                                                            if ($rowDetailPeminjaman['loan_status_detail'] == 'MENUNGGU') {
+                                                                echo "<span class='label label-warning'>MENUNGGU</span>";
+                                                            } else {
+                                                                echo "<span class='label label-success'>ACC</span>";
+                                                            }
+                                                        ?>
                                                     </center>
                                                 </td>
                                                 <td><center>

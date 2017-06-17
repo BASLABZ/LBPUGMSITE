@@ -1,5 +1,5 @@
 <table class="table table-responsive table-hover table-bordered" >
-		<thead> DATA PEMINJAMAN
+		<thead>
 			<th>NO</th>
 			<th>NAMA ALAT</th>
 			<th>STATUS ALAT</th>
