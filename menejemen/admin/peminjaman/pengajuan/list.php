@@ -36,7 +36,12 @@
                                                 <?php 
                                                     $no = 1;
                                                     // menampilkan semua data pengajuan kecuali yg statusnya dibatalkan
-                                                    $querypengajuan = mysql_query("SELECT * FROM trx_loan_application a  JOIN tbl_member m on a.member_id_fk = m.member_id where a.loan_status != 'DIBATALKAN'   ORDER BY a.loan_app_id DESC");
+                                                    if ($_SESSION['level_name']=='koordinator penelitian') {
+                                                            $querypengajuan = mysql_query("SELECT * FROM trx_loan_application a  JOIN tbl_member m on a.member_id_fk = m.member_id where a.loan_status != 'DIBATALKAN'   ORDER BY a.loan_app_id DESC");    
+                                                    }else if ($_SESSION['level_name']=='kepala laboratorium') {
+                                                     $querypengajuan = mysql_query("SELECT * FROM trx_loan_application a  JOIN tbl_member m on a.member_id_fk = m.member_id where a.loan_status ='MENUNGGU ACC FINAL' ORDER BY a.loan_app_id DESC");
+                                                    }
+                                                    
                                                     while ($roPeminjaman = mysql_fetch_array($querypengajuan)) {
                                                     $row_status = $roPeminjaman['loan_status'];
                                                  ?>

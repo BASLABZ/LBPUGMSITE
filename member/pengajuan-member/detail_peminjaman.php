@@ -172,8 +172,8 @@
                                    } 
                                    // jika status peminjaman dibatalkan -> button ajukan peminjaman
                                    else if ($statusKonfirmasi == 'DIBATALKAN') {
-                                        echo "<a href='index.php?hal=pengajuan-member/pengajuan-alat&batalkan=".$ubahstatus['loan_invoice']."' class='btn btn-success dim_about'> <span class='fa fa-share'> </span>
-                                         KIRIM PENGAJUAN</a>";                            
+                                        // echo "<a href='index.php?hal=pengajuan-member/pengajuan-alat&batalkan=".$ubahstatus['loan_invoice']."' class='btn btn-success dim_about'> <span class='fa fa-share'> </span>
+                                        //  KIRIM PENGAJUAN</a>";                            
                                    }else if ($statusKonfirmasi == 'DITOLAK'){
                                       echo " <a href='index.php?hal=members/peminjaman/pembayaran&id=".$ubahstatus['loan_invoice']."' class='btn btn-info btn-xs dim_about'
                                     ><span class='fa fa-check'></span> KONFIRMASI <br>PEMBAYARAN</a>";
@@ -205,8 +205,8 @@
                                    		 		echo "
                                    		 		<a class='btn btn-warning dim_about' href='index.php?hal=pembayaran/pembayaran_denda&id=".$ubahstatus['loan_invoice']."'>Bayar Denda </a>
                                    		 		<p>Anda Dikenakan Denda , <br>Karena Saat Ini Anda Belum Mengembalikan Alat,Anda Melewati Tanggal : ".$hariH['loan_date_return']." <br></p>";
-                                   		 		echo "<p>Anda Terlambat Selama :<b> ".$hariH['selisih']." Dan Anda Dikenakan Denda 
-                                   		 		Sebesar : Rp.".$denda." </b><br>Dan Kartu Identitas Anda Akan Kami Tahan Sebelum Melakukan Pembayaran Denda</p>";
+                                   		 		echo "<p>Anda Terlambat Selama :<b> ".$hariH['selisih']." hari Dan Anda Dikenakan Denda 
+                                   		 		Sebesar : Rp.".rupiah($total_denda = $denda * $hariH['selisih'])." </b><br>Dan Kartu Identitas Anda Akan Kami Tahan Sebelum Melakukan Pembayaran Denda</p>";
                                    		 		}
                                    		 	}
                                    }

@@ -1,7 +1,7 @@
  <?php 
       $invoice = $_GET['invoice'];
       
-        $rowStatusLoan = mysql_fetch_array(mysql_query("SELECT loan_app_id,loan_status,member_id_fk,loan_invoice FROM trx_loan_application where loan_invoice = '".$invoice."'"));
+        $rowStatusLoan = mysql_fetch_array(mysql_query("SELECT loan_app_id,loan_status,member_id_fk,loan_invoice FROM trx_loan_application where loan_invoice = '".$invoice."' "));
         $idmember = $rowStatusLoan['member_id_fk'];
         if (isset($_POST['ubah'])) {
             $selectQuery = mysql_query("SELECT * FROM tbl_member where member_id = '".$idmember."'");

@@ -3,6 +3,7 @@
             $invoice = $_GET['id'];
             $rowPenagihan = mysql_fetch_array(mysql_query("SELECT * FROM trx_loan_application a JOIN tbl_member m on a.member_id_fk = m.member_id where loan_invoice = '".$invoice."'"));
             $kodePeminjaman = $rowPenagihan['loan_app_id'];
+
           
  ?>
  <?php 
@@ -159,13 +160,17 @@
                                         <td>:</td>
                                         <td>Rp.<?php echo $rowPenagihan['loan_total_fee']; ?></td>
                                       </tr>
+                                      <?php 
+                                      $row_lama_terambat = mysql_fetch_array(mysql_query("SELECT trx_loan_application.* , current_date tanggal , datediff(current_date,loan_date_return) selisih , case when datediff(current_date,loan_date_return)>0 then 'Habis' else 'aktif' end status from trx_loan_application where member_id_fk= '".$_SESSION['member_id']."' AND loan_invoice = '".$invoice."'"));
+                                       ?>
                                       <tr>
-                                        <td>Denda Yang Harus Dibayar : (25%) Dari Total Peminjaman</td>
+                                        <td>Denda Yang Harus Dibayar : (25%) Dari Total Peminjaman x Lama Terlambat.<br>   <?php echo "Lama Terlambat ";   echo $row_lama_terambat['selisih']; ?> Hari</td>
                                         <td>:</td>
                                         <td><?php 
                                               $total_pinjaman =  $rowPenagihan['loan_total_fee']; 
-                                              echo "Rp." ; echo $total_denda = $total_pinjaman*0.25;
-
+                                               $total_denda = $total_pinjaman*0.25;
+                                               
+                                               echo rupiah($row_lama_terambat['selisih'] * $total_denda);
 
                                         ?></td>
                                       </tr>
@@ -218,8 +223,8 @@
                                         <div class="form-group row">
                                           <label class="col-md-4">TOTAL TAGIHAN</label>
                                           <div class="col-md-6">
-                                            <input type="text" name="totalTagihan"  class="form-control" value="<?php echo rupiah($total_denda); ?>" readonly  />
-                                            <input type="hidden" id="tagihan" name="payment_bill" value="<?php echo $total_denda; ?>">
+                                            <input type="text" name="totalTagihan"  class="form-control" value="<?php echo rupiah($row_lama_terambat['selisih'] * $total_denda); ?>" readonly  />
+                                            <input type="hidden" id="tagihan" name="payment_bill" value="<?php echo $row_lama_terambat['selisih'] * $total_denda; ?>">
                                           </div>
                                         </div>
                                         <div class="form-group row">

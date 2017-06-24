@@ -7,6 +7,9 @@
 		$row = mysql_fetch_array($detail);
 		$status_loan = $row['loan_status'];
 
+		$tanggal_dikembaliakan = mysql_fetch_array(mysql_query("SELECT * from trx_return where loan_app_id_fk='".$row['loan_app_id']."'"));
+
+
 ?>
 <form class="role" method="POST" action="index.php?hal=pengembalian/proses_pengembalian_alat">
 <div class="row">
@@ -30,6 +33,26 @@
 					<input type="text" readonly="" class="form-control" name="tanggalharusdikembalikan"  value="<?php echo $row['loan_date_return']; ?>" >
 				</div>
 			</div>
+			<?php 
+				if ($status_loan =='DIKEMBALIKAN') {
+				
+			 ?>
+			<div class="form-group row">
+				<label class="col-md-8">TANGGAL DIKEMBALIKAN  </label>
+				<div class="col-md-4">
+					<input type="text" readonly="" class="form-control"  value="<?php echo $tanggal_dikembaliakan['return_date_input']; ?>" >
+				</div>
+			</div>
+			<?php 
+				}else{ ?>
+				<div class="form-group row">
+				<label class="col-md-8">TANGGAL DIKEMBALIKAN  </label>
+				<div class="col-md-4">
+					<input type="text" readonly="" class="form-control"  value="<?php echo date('d-m-Y'); ?>" >
+				</div>
+			</div>
+			<?php } ?>
+			
 			
 		</div>
 		<div class="col-md-12">
