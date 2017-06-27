@@ -1,6 +1,7 @@
 <?php 
 		include '../../inc/inc-db.php';
 		$invoice = $_POST['id'];
+		// ambil data pembayaran
 		$rowPenagihan = mysql_fetch_array(mysql_query("SELECT * FROM trx_payment a join tbl_member m ON a.member_id_fk = m.member_id join trx_loan_application p ON p.loan_app_id = a.loan_app_id_fk where p.loan_invoice = '".$invoice."' "));
 		
 		
@@ -25,21 +26,9 @@
 </div> 
   </div>
 <table class="table table-responsive table-hover table-bordered">
-		<tbody>
-		<?php 
-					
-				$sqldetail = mysql_query("SELECT * FROM trx_loan_application_detail d 
-											JOIN trx_loan_application p
-											 ON d.loan_app_id_fk = p.loan_app_id
-											  JOIN ref_instrument i
-											   ON d.instrument_id_fk = i.instrument_id
-											   JOIN tbl_member m
-											    where p.loan_invoice='".$invoice."' group by instrument_id");
-				$no =1;
-				while ($rowDetailPeminjaman = mysql_fetch_array($sqldetail)) {
-		 ?>
-<?php } ?>
-		</tbody>
+	<tbody>
+		
+	</tbody>
 		<tfoot>
 			<?php 
 				// total item
@@ -61,10 +50,11 @@
 					<label>Pembayaran Transfer : Rp. <?php echo rupiah($rowPenagihan['payment_amount_transfer']); ?> 
 					<?php 
 
-
+							// ambil data saldo
 							$pertambahandengansaldo = mysql_fetch_array(mysql_query("SELECT * from trx_saldo where loan_app_id_fk = '".$rowPenagihan['loan_app_id']."'"));
-							if ($pertambahandengansaldo['saldo_total'] >= 0) {
+							if ($pertambahandengansaldo['saldo_total'] >= 0) { // jika saldo lebih dr / = 0
 								echo " + Rp.";
+								// tagihan - transfer + saldo total
 								 $penambahantransaksi = $rowPenagihan['payment_bill']-$rowPenagihan['payment_amount_transfer'] + $pertambahandengansaldo['saldo_total'];
 								 echo rupiah($penambahantransaksi);
 								echo "= Rp";

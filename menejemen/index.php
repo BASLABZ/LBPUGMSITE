@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
      <meta charset="UTF-8" />
-     <title>SIM PENYEWAAN ALAT LABIRATORIUM | Login</title>
+     <title>LAB BIO-PALEOANTROPOLOGI UGM| Login</title>
      <meta content="width=device-width, initial-scale=1.0" name="viewport" />
      <link rel="stylesheet" href="admin/assets/plugins/bootstrap/css/bootstrap.css" />
      <link rel="stylesheet" href="admin/assets/css/login.css" />

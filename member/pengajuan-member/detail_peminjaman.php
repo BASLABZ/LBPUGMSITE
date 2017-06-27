@@ -168,7 +168,7 @@
                                    else if ($statusKonfirmasi == 'ACC FINAL') {
                                    	echo "<div class='well'><b>KETERANGAN : <br/>Silahkan klik button Konfirmasi Pembayaran untuk dapat melanjutkan proses selanjutnya. Waktu yang diberikan untuk Konfirmasi Pembayaran adalah 3 Jam setelah Anda mendapat konfirmasi ACC FINAL. Apabila dalam waktu 3 jam Anda tidak melakukan konfirmasi pembayaran maka pengajuan peminjaman alat akan dibatalkan secara otomatis. </b></div>";
                                      echo " <a href='index.php?hal=pembayaran/konfirmasi_pembayaran&id=".$ubahstatus['loan_invoice']."' class='btn btn-info btn-xl pull-right dim_about'
-                                    ><span class=''></span> KONFIRMASI PEMBAYARAN</a>";
+                                    ><span class=''></span> Konfirmasi Pembayaran</a>";
                                    } 
                                    // jika status peminjaman dibatalkan -> button ajukan peminjaman
                                    else if ($statusKonfirmasi == 'DIBATALKAN') {
@@ -189,9 +189,9 @@
                                    		 	$hariH = mysql_fetch_array($queryLamaPinjam);
                                    		 	$sisaHari  = $hariH['selisih']; 
                                    		 	if ($sisaHari == 0) {
-                                   		 		echo "<a href='index.php?hal=perpanjang/list&invoice=".$ubahstatus['loan_invoice']."'>INGIN PERPANJANG ALAT ? </a> <br><p>Hari Ini Adalah Waktu Pengembalian Alat, <br>Silahkan Melakukan Pengembalian/Perpanjang Alat, Jika Anda Melewatkan Waktu <br>Pengembalian Alat Maka Anda Akan Dikenakan Denda Sebesar 25% dari Total Peminjaman <br> Dan Kartu Identitas Anda Akan Kami Tahan Sebelum Melakukan Pembayaran Denda,</p>";  	
+                                   		 		echo "<a href='index.php?hal=perpanjang/list&id=".$ubahstatus['loan_invoice']."'>INGIN PERPANJANG ALAT ? </a> <br><p>Hari Ini Adalah Waktu Pengembalian Alat, <br>Silahkan Melakukan Pengembalian/Perpanjang Alat, Jika Anda Melewatkan Waktu <br>Pengembalian Alat Maka Anda Akan Dikenakan Denda Sebesar 25% dari Total Peminjaman <br> Dan Kartu Identitas Anda Akan Kami Tahan Sebelum Melakukan Pembayaran Denda,</p>";  	
                                    		 	}else if ($sisaHari < 0 AND $sisaHari == -2 OR $sisaHari == -1 AND $hariH['status'] != 'Habis') {
-                                   		 		echo "<a href='index.php?hal=members/pengembalian/lists&id=".$ubahstatus['loan_invoice']."'>INGIN PERPANJANG ALAT ? </a><br>
+                                   		 		echo "<a href='index.php?hal=perpanjang/lists&id=".$ubahstatus['loan_invoice']."'>INGIN PERPANJANG ALAT ? </a><br>
                                    		 		<p>Waktu Pengembalian Anda Kurang Dari ".-($sisaHari)." Hari,Yaitu Pada Tanggal :".$hariH['loan_date_return'].", Lakukan Pengembalian / Perpanjang Dan Jika Pengembalian Melewati Batas Waktu Pengembalian Akan Dikenakan Denda 25% dari Total Peminjaman,<br>Dan Kartu Identitas Anda Akan Kami Tahan Sebelum Melakukan Pembayaran Denda</p>";
                                    		 	}
                                    		 	else if ($sisaHari > 0 AND $hariH['status'] == 'Habis') {
@@ -203,11 +203,12 @@
                                    		 			echo "<center><b>DATA PEMBAYARAN ANDA SEDANG KAMI PROSES</b></center>";
                                    		 		}else{
                                    		 		echo "
-                                   		 		<a class='btn btn-warning dim_about' href='index.php?hal=pembayaran/pembayaran_denda&id=".$ubahstatus['loan_invoice']."'>Bayar Denda </a>
-                                   		 		<p>Anda Dikenakan Denda , <br>Karena Saat Ini Anda Belum Mengembalikan Alat,Anda Melewati Tanggal : ".$hariH['loan_date_return']." <br></p>";
-                                   		 		echo "<p>Anda Terlambat Selama :<b> ".$hariH['selisih']." hari Dan Anda Dikenakan Denda 
-                                   		 		Sebesar : Rp.".rupiah($total_denda = $denda * $hariH['selisih'])." </b><br>Dan Kartu Identitas Anda Akan Kami Tahan Sebelum Melakukan Pembayaran Denda</p>";
-                                   		 		}
+                                   		 		<div class='well'> <b> KETERANGAN :</b>
+                                   		 		<p>Anda terlambat melakukan pengembalian alat selama <b>".$hariH['selisih']."</b> hari dihitung sejak tanggal jatuh tempo tanggal pengembalian yaitu pada tanggal <b>".$hariH['loan_date_return'].".</b> ";
+                                   		 		echo "Anda dikenakan denda 
+                                   		 		sebesar 25% per hari dari total pembayaran peminjaman. Jumlah denda yang harus Anda bayar adalah <b>Rp ".rupiah($total_denda = $denda * $hariH['selisih'])."</b>. Untuk dapat melakukan pengembalian alat dan pengambilan Kartu Identitas Anda diwajibkan membayar denda keterlambatan dan melakukan konfirmasi pembayaran melalui button dibawah ini..</p></div>
+                                   		 		<a href='index.php?hal=pembayaran/pembayaran_denda&id=".$ubahstatus['loan_invoice']."' class='btn btn-warning btn-xl pull-right dim_about' >Konfirmasi Pembayaran Denda </a>";
+                                   		 		} // else
                                    		 	}
                                    }
                                      ?>

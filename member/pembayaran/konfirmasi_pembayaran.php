@@ -183,7 +183,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="panel panel-primary">
-                                <div class="panel-heading"><span class=""></span> Tagihan Pembayaran</div>
+                                <div class="panel-heading"><span class=""></span> Tagihan Pembayaran Peminajaman</div>
                                 <div class="panel panel-body">
                                  <?php 
                                     $invoice = $_GET['id'];
@@ -194,22 +194,17 @@
                                 <div class="col-md-12">
                                   <div class="form-group">
                                   <table>
-                                  <tr>
-                                    <td>NO</td>
-                                    <td>:&nbsp&nbsp</td>
-                                    <td><?php echo $invoice; ?></td>
-                                  </tr>
-                                  <tr>
-                                    <td>NAMA MEMBER</td>
-                                    <td>:</td>
-                                    <td><?php echo $rowPenagihan['member_name']; ?></td>
-                                  </tr>
-                                  <tr>
-                                    <td>TANGGAL PENGAJUAN &nbsp</td>
-                                    <td>:</td>
-                                    <td><?php echo $rowPenagihan['loan_date_input']; ?></td>
-                                  </tr> 
-                                    </table>
+                                      <tr>
+                                        <td>NO</td>
+                                        <td>:&nbsp&nbsp</td>
+                                        <td><?php echo $invoice; ?></td>
+                                      </tr>
+                                      <tr>
+                                        <td>NAMA MEMBER&nbsp</td>
+                                        <td>:</td>
+                                        <td><?php echo $rowPenagihan['member_name']; ?></td>
+                                      </tr>
+                                  </table>
                                   </div> 
                                 </div> 
                                   </div>
@@ -340,8 +335,28 @@
                                   </table>
                                   
                                   </div>
-                            </div>             
+                            </div>      
+                            <div class="panel panel-primary">
+                                <div class="panel-heading"><span class="fa fa-file-text"></span> Saldo</div>
+                                <div class="panel-body">
+                                    <p>Jumlah saldo yang Anda miliki saat ini adalah :  </p>
+                                    <h2 class='btn btn-block btn-warning btn-lg'>
+                                        <?php 
+
+                                        $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
+                                        $total_saldo = mysql_fetch_array($querySaldo);
+                                        if ($total_saldo['total_saldo']=='') {
+                                          echo "Rp.0";
+                                        }
+                                        echo "Rp ".rupiah($total_saldo['total_saldo'])."</h2>";
+                                     ?>
+
+                                    </h2>
+                                    <p><i>*Anda Dapat Melakukan Pembayaran Dengan Menggunakan Saldo.</i></p>
+                                </div>
+                            </div>       
                         </div>
+
                         <div class="col-md-6">
                             <div class="panel panel-primary">
                                 <div class="panel-heading"><span class=""></span> Konfirmasi Pembayaran</div>

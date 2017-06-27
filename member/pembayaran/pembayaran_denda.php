@@ -12,21 +12,17 @@
                   $tanggal_konfirmasi_pembayaran_member = date('Y-m-d',strtotime($_POST['payment_confirm_date']));
              $move = move_uploaded_file($_FILES['frm_file']['tmp_name'], '../surat/'.$fileName);
               $tagihan = $_POST['payment_bill'];
-              $jumlah_transfer = $_POST['payment_amount_transfer'];
-              $saldo_sementara = $_POST['payment_amount_saldo'];
-              $total_pembayaran = $saldo_input + $jumlah_transfer;
+              $jumlah_transfer = $_POST['payment_amount_transfer']; 
+              $saldo_sementara = $_POST['payment_amount_saldo']; 
+              $total_pembayaran = $saldo_input + $jumlah_transfer; // total bayar = saldo yg dipakai+jumlah bayar
               $saldo_input = $_POST['paymensaldo_'];
              if ($move) {
-
-
-             
-
-              if ($saldo_input < 1 OR $saldo_total ='' ) {
+              if ($saldo_input < 1 OR $saldo_total ='' ) { // jika tidak ada saldo
                 
-                  if ($total_pembayaran < $tagihan) {
-                     echo "<script> alert('TOTAL TRANFER YANG ANDA INPUTKAN KURANG DARI TAGIHAN'); location.href='index.php?hal=pembayaran/pembayaran_denda&id=".$invoice."' </script>";exit;
-                  }else{
-                    $hasil_pembayaran1 = $total_pembayaran - $tagihan;
+                  if ($total_pembayaran < $tagihan) { // jika total bayar kurang dari tagihan
+                     echo "<script> alert('JUMLAH PEMBAYARAN YANG ANDA INPUTKAN KURANG DARI TAGIHAN'); location.href='index.php?hal=pembayaran/pembayaran_denda&id=".$invoice."' </script>";exit;
+                  }else {
+                    $hasil_pembayaran1 = $total_pembayaran - $tagihan; 
                       $querysimpanpembayaran_denda1 = mysql_query( "INSERT INTO trx_payment (payment_bankname,
                                                                                payment_bill,
                                                                                payment_amount_transfer,
@@ -65,7 +61,7 @@
              
 
                 if ($total_pembayaran < $tagihan) {
-                   echo "<script> alert('TOTAL TRANFER YANG ANDA INPUTKAN KURANG DARI TAGIHAN'); location.href='index.php?hal=pembayaran/pembayaran_denda&id=".$invoice."' </script>";exit;
+                   echo "<script> alert('TOTAL TRANSFER YANG ANDA INPUTKAN KURANG DARI TAGIHAN'); location.href='index.php?hal=pembayaran/pembayaran_denda&id=".$invoice."' </script>";exit;
                    if ($saldo_input > $saldo_sementara) {
                      echo "<script> alert('SALDO YANG ANDA INPUTKAN MELEBIHI SALDO ANDA'); location.href='index.php?hal=pembayaran/pembayaran_denda&id=".$invoice."' </script>";exit;
                    }
@@ -123,8 +119,8 @@
             <li>
                 <a>Pembayaran</a>
             </li>
-            <li class="active">
-                <strong>Konfirmasi Transaksi Pembayaran Denda</strong>
+            <li class="">
+                <strong>Konfirmasi Pembayaran Denda</strong>
             </li>
         </ol>
     </div>
@@ -133,12 +129,12 @@
     <div class="row animated fadeInRight">
         <div class="col-md-12">
             <div class="ibox">
-                <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class="fa fa-list"></span> Konfirmasi Transaksi Pembayaran Denda</div>
+                <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class=""></span> Konfirmasi Transaksi Pembayaran Denda</div>
                 <div class="ibox-content">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="panel panel-primary">
-                                <div class="panel-heading"><span class="fa fa-file"></span> Transaksi Tagihan Denda </div>
+                                <div class="panel-heading"><span class="fa fa-file"></span> Tagihan Denda </div>
                                 <div class="panel panel-body">
                                  <?php 
                                     $invoice = $_GET['id'];
@@ -148,41 +144,58 @@
                                 <div class="row">
                                 <div class="col-md-12">
                                   <div class="form-group">
-                                    <label>NO INVOICE : <?php echo $invoice; ?></label><br>
-                                    <label>NAMA MEMBER : <?php echo $rowPenagihan['member_name']; ?></label><br>
-                                    <label>TANGGAL PINJAM : <?php echo jin_date_str($rowPenagihan['loan_date_start']); ?></label>
+                                    <table>
+                                      <tr>
+                                        <td>NO INVOICE</td>
+                                        <td>:&nbsp&nbsp</td>
+                                        <td><?php echo $invoice; ?></td>
+                                      </tr>
+                                      <tr>
+                                        <td>NAMA MEMBER&nbsp</td>
+                                        <td>:</td>
+                                        <td><?php echo $rowPenagihan['member_name']; ?></td>
+                                      </tr>
+                                    </table>
                                   </div> 
                                 </div> 
                                   </div>
                                     <table class="table table-responsive table-bordered table-striped table-hover">
-                                      <tr>
-                                        <td>Total Peminjaman</td>
-                                        <td>:</td>
-                                        <td>Rp.<?php echo $rowPenagihan['loan_total_fee']; ?></td>
-                                      </tr>
-                                      <?php 
-                                      $row_lama_terambat = mysql_fetch_array(mysql_query("SELECT trx_loan_application.* , current_date tanggal , datediff(current_date,loan_date_return) selisih , case when datediff(current_date,loan_date_return)>0 then 'Habis' else 'aktif' end status from trx_loan_application where member_id_fk= '".$_SESSION['member_id']."' AND loan_invoice = '".$invoice."'"));
-                                       ?>
-                                      <tr>
-                                        <td>Denda Yang Harus Dibayar : (25%) Dari Total Peminjaman x Lama Terlambat.<br>   <?php echo "Lama Terlambat ";   echo $row_lama_terambat['selisih']; ?> Hari</td>
-                                        <td>:</td>
-                                        <td><?php 
+                                        <tr>
+                                          <td>Lama Keterlambatan</td>
+                                          <td><?php 
+                                              $row_lama_terambat = mysql_fetch_array(mysql_query("SELECT trx_loan_application.* , current_date tanggal , datediff(current_date,loan_date_return) selisih , case when datediff(current_date,loan_date_return)>0 then 'Habis' else 'aktif' end status from trx_loan_application where member_id_fk= '".$_SESSION['member_id']."' AND loan_invoice = '".$invoice."'"));
+                                              echo $row_lama_terambat['selisih']; ?> Hari
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>Total Peminjaman</td>
+                                          <td>Rp.<?php echo rupiah($rowPenagihan['loan_total_fee']); ?></td>
+                                        </tr>
+                                        <tr>
+                                          <td>Denda = 25% x Total Peminjaman</td>
+                                          <td><?php 
                                               $total_pinjaman =  $rowPenagihan['loan_total_fee']; 
                                                $total_denda = $total_pinjaman*0.25;
-                                               
-                                               echo rupiah($row_lama_terambat['selisih'] * $total_denda);
-
-                                        ?></td>
-                                      </tr>
+                                               ?>Rp <?php echo rupiah($total_denda);
+                                               ?>
+                                          </td>
+                                        </tr>
+                                        <tr>
+                                          <td>Total Bayar = Lama Keterlambatan x Denda </td>
+                                          <td><?php 
+                                                $total_pinjaman =  $rowPenagihan['loan_total_fee']; 
+                                                 $total_denda = $total_pinjaman*0.25;
+                                                 ?>Rp <?php echo rupiah($row_lama_terambat['selisih'] * $total_denda); ?>
+                                          </td>
+                                        </tr>
                                     </table>
-                                  
                                   </div>
                             </div>
                             <!-- saldo anda -->
                             <div class="panel panel-primary">
-                                <div class="panel-heading"><span class="fa fa-list"></span> SALDO ANDA</div>
+                                <div class="panel-heading"><span class="fa fa-file-text"></span> Saldo</div>
                                 <div class="panel-body">
-                                    <p>Sisa Saldo Anda Adalah :  </p>
+                                    <p>Jumlah saldo yang Anda miliki saat ini adalah :  </p>
                                     <h2 class='btn btn-block btn-warning btn-lg'>
                                         <?php 
 
@@ -191,7 +204,7 @@
                                         if ($total_saldo['total_saldo']=='') {
                                           echo "Rp.0";
                                         }
-                                        echo "Rp. ".rupiah($total_saldo['total_saldo'])."</h2>";
+                                        echo "Rp ".rupiah($total_saldo['total_saldo'])."</h2>";
                                      ?>
 
                                     </h2>
@@ -213,7 +226,7 @@
                                           </div>
                                         </div>
                                         <div class="form-group row">
-                                          <label class="col-md-4">TANGGAL PEMBAYARAN</label>
+                                          <label class="col-md-4">TANGGAL KONFIRMASI</label>
                                           <div class="col-md-6">
                                             <!-- <input type="date" class="form-control" name="payment_confirm_date" id="tanggal_konfirmasi_pembayaran_member" required /> -->
                                             <input type="text" class="form-control" disabled="" name="payment_confirm_date" required value="<?php echo date('d-m-Y'); ?>" />
@@ -228,7 +241,7 @@
                                           </div>
                                         </div>
                                         <div class="form-group row">
-                                          <label class="col-md-4">BANK</label>
+                                          <label class="col-md-4"> NAMA BANK</label>
                                           <div class="col-md-6">
                                             <input type="text" class="form-control" name="bankname"  required />
                                           </div>
@@ -269,13 +282,13 @@
                                           </div>
                                         </div>
                                         <div class="form-group row">
-                                          <label class="col-md-4">TRANSFER</label>
+                                          <label class="col-md-4">JUMLAH BAYAR</label>
                                           <div class="col-md-6">
                                             <input type="text" class="form-control" name="payment_amount_transfer"  id="nominaltransfer"  required/>
                                           </div>
                                         </div>
                                         <div class="form-group row">
-                                        <label class="control-label col-lg-4">Upload File</label>
+                                        <label class="control-label col-lg-4">UPLOAD BUKTI PEMBAYARAN</label>
                                             <div class="col-md-8">
                                                 <input type="file" name="frm_file" id="ifile" onchange="cekberkas()">
                                              </div>
@@ -287,7 +300,7 @@
                                           </div>
                                         </div>
                                         <div class="form-group row">
-                                          <div class="col-md-12">
+                                          <div class="col-md-7">
                                             <button type="submit" id="simpanPembayaran"  class="btn btn-primary dim_about pull-right" name="simpanPembayaranAlat" disabled>
                                             <span class="fa fa-save"> SIMPAN</span>
                                           </button>
