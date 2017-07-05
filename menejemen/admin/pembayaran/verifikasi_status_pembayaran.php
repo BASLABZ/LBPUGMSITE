@@ -15,7 +15,12 @@
 		  echo "<script>  location.href='pembayaran/SENDEMAIL/sendEmailDebug.php?loan_app_id=".$loan_app_id."&email=".$email."' </script>";exit;
 	}else if ($status == 'VALID') {
 		$query_update_valid = "UPDATE trx_payment set payment_valid='".$status."' where payment_id='".$id."'";
-	$runQuery_valid = mysql_query($query_update_valid);
+		$runQuery_valid = mysql_query($query_update_valid);
+			if ($runqu['payment_amount_saldo'] != 0) {
+					$querySimpanSaldo2 = "INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES ('".$runqu['payment_amount_saldo']."','','','','DEBIT','".$loan_app_id."','".$idmember."')";
+					$runSQL_insertsaldo = mysql_query($querySimpanSaldo2);
+				}
+	     
 	  echo "<script>  location.href='pembayaran/SENDEMAIL/sendEmailDebug.php?loan_app_id=".$loan_app_id."&email=".$email."' </script>";exit;
 	}else if ($status == 'MENUNGGU KONFIRMASI') {
 		$query_update_menunggu = "UPDATE trx_payment set  payment_valid='".$status."' where payment_id='".$id."'";

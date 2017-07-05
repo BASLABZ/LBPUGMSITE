@@ -1,6 +1,9 @@
 1. kelebihan pembayaran tidak boleh lansung dimasukkan ke dalama saldo member, harus dikonfirmasi valid dahulu (cek kesesuain jumlah transfer dengan slip pembayaran)
    ini juga berlaku buat pembayaran perpanjangan dan pembayaran denda
+
+
 2. konfirmasi tidak valid pada pembayaran belum berfungsi
+
 3. notif keterlamabatan pada transaksi pengembalian (koordinator penelitian)
 4. penarikan saldo aku bikin belum berhasil mas, cek deh skripku :(
 5. status pada data pengajuan kok bisa diubah2 oleh koordinator (misal tadinya dipinjam atau dikembalikan dll bisa diubah jadi menunggu bisa juga menunggu acc final       bisa juga tolak dan penawaran) :((((((

@@ -53,11 +53,11 @@
                                                         '','MENUNGGU KONFIRMASI')";
                                                         
                              $runQueryPayment = mysql_query($querySimpanPayment1);
-                             $saldobertambah = $hasilkondisi_sisa_saldo+$saldoAwal; // saldo awal + sisa pembayaran (saldo baru)
-
-                             $querySimpanSaldo = "INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
-                             ('".$saldobertambah."','','','','DEBIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
-                             ";
+                             // $saldobertambah = $hasilkondisi_sisa_saldo+$saldoAwal; 
+                             // saldo awal + sisa pembayaran (saldo baru)
+                             // $querySimpanSaldo = "INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
+                             // ('".$saldobertambah."','','','','DEBIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
+                             // ";
                              $runquerysimpansaldo = mysql_query($querySimpanSaldo);
                              $updateStatusPeminjaman = "UPDATE trx_loan_application set loan_status = 'MEMBAYAR TAGIHAN' where loan_app_id='".$_POST['loan_app_id_fk']."'";
                              $runqueryupdatestatuspengajuan = mysql_query($updateStatusPeminjaman);
@@ -106,10 +106,10 @@
                              $runQueryPayment2 = mysql_query($querySimpanPayment2);
 
 
-                             $querySimpanSaldo2 = "INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
-                             ('".$nominalkesaldo."','','','','DEBIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
-                             ";
-                             $runquerysimpansaldo2 = mysql_query($querySimpanSaldo2);
+                             // $querySimpanSaldo2 = "INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
+                             // ('".$nominalkesaldo."','','','','DEBIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
+                             // ";
+                             // $runquerysimpansaldo2 = mysql_query($querySimpanSaldo2);
                              $updateStatusPeminjaman2 = "UPDATE trx_loan_application set loan_status = 'MEMBAYAR TAGIHAN' where loan_app_id='".$_POST['loan_app_id_fk']."'";
                              $runqueryupdatestatuspengajuan2 = mysql_query($updateStatusPeminjaman2);
                              if ($runqueryupdatestatuspengajuan2) {
