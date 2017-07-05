@@ -4,16 +4,18 @@
 		$password = md5($_POST['password_account']);
 		$queryPassword = mysql_fetch_array(mysql_query("SELECT member_password from tbl_member where member_id = '".$_SESSION['member_id']."' and member_password='".$password."'"));
 		//$member_password = $queryPassword ['member_password'];
-		if ($queryPassword != $password) { // LOGIKANE PIE
+		if ($queryPassword['member_password'] != $password) { // LOGIKANE PIE
 			echo "<script> alert('Password anda salah'); location.href='index.php?hal=saldo/saldo' </script>";exit;
 		} else {
-		
-		$querySubmit = mysql_query("INSERT INTO trx_saldo (bank_name, bank_account, cashout_amount) VALUES ('".$_POST['bank_name']."', '".$_POST['bank_account']."', '".$_POST['cashout_amount']."')");
-		if ($querySubmit) {
-			 echo "<script> alert('Data Berhasil Disimpan'); location.href='index.php?hal=saldo/saldo' </script>";exit; 
-		} else {
-			 echo "<script> alert('Data Gagal Disimpan'); location.href='index.php?hal=saldo/saldo' </script>";exit;
-		}
+		print_r("INSERT INTO tbl_saldo (bank_name, bank_account, cashout_amount,member_id_fk) VALUES ('".$_POST['bank_name']."', '".$_POST['bank_account']."', '".$_POST['cashout_amount']."','".$_SESSION['member_id']."')");
+		print_r("INSERT INTO trx_saldo (saldo_cashout_amount,saldo_cashout_date,member_id_fk) VALUES ('".$_POST['cashout_amount']."',NOW(),'".$_SESSION['member_id']."')");
+		die();
+		// $querySubmit = mysql_query("INSERT INTO trx_saldo (bank_name, bank_account, cashout_amount,member_id_fk) VALUES ('".$_POST['bank_name']."', '".$_POST['bank_account']."', '".$_POST['cashout_amount']."','".$_SESSION['member_id']."')");
+		// if ($querySubmit) {
+		// 	 echo "<script> alert('Data Berhasil Disimpan'); location.href='index.php?hal=saldo/saldo' </script>";exit; 
+		// } else {
+		// 	 echo "<script> alert('Data Gagal Disimpan'); location.href='index.php?hal=saldo/saldo' </script>";exit;
+		// }
 		}
 	}
  ?> 
