@@ -123,12 +123,11 @@
 								<option value="TIDAK VALID" <?php if ($rowPenagihan ['payment_valid'] == 'TIDAK VALID') {echo "selected=selected";} ?>>TIDAK VALID</option>
 							</select>
 						</div>
-						<div class="col-md-12" id="keterangan" hidden>
-						<br>
-							<label>Alasan Tidak Valid</label>
-							<textarea class="form-control" name="payment_notif"></textarea>
-							
-						<br>
+						<div class="row">
+							<div class="row" id="keterangan" hidden>
+							<label class="col-md-3">Alasan</label>
+							<div class="col-md-9"><textarea class="form-control" name="payment_notif"></textarea></div>
+						</div>
 						</div>
 						<p>
 								<?php echo $rowPenagihan['payment_notif']; ?>
@@ -148,7 +147,7 @@
        		 }else if (this.value == 'VALID') {
        		 	 $('#keterangan').hide();
        		 	}else if (this.value == 'TIDAK VALID') {
-       		 		alert('tes');
+       		 		$('#keterangan').show();
        		 }
 		  });
 	</script>
