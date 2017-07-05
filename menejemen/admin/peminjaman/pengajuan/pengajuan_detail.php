@@ -53,6 +53,7 @@
 
                                 <div class="row" style="padding-top: 10px; padding-right: 10px; padding-left: 10px;">
                                 <div class="col-md-2"></div>
+                                    
                                     <div class="col-md-8">
                                         <div class="row well">
                                             <?php 
@@ -93,10 +94,15 @@
                                              </table>
                                         </div>
                                     </div>
+                                    
                                 </div>
 
                                     <div class="row">
                                        <div class="col-md-1"></div>
+                                        
+                                        <?php 
+                                            if ($rowStatusLoan['loan_status'] == 'MENUNGGU' OR $rowStatusLoan['loan_status']=='ACC FINAL' OR $rowStatusLoan['loan_status']=='MENUNGGU ACC FINAL') {
+                                         ?>
                                         <div class="col-md-10" align="center">
                                             <div class="row well dim_about">
                                             <form class="role" method="POST">
@@ -141,6 +147,14 @@
                                                 
                                             </div>
                                         </div>
+                                        <?php     
+                                            }else{ ?>
+                                            <div class="col-md-10">
+                                                <div class="well">
+                                                    <center><h4>SATATUS : <?php echo $rowStatusLoan['loan_status']; ?></h4></center>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">

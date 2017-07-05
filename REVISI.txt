@@ -1,7 +1,6 @@
-1. kelebihan pembayaran tidak boleh lansung dimasukkan ke dalama saldo member, harus dikonfirmasi valid dahulu (cek kesesuain jumlah transfer dengan slip pembayaran)
+1. kelebihan pembayaran tidak boleh lansung dimasukkan ke dalama saldo member, harus dikonfirmasi valid dahulu (cek kesesuain jumlah transfer dengan slip pembayaran) (FIXED)
    ini juga berlaku buat pembayaran perpanjangan dan pembayaran denda
-
-
+   
 2. konfirmasi tidak valid pada pembayaran belum berfungsi
 
 3. notif keterlamabatan pada transaksi pengembalian (koordinator penelitian)
