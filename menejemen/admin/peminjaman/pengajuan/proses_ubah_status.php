@@ -1,13 +1,15 @@
 <?php 
 		
 		$iddetail_instrumen = $_POST['instrument_id_fk'];
-		$status = $_POST['status_loan'];
+		$status = $_POST['status_loan']; // status alat
 		$invoice = $_POST['loan_invoice'];
 		$selisih = $_POST['selisih'];
 		if ($status == 'ACC') {
+			// query utk menghitung jumlah alat temporari
 			$queryambil_jumlah_quantity_temp = "SELECT sum(intrument_quantity_temp) as jumlahtersedia  FROM ref_instrument where instrument_id = '".$iddetail_instrumen."'";
-
 			$runquery_qty_temp = mysql_fetch_array(mysql_query($queryambil_jumlah_quantity_temp));
+
+
 			$total_qty_temp = $runquery_qty_temp['jumlahtersedia']+$selisih;
 			$query_detail_status = mysql_query("SELECT loan_status_detail from trx_loan_application_detail where instrument_id_fk = '".$iddetail_instrumen."' AND loan_app_detail_id='".$_POST['loan_app_detail_id']."' ");
 			$rowStatus_detail = mysql_fetch_array($query_detail_status);

@@ -1,9 +1,12 @@
 <?php 
 		include '../../../inc/inc-db.php';
 		$invoice = $_POST['id'];
+		// ambil data dr loan detail
 		$query = mysql_query("SELECT loan_amount, instrument_id_fk, instrument_name, loan_status_detail, loan_app_detail_id, loan_app_id_fk, loan_invoice FROM trx_loan_application_detail JOIN trx_loan_application on trx_loan_application_detail.loan_app_id_fk = trx_loan_application.loan_app_id JOIN ref_instrument on trx_loan_application_detail.instrument_id_fk = ref_instrument.instrument_id WHERE trx_loan_application_detail.loan_app_detail_id = '".$invoice."' ");
 		$rowsatus = mysql_fetch_array($query);
-		$jumlahInstrument = $rowsatus['loan_amount'];
+		$jumlahInstrument = $rowsatus['loan_amount']; // jml alat yg dipinjam (per alat)
+
+		// stok awal alat
 		$QueryInstrument  = mysql_query("SELECT instrument_quantity FROM ref_instrument where instrument_id = '".$rowsatus['instrument_id_fk']."' ");
 		$runQueryInstrument = mysql_fetch_array($QueryInstrument);
 		$kolomInstrument = $runQueryInstrument['instrument_quantity'];  
@@ -65,7 +68,7 @@
 					  <div class="panel panel-primary">
 					    <div class="panel-heading">
 					      <h4 class="panel-title">
-					        <a data-toggle="collapse" href="#collapse1"><span class="fa fa-list"></span> Pilih Penawaran Alat</a>
+					        <a data-toggle="collapse" href="#collapse1"><span class="fa fa-search-plus"></span> Sarankan Alat Lain</a>
 					      </h4>
 					    </div>
 					    <div id="collapse1" class="panel-collapse collapse">
@@ -74,14 +77,15 @@
 			 					<thead>
 			 						<th>Pilih</th>
 			 						<th>No</th>
-			 						<th>Nama Instrument</th>
+			 						<th>Nama Alat</th>
 			 						<th>Jumlah Stok</th>
-			 						<th>Ketersediaan</th>
+			 						<th>Jumlah Tersedia</th>
 			 						<th>Gambar</th>
 			 					</thead>
 			 					<tbody>
 			 					<?php 
 			 						$no = 0;
+			 						// query untuk menampilkan daftar alat yg disarankan kecuali yg sudah dipilih sebelumnya
 			 						$queryAlat = mysql_query("SELECT * FROM ref_instrument where instrument_id != '".$rowsatus['instrument_id_fk']."' order by instrument_id ASC");
 			 						while ($rowAlat = mysql_fetch_array($queryAlat)) {
 			 					 ?>
@@ -93,10 +97,12 @@
 			 							<td><?php echo $rowAlat['instrument_name']; ?></td>
 			 							<td><?php echo $rowAlat['instrument_quantity']; ?><input type="hidden" name="instrument_fee" value="<?php echo $rowAlat['instrument_fee']; ?>"></td>
 			 							<td>
-			 								<?php $jumlah_sementara = $rowAlat['instrument_quantity'];
-			                                                            $jumlah_temp = $rowAlat['intrument_quantity_temp'];
-			                                                            $ketersediaan = $jumlah_sementara-$jumlah_temp;
-			                                                            echo $ketersediaan;   ?>
+			 								<?php 
+			 								// jumlah alat tersedia
+			 								$jumlah_sementara = $rowAlat['instrument_quantity'];
+			                                $jumlah_temp = $rowAlat['intrument_quantity_temp'];
+			                                $ketersediaan = $jumlah_sementara-$jumlah_temp;
+			                                echo $ketersediaan;   ?>
 			 							</td>
 			 							<td><img src="../image/<?php echo $rowAlat['instrument_picture']; ?>" class='img-responsive' width='200px'></td>
 			 						</tr>
