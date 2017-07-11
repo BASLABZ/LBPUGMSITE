@@ -46,6 +46,7 @@
                             <th>KETERANGAN</th>
                             <th>STATUS</th>
                             <th>STATUS PEMBAYARAN</th>
+                            <th>VALID</th>
                             <th>CETAK</th>
                         </thead>
                             <tbody>
@@ -65,6 +66,7 @@
                                             <td><?php echo $rowRekap['payment_info']; ?></td>
                                             <td><?php echo $rowRekap['loan_status']; ?></td>
                                             <td><?php echo $rowRekap['payment_status']; ?></td>
+                                            <td><?php echo $rowRekap['payment_valid']; ?></td>
                                             
                                             <td>
                                                <?php 
@@ -74,7 +76,7 @@
                                                  <a href="index.php?hal=pembayaran/preview_rekappembayaran_perinvoice&id=<?php echo $rowRekap['loan_invoice']; ?>" class="btn btn-primary dim_about" target="_BLANK">
                                                     <span class="fa fa-print"></span> Cetak
                                                 </a>
-                                                <?php }else if  ($rowRekap['payment_notif']=='TIDAK VALID'){
+                                                <?php }else if  ($rowRekap['payment_valid']=='TIDAK VALID'){
                                                         echo "PEMBAYARAN ANDA TIDAK VALID ATAU TIDAK SESUAI, SILAHKAN CEK PEMBAYARAN,TAGIHAN/FILE POTO PEMBAYARAN ANDA
                                                         <a href='#' class='btn btn-info dim_about'>Ubah Konfirmasi Pembayaran</a>
                                                         ";
