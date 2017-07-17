@@ -166,16 +166,7 @@
                                             <th>Jumlah Alat Tersedia</th>
                                             <th>Jumlah Pinjam</th>
                                             <th>Subtotal</th>
-                                            <?php 
-                                                if ($_SESSION['level_name'] != 'kepala laboratorium' ) {
-                                                    if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN' OR $rowStatusLoan['loan_status'] != 'DIPINJAM' OR $rowStatusLoan['loan_status'] != 'DIKEMBALIKAN' OR $rowStatusLoan['loan_status'] == 'ACC FINAL') {
-                                                            
-                                                    }else{
-                                                    echo "<th>Aksi</th>";
-                                                }
-
-                                                }
-                                             ?>
+                                            <th>Aksi</th>
                                         </thead>
                                         <tbody>
                                         <?php 
@@ -221,11 +212,7 @@
                                                         if ($_SESSION['level_name'] != 'kepala laboratorium') {
                                                      ?>
                                                      <?php 
-                                                        if ($_SESSION['level_name'] == 'koordinator penelitian') {
-                                                            if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN' OR $rowStatusLoan['loan_status'] != 'DIPINJAM' OR $rowStatusLoan['loan_status'] != 'DIKEMBALIKAN' OR $rowStatusLoan['loan_status'] == 'ACC FINAL') {
-                                                                
-                                                            }else{
-                                                      ?>
+                                                        if ($_SESSION['level_name'] == 'koordinator penelitian') {                                                      ?>
                                                     <td>
                                                     <?php 
                                                         // jika status pengajuan tidak ditolak 
@@ -241,7 +228,7 @@
                                                                 <a href='index.php?hal=peminjaman/pengajuan/penawaran&rejected_id=<?php echo $roreject['rejected_id']; ?>' class='btn btn-warning dim_about' ><span class="fa fa-edit"></span> Lihat Detail </a> 
                                                         <?php  } ?>
                                                     </td>
-                                                    <?php }} ?>
+                                                    <?php } ?>
                                                      <?php } ?>
                                                 
                                             </tr>
