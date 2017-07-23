@@ -31,7 +31,7 @@
                                             <tr>
                                                 <th>NO</th>
                                                 <th>NAMA MEMBER</th>
-                                                <th>JUMLAH SALDO</th>
+                                                <th>TOTAL SALDO</th>
                                                 <th>AKSI</th>
                                             </tr>
                                         </thead>
@@ -54,7 +54,7 @@
                                                  <td>Rp <?php echo rupiah($saldo_sekarang); ?></td>
                                                 
                                                  <td>
-                                                     <a  href="#detail-saldo" id='custId' data-toggle='modal' data-id='<?php echo $row['member_id']; ?>' class="btn btn-info btn-sm dim_about"> <span class="fa fa-eye"> History Saldo</span>  </a> 
+                                                     <a  href="#detail-saldo" id='custId' data-toggle='modal' data-id='<?php echo $row['member_id']; ?>' class="btn btn-info btn-sm dim_about"> <span class=""> Lihat Detail</span>  </a> 
                                                  </td>
                                              </tr>
                                              <?php } ?>
@@ -69,19 +69,17 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="panel panel-primary">
-                        <div class="panel-heading">Konfirmasi Penarikan Saldo Member</div>
+                        <div class="panel-heading">Data Permohonan Pencairan Saldo</div>
                         <div class="panel-body">
                             <div class="col-md-12">
                         <table class="table table-hover table-striped table-responsive">
                             <thead>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>Tanggal</th>
                                 <th>Jumlah Penarikan</th>
                                 <th>Status</th>
                                 <th>Nama Bank</th>
                                 <th>Rekening</th>
-                                <th>Bukti Transfer</th>
                                 <th>Aksi</th>
                             </thead>
                             <tbody>
@@ -89,20 +87,29 @@
                                     $nourut = 1;
                                     $query_penarikan_saldo = mysql_query("SELECT * FROM trx_saldo s JOIN tbl_member m ON s.member_id_fk = m.member_id  where s.saldo_status = 'REQUEST' ORDER by s.saldo_cashout_date DESC");
                                     while ($row_saldo_request = mysql_fetch_array($query_penarikan_saldo)) {
+                                        $status_saldo = $row_saldo_request ['saldo_status']
                                  ?>
                                  <tr>
                                      <td><?php echo $nourut++; ?></td>
                                      <td><?php echo $row_saldo_request['member_name']; ?></td>
-                                     <td><?php echo $row_saldo_request['saldo_cashout_date']; ?></td>
-                                     <td><?php echo $row_saldo_request['saldo_cashout_amount']; ?></td>
-                                     <td><?php echo $row_saldo_request['saldo_status']; ?></td>
+                                     <!-- <td><?php //echo $row_saldo_request['saldo_cashout_date']; ?></td> -->
+                                     <td>Rp <?php echo rupiah($row_saldo_request['saldo_cashout_amount']); ?></td>
+                                     <td><?php 
+                                            if ($status_saldo == 'REQUEST') {
+                                                echo "<label class='label label-warning'>Permohonan Penarikan Saldo</label>";
+                                            } elseif ($status_saldo == 'DEPOSIT') {
+                                                echo "<label class='label label-info'>Deposit</label>";
+                                            } elseif ($status_saldo == 'DIKONFIRMASI') {
+                                                echo "<label class='label label-success'>Konfirmasi Pencairan</label>";
+                                            }
+                                      ?></td>
                                      <td><?php echo $row_saldo_request['saldo_bankname']; ?></td>
                                      <td><?php echo $row_saldo_request['saldo_accountnumber']; ?></td>
-                                     <td>
+                                     <!-- <td>
                                          <img src="" class="img-responsive">
-                                     </td>
+                                     </td -->>
                                      <td>
-                                      <a  href="index.php?hal=saldo/konfirmasi-saldo&id=<?php echo $row_saldo_request['saldo_id']; ?>" class="btn btn-info btn-sm dim_about"> <span class="fa fa-eye"> Konfirmasi Request</span>  </a> 
+                                      <a  href="index.php?hal=saldo/konfirmasi-saldo&id=<?php echo $row_saldo_request['saldo_id']; ?>" class="btn btn-primary btn-sm dim_about"> <span class=""> Konfirmasi Pencairan</span>  </a> 
                                      </td>
                                  </tr>
                                 <?php } ?>
@@ -116,11 +123,11 @@
         </div>
 </div>
 <div class="modal fade" id="detail-saldo" role="dialog" >
-        <div class="modal-dialog modal-lg" style="width: 800px" role="document">
+        <div class="modal-dialog modal-lg" style="width: 900px" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #1ab394; color:white;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="fa fa-flask"></span> History Saldo</h4>
+                    <h4 class="modal-title"><span class=""></span> Detail Saldo</h4>
                 </div>
                 <div class="modal-body" style="padding-top:10px; ">
                     <div class="detail-saldo-data"></div>

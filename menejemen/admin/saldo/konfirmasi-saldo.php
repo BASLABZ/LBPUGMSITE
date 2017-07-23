@@ -8,8 +8,11 @@
                   $fileName = $_FILES['file_transfer']['name'];
                   $move = move_uploaded_file($_FILES['file_transfer']['tmp_name'], 'berkastransafer/'.$fileName);
                      if ($move) {
-                     	// $query_upload = mysql_query("UPDATE trx_saldo set saldo_cashout_date=NOW() , saldo_photo = '".$fileName."' where saldo_id = '".$id."'");
-                     	print_r("UPDATE trx_saldo set saldo_cashout_date=NOW() , saldo_photo = '".$fileName."' where saldo_id = '".$id."'");
+
+                     	$konfirmasi = mysql_query("INSERT into trx_saldo (saldo_photo) values ('".$fileName."')");
+                     	 $query_upload = mysql_query("UPDATE trx_saldo set saldo_cashout_date=NOW() , saldo_photo = '".$fileName."' where saldo_id = '".$id."'");
+                     	//print_r("UPDATE trx_saldo set saldo_cashout_date=NOW() , saldo_photo = '".$fileName."' where saldo_id = '".$id."'");
+                   
                      	if ($query_upload) {
                      		 echo "<script> alert('Terimakasih Data Berhasil Disimpan'); location.href='index.php?hal=saldo/list' </script>";exit;
                      	}
@@ -42,18 +45,21 @@
                          </span> Konfirmasi Penarikan Saldo                        </div>
                         <div class="panel-body dim_about">
                     	 	<form class="role" method="POST" enctype="multipart/form-data">
-						 		<div class="form-group">
+						 		<div class="form-group col-md-6">
 						 			<label>Nama</label>
 						 			<input type="text" disabled="" value="<?php echo $row_request['member_name']; ?>" class='form-control'>
 						 		</div>
-						 		<div class="form-group">
+						 		<div class="form-group col-md-6">
 						 			<label>Nominal Penarikan</label>
-						 			<input type="text" disabled="" value="<?php echo $row_request['saldo_cashout_amount']; ?>" class='form-control'>
+						 			<input type="text" disabled="" value="Rp <?php echo rupiah($row_request['saldo_cashout_amount']); ?>" class='form-control'>
 						 		</div>
-						 		<div class="form-group">
+						 		<div class="form-group col-md-6">
+						 			<label>Tanggal Pencairan</label>
+						 			<input type="text" value="" class='form-control'>
+						 		</div>
+						 		<div class="form-group col-md-4">
 						 			<label>Bukti Transfer</label>
 						 			<input type="file" name="file_transfer">
-
 						 		</div>
 						 		<div class="form-group">
 						 			<button class="btn btn-primary" name="konfirmasi_saldo" type="submit">Konfirmasi Penarikan</button>

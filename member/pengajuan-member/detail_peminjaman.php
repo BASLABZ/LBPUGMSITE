@@ -68,8 +68,8 @@
 					$potongan = $roTotal['loan_total_fee'];
 					$hasil_akhirs1 = $potongan+$potongan;
 					// hitung potongan/diskon s2 
-					$lama =  $roTotal['long_loan'];
-					$totals2 = $sub *  $lama;
+					$lama =  $roTotal['long_loan']; // lama pinjam
+					$totals2 = $sub *  $lama; 
 					$diskons2 = $totals2*0.25;
 					$hasil_akhirs2 = $potongan-$diskons2;
 					// hasil akhir s3
@@ -109,7 +109,7 @@
 			</tr> <br/>
 			<tr>
 				<td colspan="5"><b>Total Bayar = (Total - Potongan)</b></td>
-				<td><b>Rp.<?php echo  rupiah($roTotal['loan_total_fee']); ?></b></td>
+				<td><b>Rp.<?php echo  rupiah ($sub/2); ?></b></td>
 			</tr> <br/>
 			<?php } else if ($roTotal['category_id_fk']==5) { // mhs s2 ugm
 				

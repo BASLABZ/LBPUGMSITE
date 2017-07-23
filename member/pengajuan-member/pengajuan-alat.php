@@ -83,7 +83,7 @@
                                         <td>
                                           <center>
                                               <?php if ($status_peminjaman == 'MENUNGGU') {
-                                                  echo "<label class='label label-warning'>MENUNGGU</label>"; // kuning
+                                                  echo "<label class='label label-warning'>MENUNGGU KONFIRMASI</label>"; // kuning
                                               } elseif ($status_peminjaman == 'DIBATALKAN') {
                                                   echo "<label class='label label-danger'>DIBATALKAN</label>"; // merah
                                               } elseif ($status_peminjaman == 'MENUNGGU ACC FINAL') {
