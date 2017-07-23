@@ -166,16 +166,7 @@
                                             <th>Jumlah Alat Tersedia</th>
                                             <th>Jumlah Pinjam</th>
                                             <th>Subtotal</th>
-                                            <?php 
-                                                if ($_SESSION['level_name'] != 'kepala laboratorium' ) {
-                                                    if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN' OR $rowStatusLoan['loan_status'] != 'DIPINJAM' OR $rowStatusLoan['loan_status'] != 'DIKEMBALIKAN' OR $rowStatusLoan['loan_status'] == 'ACC FINAL') {
-                                                            
-                                                    }else{
-                                                    echo "<th>Aksi</th>";
-                                                }
-
-                                                }
-                                             ?>
+                                            <th>Aksi</th>
                                         </thead>
                                         <tbody>
                                         <?php 
@@ -194,6 +185,10 @@
                                                        <?php 
                                                             if ($rowDetailPeminjaman['loan_status_detail'] == 'MENUNGGU') {
                                                                 echo "<span class='label label-warning'>MENUNGGU</span>";
+                                                            } elseif ($rowDetailPeminjaman['loan_status_detail'] == 'DITOLAK') {
+                                                                echo "<span class='label label-danger'>DITOLAK</span>";
+                                                            } elseif ($rowDetailPeminjaman['loan_status_detail'] == 'PENAWARAN DISETUJI') {
+                                                                echo "<span class='label label-primary'>PENAWARAN DISETUJUI</span>";
                                                             } else {
                                                                 echo "<span class='label label-success'>ACC</span>";
                                                             }
@@ -217,17 +212,15 @@
                                                     </center></td>
                                                 <td>Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
                                                     <?php 
+                                                        // jika level bukan kepala lab (koor p)
                                                         if ($_SESSION['level_name'] != 'kepala laboratorium') {
                                                      ?>
                                                      <?php 
-                                                        if ($_SESSION['level_name'] == 'koordinator penelitian') {
-                                                            if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN' OR $rowStatusLoan['loan_status'] != 'DIPINJAM' OR $rowStatusLoan['loan_status'] != 'DIKEMBALIKAN' OR $rowStatusLoan['loan_status'] == 'ACC FINAL') {
-                                                                
-                                                            }else{
-                                                      ?>
+                                                        if ($_SESSION['level_name'] == 'koordinator penelitian') {                                                      ?>
                                                     <td>
-                                                    <?php  
-                                                                 if ($rowDetailPeminjaman['loan_status_detail'] != 'DITOLAK') {
+                                                    <?php 
+                                                        // jika status pengajuan tidak ditolak 
+                                                        if ($rowDetailPeminjaman['loan_status_detail'] != 'DITOLAK') {
                                                      ?>
                                                      <a href='#ubahstatuspengajuan' class='btn btn-info dim_about' id='custId' data-toggle='modal' 
                                                         data-id='<?php echo $rowDetailPeminjaman['loan_app_detail_id']; ?>'><span class="fa fa-edit"></span> Ubah Status </a> 
@@ -239,12 +232,12 @@
                                                                 <a href='index.php?hal=peminjaman/pengajuan/penawaran&rejected_id=<?php echo $roreject['rejected_id']; ?>' class='btn btn-warning dim_about' ><span class="fa fa-edit"></span> Lihat Detail </a> 
                                                         <?php  } ?>
                                                     </td>
-                                                    <?php }} ?>
+                                                    <?php } ?>
                                                      <?php } ?>
                                                 
                                             </tr>
                                             <?php } ?>
-                                        </tbody>
+                                        </tbody> 
                 <?php 
                 // query utk menghitung subtotal di tfoot
                 $rowjumlahsubtotal = mysql_query("SELECT sum(loan_subtotal) as sub   FROM trx_loan_application_detail d join trx_loan_application x 
@@ -281,21 +274,21 @@
             </tr>
             <tr>
                 <td colspan="5"><b>Subtotal</b></td>
-                <td>Rp.<?php echo rupiah($sub); ?></td>
+                <td>Rp <?php echo rupiah($sub); ?></td>
             </tr>
             <?php if ($roTotal['category_id_fk']==1) {  ?>
             
             <tr>
                 <td colspan="5"><b>Total = ( Lama Pinjam x Subtotal) </b> </td>
-                <td>Rp.<?php echo rupiah($roTotal['long_loan']*$sub); ?></td>
+                <td>Rp <?php echo rupiah($roTotal['long_loan']*$sub); ?></td>
             </tr>
             <tr>
                 <td colspan="5"><b>Potongan (50%)</b></td>
-                <td>Rp.<?php echo rupiah(($roTotal['long_loan']*$sub/2));  ?></td>
+                <td>Rp <?php echo rupiah(($roTotal['long_loan']*$sub/2));  ?></td>
             </tr>
             <tr>
                 <td colspan="5"><b>Total Bayar = ( Total - Potongan ) </b></td>
-                <td><b>Rp.<?php echo rupiah(($roTotal['long_loan']*$sub/2)); ?></b></td>
+                <td><b>Rp <?php echo rupiah(($roTotal['long_loan']*$sub/2)); ?></b></td>
             </tr> 
             <?php } else if ($roTotal['category_id_fk']==5) {
                 
@@ -303,15 +296,15 @@
             
             <tr>
                 <td colspan="5">Total </td>
-                <td>Rp.<?php echo rupiah( $totals2); ?></td>
+                <td>Rp <?php echo rupiah( $totals2); ?></td>
             </tr>
             <tr>
                 <td colspan="5">Potongan (25%)</td>
-                <td>Rp.<?php echo rupiah($diskons2);  ?></td>
+                <td>Rp <?php echo rupiah($diskons2);  ?></td>
             </tr>
             <tr>
                 <td colspan="5">Total Bayar </td>
-                <td>Rp.<?php 
+                <td>Rp <?php 
                 echo rupiah($roTotal['loan_total_fee']); ?></td>
             </tr>
             <?php }elseif ($roTotal['category_id_fk']==6) {
@@ -319,22 +312,22 @@
              ?>
             <tr>
                 <td colspan="5">Total </td>
-                <td>Rp.<?php echo rupiah($totals3); ?></td>
+                <td>Rp <?php echo rupiah($totals3); ?></td>
             </tr>
             <tr>
                 <td colspan="3">Potongan (25%)</td>
-                <td>Rp.<?php echo rupiah($diskons3);  ?></td>
+                <td>Rp <?php echo rupiah($diskons3);  ?></td>
             </tr>
             
             <tr>
                 <td colspan="4">Total Bayar </td>
-                <td>Rp.<?php echo rupiah($hasil_akhirs3); ?></td>
+                <td>Rp <?php echo rupiah($hasil_akhirs3); ?></td>
             </tr> 
              <?php }else {
                 ?>
                 <tr>
                 <td colspan="4">Total </td>
-                <td>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></td>
+                <td>Rp <?php echo rupiah($roTotal['loan_total_fee']); ?></td>
             </tr>
                 <?php
              } ?>

@@ -25,7 +25,15 @@
 				<td><?php echo $rowDetailPeminjaman['instrument_name']; ?></td>
 				<td>
 					<center>
-						<label class="label label-warning dim_about"><span class=""></span> <?php echo $rowDetailPeminjaman['loan_status_detail']; ?></label>
+						<?php if ($status == 'MENUNGGU') {
+							echo "<span class='label label-warning'>MENUNGGU</span>";
+						} elseif ($status == 'ACC') {
+							echo "<span class='label label-primary'>ACC</span>";
+						} elseif ($status =='PENAWARAN DISETUJI') {
+							echo "<span class='label label-info'>PENAWARAN DISETUJUI</span>";
+						} else {
+							echo "<span class='label label-danger'>DITOLAK</span>";
+							}?>
 					</center>
 				</td>
 				<td>Rp <?php echo rupiah($rowDetailPeminjaman['instrument_fee']); ?></td>
@@ -191,7 +199,7 @@
                                    		 	if ($sisaHari == 0) {
                                    		 		echo "<a href='index.php?hal=perpanjang/list&id=".$ubahstatus['loan_invoice']."'>INGIN PERPANJANG ALAT ? </a> <br><p>Hari Ini Adalah Waktu Pengembalian Alat, <br>Silahkan Melakukan Pengembalian/Perpanjang Alat, Jika Anda Melewatkan Waktu <br>Pengembalian Alat Maka Anda Akan Dikenakan Denda Sebesar 25% dari Total Peminjaman <br> Dan Kartu Identitas Anda Akan Kami Tahan Sebelum Melakukan Pembayaran Denda,</p>";  	
                                    		 	}else if ($sisaHari < 0 AND $sisaHari == -2 OR $sisaHari == -1 AND $hariH['status'] != 'Habis') {
-                                   		 		echo "<a href='index.php?hal=perpanjang/lists&id=".$ubahstatus['loan_invoice']."'>INGIN PERPANJANG ALAT ? </a><br>
+                                   		 		echo "<a href='index.php?hal=perpanjang/list&id=".$ubahstatus['loan_invoice']."'>INGIN PERPANJANG ALAT ? </a><br>
                                    		 		<p>Waktu Pengembalian Anda Kurang Dari ".-($sisaHari)." Hari,Yaitu Pada Tanggal :".$hariH['loan_date_return'].", Lakukan Pengembalian / Perpanjang Dan Jika Pengembalian Melewati Batas Waktu Pengembalian Akan Dikenakan Denda 25% dari Total Peminjaman,<br>Dan Kartu Identitas Anda Akan Kami Tahan Sebelum Melakukan Pembayaran Denda</p>";
                                    		 	}
                                    		 	else if ($sisaHari > 0 AND $hariH['status'] == 'Habis') {

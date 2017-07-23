@@ -6,43 +6,85 @@
  ?>
       <br/>
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12"> 
        <?php 
             // Notifikasi peminjaman setelah login
-              $queryPeringatan = mysql_query("SELECT loan_status, loan_invoice,loan_app_id, member_name from trx_loan_application join tbl_member on trx_loan_application.member_id_fk=tbl_member.member_id where member_id_fk='".$_SESSION['member_id']."' order by loan_app_id DESC  limit 1");
-              $rowWarning_noValid = mysql_fetch_array($queryPeringatan);
+              $queryPeringatan = mysql_query("SELECT loan_status, loan_invoice, loan_app_id, member_name from trx_loan_application join tbl_member on trx_loan_application.member_id_fk=tbl_member.member_id where member_id_fk='".$_SESSION['member_id']."' order by loan_app_id DESC  limit 1");
+              //$rowWarning_noValid = mysql_fetch_array($queryPeringatan);
             while ($rowPeringatan = mysql_fetch_array($queryPeringatan)) {
                  $statusKonfirmasi = $rowPeringatan['loan_status'];
+                 $idPeminjaman = $rowPeringatan['loan_app_id'];
+                 
 
-        ?>
-            <?php 
-                 if($statusKonfirmasi=='ACC FINAL') {
+                 if ($statusKonfirmasi == 'MENUNGGU') {
+                   echo "<div class='alert alert-success alert-dismissable dim_about yellow-bg' style='border-color: #f8ac59; color: white;'>
+                        <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
+                      <span class='fa fa-bookmark'></span> <b>STATUS PEMINJAMAN ALAT</b></br>
+                          Hi ".$rowPeringatan['member_name'].", status pengajuan peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah <b>: Menunggu Konfirmasi dari Koordinator Penelitian.</b> <br><b><a href='index.php?hal=pengajuan-member/pengajuan-alat'>Lihat Data Selengkapnya</a></b>
+                      </div> ";
+                 } else if ($statusKonfirmasi == 'MENUNGGU ACC FINAL') {
+                      echo " <div class='alert alert-success alert-dismissable dim_about navy-bg' style='border-color: #f8ac59; color: white;'>
+                              <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
+                                <span class='fa fa-bookmark'></span> <b>STATUS PEMINJAMAN ALAT</b></br>
+                                Hi ".$rowPeringatan['member_name'].", status pengajuan peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah <b> : Menunggu ACC Final</b> <br/>Pengajuan Anda telah dikonfirmasi oleh Koordinator Penelitian, proses selanjutnya adalah menunggu persetujuan akhir dari Kepala Laboratorium. <b><a href='index.php?hal=pengajuan-member/pengajuan-alat'>Lihat Data Selengkapnya</a></b> 
+                             </div>";
+                  } elseif ($statusKonfirmasi == 'DIBATALKAN') {
+                        echo "<div class='alert alert-success alert-dismissable dim_about red-bg' style='border-color: #f8ac59; color: white;'>
+                          <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
+                            <span class='fa fa-bookmark'></span> <b>STATUS PEMINJAMAN ALAT</b></br> 
+                            Hi ".$rowPeringatan['member_name'].", pengajuan peminjaman alat dengan No Invoice ".$rowPeringatan['loan_invoice']." telah Anda batalkan. Untuk dapat melakukan peminjaman silahkan melakukan pengajuan ulang. 
+                         </div>";
+                  } elseif ($statusKonfirmasi == 'ACC FINAL') {
                         echo " <div class='alert alert-success alert-dismissable dim_about navy-bg' style='border-color: #f8ac59; color: white;'>
                               <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
-                                <span class='fa fa-check'></span> <b>STATUS PENGAJUAN ALAT:</b></br>
-                                Hi ".$rowPeringatan['member_name'].", pengajuan peminjaman alat penelitian dengan NO INVOICE ".$rowPeringatan['loan_invoice']."  telah mendapatkan persetujuan final dari Kepala Laboratorium. Silahkan melakukan pembayaran dan konfirmasi pembayaran dalam waktu 3 jam setelah pengajuan Anda kami setujui. Apabila dalam waktu tempo yang diberikan Anda belum melakukan konfirmasi pembayaran maka pengajuan peminjaman alat Anda dibatalkan secara otomatis. <b><a href='index.php?hal=pengajuan-member/pengajuan-alat'>Lihat Data Pengajuan</a></b> 
+                                <span class='fa fa-bookmark'></span> <b>STATUS PEMINJAMAN ALAT</b></br>
+                                Hi ".$rowPeringatan['member_name'].", status pengajuan peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah <b>: ACC FINAL</b> <br/>Pengajuan Anda telah disetujui oleh Kepala Laboratorium. Silahkan melakukan pembayaran dan konfirmasi pembayaran dalam waktu 3 jam setelah pengajuan Anda disetujui. Apabila dalam waktu tempo yang diberikan Anda belum melakukan konfirmasi pembayaran maka pengajuan peminjaman alat Anda dibatalkan secara otomatis. <b><a href='index.php?hal=pengajuan-member/pengajuan-alat'>Lihat Data Selengkapnya</a></b> 
                              </div>";
-                    }else if ($statusKonfirmasi == 'MENUNGGU ACC FINAL') {
-                      echo " <div class='alert alert-success alert-dismissable dim_about yellow-bg' style='border-color: #f8ac59; color: white;'>
-                              <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
-                                <span class='fa fa-check'></span> <b>STATUS PENGAJUAN ALAT:</b></br>
-                                Hi ".$rowPeringatan['member_name'].", pengajuan peminjaman alat penelitian dengan NO INVOICE ".$rowPeringatan['loan_invoice']." saat ini sudah mendapatkan persetujuan dari Koordinator Penelitian, proses selanjutnya adalah menunggu persetujuan final dari Kepala Laoratorium. <b><a href='index.php?hal=pengajuan-member/pengajuan-alat'>Lihat Data Pengajuan</a></b> 
-                             </div>";
-                    }elseif ($statusKonfirmasi == 'DITOLAK') {
+                    } elseif ($statusKonfirmasi == 'MEMBAYAR TAGIHAN') {
+                          echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
+                               <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
+                                  <span class='fa fa-bookmark'></span> <b>KETERANGAN PEMBAYARAN</b></br>
+                                Hi ".$rowPeringatan['member_name'].", data pembayaran peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." telah terkirim. <br/>Mohon tunggu verifikasi pembayaran dari kami. Pembayaran yang sudah diverifikasi akan mengarahkan Anda menuju langkah selanjutnya. 
+                                </div> ";
+                                // status pembayaran
+                                $pembayaran = mysql_query("SELECT payment_valid, payment_notif from trx_payment where loan_app_id_fk ='".$idPeminjaman."' AND member_id_fk ='".$_SESSION['member_id']."' ");
+                                $run_pembayaran = mysql_fetch_array($pembayaran);
+                                $keterangan = $run_pembayaran['payment_valid'];
+                                if ($keterangan == 'VALID') {
+                                  echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
+                                       <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
+                                          <span class='fa fa-bookmark'></span> <b>STATUS PEMBAYARAN</b></br>
+                                        Hi ".$rowPeringatan['member_name'].", status pembayaran peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah <b>: VALID</b> <br/>Silahkan cetak invoice untuk melakukan pengambilan alat.<b><a href='index.php?hal=pengajuan-member/pengajuan-alat'> Lihat Data Selengkapnya</a></b> 
+                                        </div> ";
+                                } elseif ($keterangan == 'TIDAK VALID'){
+                                    echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
+                                       <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
+                                          <span class='fa fa-bookmark'></span> <b>STATUS PEMBAYARAN</b></br>
+                                        Hi ".$rowPeringatan['member_name'].", status pembayaran peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah <b>: TIDAK VALID</b> <br/>Keterangan Tidak Valid : <b>".$run_pembayaran['payment_notif']."</b><br/>Pembayaran yang dinyatakan tidak valid tidak bisa melanjutkan proses selanjutnya. Silahkan melakukan pembayaran kekurangan dan konfirmasi ulang.<b><a href='index.php?hal=pengajuan-member/pengajuan-alat'> Lihat Data Selengkapnya</a></b> 
+                                        </div> ";
+                                } else{
+
+                                }
+                    } elseif ($statusKonfirmasi == 'DIPINJAM') {
+                        echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
+                               <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
+                                  <span class='fa fa-bookmark'></span> <b>STATUS PEMINJAMAN</b></br>
+                                Hi ".$rowPeringatan['member_name'].", status peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah : <b>Sedang Dipinjam</b> <br/>Mohon melakukan pengembalian alat tepat pada waktunya untuk menghindari denda.<a href='index.php?hal=pengajuan-member/pengajuan-alat'> Lihat Data Selengkapnya</a></b> 
+                                </div> ";
+                    } elseif ($statusKonfirmasi == 'DIKEMBALIKAN') {
+                         echo "<div class='alert alert-success alert-dismissable dim_about navy-bg' style='border-color: #f8ac59; color: white;'>
+                               <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
+                                  <span class='fa fa-bookmark'></span> <b>STATUS PEMINJAMAN</b></br>
+                                Hi ".$rowPeringatan['member_name'].", status peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah : <b>Sudah Dikembalikan</b> <br/> Transaksi peminjaman Anda telah selesai.<a href='index.php?hal=pengajuan-member/pengajuan-alat'> Lihat Data Selengkapnya</a></b> 
+                                </div> ";
+                    }
+                    elseif ($statusKonfirmasi == 'DITOLAK') {
                         echo "<div class='alert alert-success alert-dismissable dim_about red-bg' style='border-color: #f8ac59; color: white;'>
                           <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
                             <span class='fa fa-check'></span> <b>STATUS PENGAJUAN ALAT :</b></br> 
                             Hi ".$rowPeringatan['member_name'].", mohon maaf pengajuan peminjaman alat penelitian dengan  NO INVOICE ".$rowPeringatan['loan_invoice']." untuk saat ini tidak dapat kami setujui karena adanya kendala teknis pada alat di Laboratorium. 
                          </div>";
-                      
-                    }elseif($statusKonfirmasi == 'MENUNGGU'){
-                      echo "<div class='alert alert-success alert-dismissable dim_about navy-bg' style='border-color: #f8ac59; color: white;'>
-                        <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
-                      <span class='fa fa-check'></span> <b>STATUS PEMINJAMAN ALAT :</b></br>
-                      Hi ".$rowPeringatan['member_name'].", pengajuan peminjaman alat penelitian dengan NO INVOICE ".$rowPeringatan['loan_invoice']." sedang menunggu konfirmasi dari Koordinator Penelitian. <br><b><a href='index.php?hal=pengajuan-member/pengajuan-alat'>Lihat Data Pengajuan</a></b>
-                      </div> ";
-                    }
-                    else if($statusKonfirmasi != 'ACC' && $statusKonfirmasi != 'DITOLAK'){
+                    } else if($statusKonfirmasi != 'ACC FINAL' && $statusKonfirmasi != 'DITOLAK' && $statusKonfirmasi != 'MENUNGGU' && $statusKonfirmasi != 'MENUNGGU ACC FINAL' && $statusKonfirmasi != 'DIBATALKAN' && $statusKonfirmasi != 'MEMBAYAR TAGIHAN' && $statusKonfirmasi != 'DIPINJAM' && $statusKonfirmasi != 'DIKEMBALIKAN'){
                         echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
                           <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
                             <span class=''></span> Selamat Datang Di Website Peminjaman Alat Penelitian Antropologi Laboratorium Bio- & Paleoantropologi UGM
@@ -52,7 +94,7 @@
         <?php } ?> 
         <!-- peringatan pembayaran -->
         <?php 
-            $queryPeringatanPembayaran  = mysql_query("SELECT payment_valid,payment_notif,loan_app_id_fk from trx_payment where member_id_fk = '".$_SESSION['member_id']."' AND loan_app_id_fk = '".$rowWarning_noValid['loan_app_id']."'");
+            $queryPeringatanPembayaran  = mysql_query("SELECT payment_valid, payment_notif, loan_app_id_fk from trx_payment where member_id_fk = '".$_SESSION['member_id']."' AND loan_app_id_fk = '".$rowPeringatan['loan_app_id']."'");
             $runperingatanpembayaran = mysql_fetch_array($queryPeringatanPembayaran);
             $valid = $runperingatanpembayaran['payment_valid'];
 

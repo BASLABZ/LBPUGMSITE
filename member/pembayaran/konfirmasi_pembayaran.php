@@ -56,7 +56,7 @@
                              // $saldobertambah = $hasilkondisi_sisa_saldo+$saldoAwal; 
                              // saldo awal + sisa pembayaran (saldo baru)
                              // $querySimpanSaldo = "INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
-                             // ('".$saldobertambah."','','','','DEBIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
+                             // ('".$saldobertambah."','','','','DEPOSIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
                              // ";
                              $runquerysimpansaldo = mysql_query($querySimpanSaldo);
                              $updateStatusPeminjaman = "UPDATE trx_loan_application set loan_status = 'MEMBAYAR TAGIHAN' where loan_app_id='".$_POST['loan_app_id_fk']."'";
@@ -69,8 +69,10 @@
                     }
 
                 }else if ($cekPenggunaan_saldo >= 0 ) {
-                    
-                    $tagihan =  $_POST['payment_bill'];
+                    if ($_POST['paymensaldo_'] > $_POST['payment_amount_saldo']) {
+                      echo "<script> alert('SALDO ANDA TIDAK CUKUP'); location.href='index.php?hal=pembayaran/konfirmasi_pembayaran&id=".$invoice."' </script>";exit;
+                    }else{
+                      $tagihan =  $_POST['payment_bill'];
                     $transfer_pembayaran =  $_POST['payment_amount_transfer'];
                     $transfer_saldo = $_POST['paymensaldo_'];
                     $hasiljumlahSaldoDanTransfer = $_POST['payment_amount_transfer'] + $_POST['paymensaldo_'];
@@ -107,7 +109,7 @@
 
 
                              // $querySimpanSaldo2 = "INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
-                             // ('".$nominalkesaldo."','','','','DEBIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
+                             // ('".$nominalkesaldo."','','','','DEPOSIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
                              // ";
                              // $runquerysimpansaldo2 = mysql_query($querySimpanSaldo2);
                              $updateStatusPeminjaman2 = "UPDATE trx_loan_application set loan_status = 'MEMBAYAR TAGIHAN' where loan_app_id='".$_POST['loan_app_id_fk']."'";
@@ -116,6 +118,8 @@
                                echo "<script> alert('Data Anda Berhasil Dan Tunggu Konfirmasi Dari Kami'); location.href='index.php?hal=pengajuan-member/pengajuan-alat' </script>";exit;
                              }
                     }
+                    }
+                    
                    
                   //  if ($totalPembayarandgSaldo < $_POST['payment_bill']) {
                   //    echo "KURANG";
@@ -272,7 +276,7 @@
 
                                         <tr>
                                             <td colspan="3"> Subtotal</td>
-                                            <td>Rp.<?php echo rupiah($sub); ?></td>
+                                            <td>Rp <?php echo rupiah($sub); ?></td>
                                         </tr>
                                        <!--  -->
                                        <?php 
@@ -281,52 +285,52 @@
                                         ?>
                                         <tr>
                                             <td colspan="3">Total = (Lama Pinjam x Subtotal)</td>
-                                            <td>Rp.<?php echo rupiah($roTotal['long_loan']*$sub); ?></td>
+                                            <td>Rp <?php echo rupiah($roTotal['long_loan']*$sub); ?></td>
                                         </tr>
                                          <tr>
                                             <td colspan="3"> Potongan (50%)</td>
-                                            <td>Rp.<?php echo rupiah($roTotal['long_loan']*$sub/2); ?></td>
+                                            <td>Rp <?php echo rupiah($roTotal['long_loan']*$sub/2); ?></td>
                                         </tr>
                                          <tr>
                                             <td colspan="3"> Total Bayar = (Total - Potongan)</td>
-                                            <td>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></td>
+                                            <td>Rp <?php echo rupiah($roTotal['loan_total_fee']); ?></td>
                                         </tr>
                                         <?php }elseif ($category_member == '5') { // mhs ugm s2
                                           ?>
                                           <tr>
                                             <td colspan="3"><b>Total = (Lama Pinjam x Subtotal)</b></td>
-                                            <td>Rp.<?php echo rupiah($totals2);?></td>
+                                            <td>Rp <?php echo rupiah($totals2);?></td>
                                           </tr>
                                           <tr>
                                             <td colspan="3"><b>Potongan (25%)</b></td>
-                                            <td>Rp.<?php echo rupiah($diskons2);  ?></td>
+                                            <td>Rp <?php echo rupiah($diskons2);  ?></td>
                                           </tr>
                                           <tr>
                                             <td colspan="3"><b>Total Bayar = (Total - Potongan)</b></td>
-                                            <td><b>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></b></td>
+                                            <td><b>Rp <?php echo rupiah($roTotal['loan_total_fee']); ?></b></td>
                                           </tr>
                                         <?php
                                         } elseif ($category_member == '6') { // mhs s3 ugm
                                         ?>
                                           <tr>
                                             <td colspan="5"><b>Total = (Lama Pinjam x Subtotal)</b></td>
-                                            <td>Rp.<?php echo rupiah($totals3); ?></td>
+                                            <td>Rp <?php echo rupiah($totals3); ?></td>
                                           </tr>
                                           <tr>
                                             <td colspan="5"><b>Potongan (25%)</b></td>
-                                            <td>Rp.<?php echo rupiah($roTotal['loan_total_fee']);  ?></td>
+                                            <td>Rp <?php echo rupiah($roTotal['loan_total_fee']);  ?></td>
                                           </tr>
                                           
                                           <tr>
                                             <td colspan="5"><b>Total Bayar = (Total - Potongan)</b></td>
-                                            <td><b>Rp.<?php echo rupiah($hasil_akhirs3); ?></b></td>
+                                            <td><b>Rp <?php echo rupiah($hasil_akhirs3); ?></b></td>
                                           </tr> 
                                         <?php
                                         } else {
                                           ?>
                                           <tr>
                                             <td colspan="5"><b>Total = (Lama Pinjam x Subtotal)</b></td>
-                                            <td>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></td>
+                                            <td>Rp <?php echo rupiah($roTotal['loan_total_fee']); ?></td>
                                           </tr> <?php
                                         } 
                                         ?>
@@ -337,7 +341,7 @@
                                   </div>
                             </div>      
                             <div class="panel panel-primary">
-                                <div class="panel-heading"><span class="fa fa-file-text"></span> Saldo</div>
+                                <div class="panel-heading"><span class=""></span> Saldo</div>
                                 <div class="panel-body">
                                     <p>Jumlah saldo yang Anda miliki saat ini adalah :  </p>
                                     <h2 class='btn btn-block btn-warning btn-lg'>
@@ -346,10 +350,10 @@
                                         $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
                                         $total_saldo = mysql_fetch_array($querySaldo);
                                         if ($total_saldo['total_saldo']=='') {
-                                          echo "Rp.0";
-                                        }
+                                          echo "Rp 0";
+                                        } else{
                                         echo "Rp ".rupiah($total_saldo['total_saldo'])."</h2>";
-                                     ?>
+                                    } ?>
 
                                     </h2>
                                     <p><i>*Anda Dapat Melakukan Pembayaran Dengan Menggunakan Saldo.</i></p>
@@ -373,11 +377,7 @@
                                         <div class="form-group row">
                                           <label class="col-md-5">JENIS PEMBAYARAN</label>
                                           <div class="col-md-6">
-                                            <select class="form-control" name="payment_category" required>
-                                              <option value="">PILIH JENIS PEMBAYARAN</option>
-                                              <option value="PEMINJAMAN">PEMINJAMAN ALAT</option>
-                                              <option value="PERPANJANGAN">PERPANJANGAN ALAT</option>
-                                            </select>
+                                              <input type="text" class="form-control" name="payment_category" value="PEMINJAMAN ALAT" readonly>
                                           </div>
                                         </div>
                                         <div class="form-group row">

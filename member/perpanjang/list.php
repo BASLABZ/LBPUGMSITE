@@ -1,5 +1,5 @@
 <?php 
-    $query  = mysql_query("SELECT * FROM trx_loan_application where loan_invoice = '".$_GET['invoice']."'");
+    $query  = mysql_query("SELECT * FROM trx_loan_application where loan_invoice = '".$_GET['id']."'");
     $rows = mysql_fetch_array($query);
     $tanggalpengembalian = $rows['loan_date_return'];
     $tanggalawal = $rows['loan_date_start'];

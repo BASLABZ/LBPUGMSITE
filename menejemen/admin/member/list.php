@@ -75,7 +75,7 @@
                                                 
                                             </td>
                                             <td align="center">
-                                                <a  href="#detail_member" id='custId' data-toggle='modal' data-id='<?php echo $row['member_id']; ?>' class="btn btn-info btn-sm dim_about"> <span class="fa fa-eye"> Detail Member</span>    
+                                                <a  href="#detail_member" id='custId' data-toggle='modal' data-id='<?php echo $row['member_id']; ?>' class="btn btn-info btn-sm dim_about"> <span class="fa fa-eye"> Detail Member</span>  </a>  
                                             </td>
                                         </tr>
                                        <?php } ?>

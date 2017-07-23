@@ -61,7 +61,7 @@
     <div class="row animated fadeInRight">
         <div class="col-md-12">
             <div class="ibox">
-                <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class=""></span> Data Penolakan Dan Penawaran Alat</div>
+                <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class=""></span> Data Penolakan dan Penawaran Alat</div>
                 <div class="ibox-content">
                    <div class="row">
                        <div class="col-md-6">
@@ -71,10 +71,11 @@
                        <div class="col-md-12">
                            <table class="table table-bordered table-responsive table-hover">
                                <thead>
-                                    <th>Nama Instrument</th>
-                                    <th>Status Peminjaman</th>
-                                    <th>Alat Yang Diminta</th>
-                                    <th>Subtutotal</th>
+                                    <th>Nama Alat</th>
+                                    <th>Status Alat</th>
+                                    <th>Jumlah Pinjam</th>
+                                    <th>Subtotal</th>
+                                    <th>Keterangan Penolakan</th>
                                </thead>
                                <tbody>
                                    <?php 
@@ -89,9 +90,10 @@
                                          ?>
                                          <tr>
                                             <td><?php echo $rowPenolakan['instrument_name']; ?></td>
-                                            <td><?php echo $rowPenolakan['loan_status_detail']; ?></td>
+                                            <td><span class="label label-danger"><?php echo $rowPenolakan['loan_status_detail']; ?></span></td>
                                             <td><?php echo $rowPenolakan['loan_amount']; ?></td>
-                                            <td><?php echo $rowPenolakan['loan_status_detail']; ?></td>
+                                            <td>Rp <?php echo rupiah($rowPenolakan['loan_subtotal']); ?></td>
+                                            <td><?php echo $rowPenolakan['rejected_text']; ?></td>
                                          </tr>
 
                                         <?php } ?>
@@ -104,19 +106,14 @@
                        <div class="col-md-12">
                        
                        <label>Data Alat Yang Disarankan</label><hr>
-                         <form class="role" method="POST">          
-                        <input type="hidden" name="idreject" value="<?php echo $rowdetail['rejected_detail_id']; ?>">
-                    <button type="submit" name="setujuipenawaran" class="btn btn-warning"><span class="fa fa-save"></span> Setujui Penawaran</button>
-                    <button type="submit" name="hapuspenawaran" class="btn btn-danger"><span class="fa fa-trash"></span> Hapus Alat Yang Ditolak  Dan Alat yang ditawarkan</button>
-                           </form>
+                         
                            <br>
                            <table class="table table-responsive table-bordered table-stripped">
                                     <thead>
-                                        <th>Nama Instrument</th>
-                                        <th>Jumlah Ketersediaan Alat</th>
-                                        <th>Jumlah Alat Yang Ditawarkan</th>
-                                        <th>Sub total</th>
-                                        <th>Keterangan</th>
+                                        <th>Nama Alat</th>
+                                        <th>Biaya Alat</th>
+                                        <th>Jumlah Alat</th>
+                                        <th>Subtotal</th>
                                     </thead>
                                     <tbody>
                                         <?php 
@@ -134,15 +131,19 @@
 
                                          <tr>
                                             <td><?php echo $rowpenawaran['instrument_name']; ?></td>
-                                            <td><?php echo $rowpenawaran['instrument_quantity']-$rowpenawaran['intrument_quantity_temp']; ?></td>
+                                            <td>Rp <?php echo rupiah($rowpenawaran['instrument_fee']); ?></td>
                                             <td><?php echo $rowpenawaran['rejected_detail_loan_amount']; ?></td>
-                                            <td><?php echo $rowpenawaran['rejected_detail_loan_subtotal']; ?></td>
-                                            <td><?php echo $rowpenawaran['rejected_text']; ?></td>
-                                            
-                                         </tr>
+                                            <td>Rp <?php echo rupiah($rowpenawaran['rejected_detail_loan_subtotal']); ?></td>
+                                            </tr>
                                         <?php } ?>
                                     </tbody>
-                                </table>
+                                </table> <br/>
+                               <span class="fa fa-twitch"></span> Klik button Terima jika Anda setuju merubah alat yang akan dipinjam <br/><br/>
+                            <form class="role" method="POST">          
+                                <input type="hidden" name="idreject" value="<?php echo $rowdetail['rejected_detail_id']; ?>">
+                                    <button type="submit" name="setujuipenawaran" class="btn btn-warning"><span class="fa fa-save"></span> Terima</button>
+                                     <button type="submit" name="hapuspenawaran" class="btn btn-danger"><span class="fa fa-trash"></span> Tidak Terima</button>
+                            </form>
                        </div>
                    </div>
                     

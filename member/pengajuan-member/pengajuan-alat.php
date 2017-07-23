@@ -83,19 +83,21 @@
                                         <td>
                                           <center>
                                               <?php if ($status_peminjaman == 'MENUNGGU') {
-                                                  echo "<label class='label label-warning'>MENUNGGU</label>";
+                                                  echo "<label class='label label-warning'>MENUNGGU</label>"; // kuning
                                               } elseif ($status_peminjaman == 'DIBATALKAN') {
-                                                  echo "<label class='label label-danger'>DIBATALKAN</label>";
+                                                  echo "<label class='label label-danger'>DIBATALKAN</label>"; // merah
                                               } elseif ($status_peminjaman == 'MENUNGGU ACC FINAL') {
-                                                  echo "<label class='label label-default'>MENUNGGU ACC FINAL</label>";
+                                                  echo "<label class='label label-default'>MENUNGGU ACC FINAL</label>"; // abu2
                                               } elseif ($status_peminjaman == 'ACC FINAL') {
-                                                  echo "<label class='label label-info'>ACC FINAL</label>";                                         
+                                                  echo "<label class='label label-info'>ACC FINAL</label>"; // biru muda                                         
                                               } elseif ($status_peminjaman == 'MEMBAYAR TAGIHAN') {
-                                                  echo "<label class='label label-primary'>MEMBAYAR TAGIHAN</label>";
+                                                  echo "<label class='label label-primary'>MEMBAYAR TAGIHAN</label>"; // biru tua
                                               } elseif ($status_peminjaman == 'DIPINJAM') {
-                                                  echo "<label class='label label-success'>DIPINJAM</label>";
+                                                  echo "<label class='label label-success'>DIPINJAM</label>"; // hijau
                                               } elseif ($status_peminjaman == 'DIKEMBALIKAN') {
-                                                  echo "<label class='label label-default'>DIKEMBALIKAN</label>";
+                                                  echo "<label class='label label-default'>DIKEMBALIKAN</label>"; // abu2
+                                              } else {
+                                                  echo "<label class='label label-danger'>DIKONFIRMASI</label>";
                                               }
                                               ?>
                                           </center>

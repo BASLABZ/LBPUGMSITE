@@ -1,26 +1,48 @@
-1. kelebihan pembayaran tidak boleh lansung dimasukkan ke dalama saldo member, harus dikonfirmasi valid dahulu (cek kesesuain jumlah transfer dengan slip pembayaran) (FIXED)
+ 1. kelebihan pembayaran tidak boleh lansung dimasukkan ke dalama saldo member, harus dikonfirmasi valid dahulu (cek kesesuain jumlah transfer dengan slip pembayaran) (FIXED)--------
    ini juga berlaku buat pembayaran perpanjangan dan pembayaran denda
 
-2. konfirmasi tidak valid pada pembayaran belum berfungsi (fixed in back end)
+2. konfirmasi tidak valid pada pembayaran belum berfungsi (fixed in back end)-------
 
-3. notif keterlamabatan pada transaksi pengembalian (koordinator penelitian)
+3. notif keterlamabatan pada transaksi pengembalian (koordinator penelitian)-----------------
 
-4. penarikan saldo aku bikin belum berhasil mas, cek deh skripku :(
+4. penarikan saldo aku bikin belum berhasil mas -------------------------------
 
+<<<<<<< HEAD
 5. status pada data pengajuan kok bisa diubah2 oleh koordinator (misal tadinya dipinjam atau dikembalikan dll bisa diubah jadi menunggu bisa juga menunggu acc final       bisa juga tolak dan penawaran) :(((((( (FIXED)
 
 6. pembayaran peminjaman alat dan perpanjangan dibedakan, jadi di pembayaran gak jadi pake combo box pada jenis pembayaran (dibikin disable)
 
 7. Perpanjangan macet
+=======
+5. status pada data pengajuan kok bisa diubah2 oleh koordinator (misal tadinya dipinjam atau dikembalikan dll bisa diubah jadi menunggu bisa juga menunggu acc final       bisa juga tolak dan penawaran) :(((((( ---------------
+
+6. pembayaran peminjaman alat dan perpanjangan dibedakan, jadi di pembayaran gak jadi pake combo box pada jenis pembayaran (dibikin disable)
+7. Perpanjangan macet ---------------------
+
+>>>>>>> 1f6ff0ef9b954f90758b0cae11db3ef5c96864dd
 8. setelah acc final, (kondisi konfirmasi pembayaran dibuat lebih  dari 3 jam) ---> notifnya setelah login masih sama & kok masih bisa konfirmasi pembayaran padahal    sudah telat
-9. mas pas aku nyoba pembayaran peminjaman, saldonya bisa tak tembak. misal aku punya saldo 100.000, tp saldo yg mau aku pake buat bayar tak input 120.000 mau e,     padahal kan nggak boleh 
+
+9. mas pas aku nyoba pembayaran peminjaman, saldonya bisa tak tembak. misal aku punya saldo 100.000, tp saldo yg mau aku pake buat bayar tak input 120.000 mau e,     padahal kan nggak boleh -------------------
+
 10. saldonya juga masih erorr sayang, udah tak pake buat bayar tp saldonya enggak berkurang. ttp segitu aja. aku cek di database trx_payment (kondisi aku bayarnya     transfer+saldo) kok yg kesimpen cuma payment_amount_transfer, yg payment_amount_saldo enggak. payment_amount_saldo itu buat nampung nominal yg kita inputin di form     pembayaran kan sayang
-11. member, detail peminjaman (pas ada notif buat suruh segera mengembalikan, karna udah mau jatuh tempo), kok link ingin perpanjangg alatnya redirect ke index lg,     udah tak ubah tetep gak mau apa aku yg masih salah, jadinya belum jadi sampek buka halaman perpanjangan
-12. koordinator penelitian, buat validasi, jika status alat acc semua maka status selain menunggu acc final di disable
+
+11. member, detail peminjaman (pas ada notif buat suruh segera mengembalikan, karna udah mau jatuh tempo),
+ kok link ingin perpanjangg alatnya redirect ke index lg,     udah tak ubah tetep gak mau apa aku yg masih salah, jadinya belum jadi sampek buka halaman perpanjangan
+
+12. koordinator penelitian, buat validasi, jika status alat acc semua maka status selain menunggu acc final di disable(not revisi)
+
 13. penolakan belum berfungsi, yg penolakan aja (jadi tidak ada penawaran/tidak ada alat yg disarankan), kondisi ini bisa terjadi kalo alat rusak atau mau dipake pihak     lab
+
 14. koordinator penelitian, di data pengajuan pas mau acc alat. ada alat yg ditolak dan diberi penawaran alat, tp status alat di detail pengajuan kok tetep acc (status     alat ya sayang, bukan status pengajuan).
-15. member, pas member menyetujui penawaran, di detail pengajuan masih ada button batalkan pengajuan
+15. member, pas member menyetujui penawaran, di detail pengajuan masih ada button batalkan pengajuan-------------
+--------------------------------------------------------------------------------------------------------------------
 16. member, setelah ada penawaran trs penawaran ditolak oleh member, total bayar pada detail pengajuan masih salah
 
 ================================================================================================================================================================
 Note : mas ternyata kategorinya mahasiswa kurang 1 :( ----> Mahasiswa S1 UGM 
+
+------------------------------------
+-catat semua warning di member
+-catat warning yang ada di admin
+-penarikan saldo
+-----------------------------------
