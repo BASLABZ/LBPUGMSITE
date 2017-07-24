@@ -1,12 +1,12 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>PENGAJUAN ALAT</h2>
+        <h2>PEMBAYARAN</h2>
         <ol class="breadcrumb">
             <li>
                 <a href="index-2.html">Home</a>
             </li>
             <li>
-                <a>PENGAJUAN-ALAT</a>
+                <a>DATA PEMBAYARAN</a>
             </li>
             <li class="active">
                 <strong>Daftar Pengajuan</strong>
@@ -18,7 +18,7 @@
     <div class="row animated fadeInRight">
         <div class="col-md-12">
             <div class="ibox">
-                <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class="fa fa-list"></span> Daftar Transaksi Pengajuan Alat</div>
+                <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class=""></span> Daftar Transaksi Pembayaran</div>
                 <div class="ibox-content">
                     <form class="role well" method="POST">
                         <div class="form-group row">
@@ -33,21 +33,16 @@
                     <hr>
                     <div class="row">
                         <div class="col-md-12">
-                        <h2>PEMBAYARAN PEMINJAMAN</h2>
                         <table class="table table-responsive table-bordered table-striped table-hover">    
                         <thead>
-                            <th>NO</th>
-                            <th>INVOICE</th>
-                            <th>TANGGAL INPUT</th>
-                            <th>TANGGAL KONFIRMASI</th>
-                            <th>NAMA BANK</th>
-                            <th>BUKTI TRANSFER</th>
-                            <th>JUMLAH</th>
-                            <th>KETERANGAN</th>
-                            <th>STATUS</th>
-                            <th>STATUS PEMBAYARAN</th>
-                            <th>VALID</th>
-                            <th>CETAK</th>
+                            <th><center>NO</center></th>
+                            <th><center>INVOICE</center></th>
+                            <th><center>TANGGAL KONFIRMASI</center></th>
+                            <th><center>BUKTI TRANSFER</center></th>
+                            <th><center>JUMLAH BAYAR</center></th>
+                            <th><center>STATUS PEMBAYARAN</center></th>
+                            <th><center>KETERANGAN</center></th>
+                            <th><center>AKSI</center></th>
                         </thead>
                             <tbody>
                                 <?php 
@@ -57,30 +52,32 @@
                                  ?>
                                         <tr>
                                             <td><?php echo ++$no; ?></td>
-                                            <td><?php echo $rowRekap['loan_invoice']; ?></td>
-                                            <td><?php echo $rowRekap['payment_date']; ?></td>
-                                            <td><?php echo $rowRekap['payment_confirm_date']; ?></td>
-                                            <td><?php echo $rowRekap['payment_bankname']; ?></td>
-                                            <td><a href="../surat/<?php echo $rowRekap['payment_photo']; ?>" class="label label-primary"><span class="fa fa-download"></span> BUKTI TRANSAFER</a></td>
-                                            <td>Rp. <?php echo rupiah($rowRekap['payment_amount_transfer']); ?></td>
-                                            <td><?php echo $rowRekap['payment_info']; ?></td>
-                                            <td><?php echo $rowRekap['loan_status']; ?></td>
-                                            <td><?php echo $rowRekap['payment_status']; ?></td>
-                                            <td><?php echo $rowRekap['payment_valid']; ?></td>
-                                            
-                                            <td>
+                                            <td><center><?php echo $rowRekap['loan_invoice']; ?></center></td>
+                                            <td><center><?php echo $rowRekap['payment_confirm_date']; ?></center></td>
+                                            <td><center><a href="../surat/<?php echo $rowRekap['payment_photo']; ?>" class=""><span class="fa fa-download"></span> Lihat Slip</a></center></td>
+                                            <td><center>Rp <?php echo rupiah($rowRekap['payment_amount_transfer']); ?></center></td>
+                                            <td><center>
+                                                <?php 
+                                                if ($rowRekap['payment_valid'] == 'VALID') {
+                                                     echo "<label class='label label-primary'>VALID</label>";
+                                                 } elseif ($rowRekap['payment_valid'] == 'TIDAK VALID') {
+                                                      echo "<label class='label label-danger'>TIDAK VALID</label>";
+                                                 } elseif ($rowRekap['payment_valid'] == 'MENUNGGU KONFIRMASI') {
+                                                     echo "<label class='label label-warning'>MENUNGGU KONFIRMASI</label>";
+                                                 } ?>
+                                                 </center>
+                                            </td>
+                                            <td><?php echo $rowRekap['payment_notif']; ?></td>
+                                            <td><center>
                                                <?php 
                                                     if ($rowRekap['payment_valid']=='VALID') {
                                                         
-                                                ?>
-                                                 <a href="index.php?hal=pembayaran/preview_rekappembayaran_perinvoice&id=<?php echo $rowRekap['loan_invoice']; ?>" class="btn btn-primary dim_about" target="_BLANK">
-                                                    <span class="fa fa-print"></span> Cetak
-                                                </a>
-                                                <?php }else if  ($rowRekap['payment_valid']=='TIDAK VALID'){
-                                                        echo "PEMBAYARAN ANDA TIDAK VALID ATAU TIDAK SESUAI, SILAHKAN CEK PEMBAYARAN,TAGIHAN/FILE POTO PEMBAYARAN ANDA
-                                                        <a href='#' class='btn btn-info dim_about'>Ubah Konfirmasi Pembayaran</a>
-                                                        ";
+                                                echo "<a href='index.php?hal=pembayaran/preview_rekappembayaran_perinvoice&id=<?php echo ".$rowRekap['loan_invoice']."; ?>' class='btn btn-default dim_about' target='_BLANK'>
+                                                    <span class='fa fa-print'></span> Cetak</a>";
+                                                 }else if  ($rowRekap['payment_valid']=='TIDAK VALID'){
+                                                        echo "<a href='index.php?hal=pembayaran/konfirmasi_kekurangan' class='btn btn-info dim_about'>Konfirmasi Ulang</a>";
                                                     } ?>
+                                                </center>
                                             </td>
                                         </tr>
                                  <?php } ?>
@@ -122,7 +119,6 @@
                                             <td><?php echo $rowRekap['payment_payment_bankname']; ?></td>
                                             <td><a href="../surat/<?php echo $rowRekap['payment_photo']; ?>" class="label label-primary"><span class="fa fa-download"></span> BUKTI TRANSAFER</a></td>
                                             <td>Rp. <?php echo rupiah($rowRekap['payment_amount_transfer']); ?></td>
-                                            <td><?php echo $rowRekap['payment_info']; ?></td>
                                             <td><?php echo $rowRekap['loan_status']; ?></td>
                                             <td><?php echo $rowRekap['payment_status']; ?></td>
                                             <td>

@@ -60,7 +60,7 @@
                                     echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
                                        <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
                                           <span class='fa fa-bookmark'></span> <b>STATUS PEMBAYARAN</b></br>
-                                        Hi ".$rowPeringatan['member_name'].", status pembayaran peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah <b>: TIDAK VALID</b> <br/>Keterangan Tidak Valid : <b>".$run_pembayaran['payment_notif']."</b><br/>Pembayaran yang dinyatakan tidak valid tidak bisa melanjutkan proses selanjutnya. Silahkan melakukan pembayaran kekurangan dan konfirmasi ulang.<b><a href='index.php?hal=pengajuan-member/pengajuan-alat'> Lihat Data Selengkapnya</a></b> 
+                                        Hi ".$rowPeringatan['member_name'].", status pembayaran peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah <b>: TIDAK VALID</b> <br/>Keterangan Tidak Valid : <b>".$run_pembayaran['payment_notif']."</b><br/>Pembayaran yang dinyatakan tidak valid tidak bisa melanjutkan proses selanjutnya. Silahkan melakukan pembayaran kekurangan dan konfirmasi ulang.<b><a href='index.php?hal=pembayaran/konfirmasi_kekurangan'> Lihat Data Selengkapnya</a></b> 
                                         </div> ";
                                 } else{
 
