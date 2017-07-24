@@ -170,7 +170,12 @@
                                             <th>Jumlah Alat Tersedia</th>
                                             <th>Jumlah Pinjam</th>
                                             <th>Subtotal</th>
+                                            <?php 
+                                                if ($_SESSION['level_name'] != 'kepala laboratorium') {
+                                                    if ($_SESSION['level_name'] = 'koordinator penelitian') {
+                                             ?>
                                             <th>Aksi</th>
+                                            <?php }} ?>
                                         </thead>
                                         <tbody>
                                         <?php 
