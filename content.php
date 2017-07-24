@@ -9,7 +9,7 @@
             <div class="container">
                 <div class="carousel-caption">
                     <h2 style="font-size: 28px;">Laboratorium Bioantropologi  <br/>
-                        Paleantropologi LBP<br/>
+                        & Paleoantropologi<br/>
                         Universitas Gajah Mada [LBP-UGM]</h2>
                         <?php 
                             if (isset($_SESSION['member_name'])) {
@@ -29,7 +29,7 @@
             <div class="container">
                 <div class="carousel-caption blank">
                     <h2 style="font-size: 28px;">Laboratorium Bioantropologi <br/>
-                        Paleantropologi LBP<br/>
+                         & Paleoantropologi<br/>
                         Universitas Gajah Mada [LBP-UGM]</h2>
                          <?php 
                             if (isset($_SESSION['member_name'])) {
@@ -56,9 +56,8 @@
     <div class="container" style="padding-top: 20px;">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h1 style="color:white; "><span class="fa fa-flask fa-2x"></span><br>Peralatan BIO-PALEONTROPOLOGI</h1>
-
-                <p style="color: white;">Daftar Data Perlatan Laboratorium Bio-Paleontropologi UGM </p>
+                <h2 style="color:white; "><br><b>SISTEM INFORMASI PEMINJAMAN ALAT PENELITIAN ANTROPOMETRI </b></h2><br/>
+                
             </div>
         </div>
     </div>

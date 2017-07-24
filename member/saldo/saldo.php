@@ -76,7 +76,7 @@
 							<div class="form-group row">
 								<label class="col-md-4">Total Saldo</label>
 								<div class="col-md-6">
-									<input type="text" class="form-control" value="<?php echo $total_saldo['total_saldo']; ?>" disabled>
+									<input type="text" class="form-control" value="<?php echo rupiah ($total_saldo['total_saldo']); ?>" disabled>
 								</div>
 							</div>
 							<div class="form-group row">
