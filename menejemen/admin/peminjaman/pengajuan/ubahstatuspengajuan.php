@@ -41,9 +41,28 @@
 							<?php if($rowsatus['loan_status_detail']=='DITOLAK'){echo "selected=selected";}?>>
 								DITOLAK
 						</option> 
+						<option value="DITOLAK TANPA PENAWARAN"
+							<?php if($rowsatus['loan_status_detail']=='DITOLAK'){echo "selected=selected";}?>>
+								DITOLAK TANPA PENAWARAN
+						</option> 
  				</select> 
  			</div>
  		</div>
+ 		<?php 
+ 			if ($status == 'DITOLAK TANPA PENAWARAN') {
+ 				echo "	<div class='row' id='ditolaktanpapenawaran'>";
+ 			}else if ($status != 'DITOLAK TANPA PENAWARAN') {
+ 				echo "	<div class='row' id='ditolaktanpapenawaran' hidden> ";
+ 			}
+ 		 ?>
+ 		
+ 			<div class="form-group">
+ 				<label>Alasan Penolakan</label>
+ 				<textarea class="form-control" name="ditolak_nonpenawaran">
+ 					
+ 				</textarea>
+ 			</div>
+ 		</div> 
  		<div class="row">
  			<div class="col-md-12">
  				<br>
@@ -124,8 +143,15 @@
  		   var selectStatus = document.getElementById('status').value;
  		   if (selectStatus == 'DITOLAK') {
  		   		$('#hiddenStatusTolak').show();
- 		   }else{
+ 		   		$('#ditolaktanpapenawaran').hide();
+ 		   }else if (selectStatus == 'DITOLAK TANPA PENAWARAN') {
+ 		   		$('#ditolaktanpapenawaran').show();
+ 		   }else if (selectStatus == 'MENUNGGU') {
 				$('#hiddenStatusTolak').hide();
+				$('#ditolaktanpapenawaran').hide();
+ 		   }else if (selectStatus == 'ACC') {
+ 		   		$('#hiddenStatusTolak').hide();
+				$('#ditolaktanpapenawaran').hide();
  		   }
  	}
  </script>

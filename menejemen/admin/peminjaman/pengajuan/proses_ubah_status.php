@@ -90,5 +90,10 @@
 			 if ($run_query_update_status) {
 			 	echo "<script>alert ('Data berhasil disimpan'); location.href='index.php?hal=peminjaman/pengajuan/penawaran&rejected_id=".$idreject."'</script>";
 			 }
+		}else if ($status == 'DITOLAK TANPA PENAWARAN' ) {
+			$alasan_penolakan  = $_POST['ditolak_nonpenawaran'];
+			$queryInsert_tanpa_penawaran  = mysql_query("INSERT trx_rejected INTO (loan_app_detail_id_fk,instrument_id_fk) VALUES ('".$idDetail_loans."','".$iddetail_instrumen."') ");
+			
+
 		}
  ?>

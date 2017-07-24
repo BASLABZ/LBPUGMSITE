@@ -127,6 +127,10 @@
                                                                 <?php if($rowStatusLoan['loan_status']=='DIKONFORMASI'){echo "selected=selected";}?>>
                                                                     DIKONFORMASI & ADA INSTRUMEN YANG DI TOLAK
                                                             </option>
+                                                            <option value="DITOLAK"
+                                                                <?php if($rowStatusLoan['loan_status']=='DIKONFORMASI'){echo "selected=selected";}?>>
+                                                                    DITOLAK
+                                                            </option>
                                                             <?php }else{ ?>
                                                             <!-- bu ketua lab -->
                                                             <option value="ACC FINAL"
@@ -220,12 +224,13 @@
                                                     <td>
                                                     <?php 
                                                         // jika status pengajuan tidak ditolak 
-                                                        if ($rowDetailPeminjaman['loan_status_detail'] != 'DITOLAK') {
+                                                        if ($rowDetailPeminjaman['loan_status_detail'] != 'DITOLAK' AND $rowDetailPeminjaman['loan_status_detail'] != 'PENAWARAN DISETUJI') {
                                                      ?>
                                                      <a href='#ubahstatuspengajuan' class='btn btn-info dim_about' id='custId' data-toggle='modal' 
                                                         data-id='<?php echo $rowDetailPeminjaman['loan_app_detail_id']; ?>'><span class="fa fa-edit"></span> Ubah Status </a> 
 
-                                                        <?php  }else{ 
+                                                        <?php  }
+                                                        else{ 
                                                                 $queryreject = mysql_query("SELECT * FROM trx_rejected where loan_app_detail_id_fk = '".$rowDetailPeminjaman['loan_app_detail_id']."'");
                                                                     $roreject =mysql_fetch_array($queryreject); 
                                                          ?>
