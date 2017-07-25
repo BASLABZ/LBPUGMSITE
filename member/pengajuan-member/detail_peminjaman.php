@@ -22,7 +22,7 @@
  ?>		
 			<tr>
 				<td><?php echo $no++; ?></td>
-				<td><?php echo $rowDetailPeminjaman['instrument_name']; ?></td>
+				<td><?php echo $rowDetailPeminjaman['instrument_name'];   ?></td>
 				<td>
 					<center>
 						<?php if ($status == 'MENUNGGU') {
@@ -186,7 +186,27 @@
                                         // echo "<a href='index.php?hal=pengajuan-member/pengajuan-alat&batalkan=".$ubahstatus['loan_invoice']."' class='btn btn-success dim_about'> <span class='fa fa-share'> </span>
                                         //  KIRIM PENGAJUAN</a>";                            
                                    }else if ($statusKonfirmasi == 'DITOLAK'){
-                                      echo " <a href='index.php?hal=members/peminjaman/pembayaran&id=".$ubahstatus['loan_invoice']."' class='btn btn-info btn-xs dim_about'
+                                      	$query_alasan  = mysql_query("SELECT * FROM trx_rejected_detail de join trx_rejected re 
+                                        ON de.rejected_id_fk = re.rejected_id
+                                        JOIN trx_loan_application_detail dl 
+                                        ON re.loan_app_detail_id_fk = dl.loan_app_detail_id
+                                        JOIN ref_instrument i
+                                        ON dl.instrument_id_fk = i.instrument_id
+                                        JOIN trx_loan_application lp ON
+                                        dl.loan_app_id_fk = lp.loan_app_id
+                                         where lp.loan_invoice= '".$invoice."'");
+                                         while ($row_alasan = mysql_fetch_array($query_alasan)) {
+                                         	echo "<ul>";
+                                         	echo "<li>";
+                                         	echo "<b>Alat Yang Ditolak :";
+                                         	echo $row_alasan['instrument_name'];
+                                         	echo "</b>-";
+                                         	echo $row_alasan['rejected_text'];
+                                         	echo "</li>";
+                                         	echo "</ul>";
+                                         }
+                                   }else if ($statusKonfirmasi == 'DIKONFIRMASI') {
+                                   	echo " <a href='index.php?hal=members/peminjaman/pembayaran&id=".$ubahstatus['loan_invoice']."' class='btn btn-info btn-xs dim_about'
                                     ><span class='fa fa-check'></span> KONFIRMASI <br>PEMBAYARAN</a>";
                                    } 
                                    // jika status peminjaman menunggu = ( kondisi blm dikonfirmasi koordinator penelitian) -> button batalkan pengajuan

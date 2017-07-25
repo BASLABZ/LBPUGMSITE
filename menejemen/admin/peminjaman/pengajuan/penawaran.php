@@ -17,7 +17,7 @@
                                         JOIN trx_loan_application lp ON
                                         dl.loan_app_id_fk = lp.loan_app_id
                                          where re.rejected_id= '".$rejected_id."'"));
-            echo $row_query;
+     
             $invoice = $row_query['loan_invoice'];
 
  ?>
@@ -88,7 +88,7 @@
                             		</thead>
                             		<tbody>
                             			<?php 
-                            				$queryPenawaran = mysql_query("SELECT de.rejected_text,de.rejected_detail_id,i.instrument_quantity,x.intrument_quantity_temp,x.instrument_name,x.instrument_fee,de.rejected_detail_loan_amount ,de.rejected_detail_loan_subtotal FROM trx_rejected_detail de join trx_rejected re 
+                            				$queryPenawaran = mysql_query("SELECT de.rejected_text,de.rejected_detail_id,i.instrument_quantity,x.intrument_quantity_temp,x.instrument_name,x.instrument_fee,de.rejected_detail_loan_amount ,de.rejected_detail_loan_subtotal,dl.loan_status_detail FROM trx_rejected_detail de join trx_rejected re 
 										ON de.rejected_id_fk = re.rejected_id
 										JOIN trx_loan_application_detail dl 
 										ON re.loan_app_detail_id_fk = dl.loan_app_detail_id
@@ -96,7 +96,7 @@
 										ON dl.instrument_id_fk = i.instrument_id
 										JOIN ref_instrument x
 										ON de.instrument_id_rejected_fk = x.instrument_id
-	 									where re.rejected_id= '".$rejected_id."' ");
+	 									where re.rejected_id= '".$rejected_id."' AND dl.loan_status_detail != 'DITOLAK TANPA PENAWARAN'  ");
                             				while ($rowpenawaran = mysql_fetch_array($queryPenawaran)) {
                             			 ?>
 
@@ -111,7 +111,7 @@
                                                                             <input type="hidden" value="<?php echo $rowpenawaran['rejected_detail_id'] ; ?>" name='rejected_detail_id'> 
                                                                             <input type="hidden" value="<?php echo $rowpenawaran['instrument_fee'] ; ?>" name='rejected_detail_loan_subtotal'> 
 
-                                                                            <input type="number" class='form-control' value="<?php echo $rowpenawaran['rejected_detail_loan_amount']; ?>" name='jumlahalat'> 
+                                                                            <input type="number" class='form-control' value="<?php echo $rowpenawaran['rejected_detail_loan_amount']; ?>" name='jumlahalat' min="1" max="<?php echo $rowpenawaran['instrument_quantity']-$rowpenawaran['intrument_quantity_temp']; ?>"> 
                                                                     </div>
                                                                     <div class="col-md-4"><p align="left"><button name="ubahnilaialat" type="submit" class="btn btn-sm btn-primary"><span class="fa fa-pencil"> </span> </button> </p></div>
                                                                     

@@ -11,7 +11,8 @@
                     $queryUpdateStatusLoanAPP = mysql_query("UPDATE trx_loan_application set loan_status = '".$_POST['loan_status']."' where loan_app_id = '".$_POST['loan_app_id']."'");
                  // echo "<script>  location.href='index.php?hal=peminjaman/pengajuan/list' </script>";exit;
                  echo "<script>  location.href='peminjaman/pengajuan/SENDEMAIL/sendEmailDebug.php?invoice=".$invoice."&email=".$email."' </script>";exit;    
-            }else{
+            }
+            else{
                     $queryUpdateStatusLoanAPP_menunggu = mysql_query("UPDATE trx_loan_application set loan_status = '".$_POST['loan_status']."' where loan_app_id = '".$_POST['loan_app_id']."'");
                     if ($queryUpdateStatusLoanAPP_menunggu) {
                         
@@ -176,11 +177,12 @@
 
                                                         if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN') {  
                                                         if ($rowStatusLoan['loan_status'] !='PERPANJANG') {
-                                                             
+                                                        if ($rowStatusLoan['loan_status'] !='DIKEMBALIKAN') {
+                                                                
 
                                              ?>
                                             <th>Aksi</th>
-                                            <?php }}}} ?>
+                                            <?php }}}}} ?>
                                         </thead>
                                         <tbody>
                                         <?php 
@@ -203,7 +205,10 @@
                                                                 echo "<span class='label label-danger'>DITOLAK</span>";
                                                             } elseif ($rowDetailPeminjaman['loan_status_detail'] == 'PENAWARAN DISETUJI') {
                                                                 echo "<span class='label label-primary'>PENAWARAN DISETUJUI</span>";
-                                                            } else {
+                                                            } else if ($rowDetailPeminjaman['loan_status_detail'] == 'DITOLAK TANPA PENAWARAN') {
+                                                                echo "<span class='label label-danger'>".$rowDetailPeminjaman['loan_status_detail']."</span>";
+                                                            }
+                                                            else {
                                                                 echo "<span class='label label-success'>ACC</span>";
                                                             }
                                                         ?>
@@ -234,25 +239,29 @@
                                                          if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN') {                                                      ?>
                                                    <?php 
                                                     if ($rowStatusLoan['loan_status'] != 'PERPANJANG') {
+                                                        if ( $rowStatusLoan['loan_status'] != 'DIKEMBALIKAN') {
+                                                            
                                                     ?>
                                                      <td>
                                                     <?php 
                                                         // jika status pengajuan tidak ditolak 
-                                                        if ($rowDetailPeminjaman['loan_status_detail'] != 'DITOLAK' AND $rowDetailPeminjaman['loan_status_detail'] != 'PENAWARAN DISETUJI') {
+                                                        if ($rowDetailPeminjaman['loan_status_detail'] != 'DITOLAK' AND $rowDetailPeminjaman['loan_status_detail'] !='DITOLAK TANPA PENAWARAN' AND $rowDetailPeminjaman['loan_status_detail'] != 'PENAWARAN DISETUJI') {
                                                      ?>
                                                      <a href='#ubahstatuspengajuan' class='btn btn-info dim_about' id='custId' data-toggle='modal' 
                                                         data-id='<?php echo $rowDetailPeminjaman['loan_app_detail_id']; ?>'><span class="fa fa-edit"></span> Ubah Status </a> 
 
                                                         <?php  }
-                                                        else{ 
+                                                                 else{ 
+                                                                    
                                                                 $queryreject = mysql_query("SELECT * FROM trx_rejected where loan_app_detail_id_fk = '".$rowDetailPeminjaman['loan_app_detail_id']."'");
                                                                     $roreject =mysql_fetch_array($queryreject); 
                                                          ?>
                                                                 <a href='index.php?hal=peminjaman/pengajuan/penawaran&rejected_id=<?php echo $roreject['rejected_id']; ?>' class='btn btn-warning dim_about' ><span class="fa fa-edit"></span> Lihat Detail </a> 
+
                                                         <?php  } ?>
                                                     </td>
                                                    <?php } ?>
-                                                    <?php }} ?>
+                                                    <?php }}} ?>
                                                      <?php } ?>
                                                 
                                             </tr>

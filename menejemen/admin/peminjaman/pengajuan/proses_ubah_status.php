@@ -92,8 +92,30 @@
 			 }
 		}else if ($status == 'DITOLAK TANPA PENAWARAN' ) {
 			$alasan_penolakan  = $_POST['ditolak_nonpenawaran'];
-			$queryInsert_tanpa_penawaran  = mysql_query("INSERT trx_rejected INTO (loan_app_detail_id_fk,instrument_id_fk) VALUES ('".$idDetail_loans."','".$iddetail_instrumen."') ");
+			$alat_dipinjam = $_POST['loan_app_detail_id'];
+			$loan_app_id_fk = $_POST['loan_app_id_fk'];
+			$invoice_peminjaman = $_POST['loan_invoice'];
+
+			$query_insert_ditolak_tanpa_penawaran = "INSERT INTO  trx_rejected (loan_app_detail_id_fk,instrument_id_fk) VALUES ('".$alat_dipinjam."','".$iddetail_instrumen."')";
+			$run_query_penolakan = mysql_query($query_insert_ditolak_tanpa_penawaran);
+
+			$nilai_pengurangan = mysql_fetch_array(mysql_query("SELECT * FROM trx_loan_application_detail where loan_app_detail_id ='".$alat_dipinjam."' "));
+
+			$queryAmbil_ditolak = "SELECT rejected_id,instrument_id_fk from trx_rejected where loan_app_detail_id_fk = '".$alat_dipinjam."'  AND instrument_id_fk='".$nilai_pengurangan['instrument_id_fk']."'";
+			print_r($queryAmbil_ditolak);
+			$rowIditolak = mysql_fetch_array(mysql_query($queryAmbil_ditolak));
+			$idditolak = $rowIditolak['rejected_id'];
+
+			$query_insert_penolakan = "INSERT INTO trx_rejected_detail (rejected_id_fk,instrument_id_rejected_fk,rejected_detail_loan_amount,rejected_detail_loan_subtotal,rejected_text) 
+			VALUES ('".$idditolak."','".$rowIditolak['instrument_id_fk']."','".$nilai_pengurangan['loan_amount']."','".$nilai_pengurangan['loan_subtotal']."','".$alasan_penolakan."')";
+			$run_insert_detail_penolakan = mysql_query($query_insert_penolakan);
 			
+			$update_detail_loan_penolakan = "UPDATE trx_loan_application_detail SET loan_status_detail='DITOLAK TANPA PENAWARAN'  WHERE loan_app_detail_id = '".$alat_dipinjam."' AND instrument_id_fk='".$iddetail_instrumen."'";
+			$run_query_update_status_penolakan = mysql_query($update_detail_loan_penolakan);
+			 
+			 if ($run_query_update_status_penolakan) {
+			 	echo "<script>alert ('Data berhasil disimpan'); location.href='index.php?hal=peminjaman/pengajuan/penawaran&rejected_id=".$idditolak."'</script>";
+			 }
 
 		}
  ?>
