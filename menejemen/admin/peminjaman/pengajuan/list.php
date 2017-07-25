@@ -73,6 +73,8 @@
                                                                 echo "<label class='label label-warning'>PERPANJANG</label>";
                                                             } elseif ($row_status == 'DIKEMBALIKAN') {
                                                                 echo "<label class='label label-default'>DIKEMBALIKAN</label>";
+                                                            }elseif ($row_status == 'DITOLAK') {
+                                                                echo "<label class='label label-default'>DITOLAK</label>";
                                                             }
                                                             ?>
                                                          </td>

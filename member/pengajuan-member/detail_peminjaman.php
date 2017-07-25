@@ -109,7 +109,7 @@
 			</tr> <br/>
 			<tr>
 				<td colspan="5"><b>Total Bayar = (Total - Potongan)</b></td>
-				<td><b>Rp.<?php echo  rupiah ($sub/2); ?></b></td>
+				<td><b>Rp.<?php echo  rupiah ($roTotal['long_loan'] * $sub/2); ?></b></td>
 			</tr> <br/>
 			<?php } else if ($roTotal['category_id_fk']==5) { // mhs s2 ugm
 				

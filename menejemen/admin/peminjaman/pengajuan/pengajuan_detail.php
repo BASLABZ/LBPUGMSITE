@@ -187,7 +187,7 @@
                                         <tbody>
                                         <?php 
                                         // query utk menampilkan data pengajuan
-                                        $sqldetail = mysql_query("SELECT * FROM trx_loan_application_detail d join ref_instrument i on d.instrument_id_fk = i.instrument_id join trx_loan_application a on d.loan_app_id_fk = a.loan_app_id where a.loan_invoice = '".$invoice."'");
+                                        $sqldetail = mysql_query("SELECT * FROM trx_loan_application_detail d join ref_instrument i on d.instrument_id_fk = i.instrument_id join trx_loan_application a on d.loan_app_id_fk = a.loan_app_id where a.loan_invoice = '".$invoice."' ");
                                         $no =1;
                                         while ($rowDetailPeminjaman = mysql_fetch_array($sqldetail)) { 
                                                 $Temp_tersedia = $rowDetailPeminjaman['intrument_quantity_temp'];
@@ -274,7 +274,7 @@
                 $xs = mysql_fetch_array($rowjumlahsubtotal);
                 $sub = $xs['sub'];
                 // query utk menampilkan total alat, lama pinjam
-                $queryTotal = mysql_query("SELECT a.loan_total_item, a.loan_total_fee, a.long_loan, m.category_id_fk FROM trx_loan_application a JOIN tbl_member m ON a.member_id_fk = m.member_id where a.loan_invoice ='".$invoice."'");
+                $queryTotal = mysql_query("SELECT a.loan_total_item, a.loan_total_fee, a.long_loan, m.category_id_fk FROM trx_loan_application a JOIN tbl_member m ON a.member_id_fk = m.member_id where a.loan_invoice ='".$invoice."' ");
                 while ($roTotal = mysql_fetch_array($queryTotal)){  
                     $potongan = $roTotal['loan_total_fee'];
                     $hasil_akhirs1 = $potongan+$potongan; 

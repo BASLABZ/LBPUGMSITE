@@ -11,7 +11,20 @@
                                          $rowdetail = mysql_fetch_array(mysql_query($query));
     // hapus penawaran
     if (isset($_POST['hapuspenawaran'])) {
-        $queryupdatestatus_pengajuan = mysql_query("UPDATE trx_loan_application set loan_status = 'MENUNGGU ACC FINAL' where loan_app_id = '".$rowdetail['loan_app_id_fk']."' ");
+        $total_biaya = mysql_fetch_array(mysql_query("SELECT * FROM trx_loan_application where loan_invoice = '".$idpengajuan."'"));
+        // hitung pengurangan nilai subtotal
+        $total_biaya['loan_total_fee'];
+        $rowdetail['rejected_detail_loan_amount'];
+        $rowdetail['rejected_detail_loan_subtotal'];
+        $rowdetail['loan_subtotal'];
+        $nilai_jumlah_alat = $total_biaya['loan_total_item'];
+        $alat_update_jumlah = $nilai_jumlah_alat - $rowdetail['loan_amount'] + $rowdetail['rejected_detail_loan_amount'];
+        
+        $nilaipengurang_harga  = $rowdetail['loan_subtotal'] * $rowdetail['loan_amount'];
+        $total = $total_biaya['loan_total_fee'] - $nilaipengurang_harga + $rowdetail['rejected_detail_loan_amount'] * $rowdetail['rejected_detail_loan_subtotal'];
+        
+        $queryupdatestatus_pengajuan = mysql_query("UPDATE trx_loan_application set loan_status = 'MENUNGGU ACC FINAL',loan_total_fee = '".$total."' , loan_total_item = '".$alat_update_jumlah."' where loan_app_id = '".$rowdetail['loan_app_id_fk']."' ");
+
         $queryInstrument = mysql_query("DELETE FROM trx_loan_application_detail where loan_app_detail_id = '".$rowdetail['loan_app_detail_id']."' ");
         $queryHapusPenawaran = mysql_query("DELETE FROM trx_rejected where rejected_id='".$rowdetail['rejected_id']."'");
         $queryHapusPenawaran_detail = mysql_query("DELETE FROM trx_rejected_detail where rejected_detail_id='".$_POST['idreject']."'");
