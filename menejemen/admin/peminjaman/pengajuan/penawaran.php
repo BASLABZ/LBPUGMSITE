@@ -55,6 +55,7 @@
                                         <th>Biaya Alat</th>
                                 		<th>Jumlah Pinjam</th>
                                 		<th>Subtotal</th>
+                                		<th>Keterangan Penolakan</th>
                                 	</thead>
                                 	<tbody>
                                 		<?php 
@@ -64,9 +65,10 @@
                                 		 <tr>
                                 		 	<td><?php echo $rowPenolakan['instrument_name']; ?></td>
                                 		 	<td><span class="label label-danger"><?php echo $rowPenolakan['loan_status_detail']; ?></span></td>
-                                            <td><?php echo $rowPenolakan['instrument_fee']; ?></td>
+                                            <td>Rp <?php echo rupiah($rowPenolakan['instrument_fee']); ?></td>
                                 		 	<td><?php echo $rowPenolakan['loan_amount']; ?></td>
-                                		 	<td><?php echo $rowPenolakan['loan_subtotal']; ?></td>
+                                		 	<td>Rp <?php echo rupiah($rowPenolakan['loan_subtotal']); ?></td>
+                                		 	<td><?php echo $rowPenolakan['rejected_text']; ?></td>
                                 		 </tr>
 
                                 		<?php } ?>
@@ -81,9 +83,8 @@
                             			<th>Nama Alat</th>
                                         <th>Biaya Alat</th>
                             			<th>Jumlah Alat Tersedia</th>
-                            			<th>Jumlah Alat Yang Disarankan</th>
+                            			<th>Jumlah Alat</th>
                             			<th>Subtotal</th>
-                                        <th>Keterangan</th>
                             		</thead>
                             		<tbody>
                             			<?php 
@@ -101,7 +102,7 @@
 
                             			 <tr>
                             			 	<td><?php echo $rowpenawaran['instrument_name']; ?></td>
-                                            <td><?php echo $rowpenawaran['instrument_fee']; ?></td>
+                                            <td>Rp <?php echo rupiah($rowpenawaran['instrument_fee']); ?></td>
                             			 	<td><?php echo $rowpenawaran['instrument_quantity']-$rowpenawaran['intrument_quantity_temp']; ?> </td>
                             			 	<td>
                                                     <form method="POST" >
@@ -117,9 +118,7 @@
                                                              </div>
                                                      </form>           
                                             </td>
-                            			 	<td><?php echo $rowpenawaran['rejected_detail_loan_subtotal']; ?></td>
-                                            <td><?php echo $rowpenawaran['rejected_text']; ?></td>
-                            			 	
+                            			 	<td>Rp <?php echo rupiah($rowpenawaran['rejected_detail_loan_subtotal']); ?></td>
                             			 </tr>
                             			<?php } ?>
                             		</tbody>

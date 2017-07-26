@@ -185,6 +185,10 @@
                                                        <?php 
                                                             if ($rowDetailPeminjaman['loan_status_detail'] == 'MENUNGGU') {
                                                                 echo "<span class='label label-warning'>MENUNGGU</span>";
+                                                            } elseif ($rowDetailPeminjaman['loan_status_detail'] == 'DITOLAK') {
+                                                                echo "<span class='label label-danger'>DITOLAK</span>";
+                                                            } elseif ($rowDetailPeminjaman['loan_status_detail'] == 'PENAWARAN DISETUJI') {
+                                                                echo "<span class='label label-primary'>PENAWARAN DISETUJUI</span>";
                                                             } else {
                                                                 echo "<span class='label label-success'>ACC</span>";
                                                             }

@@ -25,7 +25,15 @@
 				<td><?php echo $rowDetailPeminjaman['instrument_name']; ?></td>
 				<td>
 					<center>
-						<label class="label label-warning dim_about"><span class=""></span> <?php echo $rowDetailPeminjaman['loan_status_detail']; ?></label>
+						<?php if ($status == 'MENUNGGU') {
+							echo "<span class='label label-warning'>MENUNGGU</span>";
+						} elseif ($status == 'ACC') {
+							echo "<span class='label label-primary'>ACC</span>";
+						} elseif ($status =='PENAWARAN DISETUJI') {
+							echo "<span class='label label-info'>PENAWARAN DISETUJUI</span>";
+						} else {
+							echo "<span class='label label-danger'>DITOLAK</span>";
+							}?>
 					</center>
 				</td>
 				<td>Rp <?php echo rupiah($rowDetailPeminjaman['instrument_fee']); ?></td>

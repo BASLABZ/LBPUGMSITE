@@ -30,7 +30,7 @@
                         <a href="index.php"><i class="fa fa-home"></i> <span class="nav-label">HOME</span></a>
                     </li>
                     <li>
-                        <a href="index.php?hal=pengajuan-member/pengajuan-alat"><i class="fa fa-tags"></i> <span class="nav-label">PENGAJUAN</span>
+                        <a href="index.php?hal=pengajuan-member/pengajuan-alat"><i class="fa fa-tags"></i> <span class="nav-label">PEMINJAMAN</span>
                         <!-- peringatan Pengajuan -->
                         <?php include 'peringatan_pengajuan.php'; ?>
                         </a>

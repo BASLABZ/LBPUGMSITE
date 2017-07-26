@@ -2,9 +2,11 @@
 	if (isset($_POST['simpan'])) {
 
 		$password = md5($_POST['password_account']);
-		$queryPassword = mysql_fetch_array(mysql_query("SELECT member_password from tbl_member where member_id = '".$_SESSION['member_id']."' and member_password='".$password."'"));
-		//$member_password = $queryPassword ['member_password'];
-		if ($queryPassword['member_password'] != $password) { // LOGIKANE PIE
+		$queryPassword = (mysql_query("SELECT member_password from tbl_member where member_id = '".$_SESSION['member_id'].""));
+		while ($run_query = mysql_fetch_array($queryPassword)) {
+			$pass = $run_query['member_password'];
+	
+		if ($pass != $password) { // LOGIKANE PIE
 			echo "<script> alert('Password anda salah'); location.href='index.php?hal=saldo/saldo' </script>";exit;
 		} else {
 			// insert table ke trx_saldo
@@ -17,6 +19,7 @@
 		// } else {
 		// 	 echo "<script> alert('Data Gagal Disimpan'); location.href='index.php?hal=saldo/saldo' </script>";exit;
 		// }
+		}
 		}
 	}
  ?> 
@@ -76,7 +79,7 @@
 							<div class="form-group row">
 								<label class="col-md-4">Total Saldo</label>
 								<div class="col-md-6">
-									<input type="text" class="form-control" value="<?php echo rupiah ($total_saldo['total_saldo']); ?>" disabled>
+									<input type="text" class="form-control" value="<?php echo  rupiah ($total_saldo['total_saldo']); ?>" disabled>
 								</div>
 							</div>
 							<div class="form-group row">
