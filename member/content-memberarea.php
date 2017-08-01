@@ -271,10 +271,12 @@
                               ";
                         echo "<div class='col-md-8'>
                           <div class='alert alert-danger alert-dismissable dim_about red-bg' style='border-color: #f8ac59; color: white;'>
+                              <a href='index.php?hal=akun/profil' style='color:white;'>
                               <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
                                 <span class='fa fa-times'></span>
                                LENGKAPI DATA
                                 </b>
+                                </a>
                              </div>
                         </div>";
                        }                  

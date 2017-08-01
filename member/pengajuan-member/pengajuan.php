@@ -92,15 +92,16 @@
                                         <th width="5%">NO</th>
                                         <th width="20%">GAMBAR</th>
                                         <th width="20%">NAMA ALAT</th>
-                                        <th width="8%">JUMLAH ALAT</th>
-                                        <th width="8%">JUMLAH DIPINJAM</th>
-                                        <th width="8%">JUMLAH TERSEDIA</th>
+                                        <th width="8%"> ALAT</th>
+                                        <th width="8%"> DIPINJAM</th>
+                                        <th width="8%"> TERSEDIA</th>
                                         <th width="10%"><center>HARGA SEWA</center></th>
                                         <th width="10%">AKSI</th>    
                                     </tr> 
                                 </thead>
                                 <tbody>
                                     <?php 
+                                            $no = 0;
                                             // menampilkan data alat
                                             $queryI = mysql_query("SELECT instrument_id,instrument_name,instrument_quantity,intrument_quantity_temp,instrument_fee,instrument_picture FROM ref_instrument");
                                             

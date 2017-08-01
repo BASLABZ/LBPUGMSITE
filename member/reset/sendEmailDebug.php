@@ -16,7 +16,7 @@ $mail->SMTPSecure = 'tls';
 $mail->SMTPAuth = true;
 $mail->Username = "lbpugmsite@gmail.com";
 $mail->Password = "k3d0kt3r4n";
-$mail->setFrom('lbpugmsite@gmail.com', 'judul dari x');
+$mail->setFrom('lbpugmsite@gmail.com', 'Reset Password Member');
 $namaPenerimaEmail  = "$emails";
 $mail->addAddress($emails, 'John Doe');
 function get_include_contents($filename) {
