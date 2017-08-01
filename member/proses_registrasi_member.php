@@ -20,7 +20,7 @@
 		$member_idcard_photo = $_FILES['member_idcard_photo']['name'];
 		$queryEmail  = mysql_query("SELECT * FROM tbl_member where member_email ='".$member_email."' ");
 		$cekEMail = mysql_num_rows($queryEmail);
-		$kode = 'b4ss4y4ngm4nd4';
+		$kode = 'm4nd4lbpugm';
             $ency = base64_encode($kode);
 		if ($cekEMail != 0) {
 			 	 echo "<script> alert('Email Sudah Digunakan'); location.href='../index.php' </script>";exit;
