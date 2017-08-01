@@ -10,7 +10,7 @@
 	<div class="form-group">
 		<table>
 			<tr>
-				<td><b>No Invoice&nbsp</b></td>
+				<td><b>No Invoice&nbsp </b></td>
 				<td>:</td>
 				<td><b>&nbsp<?php echo $invoice; ?></b></td>
 			</tr>
@@ -104,45 +104,30 @@
 				<td><?php echo $rowPenagihan['payment_bankname']; ?></td>
 			</tr>
 			<tr>
+				<td colspan="3"><label>FOTO</label>
+				</td>
+				<td><img src="../../surat/<?php echo $rowPenagihan['payment_photo']; ?>" width='400px'></td>
+			</tr>
+			<tr>
 				<td colspan="3"><label>STATUS</label></td>
 				<td>
 					<label>
-						<?php 
-								
-								$pertambahandengansaldo2 = mysql_fetch_array(mysql_query("SELECT * from trx_saldo where loan_app_id_fk = '".$rowPenagihan['loan_app_id']."'"));
-							if ($pertambahandengansaldo2['saldo_total'] >= 0) {
-								
-								 $penambahantransaksi2 = $rowPenagihan['payment_bill']-$rowPenagihan['payment_amount_transfer'] + $pertambahandengansaldo2['saldo_total'];
-								 rupiah($penambahantransaksi2);
-								
-
-								 $jumlahpembayarandansaldo2 = $rowPenagihan['payment_amount_transfer'] + $penambahantransaksi2;
-								if ($penambahantransaksi2 > 0) {
-									
-									echo "PEMBAYARAN VALID";
-									
-								}else if ($penambahantransaksi2 < 0) {
-									echo "PEMBAYARAN TIDAK VALID";
-
-								}
-								 
-							}else{
-
-							}
-
-
-								
-						 ?>
+						PEMBAYARAN <?php echo $rowPenagihan['payment_status']; ?>
 					</label>
+					<p>
+						<?php echo $rowPenagihan['payment_notif']; ?>
+					</p>
 				</td>
 			</tr>
+
+
 		</tfoot>
 	</table>
 	<div class="row well">
 		<form class="role" method="POST" action="index.php?hal=pembayaran/verifikasi_status_pembayaran">
 						<div class="col-md-6">
 							<input type="hidden" name="idpayment" value="<?php echo $rowPenagihan['payment_id']; ?>" >
-							<select class="form-control" name="payment_valid" required id="konfirmasivalidasi">
+							<select class="form-control" name="payment_valid"  id="konfirmasivalidasi">
 								<option value="MENUNGGU KONFIRMASI">MENUNGGU KONFIRMASI</option>
 								<option value="VALID">VALID</option>
 								<option value="TIDAK VALID">TIDAK VALID</option>
@@ -170,10 +155,10 @@
 		  $('#konfirmasivalidasi').on('change',function () {
 		  	if(this.value == "MENUNGGU KONFIRMASI") {
 	          $('#keterangan').hide();
-       		 } if (this.value == 'VALID') {
+       		 }else if (this.value == 'VALID') {
        		 	 $('#keterangan').hide();
-       		 	} if (this.value == 'TIDAK VALID') {
-       		 		$('#keterangan').show();
-       		 	}
+       		 	}else if (this.value == 'TIDAK VALID') {
+       		 		alert('tes');
+       		 }
 		  });
 	</script>

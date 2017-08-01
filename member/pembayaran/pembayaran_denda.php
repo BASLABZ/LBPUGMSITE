@@ -125,15 +125,16 @@
                             <div class="panel panel-primary">
                                 <div class="panel-heading"><span class="fa fa-list"></span> SALDO ANDA</div>
                                 <div class="panel-body">
-                                    <p>Sisa Saldo Anda Adalah : </p>
+                                    <p>Sisa Saldo Anda Adalah :  </p>
                                     <h2 class='btn btn-block btn-warning btn-lg'>
                                         <?php 
-                                        $querySaldo = mysql_query("SELECT sum(saldo_nominal) as total_saldo FROM tbl_saldo where member_id_fk='".$_SESSION['member_id']."'");
+
+                                        $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
                                         $total_saldo = mysql_fetch_array($querySaldo);
                                         if ($total_saldo['total_saldo']=='') {
                                           echo "Rp.0";
                                         }
-                                        echo "".$total_saldo['total_saldo']."</h2>";
+                                        echo "Rp. ".rupiah($total_saldo['total_saldo'])."</h2>";
                                      ?>
 
                                     </h2>

@@ -8,6 +8,17 @@
 
                 }
             }	
+            $row_query = mysql_fetch_array(mysql_query("SELECT * FROM trx_rejected_detail de join trx_rejected re 
+                                        ON de.rejected_id_fk = re.rejected_id
+                                        JOIN trx_loan_application_detail dl 
+                                        ON re.loan_app_detail_id_fk = dl.loan_app_detail_id
+                                        JOIN ref_instrument i
+                                        ON dl.instrument_id_fk = i.instrument_id
+                                        JOIN trx_loan_application lp ON
+                                        dl.loan_app_id_fk = lp.loan_app_id
+                                         where re.rejected_id= '".$rejected_id."'"));
+            $invoice = $row_query['loan_invoice'];
+
  ?>
  <div id="content">
             <div class="container" style="padding-top:30px; ">
@@ -32,6 +43,7 @@
                         <div class="panel-body dim_about">
 
                             <div class="col-md-12">
+                                <a href="index.php?hal=peminjaman/pengajuan/pengajuan_detail&invoice=<?php echo $invoice; ?>" class="btn btn-success">Kembali</a>
                             	<label>INSTRUMENT YANG DITOLAK</label>
                             	<hr>
                             	
@@ -77,7 +89,7 @@
                             		</thead>
                             		<tbody>
                             			<?php 
-                            				$queryPenawaran = mysql_query("SELECT de.rejected_text,de.rejected_detail_id,i.instrument_quantity,x.instrument_name,x.instrument_fee,de.rejected_detail_loan_amount ,de.rejected_detail_loan_subtotal FROM trx_rejected_detail de join trx_rejected re 
+                            				$queryPenawaran = mysql_query("SELECT de.rejected_text,de.rejected_detail_id,i.instrument_quantity,x.intrument_quantity_temp,x.instrument_name,x.instrument_fee,de.rejected_detail_loan_amount ,de.rejected_detail_loan_subtotal FROM trx_rejected_detail de join trx_rejected re 
 										ON de.rejected_id_fk = re.rejected_id
 										JOIN trx_loan_application_detail dl 
 										ON re.loan_app_detail_id_fk = dl.loan_app_detail_id
@@ -91,7 +103,7 @@
 
                             			 <tr>
                             			 	<td><?php echo $rowpenawaran['instrument_name']; ?></td>
-                            			 	<td><?php echo $rowpenawaran['instrument_quantity']-$rowpenawaran['intrument_quantity_temp']; ?></td>
+                            			 	<td><?php echo $rowpenawaran['instrument_quantity']-$rowpenawaran['intrument_quantity_temp']; ?> </td>
                             			 	<td>
                                                     <form method="POST" >
                                                             <div class="form-group row">
