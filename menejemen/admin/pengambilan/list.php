@@ -40,7 +40,7 @@
                                                     $no = 1;
                                                     $querypengambilan = mysql_query("SELECT * FROM trx_loan_application a  JOIN tbl_member m on a.member_id_fk = m.member_id 
                                                         JOIN trx_payment p ON p.loan_app_id_fk = a.loan_app_id
-                                                        where p.payment_valid = 'VALID'   ORDER BY a.loan_app_id DESC");
+                                                        where p.payment_valid = 'VALID' GROUP by a.loan_app_id  ORDER BY a.loan_app_id DESC");
                                                     while ($roPengambilan_alat = mysql_fetch_array($querypengambilan)) {
                                                  ?>
                                                     <tr>

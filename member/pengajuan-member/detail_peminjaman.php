@@ -188,11 +188,17 @@
                                    		 	else if ($sisaHari > 0 AND $hariH['status'] == 'Habis') {
                                    		 		$totalBayarPeminjaman = $ubahstatus['loan_total_fee'];
                                    		 		$denda = $totalBayarPeminjaman * 0.25;
+                                   		 		$query_pembayaran_denda = mysql_fetch_array(mysql_query("SELECT * FROM trx_payment where loan_app_id_fk = '".$querystatuspembayaran['loan_app_id_fk']."' AND payment_category = 'PEMBAYARAN DENDA' AND payment_valid= 'MENUNGGU KONFIRMASI' "));
+
+                                   		 		if ($query_pembayaran_denda['payment_category'] == 'PEMBAYARAN DENDA' and $query_pembayaran_denda['payment_valid'] == 'MENUNGGU KONFIRMASI') {
+                                   		 			echo "<center><b>DATA PEMBAYARAN ANDA SEDANG KAMI PROSES</b></center>";
+                                   		 		}else{
                                    		 		echo "
                                    		 		<a class='btn btn-warning dim_about' href='index.php?hal=pembayaran/pembayaran_denda&id=".$ubahstatus['loan_invoice']."'>Bayar Denda </a>
                                    		 		<p>Anda Dikenakan Denda , <br>Karena Saat Ini Anda Belum Mengembalikan Alat,Anda Melewati Tanggal : ".$hariH['loan_date_return']." <br></p>";
                                    		 		echo "<p>Anda Terlambat Selama :<b> ".$hariH['selisih']." Dan Anda Dikenakan Denda 
                                    		 		Sebesar : Rp.".$denda." </b><br>Dan Kartu Identitas Anda Akan Kami Tahan Sebelum Melakukan Pembayaran Denda</p>";
+                                   		 		}
                                    		 	}
                                    }
                                      ?>

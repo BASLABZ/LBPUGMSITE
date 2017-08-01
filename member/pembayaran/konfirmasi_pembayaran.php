@@ -78,7 +78,7 @@
 
                     }else if ($hasiljumlahSaldoDanTransfer >= $tagihan ) {
                        $nominalkesaldo = $hasiljumlahSaldoDanTransfer-$tagihan;
-                       print_r($nominalkesaldo); 
+                       
                        $querySimpanPayment2 = "INSERT INTO trx_payment (payment_bankname,payment_bill,
                                                                   payment_amount_transfer,
                                                                   payment_amount_saldo,payment_date,

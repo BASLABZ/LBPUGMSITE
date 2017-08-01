@@ -8,54 +8,106 @@
  <?php 
         if (isset($_POST['simpanPembayaranAlat'])) {
                   $fileName = $_FILES['frm_file']['name'];
-                  $paymentBill = $_POST['payment_bill'];
-                  $Ceksaldo = $_POST['cekSaldos'];  
-                  $transfer = $_POST['payment_temp_amount_transfer'];
-                  $penguranganSaldo = $transfer-$paymentBill;
-                  $saldoawal = $_POST['payment_temp_amount_saldo'];
-                  $tanggal_konfirmasi_pembayaran_member = date('Y-m-d',strtotime($_POST['payment_temp_confirm_date']));
+                  $tanggal_konfirmasi_pembayaran_member = date('Y-m-d',strtotime($_POST['payment_confirm_date']));
              $move = move_uploaded_file($_FILES['frm_file']['tmp_name'], '../surat/'.$fileName);
+              $tagihan = $_POST['payment_bill'];
+              $jumlah_transfer = $_POST['payment_amount_transfer'];
+              $saldo_sementara = $_POST['payment_amount_saldo'];
+              $total_pembayaran = $saldo_input + $jumlah_transfer;
+              $saldo_input = $_POST['paymensaldo_'];
              if ($move) {
-                if ($Ceksaldo <= 0) {
-                  $querySimpanPayment = mysql_query("INSERT INTO trx_payment_temp 
-                                                    (bankname,payment_bill,payment_temp_amount_transfer,
-                                                    payment_temp_amount_saldo,payment_temp_date,
-                                                    payment_temp_confirm_date,payment_temp_photo,
-                                                    payment_temp_info,loan_app_id_fk,member_id_fk,payment_status
-                                                    ) 
-                                                VALUES ('".$_POST['bankname']."','".$_POST['payment_bill']."',
-                                                        '".$_POST['payment_temp_amount_transfer']."','".$penguranganSaldo."',NOW(),
-                                                        '".$tanggal_konfirmasi_pembayaran_member."','".$fileName."','".$_POST['payment_temp_info']."',
-                                                        '".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."','TANPA SALDO & MEMBAYAR DENDA')");
-                             $saldobertambah = $penguranganSaldo+$saldoAwal;
-                                                  $querySimpanSaldo = mysql_query("INSERT INTO tbl_saldo 
-                                                                                    (loan_app_id_fk,saldo_nominal,member_id_fk) 
-                                                                                    VALUES ('".$_POST['loan_app_id_fk']."','".$saldobertambah."','".$_SESSION['member_id']."') ");
 
-                                
 
-                }elseif ($Ceksaldo >  0) {
+             
 
-                                                  $saldobertambah = $penguranganSaldo+$saldoAwal;
-                                                  $querySimpanSaldo = mysql_query("INSERT INTO tbl_saldo 
-                                                                                    (loan_app_id_fk,saldo_nominal,member_id_fk) 
-                                                                                    VALUES ('".$_POST['loan_app_id_fk']."','".$saldobertambah."','".$_SESSION['member_id']."') ");
-                                                  $querySimpanPayment = mysql_query( "INSERT INTO trx_payment_temp 
-                                                    (bankname,payment_bill,payment_temp_amount_transfer,
-                                                    payment_temp_amount_saldo,payment_temp_date,
-                                                    payment_temp_confirm_date,payment_temp_photo,
-                                                    payment_temp_info,loan_app_id_fk,member_id_fk,payment_status
-                                                    ) 
-                                                VALUES ('".$_POST['bankname']."','".$_POST['payment_bill']."',
-                                                        '".$_POST['payment_temp_amount_transfer']."','".$saldobertambah."',NOW(),
-                                                        '".$tanggal_konfirmasi_pembayaran_member."','".$fileName."','".$_POST['payment_temp_info']."',
-                                                        '".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."','SALDO & MEMBAYAR DENDA')");
+              if ($saldo_input < 1 OR $saldo_total ='' ) {
+                
+                  if ($total_pembayaran < $tagihan) {
+                     echo "<script> alert('TOTAL TRANFER YANG ANDA INPUTKAN KURANG DARI TAGIHAN'); location.href='index.php?hal=pembayaran/pembayaran_denda&id=".$invoice."' </script>";exit;
+                  }else{
+                    $hasil_pembayaran1 = $total_pembayaran - $tagihan;
+                      $querysimpanpembayaran_denda1 = mysql_query( "INSERT INTO trx_payment (payment_bankname,
+                                                                               payment_bill,
+                                                                               payment_amount_transfer,
+                                                                               payment_amount_saldo,payment_date,
+                                                                              payment_confirm_date,payment_photo,
+                                                                              payment_info,loan_app_id_fk,
+                                                                              member_id_fk,payment_notif,payment_status,
+                                                                              payment_category,payment_verification_date,
+                                                                              payment_valid)
 
-                            
-                           } 
-                if ($updateStatusPeminjaman) {
-                             echo "<script> alert('Terimakasih Data Konfirmasi Pembayaran Denda Berhasil Disimpan'); location.href='index.php?hal=pembayaran/rekap_pembayaran' </script>";exit;
-                           }
+                                                                VALUES ('".$_POST['bankname']."',
+                                                                        '".$_POST['payment_bill']."',
+                                                                        '".$_POST['payment_amount_transfer']."',
+                                                                        '".$hasil_pembayaran1."',
+                                                                        NOW(),NOW(),
+                                                                        '".$fileName."',
+                                                                        '".$_POST['payment_info']."',
+                                                                        '".$_POST['loan_app_id_fk']."',
+                                                                        '".$_SESSION['member_id']."',
+                                                                        '',
+                                                                        'DENGAN SALDO',
+                                                                        'PEMBAYARAN DENDA',
+                                                                        '',
+                                                                        'MENUNGGU KONFIRMASI')");
+
+                    $querySimpanSaldo2 = mysql_query("INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
+                             ('".$hasil_pembayaran1."','','','','DEBIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
+                             ");
+                    if ($querySimpanSaldo2) {
+                        echo "<script> alert('DATA PEMBAYARAN DENDA ANDA TELAH TERSIMPAN DAN KAMI AKAN KONFIRMASI PEMBAYARAN ANDA'); location.href='index.php?hal=pengajuan-member/pengajuan-alat' </script>";exit;
+                    }
+                  }
+
+              }else{
+
+             
+
+                if ($total_pembayaran < $tagihan) {
+                   echo "<script> alert('TOTAL TRANFER YANG ANDA INPUTKAN KURANG DARI TAGIHAN'); location.href='index.php?hal=pembayaran/pembayaran_denda&id=".$invoice."' </script>";exit;
+                   if ($saldo_input > $saldo_sementara) {
+                     echo "<script> alert('SALDO YANG ANDA INPUTKAN MELEBIHI SALDO ANDA'); location.href='index.php?hal=pembayaran/pembayaran_denda&id=".$invoice."' </script>";exit;
+                   }
+                }else{
+                   if ($saldo_input > $saldo_sementara) {
+                     echo "<script> alert('SALDO YANG ANDA INPUTKAN MELEBIHI SALDO ANDA'); location.href='index.php?hal=pembayaran/pembayaran_denda&id=".$invoice."' </script>";exit;
+                   }else{
+                      $hasil_pembayaran2 = $total_pembayaran - $tagihan;
+                      $querysimpanpembayaran_denda2 = mysql_query( "INSERT INTO trx_payment (payment_bankname,
+                                                                               payment_bill,
+                                                                               payment_amount_transfer,
+                                                                               payment_amount_saldo,payment_date,
+                                                                              payment_confirm_date,payment_photo,
+                                                                              payment_info,loan_app_id_fk,
+                                                                              member_id_fk,payment_notif,payment_status,
+                                                                              payment_category,payment_verification_date,
+                                                                              payment_valid)
+
+                                                                VALUES ('".$_POST['bankname']."',
+                                                                        '".$_POST['payment_bill']."',
+                                                                        '".$_POST['payment_amount_transfer']."',
+                                                                        '".$hasil_pembayaran2."',
+                                                                        NOW(),NOW(),
+                                                                        '".$fileName."',
+                                                                        '".$_POST['payment_info']."',
+                                                                        '".$_POST['loan_app_id_fk']."',
+                                                                        '".$_SESSION['member_id']."',
+                                                                        '',
+                                                                        'DENGAN SALDO',
+                                                                        'PEMBAYARAN DENDA',
+                                                                        '',
+                                                                        'MENUNGGU KONFIRMASI')");
+                      $querySimpanSaldo = mysql_query("INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
+                             ('".$hasil_pembayaran2."','','','','DEBIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
+                             ");
+                      if ($querysimpanpembayaran_denda2) {
+                         echo "<script> alert('DATA PEMBAYARAN DENDA ANDA TELAH TERSIMPAN DAN KAMI AKAN KONFIRMASI PEMBAYARAN ANDA'); location.href='index.php?hal=pengajuan-member/pengajuan-alat' </script>";exit;
+                      }
+
+                   }
+                }
+                
+              }
              }
              
         }
@@ -158,15 +210,15 @@
                                         <div class="form-group row">
                                           <label class="col-md-4">TANGGAL PEMBAYARAN</label>
                                           <div class="col-md-6">
-                                            <!-- <input type="date" class="form-control" name="payment_temp_confirm_date" id="tanggal_konfirmasi_pembayaran_member" required /> -->
-                                            <input type="date" class="form-control" name="payment_temp_confirm_date" required />
+                                            <!-- <input type="date" class="form-control" name="payment_confirm_date" id="tanggal_konfirmasi_pembayaran_member" required /> -->
+                                            <input type="text" class="form-control" disabled="" name="payment_confirm_date" required value="<?php echo date('d-m-Y'); ?>" />
                                             
                                           </div>
                                         </div>
                                         <div class="form-group row">
                                           <label class="col-md-4">TOTAL TAGIHAN</label>
                                           <div class="col-md-6">
-                                            <input type="text" name="totalTagihan"  class="form-control" value="<?php echo $total_denda; ?>" readonly  />
+                                            <input type="text" name="totalTagihan"  class="form-control" value="<?php echo rupiah($total_denda); ?>" readonly  />
                                             <input type="hidden" id="tagihan" name="payment_bill" value="<?php echo $total_denda; ?>">
                                           </div>
                                         </div>
@@ -176,35 +228,45 @@
                                             <input type="text" class="form-control" name="bankname"  required />
                                           </div>
                                         </div>
-                                        <div class="form-group row">
-                                          <label class="col-md-4">MENGGUNAKAN SALDO</label>
+                                      <div class="form-group row">
+                                        <?php 
+                                               $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
+                                                 $rowsaldo = mysql_fetch_array($querySaldo);
+                                        ?>
+                                          <label class="col-md-4">MENGGUNAKAN SALDO </label>
                                           <div class="col-md-6">
+                                            <?php 
+                                            if ($rowsaldo['total_saldo'] == '' OR $rowsaldo['total_saldo'] < 1 ) {
+                                              echo "ANDA TIDAK MEMILIKI SALDO";
+                                            }else{
+                                           ?>
                                             <div class="input-group">
                                             <span class="input-group-addon">
-                                              <input type="checkbox" onclick="disabledSaldo(this)"   id="cek">
-                                            </span>
-                                            <input type="text" class="form-control"  id="txtSaldo" disabled="disabled">
+                                               <input type="hidden" onclick="disabledSaldo(this)"   id="cek">
+                                               <input type="checkbox" onclick="disabledSaldo(this)" id="cek">
+                                            </span> 
+                                            <input type="number" class="form-control"  id="txtSaldo" disabled="disabled" name="paymensaldo_" >
                                             <input type="hidden" name="cekSaldos" value="0">
-                                            <input type="hidden" class="form-control"   name="payment_temp_amount_saldo" value="0">
+                                            <input type="hidden" class="form-control"   name="payment_amount_saldo" value="<?php echo $rowsaldo['total_saldo']; ?>" id="paymentsaldo">
                                           </div>
+                                      
                                           <!-- INFROMASI SALDO MEMBER -->
                                            <label id="saldosementara" hidden>
                                             <?php 
-                                               $querySaldo = mysql_query("SELECT sum(saldo_nominal) as total_saldo FROM tbl_saldo where member_id_fk='".$_SESSION['member_id']."'");
-                                                                      $total_saldo = mysql_fetch_array($querySaldo);
-                                                                      if ($total_saldo['total_saldo']=='') {
-                                                                        echo "Rp.0";
-                                                                      }else{
-                                                                         echo "".$total_saldo['total_saldo']."";
-                                                                      }
+                                                if ($rowsaldo['total_saldo'] <= 0) {
+                                                  echo "Rp.0";
+                                                }else{
+                                                   echo "Rp.".rupiah($rowsaldo['total_saldo'])."";
+                                                }
                                              ?>
                                           </label>
+                                              <?php } ?>
                                           </div>
                                         </div>
                                         <div class="form-group row">
                                           <label class="col-md-4">TRANSFER</label>
                                           <div class="col-md-6">
-                                            <input type="text" class="form-control" name="payment_temp_amount_transfer"  id="nominaltransfer"  required/>
+                                            <input type="text" class="form-control" name="payment_amount_transfer"  id="nominaltransfer"  required/>
                                           </div>
                                         </div>
                                         <div class="form-group row">
@@ -216,7 +278,7 @@
                                         <div class="form-group row">
                                           <label class="col-md-4">KETERANGAN</label>
                                           <div class="col-md-6">
-                                            <textarea class="form-control" name="payment_temp_info" required></textarea>
+                                            <textarea class="form-control" name="payment_info" required></textarea>
                                           </div>
                                         </div>
                                         <div class="form-group row">
