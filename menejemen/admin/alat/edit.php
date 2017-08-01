@@ -44,7 +44,7 @@
                 <div class="col-md-12">
                 <div class="panel panel-primary" style="border-color:white; ">
                     <div class="panel-heading dim_about">
-                        <span class="fa fa-pencil"></span> Ubah Master Data Alat /<i>Instrument</i> 
+                        <span class="fa fa-pencil"></span>Master Data Alat 
                         <span class="fa fa-home pull-right"> <i>
                             Home / <span class="fa fa-list"></span> Master / <span class="fa fa-pencil">
                             </span>
@@ -57,7 +57,7 @@
                     <div class="col-md-3"></div>
                     <div class="col-md-6">
                         <div class="panel panel-primary" style="border-color:white;">
-                        <div class="panel-heading">Ubah Alat /<i>Instrument</i></div>
+                        <div class="panel-heading">Ubah Data Alat</div>
                         <div class="panel-body dim_about">
 
                             <div class="col-md-12">

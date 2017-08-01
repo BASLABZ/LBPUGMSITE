@@ -10,7 +10,7 @@
                 <div class="carousel-caption">
                     <h2 style="font-size: 28px;">Laboratorium Bioantropologi  <br/>
                         & Paleoantropologi<br/>
-                        Universitas Gajah Mada [LBP-UGM]</h2>
+                        Universitas Gadjah Mada [LBP-UGM]</h2>
                         <?php 
                             if (isset($_SESSION['member_name'])) {
                          ?>
@@ -30,7 +30,7 @@
                 <div class="carousel-caption blank">
                     <h2 style="font-size: 28px;">Laboratorium Bioantropologi <br/>
                          & Paleoantropologi<br/>
-                        Universitas Gajah Mada [LBP-UGM]</h2>
+                        Universitas Gadjah Mada [LBP-UGM]</h2>
                          <?php 
                             if (isset($_SESSION['member_name'])) {
                          ?>

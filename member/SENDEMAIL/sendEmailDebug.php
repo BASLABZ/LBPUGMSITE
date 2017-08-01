@@ -15,7 +15,7 @@ $mail->Port = 587;
 $mail->SMTPSecure = 'tls';
 $mail->SMTPAuth = true;
 $mail->Username = "lbpugmsite@gmail.com";
-$mail->Password = "kedokteran";
+$mail->Password = "k3d0kt3r4n";
 $mail->setFrom('lbpugmsite@gmail.com', 'Aktifasi Akun Member LBP UGM');
 $namaPenerimaEmail  = "$emails";
 $mail->addAddress($emails, 'John Doe');
