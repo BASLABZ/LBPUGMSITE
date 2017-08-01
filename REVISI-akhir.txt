@@ -1,19 +1,28 @@
  1. kelebihan pembayaran tidak boleh lansung dimasukkan ke dalama saldo member, harus dikonfirmasi valid dahulu
  buat pembayaran perpanjangan dan pembayaran denda.
 
-2. setelah acc final, (kondisi konfirmasi pembayaran dibuat lebih  dari 3 jam) ---> notifnya setelah login masih sama & kok masih bisa konfirmasi pembayaran padahal    sudah telat
+2. setelah acc final, (kondisi konfirmasi pembayaran dibuat lebih  dari 3 jam) ---> notifnya setelah login masih sama & kok masih bisa konfirmasi pembayaran padahal    sudah telat.
+
 3. saldonya juga masih erorr sayang, udah           pake buat bayar tp saldonya enggak berkurang. ttp segitu aja. aku cek di database trx_payment (kondisi aku bayarnya     transfer+saldo) kok yg kesimpen cuma payment_amount_transfer, yg payment_amount_saldo enggak. payment_amount_saldo itu buat nampung nominal yg kita inputin di form     pembayaran kan sayang
+
 4. penolakan belum berfungsi, yg penolakan aja (jadi tidak ada penawaran/tidak ada alat yg disarankan), kondisi ini bisa terjadi kalo alat rusak atau mau dipake pihak     lab.
-5. kategorinya mahasiswa kurang 1 :( ----> Mahasiswa S1 UGM 
-6. mengajukan 2 alat (ditotak & ditolak beserta penawaran), setelah data penawaran disetujui (lihat pada koordinator penelitian), di detail peminjaman -->> data alat yg ditolak tetap terhitung pada subtotal, jadinya total bayarnya juga salah
+
+5. kategorinya mahasiswa kurang 1 :( ----> Mahasiswa S1 UGM.
+
+6. mengajukan 2 alat (ditotak & ditolak beserta penawaran), setelah data penawaran disetujui (lihat pada koordinator penelitian), di detail peminjaman -->> data alat yg ditolak tetap terhitung pada subtotal, jadinya total bayarnya juga salah.
+
 7. pembatalan peminjaman (hangus)ketika dalan waktu 3 jam tidak konfirmasi pembayaran
 koordinator, ketika dipilih ditolak tanpa penawaran kok data yg disarankan tetep ada datanya (isi data sama dengan data yg ditolak) --------------
+
 8. 1 orang hanya dapat melakukan 1 peminjaman (kalo sebelumnya sudah pinjam dan belum kembali alatnya, tidak bisa pinjam lg sebelum dikembalikan), trs kalo ngajuin 2 posisi dua2nya blm di konfirmasi gimana
+
 9. notifikasi angka pada menu di sidebar
-10. pas ada alat yg ditolak (tanpa penawaran), button pada aksi kan button cheklist, trs liat reason penolakannya gimana 
+
+10. pas ada alat yg ditolak (tanpa penawaran), button pada aksi kan button cheklist, trs liat reason penolakannya gimana ?
+
 11. koordinator penelitian, ketika status alat dipilih tolak tanpa penawaran, kok textarea utk reason ada 2, dan masih ada button utk menyarankan alat (lihat perbedaan setelah login langsung buka detail & refresh), setelah di refresh jadi normal? harus du refresh dulu , normal maksudnya yg muncul cuma 1 textarea aj	
 12. member, ketika status alat berubah menjadi penawaran disetujui kok masih ada button batalkan pengajuan
-13. member, ketika ada penawaran dan penawaran tidak disetujui datanya alat yg diajukan sebelumnya kok juga dihapus? detail jadi tidak ada isinya,, terus kok statusnya langsung berubah menjadi menunggu acc final . kalo tidak disetujui diganti dibatalkan saja
+13. member, ketika ada penawaran dan penawaran tidak disetujui datanya alat yg diajukan sebelumnya kok juga dihapus? detail jadi tidak ada isinya, terus kok statusnya langsung berubah menjadi menunggu acc final . kalo tidak disetujui diganti dibatalkan saja
 14. total bayar & tagihan pada konfirmasi pembayaran masih salah INV 003
 15. data pembayaran yg di rekap member itu yg muncul cuma yg sudah dikonfirmasi? yg lg menunggu gak bisa?
 16. kelebihan pembayaran pada denda otomatis masuk saldo :((

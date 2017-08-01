@@ -44,12 +44,27 @@
 
 				<td>
 					<?php if ($status == 'DITOLAK' ) {
+
 						echo "<a style='margin-left:10px;' href='index.php?hal=pengajuan-member/lihat_penawaran&id=".$rowDetailPeminjaman['loan_app_detail_id']."&idpengajuan=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-info btn-xs dim_about'><span class='fa fa-eye'> Lihat Detail</span></a>";
 						// echo "<a style='margin-left:10px;' href='index.php?hal=members/list&hapus=".$rowDetailPeminjaman['loan_app_detail_id']."&jumlah=".$rowDetailPeminjaman['loan_amount']."&subtotal=".$rowDetailPeminjaman['loan_subtotal']."&invoice=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-danger'><span class='fa fa-trash'></span></a>";
 						
 						
 					}else if ($status == 'PENAWARAN') {
 						echo "<a href='index.php?hal=members/list&hapus=".$rowDetailPeminjaman['loan_app_detail_id']."&jumlah=".$rowDetailPeminjaman['loan_amount']."&subtotal=".$rowDetailPeminjaman['loan_subtotal']."&invoice=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-danger dim_about'><span class='fa fa-trash'></span></a>";
+					}elseif ($status == 'DITOLAK TANPA PENAWARAN') {
+	                        $queryPermintaan = mysql_query("SELECT * FROM trx_rejected_detail de join trx_rejected re 
+	                        ON de.rejected_id_fk = re.rejected_id
+	                        JOIN trx_loan_application_detail dl 
+	                        ON re.loan_app_detail_id_fk = dl.loan_app_detail_id
+	                        JOIN ref_instrument i
+	                        ON dl.instrument_id_fk = i.instrument_id
+	                        where dl.loan_app_detail_id = '".$rowDetailPeminjaman['loan_app_detail_id']."'");
+
+                            while ($rowPenolakan = mysql_fetch_array($queryPermintaan)) {
+                            	
+                            	echo "Ket : "; echo $rowPenolakan['rejected_text'];
+                            }
+                                         
 					}
 					else{
 						echo "<center><button class='btn btn-success dim_about btn-xs'><span class='fa fa-check'></span></button></center>";

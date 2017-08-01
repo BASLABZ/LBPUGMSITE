@@ -1,5 +1,6 @@
 <?php 
 	$rejected_id = $_GET['rejected_id'];
+    
         if (isset($_POST['ubahnilaialat'])) {
                     $subtotal = $_POST['jumlahalat'] * $_POST['rejected_detail_loan_subtotal'];
                 $queryubahnilaialat = mysql_query("UPDATE  trx_rejected_detail SET rejected_detail_loan_subtotal = '".$subtotal."', rejected_detail_loan_amount = '".$_POST['jumlahalat']."' WHERE rejected_detail_id = '".$_POST['rejected_detail_id']."'");

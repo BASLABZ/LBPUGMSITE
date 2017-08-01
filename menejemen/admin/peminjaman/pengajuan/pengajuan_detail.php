@@ -164,6 +164,7 @@
                                             </div>
                                         <?php } ?>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-12">
                                         <table class="table table-responsive table-striped table-hover table-bordered table-pengajuan">
@@ -211,7 +212,7 @@
                                                             } else if ($rowDetailPeminjaman['loan_status_detail'] == 'DITOLAK TANPA PENAWARAN') {
                                                                 echo "<span class='label label-danger'>DITOLAK</span>";
                                                             }
-                                                            else if ($rowDetailPeminjaman == 'ACC'){
+                                                            else if ($rowDetailPeminjaman['loan_status_detail'] == 'ACC'){
                                                                 echo "<span class='label label-success'>ACC</span>";
                                                             }
                                                         ?>
@@ -232,19 +233,21 @@
                                                     // jumlah alat dipinjam (per jenis alat)
                                                     echo "".$rowDetailPeminjaman['loan_amount'].""; ?>
                                                     </center></td>
-                                                <td>Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
+                                                <td>
+
+                                                    Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
+
                                                     <?php 
                                                         // jika level bukan kepala lab (koor p)
                                                         if ($_SESSION['level_name'] != 'kepala laboratorium') {
                                                      ?>
-                                                     <?php 
-                                                        if ($_SESSION['level_name'] == 'koordinator penelitian') {   
-                                                         if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN') {                                                      ?>
-                                                   <?php 
-                                                    if ($rowStatusLoan['loan_status'] != 'PERPANJANG') {
-                                                        if ( $rowStatusLoan['loan_status'] != 'DIKEMBALIKAN') {
-                                                            
-                                                    ?>
+                                                         <?php 
+                                                            if ($_SESSION['level_name'] == 'koordinator penelitian') {   
+                                                             if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN') {                                                      ?>
+                                                           <?php 
+                                                            if ($rowStatusLoan['loan_status'] != 'PERPANJANG') {
+                                                                if ( $rowStatusLoan['loan_status'] != 'DIKEMBALIKAN') {?>
+                                                                
                                                      <td>
                                                     <?php 
                                                         // jika status pengajuan tidak ditolak 
@@ -270,6 +273,11 @@
                                             </tr>
                                             <?php } ?>
                                         </tbody> 
+
+
+
+
+
                 <?php 
                 // query utk menghitung subtotal di tfoot
                 $rowjumlahsubtotal = mysql_query("SELECT sum(loan_subtotal) as sub   FROM trx_loan_application_detail d join trx_loan_application x 

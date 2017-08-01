@@ -114,7 +114,9 @@
                                                 }
                                            ?>
                                         </td>  
-                                        <?php echo "<td><center><a href='#detail_peminjaman'  class='' id='custId' data-toggle='modal' data-id='".$rowPeminjaman['loan_invoice']."'><span class=''></span> Lihat Detail</a></center></td>"; ?>
+                                        <td><center>
+
+                                        <a href='#detail_peminjaman'  class='' id='custId' data-toggle='modal' data-id='<?php echo $rowPeminjaman['loan_invoice']; ?>'><span class=''></span> Lihat Detail</a></center></td>
                                 </tr>
                           <?php } 
                           }?> 
