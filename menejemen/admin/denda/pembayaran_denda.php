@@ -69,28 +69,13 @@
         
     </div>
 </div>
-<div class="modal fade modal-lg" id="detail_pengajuan" role="dialog" >
-        <div class="modal-dialog" role="document" style="width:900px; ">
-            <div class="modal-content">
-                <div class="modal-header" style="background-color: #1ab394; color:white;">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="fa fa-flask"></span> Detail Pengajuan</h4>
-                </div>
-                <div class="modal-body" style="padding-top:10px; ">
-                    <div class="detail_pengajuan-data"></div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger dim_about" data-dismiss="modal"><span class="fa fa-times"></span> Keluar</button>
-                </div>
-            </div>
-        </div>
-</div>
+
 <div class="modal fade modal-lg" id="detail_peminjaman_yangdibayar_denda" role="dialog" >
         <div class="modal-dialog" role="document" style="width:900px; ">
             <div class="modal-content">
                 <div class="modal-header" style="background-color: #1ab394; color:white;">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><span class="fa fa-flask"></span> DETAIL PEMINJAMAN & KONFIRMASI PEMINJAMAN</h4>
+                    <h4 class="modal-title"><span class="fa fa-flask"></span> DETAIL INFORMASI DENDA</h4>
                 </div>
                 <div class="modal-body">
                     <div class="slipPenagihan-data"></div>
@@ -103,20 +88,7 @@
 </div>
 <!-- show peminjaman modal -->
   <script type="text/javascript">
-    $(document).ready(function(){
-        $('#detail_pengajuan').on('show.bs.modal', function (e) {
-            var rowid = $(e.relatedTarget).data('id');
-            //menggunakan fungsi ajax untuk pengambilan data
-            $.ajax({
-                type : 'post',
-                url : 'peminjaman/pengajuan/detail_pengajuan.php',
-                data :  'id='+ rowid,
-                success : function(data){
-                $('.detail_pengajuan-data').html(data);//menampilkan data ke dalam modal
-                }
-            });
-         });
-    });
+    
     $(document).ready(function(){
         $('#detail_peminjaman_yangdibayar_denda').on('show.bs.modal', function (e) {
             var rowid = $(e.relatedTarget).data('id');

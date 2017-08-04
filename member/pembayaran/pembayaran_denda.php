@@ -24,29 +24,29 @@
                   }else {
                     $hasil_pembayaran1 = $total_pembayaran - $tagihan; 
                       $querysimpanpembayaran_denda1 = mysql_query( "INSERT INTO trx_payment (payment_bankname,
-                                                                               payment_bill,
-                                                                               payment_amount_transfer,
-                                                                               payment_amount_saldo,payment_date,
-                                                                              payment_confirm_date,payment_photo,
-                                                                              payment_info,loan_app_id_fk,
-                                                                              member_id_fk,payment_notif,payment_status,
-                                                                              payment_category,payment_verification_date,
-                                                                              payment_valid)
+                       payment_bill,
+                       payment_amount_transfer,
+                       payment_amount_saldo,payment_date,
+                      payment_confirm_date,payment_photo,
+                      payment_info,loan_app_id_fk,
+                      member_id_fk,payment_notif,payment_status,
+                      payment_category,payment_verification_date,
+                      payment_valid)
 
-                                                                VALUES ('".$_POST['bankname']."',
-                                                                        '".$_POST['payment_bill']."',
-                                                                        '".$_POST['payment_amount_transfer']."',
-                                                                        '".$hasil_pembayaran1."',
-                                                                        NOW(),NOW(),
-                                                                        '".$fileName."',
-                                                                        '".$_POST['payment_info']."',
-                                                                        '".$_POST['loan_app_id_fk']."',
-                                                                        '".$_SESSION['member_id']."',
-                                                                        '',
-                                                                        'DENGAN SALDO',
-                                                                        'PEMBAYARAN DENDA',
-                                                                        '',
-                                                                        'MENUNGGU KONFIRMASI')");
+                      VALUES ('".$_POST['bankname']."',
+                              '".$_POST['payment_bill']."',
+                              '".$_POST['payment_amount_transfer']."',
+                              '".$hasil_pembayaran1."',
+                              NOW(),NOW(),
+                              '".$fileName."',
+                              '".$_POST['payment_info']."',
+                              '".$_POST['loan_app_id_fk']."',
+                              '".$_SESSION['member_id']."',
+                              '',
+                              'DENGAN SALDO',
+                              'PEMBAYARAN DENDA',
+                              '',
+                              'MENUNGGU KONFIRMASI')");
 
                     $querySimpanSaldo2 = mysql_query("INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
                              ('".$hasil_pembayaran1."','','','','DEBIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
@@ -108,6 +108,15 @@
              }
              
         }
+  ?>
+  <?php 
+         $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
+           $rowsaldo = mysql_fetch_array($querySaldo);
+           
+           $query_saldo_penarikan  = mysql_query("SELECT SUM(saldo_cashout_amount) as total_penarikan FROM trx_saldo where member_id_fk = '".$_SESSION['member_id']."'");
+           $row_saldo_penarikan  = mysql_fetch_array($query_saldo_penarikan);
+           $sisa_saldo = $rowsaldo['total_saldo'] - $row_saldo_penarikan['total_penarikan'];
+
   ?>
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
@@ -198,13 +207,10 @@
                                     <p>Jumlah saldo yang Anda miliki saat ini adalah :  </p>
                                     <h2 class='btn btn-block btn-warning btn-lg'>
                                         <?php 
-
-                                        $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
-                                        $total_saldo = mysql_fetch_array($querySaldo);
-                                        if ($total_saldo['total_saldo']=='') {
+                                        if ($sisa_saldo=='') {
                                           echo "Rp.0";
                                         }
-                                        echo "Rp ".rupiah($total_saldo['total_saldo'])."</h2>";
+                                        echo "Rp ".rupiah($sisa_saldo)."</h2>";
                                      ?>
 
                                     </h2>
@@ -247,14 +253,11 @@
                                           </div>
                                         </div>
                                       <div class="form-group row">
-                                        <?php 
-                                               $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
-                                                 $rowsaldo = mysql_fetch_array($querySaldo);
-                                        ?>
+                                      
                                           <label class="col-md-4">MENGGUNAKAN SALDO </label>
                                           <div class="col-md-6">
                                             <?php 
-                                            if ($rowsaldo['total_saldo'] == '' OR $rowsaldo['total_saldo'] < 1 ) {
+                                            if ($sisa_saldo == '' OR $sisa_saldo < 1 ) {
                                               echo "ANDA TIDAK MEMILIKI SALDO";
                                             }else{
                                            ?>
@@ -265,16 +268,15 @@
                                             </span> 
                                             <input type="number" class="form-control"  id="txtSaldo" disabled="disabled" name="paymensaldo_" >
                                             <input type="hidden" name="cekSaldos" value="0">
-                                            <input type="hidden" class="form-control"   name="payment_amount_saldo" value="<?php echo $rowsaldo['total_saldo']; ?>" id="paymentsaldo">
+                                            <input type="hidden" class="form-control"   name="payment_amount_saldo" value="<?php echo $sisa_saldo; ?>" id="paymentsaldo">
                                           </div>
-                                      
                                           <!-- INFROMASI SALDO MEMBER -->
                                            <label id="saldosementara" hidden>
                                             <?php 
-                                                if ($rowsaldo['total_saldo'] <= 0) {
+                                                if ($sisa_saldo <= 0) {
                                                   echo "Rp.0";
                                                 }else{
-                                                   echo "Rp.".rupiah($rowsaldo['total_saldo'])."";
+                                                   echo "Rp.".rupiah($sisa_saldo)."";
                                                 }
                                              ?>
                                           </label>

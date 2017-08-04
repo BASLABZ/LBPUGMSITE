@@ -171,6 +171,9 @@
                     						echo "<a href='index.php?hal=pembayaran/preview_rekappembayaran_perinvoice&id=".$invoice."' h class='btn  btn-info dim_about'><span class='fa fa-print'></span> CETAK INVOICE</a>";
                     					}                 
                                   
+                                   }else if ($statusKonfirmasi == 'PERPANJANG') {
+                    					echo "<a href='index.php?hal=perpanjang/list&id=".$invoice."' h class='btn  btn-info dim_about'><span class='fa fa-print'></span> CETAK INVOICE</a>";              
+                                  
                                    } 
                                    // jika status peminjaman acc final -> button konfirm pmbayaran
                                    else if ($statusKonfirmasi == 'ACC FINAL') {

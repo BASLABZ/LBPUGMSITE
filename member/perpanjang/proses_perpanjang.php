@@ -29,7 +29,7 @@
        $queryupdatestatusloan = mysql_query("UPDATE trx_loan_application set loan_status = 'PERPANJANG' where loan_invoice = '".$invoice."'");
        
         if ($queryupdatestatusloan) {
-            echo "<script> alert('Terimakasih Data Berhasil Disimpan & Tunggu Konfirmasi Dari Kami'); location.href='index.php?hal=perpanjang/list&invoice=".$invoice."' </script>";exit;
+            echo "<script> alert('Terimakasih Data Berhasil Disimpan & Tunggu Konfirmasi Dari Kami'); location.href='index.php?hal=perpanjang/list&id=".$invoice."' </script>";exit;
         }
 
  ?>

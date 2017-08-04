@@ -134,32 +134,28 @@
 								<option value="TIDAK VALID">TIDAK VALID</option>
 							</select>
 						</div>
-						<div class="col-md-12" id="keterangan" hidden>
-						<br>
-							<label>Alasan Tidak Valid</label>
-							<textarea class="form-control" name="payment_notif"></textarea>
-							
-						<br>
+						<div class="row">
+							<div class="row" id="keterangan" hidden>
+							<label class="col-md-3">Keterangan Tidak Valid</label>
+							<div class="col-md-9"><textarea class="form-control" name="payment_notif"></textarea></div>
 						</div>
-						<p>
-								<?php echo $rowPenagihan['payment_notif']; ?>
-							</p>
+						</div>
+						<p><?php echo $rowPenagihan['payment_notif']; ?></p>
 						<div class="col-md-3" style="padding-top: 3px;">
 							<button type="submit" class="btn btn-info btn-sm"><span class="fa fa-check
 							"></span> VERIFIKASI PEMBAYARAN</button>
 						</div>
-
 					</form>
-	</div>
+				</div>
 	
-	<script type="text/javascript">
-		  $('#konfirmasivalidasi').on('change',function () {
-		  	if(this.value == "MENUNGGU KONFIRMASI") {
-	          $('#keterangan').hide();
-       		 }else if (this.value == 'VALID') {
-       		 	 $('#keterangan').hide();
-       		 	}else if (this.value == 'TIDAK VALID') {
-       		 		alert('tes');
-       		 }
-		  });
-	</script>
+				<script type="text/javascript">
+					  $('#konfirmasivalidasi').on('change',function () {
+					  	if(this.value == "MENUNGGU KONFIRMASI") {
+				          $('#keterangan').hide();
+			       		 }else if (this.value == 'VALID') {
+			       		 	 $('#keterangan').hide();
+			       		 	}else if (this.value == 'TIDAK VALID') {
+			       		 		$('#keterangan').show();
+			       		 }
+					  });
+				</script>
