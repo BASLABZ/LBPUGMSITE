@@ -13,6 +13,20 @@
 ?>
 <form class="role" method="POST" action="index.php?hal=pengembalian/proses_pengembalian_alat">
 <div class="row">
+<div class="col-md-12">
+	<?php 
+		
+		$query_notifikasi_pengembalian  = mysql_query("SELECT trx_loan_application.* , current_date tanggal , datediff(current_date,loan_date_return) selisih , case when datediff(current_date,loan_date_return)>0 then 'Habis' else 'aktif' end status from trx_loan_application where loan_invoice = '".$invoice."'");
+		$row_notif = mysql_fetch_array($query_notifikasi_pengembalian);
+		$selisih = $row_notif['selisih'];
+		if ($selisih > 0 ) {
+			echo "Terlambat ";
+			echo $selisih;
+			echo "Hari";
+		}
+	 ?>
+	
+</div>
 	<div class="col-md-12">
 		
 			<div class="form-group row">

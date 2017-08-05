@@ -46,24 +46,25 @@
                                   <span class='fa fa-bookmark'></span> <b>KETERANGAN PEMBAYARAN</b></br>
                                 Hi ".$rowPeringatan['member_name'].", data pembayaran peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." telah terkirim. <br/>Mohon tunggu verifikasi pembayaran dari kami. Pembayaran yang sudah diverifikasi akan mengarahkan Anda menuju langkah selanjutnya. 
                                 </div> ";
-                        $pembayaran = mysql_query("SELECT payment_valid, payment_notif from trx_payment where loan_app_id_fk ='".$idPeminjaman."' AND member_id_fk ='".$_SESSION['member_id']."' ");
-                        $run_pembayaran = mysql_fetch_array($pembayaran);
-                        $keterangan = $run_pembayaran['payment_valid'];
-                        if ($keterangan == 'VALID') {
-                          echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
-                               <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
-                                  <span class='fa fa-bookmark'></span> <b>STATUS PEMBAYARAN</b></br>
-                                Hi ".$rowPeringatan['member_name'].", status pembayaran peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah <b>: VALID</b> <br/>Silahkan cetak invoice untuk melakukan pengambilan alat.<b><a href='index.php?hal=pengajuan-member/pengajuan-alat'> Lihat Data Selengkapnya</a></b> 
-                                </div> ";
-                        } elseif ($keterangan == 'TIDAK VALID'){
-                            echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
-                               <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
-                                  <span class='fa fa-bookmark'></span> <b>STATUS PEMBAYARAN</b></br>
-                                Hi ".$rowPeringatan['member_name'].", status pembayaran peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah <b>: TIDAK VALID</b> <br/>Keterangan Tidak Valid : <b>".$run_pembayaran['payment_notif']."</b><br/>Pembayaran yang dinyatakan tidak valid tidak bisa melanjutkan proses selanjutnya. Silahkan melakukan pembayaran kekurangan dan konfirmasi ulang.<b><a href='index.php?hal=pengajuan-member/pengajuan-alat'> Lihat Data Selengkapnya</a></b> 
-                                </div> ";
-                        } else{
+                                // status pembayaran
+                                $pembayaran = mysql_query("SELECT payment_valid, payment_notif from trx_payment where loan_app_id_fk ='".$idPeminjaman."' AND member_id_fk ='".$_SESSION['member_id']."' ");
+                                $run_pembayaran = mysql_fetch_array($pembayaran);
+                                $keterangan = $run_pembayaran['payment_valid'];
+                                if ($keterangan == 'VALID') {
+                                  echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
+                                       <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
+                                          <span class='fa fa-bookmark'></span> <b>STATUS PEMBAYARAN</b></br>
+                                        Hi ".$rowPeringatan['member_name'].", status pembayaran peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah <b>: VALID</b> <br/>Silahkan cetak invoice untuk melakukan pengambilan alat.<b><a href='index.php?hal=pengajuan-member/pengajuan-alat'> Lihat Data Selengkapnya</a></b> 
+                                        </div> ";
+                                } elseif ($keterangan == 'TIDAK VALID'){
+                                    echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
+                                       <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
+                                          <span class='fa fa-bookmark'></span> <b>STATUS PEMBAYARAN</b></br>
+                                        Hi ".$rowPeringatan['member_name'].", status pembayaran peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah <b>: TIDAK VALID</b> <br/>Keterangan Tidak Valid : <b>".$run_pembayaran['payment_notif']."</b><br/>Pembayaran yang dinyatakan tidak valid tidak bisa melanjutkan proses selanjutnya. Silahkan melakukan pembayaran kekurangan dan konfirmasi ulang.<b><a href='index.php?hal=pengajuan-member/pengajuan-alat'> Lihat Data Selengkapnya</a></b> 
+                                        </div> ";
+                                } else{
 
-                        }
+                                }
                     } elseif ($statusKonfirmasi == 'DIPINJAM') {
                         echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
                                <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>

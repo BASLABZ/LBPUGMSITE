@@ -1,0 +1,10 @@
+ 1. kelebihan pembayaran tidak boleh lansung dimasukkan ke dalama saldo member, harus dikonfirmasi valid dahulu
+ buat pembayaran perpanjangan dan pembayaran denda.
+
+2. setelah acc final, (kondisi konfirmasi pembayaran dibuat lebih  dari 3 jam) ---> notifnya setelah login masih sama & kok masih bisa konfirmasi pembayaran padahal    sudah telat
+3. saldonya juga masih erorr sayang, udah           pake buat bayar tp saldonya enggak berkurang. ttp segitu aja. aku cek di database trx_payment (kondisi aku bayarnya     transfer+saldo) kok yg kesimpen cuma payment_amount_transfer, yg payment_amount_saldo enggak. payment_amount_saldo itu buat nampung nominal yg kita inputin di form     pembayaran kan sayang
+4. penolakan belum berfungsi, yg penolakan aja (jadi tidak ada penawaran/tidak ada alat yg disarankan), kondisi ini bisa terjadi kalo alat rusak atau mau dipake pihak     lab.
+5. kategorinya mahasiswa kurang 1 :( ----> Mahasiswa S1 UGM 
+
+
+
