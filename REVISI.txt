@@ -7,11 +7,19 @@
 
 4. penarikan saldo aku bikin belum berhasil mas -------------------------------
 
+<<<<<<< HEAD
+5. status pada data pengajuan kok bisa diubah2 oleh koordinator (misal tadinya dipinjam atau dikembalikan dll bisa diubah jadi menunggu bisa juga menunggu acc final       bisa juga tolak dan penawaran) :(((((( (FIXED)
+
+6. pembayaran peminjaman alat dan perpanjangan dibedakan, jadi di pembayaran gak jadi pake combo box pada jenis pembayaran (dibikin disable)
+
+7. Perpanjangan macet
+=======
 5. status pada data pengajuan kok bisa diubah2 oleh koordinator (misal tadinya dipinjam atau dikembalikan dll bisa diubah jadi menunggu bisa juga menunggu acc final       bisa juga tolak dan penawaran) :(((((( ---------------
 
 6. pembayaran peminjaman alat dan perpanjangan dibedakan, jadi di pembayaran gak jadi pake combo box pada jenis pembayaran (dibikin disable)
 7. Perpanjangan macet ---------------------
 
+>>>>>>> 1f6ff0ef9b954f90758b0cae11db3ef5c96864dd
 8. setelah acc final, (kondisi konfirmasi pembayaran dibuat lebih  dari 3 jam) ---> notifnya setelah login masih sama & kok masih bisa konfirmasi pembayaran padahal    sudah telat
 
 9. mas pas aku nyoba pembayaran peminjaman, saldonya bisa tak tembak. misal aku punya saldo 100.000, tp saldo yg mau aku pake buat bayar tak input 120.000 mau e,     padahal kan nggak boleh -------------------
