@@ -1,9 +1,14 @@
 <?php
 	$querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
+	$querySaldo_penarikan = mysql_query("SELECT sum(saldo_cashout_amount) penarikan FROM trx_saldo where member_id_fk= '".$_SESSION['member_id_fk']."'");
+	$total_penarikan_saldo = mysql_fetch_array($querySaldo_penarikan);
+
 	    $total_saldo = mysql_fetch_array($querySaldo);
+
 	    $query_saldo_terakhir = mysql_fetch_array(mysql_query("SELECT * FROM trx_saldo where member_id_fk = '".$_SESSION['member_id']."' ORDER BY member_id_fk DESC"));
 	    $saldo_terakhir = $query_saldo_terakhir['saldo_total']; 
-
+	    $sisa_saldo_member = $saldo_terakhir - $total_penarikan_saldo['penarikan'];
+	    
 	if (isset($_POST['simpan'])) {
 		$total_saldo_cek = $total_saldo['total_saldo'];
 		$passwordakun = md5($_POST['password_account']);
@@ -78,7 +83,7 @@
 			    if ($total_saldo['total_saldo']=='') {
 			      echo "Rp.0";
 			    }
-			    echo "<h1>Rp ".rupiah($total_saldo['total_saldo'])."</h1>";
+			    echo "<h1>Rp ".rupiah($sisa_saldo_member)."</h1>";
 			 ?></center>
 					</div>
 				</div>
@@ -101,7 +106,7 @@
 							<div class="form-group row">
 								<label class="col-md-4">Total Saldo</label>
 								<div class="col-md-6">
-									<input type="text" class="form-control" value="<?php echo  rupiah ($total_saldo['total_saldo']); ?>" disabled>
+									<input type="text" class="form-control" value="<?php echo  rupiah ($sisa_saldo_member); ?>" disabled>
 								</div>
 							</div>
 							<div class="form-group row">
