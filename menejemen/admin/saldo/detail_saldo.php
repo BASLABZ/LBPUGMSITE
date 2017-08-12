@@ -1,4 +1,4 @@
-<table class="table table-responsive table-hover table-bordered" >
+<table class="table table-responsive table-hover table-striped" >
 	<thead>
 		<th>No</th>
 		<th>Tanggal</th>
@@ -11,9 +11,10 @@
 		<tbody>	
 			<?php 
 				include '../../inc/inc-db.php';
+
 				$nourut = 1;
 				$id = $_POST['id'];
-				$query_saldo = mysql_query("SELECT * FROM trx_saldo s JOIN tbl_member m ON s.member_id_fk = m.member_id where m.member_id = '".$id."' ");
+				$query_saldo = mysql_query("SELECT * FROM trx_saldo s JOIN tbl_member m ON s.member_id_fk = m.member_id join trx_loan_application t on s.loan_app_id_fk=t.loan_app_id where m.member_id = '".$id."' ");
 				while ($row_history = mysql_fetch_array($query_saldo)) {
 			 ?>
 			 <tr>
