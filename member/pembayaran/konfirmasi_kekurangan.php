@@ -1,4 +1,5 @@
 <?php 
+include '../../inc/inc-db.php';
             // preview tagihan
             $invoice = $_GET['id'];
             $rowPenagihan = mysql_fetch_array(mysql_query("SELECT * FROM trx_loan_application a JOIN tbl_member m on a.member_id_fk = m.member_id where loan_invoice = '".$invoice."'"));
@@ -377,7 +378,7 @@
                                         <div class="form-group row">
                                           <label class="col-md-5">JENIS PEMBAYARAN</label>
                                           <div class="col-md-6">
-                                              <input type="text" class="form-control" name="payment_category" value="PEMINJAMAN ALAT" readonly>
+                                              <input type="text" class="form-control" name="payment_category" value="KEKURANGAN PEMBAYARAN" readonly>
                                           </div>
                                         </div>
                                         <div class="form-group row">
@@ -385,6 +386,17 @@
                                           <div class="col-md-6">
                                             <input type="text" name="totalTagihan"  class="form-control" value="<?php echo rupiah($rowPenagihan['loan_total_fee']); ?>" readonly  />
                                             <input type="hidden" id="tagihan" name="payment_bill" value="<?php echo $rowPenagihan['loan_total_fee']; ?>">
+                                          </div>
+                                        </div>
+                                        <div class="form-group row">
+                                          <label class="col-md-5">KETERANGAN</label>
+                                          <div class="col-md-12">
+                                            <input type="text" class="form-control" name="payment_notif" value="<?php 
+                                            $notif = print_r("SELECT payment_notif from trx_payment where loan_app_id_fk = '".$invoice."'");
+
+                                            $run_notif = mysql_fetch_array($notif);
+                                            echo $run_notif['payment_notif'];
+                                             ?>" readonly />
                                           </div>
                                         </div>
                                         <div class="form-group row">

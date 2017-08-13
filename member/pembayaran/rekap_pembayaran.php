@@ -49,6 +49,7 @@
                                     $no = 0;
                                     $query_rekap_pembayaran = mysql_query("SELECT * FROM trx_loan_application p JOIN trx_payment t ON t.loan_app_id_fk = p.loan_app_id where t.payment_status != 'TANPA SALDO & MEMBAYAR DENDA' AND t.payment_status != 'SALDO & MEMBAYAR DENDA' AND p.member_id_fk = '".$_SESSION['member_id']."'");
                                     while ($rowRekap = mysql_fetch_array($query_rekap_pembayaran)) {
+                                        $invoice = $rowRekap['loan_invoice'];
                                  ?>
                                         <tr>
                                             <td><?php echo ++$no; ?></td>
@@ -75,7 +76,7 @@
                                                 echo "<a href='index.php?hal=pembayaran/preview_rekappembayaran_perinvoice&id=<?php echo ".$rowRekap['loan_invoice']."; ?>' class='btn btn-default dim_about' target='_BLANK'>
                                                     <span class='fa fa-print'></span> Cetak</a>";
                                                  }else if  ($rowRekap['payment_valid']=='TIDAK VALID'){
-                                                        echo "<a href='index.php?hal=pembayaran/konfirmasi_kekurangan' class='btn btn-info dim_about'>Konfirmasi Ulang</a>";
+                                                        echo "<a class='btn btn-info dim_about' href='index.php?hal=pembayaran/konfirmasi_kekurangan&id=$invoice' >Konfirmasi Ulang</a>";
                                                     } ?>
                                                 </center>
                                             </td>
@@ -89,7 +90,7 @@
                     <div class="row">
                         <div class="col-md-12">
                         <h2>PEMBAYARAN DENDA DENGAN SALDO</h2>
-                        <table class="table table-responsive table-bordered table-striped table-hover"id="instrument">    
+                        <table class="table table-responsive table-bordered table-striped table-hover id="instrument">    
                         <thead>
                             <th>NO</th>
                             <th>INVOICE</th>
