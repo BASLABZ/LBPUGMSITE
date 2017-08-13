@@ -186,58 +186,37 @@ include '../../inc/inc-db.php';
                 <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class="">Ringkasan Pembayaran</span> </div>
                 <div class="ibox-content">
                     <div class="row">
-                        <div class="col-md-6">
-                                  
-                            <div class="panel panel-primary">
-                                <div class="panel-heading"><span class=""></span> Saldo</div>
-                                <div class="panel-body">
-                                    <p>Jumlah saldo yang Anda miliki saat ini adalah :  </p>
-                                    <h2 class='btn btn-block btn-warning btn-lg'>
-                                        <?php 
+                        
 
-                                        $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
-                                        $total_saldo = mysql_fetch_array($querySaldo);
-                                        if ($total_saldo['total_saldo']=='') {
-                                          echo "Rp 0";
-                                        } else{
-                                        echo "Rp ".rupiah($total_saldo['total_saldo'])."</h2>";
-                                    } ?>
-
-                                    </h2>
-                                    <p><i>*Anda Dapat Melakukan Pembayaran Dengan Menggunakan Saldo.</i></p>
-                                </div>
-                            </div>       
-                        </div>
-
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <div class="panel panel-primary">
                                 <div class="panel-heading"><span class=""></span> Konfirmasi Pembayaran</div>
                                 <div class="panel-body">
                                      <form class="role" method="POST" enctype="multipart/form-data">
                                         <div class="form-group row">
-                                          <label class="col-md-5">INVOICE</label>
-                                          <div class="col-md-6">
+                                          <label class="col-md-3">INVOICE</label>
+                                          <div class="col-md-9">
                                             <input type="text" class="form-control" name="invoice" value="<?php echo $invoice; ?>" readonly />
                                             <input type="hidden" class="form-control" name="loan_app_id_fk" value="<?php echo $kodePeminjaman; ?>" />
                                             
                                           </div>
                                         </div>
                                         <div class="form-group row">
-                                          <label class="col-md-5">JENIS PEMBAYARAN</label>
-                                          <div class="col-md-6">
+                                          <label class="col-md-3">JENIS PEMBAYARAN</label>
+                                          <div class="col-md-9">
                                               <input type="text" class="form-control" name="payment_category" value="KEKURANGAN PEMBAYARAN" readonly>
                                           </div>
                                         </div>
                                         <div class="form-group row">
-                                          <label class="col-md-5">TOTAL TAGIHAN</label>
-                                          <div class="col-md-6">
+                                          <label class="col-md-3">TOTAL TAGIHAN</label>
+                                          <div class="col-md-9">
                                             <input type="text" name="totalTagihan"  class="form-control" value="<?php echo rupiah($rowPenagihan['loan_total_fee']); ?>" readonly  />
                                             <input type="hidden" id="tagihan" name="payment_bill" value="<?php echo $rowPenagihan['loan_total_fee']; ?>">
                                           </div>
                                         </div>
                                         <div class="form-group row">
-                                          <label class="col-md-5">KETERANGAN</label>
-                                          <div class="col-md-12">
+                                          <label class="col-md-3">KETERANGAN</label>
+                                          <div class="col-md-9">
                                             <input type="text" class="form-control" name="payment_notif" value="<?php 
                                             $notif = mysql_query("SELECT payment_notif from trx_payment where loan_app_id_fk = '".$kodePeminjaman."'");
                                             $run_notif = mysql_fetch_array($notif);
@@ -246,8 +225,8 @@ include '../../inc/inc-db.php';
                                           </div>
                                         </div>
                                         <div class="form-group row">
-                                          <label class="col-md-5">BANK</label>
-                                          <div class="col-md-6">
+                                          <label class="col-md-3">BANK</label>
+                                          <div class="col-md-9">
                                             <input type="text" class="form-control" name="payment_bankname"  required />
                                           </div>
                                         </div>
@@ -256,8 +235,8 @@ include '../../inc/inc-db.php';
                                                $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
                                                  $rowsaldo = mysql_fetch_array($querySaldo);
                                         ?>
-                                          <label class="col-md-5">MENGGUNAKAN SALDO </label>
-                                          <div class="col-md-6">
+                                          <label class="col-md-3">MENGGUNAKAN SALDO </label>
+                                          <div class="col-md-9">
                                             <?php 
                                             if ($rowsaldo['total_saldo'] == '' OR $rowsaldo['total_saldo'] < 1 ) {
                                               echo "ANDA TIDAK MEMILIKI SALDO";
@@ -287,8 +266,8 @@ include '../../inc/inc-db.php';
                                           </div>
                                         </div>
                                         <div class="form-group row">
-                                          <label class="col-md-5"> JUMLAH TRANSFER</label>
-                                          <div class="col-md-6">
+                                          <label class="col-md-3"> JUMLAH TRANSFER</label>
+                                          <div class="col-md-9">
                                             <input type="number" class="form-control" name="payment_amount_transfer"  id="nominaltransfer"  required />
                                           </div> <br/>
                                           <label class="col-md-5"></label>
@@ -298,14 +277,14 @@ include '../../inc/inc-db.php';
                                         </div>
                                         
                                         <div class="form-group row">
-                                        <label class="control-label col-lg-5">UPLOAD BUKTI TRANSFER</label>
-                                            <div class="col-md-6">
+                                        <label class="control-label col-lg-3">UPLOAD BUKTI TRANSFER</label>
+                                            <div class="col-md-9">
                                                 <input type="file" name="frm_file" id="ifile" onchange="cekberkas()">
                                              </div>
                                         </div>
                                         <div class="form-group row">
-                                          <label class="col-md-5">KETERANGAN</label>
-                                          <div class="col-md-6">
+                                          <label class="col-md-3">KETERANGAN</label>
+                                          <div class="col-md-9">
                                             <textarea class="form-control" name="payment_info"></textarea>
                                           </div>
                                         </div>
