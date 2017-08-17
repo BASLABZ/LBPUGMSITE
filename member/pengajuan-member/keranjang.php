@@ -86,6 +86,7 @@
                             $no = 0;
                             // mengambil data alat yg dipilih berdasarkan id member
                             $query = mysql_query("SELECT instrument_id_fk, instrument_name, instrument_quantity,intrument_quantity_temp , instrument_fee, count(instrument_id) AS jumlah FROM ref_instrument LEFT JOIN trx_loan_temp ON ref_instrument.instrument_id=trx_loan_temp.instrument_id_fk WHERE member_id_fk='".$_SESSION['member_id']."' GROUP BY instrument_id_fk");
+                            
                                 $number = 1;
                             while ($row = mysql_fetch_array($query)) {
                                     $biaya = $row['instrument_fee'];
@@ -310,12 +311,13 @@
     }
 }
 function hitung(no) {
-        
+        // ini digunkan untuk deklarasi variable pada keranjang
         var stokTersedia = document.getElementById('stokTersedia'+no).value;
         var jumlah  = document.getElementById('jumlah'+no).value;
         var biaya   =  $('#biaya'+no).val();
         var subtotal = jumlah*biaya;
         var total = total+subtotal;
+        //ini digunakan untuk deklarasi subtotal dan ditampilkan pada keranjang
         document.getElementById('subtotalf'+no).innerHTML = subtotal;
         $('#subtotal'+no).val(subtotal);
         var subtotaljumlah = 0;
@@ -343,6 +345,7 @@ function hitung(no) {
         hitungTotalNIlai();
         var cekData  = stokTersedia-jumlah;
         if (cekData < 0) {
+          // ini digunakan untuk menampilkan peringatan stok
           alert('MAAF STOK TIDAK MENCUKUPI');
           document.getElementById('jumlah'+no).value='1';
           var biayas   =  $('#biaya'+no).val();
@@ -403,7 +406,7 @@ function hitungFIX() {
 }
 
 function hitungTotalNIlai() {
-  
+  // proses simpan nilai.
   var hitungsemuaData = document.getElementById('hitungsemua');
   hitungsemuaData.click(); 
 }

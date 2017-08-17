@@ -1,7 +1,4 @@
-<?php
-include '../../inc/inc-db.php';
-session_start();
-?>
+
 <div id="content">
 			<div class="inner">
 				<div class="row" style="padding-top: 10px; padding-right: 10px; padding-left: 10px;">
@@ -59,8 +56,8 @@ session_start();
                                     </tbody>
                                 </table>
                              <div align="center">
-                                <button class="btn btn-success"><span class="fa fa-file-excel-o"></span> Export to Excel</button>
-                                <button class="btn btn-warning"><span class="fa fa-file-pdf-o"></span> Export to PDF</button>
+                                <a href="laporan/export_laporan_rekap_data_member_exel.php" class="btn btn-success"><span class="fa fa-file-excel-o"></span> Export to Excel</a>
+                                <a class="btn btn-warning" href="laporan/cetak_laporan_member_pdf.php" target="_BLANK"><span class="fa fa-file-pdf-o"></span> Export to PDF</a>
                             </div>
                         </div>
                     </div>

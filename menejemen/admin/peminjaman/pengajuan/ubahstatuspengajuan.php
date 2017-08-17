@@ -4,6 +4,7 @@
 		// ambil data dr loan detail
 		$query = mysql_query("SELECT loan_amount, instrument_id_fk, instrument_name, loan_status_detail, loan_app_detail_id, loan_app_id_fk, loan_invoice FROM trx_loan_application_detail JOIN trx_loan_application on trx_loan_application_detail.loan_app_id_fk = trx_loan_application.loan_app_id JOIN ref_instrument on trx_loan_application_detail.instrument_id_fk = ref_instrument.instrument_id WHERE trx_loan_application_detail.loan_app_detail_id = '".$invoice."' ");
 		$rowsatus = mysql_fetch_array($query);
+		$status = $rowsatus['loan_status_detail'];
 		$jumlahInstrument = $rowsatus['loan_amount']; // jml alat yg dipinjam (per alat)
 
 		// stok awal alat

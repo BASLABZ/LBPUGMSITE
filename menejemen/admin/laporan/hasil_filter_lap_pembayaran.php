@@ -1,4 +1,15 @@
-<div id="content">
+<?php 
+		if (isset($_POST['filter'])) {
+
+			 $per1=$_POST['periode1'];
+  			 $per2=$_POST['periode2'];
+  			 $query = "SELECT * from trx_payment A join trx_loan_application B on A.loan_app_id_fk = B.loan_app_id join tbl_member C on C.member_id = A.member_id_fk
+  			 		 WHERE A.payment_date BETWEEN '$per1' AND '$per2' 
+  			 ";
+
+		}
+ ?>
+ <div id="content">
 			<div class="inner">
 				<div class="row" style="padding-top: 10px; padding-right: 10px; padding-left: 10px;">
                 <div class="panel panel-primary" style="border-color: #1ab394;">
@@ -17,42 +28,6 @@
                 </div>
             </div>
              <div class="row">
-                      <div class="col-lg-12">
-                    <div class="panel panel-primary" style="border-color:#f8f8f8;">
-                        <div class="panel-heading">
-                            <span class=""></span> Filter Laporan Pembayaran
-                        </div>
-                        <div class="panel-body dim_about">
-                            <div class="row">
-                                <form method="POST" action="index.php?hal=laporan/hasil_filter_lap_pembayaran">
-                                    <div class="col-md-4">
-                                        <div class="from-group">
-                                            <label>Periode Pertama</label>
-                                            <input type="date" class="form-control" value="<?php echo date('Y-m-d'); ?>" name='periode1'>
-                                        </div> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="from-group">
-                                            <label>Periode Akhir</label>
-                                            <input type="date" class="form-control" value="<?php echo date('Y-m-d'); ?>" name='periode2'>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="from-group">
-                                        <br>
-                                            <button type="submit" name="filter" class="btn btn-primary"> 
-                                            <span class="fa fa-search"></span> Filter
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-
-                            </div>    
-                        </div>
-                </div>
-            </div>
-                </div>
-                <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-primary" style="border-color:#f8f8f8;">
                         <div class="panel-heading">
@@ -73,7 +48,7 @@
                                     <tbody>
                                         <?php
                                             $no =1;
-                                            $show = mysql_query("SELECT * from trx_payment A join trx_loan_application B on A.loan_app_id_fk = B.loan_app_id join tbl_member C on C.member_id = A.member_id_fk ");
+                                            $show = mysql_query($query);
                                             while ($runshow = mysql_fetch_array($show)) {
                                             ?>
                                             <tr>

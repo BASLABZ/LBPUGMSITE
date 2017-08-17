@@ -7,7 +7,7 @@ date_default_timezone_set('Etc/UTC');
 require 'PHPMailerAutoload.php';
 $mail = new PHPMailer;
 $mail->isSMTP();
-$mail->SMTPDebug = 2;
+// $mail->SMTPDebug = 2;
 $mail->Debugoutput = 'html';
 $mail->Host = 'smtp.gmail.com';
 $mail->Port = 587;
@@ -28,7 +28,7 @@ function get_include_contents($filename) {
     return false;
 }
 $mail->IsHTML(true);
-$mail->Subject = "You have an event today";
+$mail->Subject = "Konfirmasi Pengajuan Peminjaman Alat";
 $mail->Body = get_include_contents('content\invoice.php');
 if (!$mail->send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;

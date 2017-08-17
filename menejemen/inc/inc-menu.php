@@ -21,7 +21,7 @@ while($datamenu1=mysql_fetch_array($resultmenu1)){
             $queryPeringatans  = mysql_query("SELECT count(loan_status) as menunggu from trx_loan_application where loan_status = 'MENUNGGU'");
             $jumlahPeringatan_pembayaran = mysql_fetch_array($queryPeringatan_pembayarans);
             $rowPembayaran_peringatan = $jumlahPeringatan_pembayaran['pembayaran'];
-             $jumlahPeringatan_pengajuan = mysql_fetch_array($queryPeringatans);
+             $jumlahPeringatan_pengajuan = mysql_fetch_array($queryPeringatan_pembayarans);
             $rowPengajuan_peringatan = $jumlahPeringatan_pengajuan['pembayaran'];
         ?>
         <?php 

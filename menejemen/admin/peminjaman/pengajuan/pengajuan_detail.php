@@ -1,6 +1,5 @@
  <?php 
       $invoice = $_GET['invoice'];
-      
         $rowStatusLoan = mysql_fetch_array(mysql_query("SELECT loan_app_id,loan_status,member_id_fk,loan_invoice FROM trx_loan_application where loan_invoice = '".$invoice."' "));
         $idmember = $rowStatusLoan['member_id_fk'];
         if (isset($_POST['ubah'])) {
@@ -110,6 +109,7 @@
                                         
                                         <?php 
                                             if ($rowStatusLoan['loan_status'] == 'MENUNGGU' OR $rowStatusLoan['loan_status']=='ACC FINAL' OR $rowStatusLoan['loan_status']=='MENUNGGU ACC FINAL') {
+
                                          ?>
                                         <div class="col-md-10" align="center">
                                             <div class="row well dim_about">
@@ -206,9 +206,11 @@
                                             ?>
                                             <tr>
                                                 <td><?php echo $no++; ?></td>
-                                                <td><?php echo $rowDetailPeminjaman['instrument_name']; ?></td>
-                                                <td><center>
-                                                       <?php 
+                                                <td><?php echo $rowDetailPeminjaman['instrument_name']; ?>
+                                                </td>
+                                                <td>
+                                                    <center>
+                                                           <?php 
                                                             if ($rowDetailPeminjaman['loan_status_detail'] == 'MENUNGGU') {
                                                                 echo "<span class='label label-warning'>MENUNGGU</span>";
                                                             } elseif ($rowDetailPeminjaman['loan_status_detail'] == 'DITOLAK') {
@@ -224,50 +226,33 @@
                                                         ?>
                                                     </center>
                                                 </td>
-                                                <td><center>
-                                                <?php 
-                                                    // jumlah alat yg tersedia
-                                                    if ($stokTersedia != 0 ) {
-                                                    echo "".$stokTersedia."";
-                                                    }else{
-                                                    echo "<label class='btn btn-warning btn-xs'>ALAT TELAH DIPINJAM SEMUA</label>";
-                                                    }  ?>
+                                                <td>
+                                                    <center>
+                                                    <?php 
+                                                        // jumlah alat yg tersedia
+                                                        if ($stokTersedia != 0 ) {
+                                                        echo "".$stokTersedia."";
+                                                        }else{
+                                                        echo "<label class='btn btn-warning btn-xs'>ALAT TELAH DIPINJAM SEMUA</label>";
+                                                        }  ?>
                                                     </center>
                                                 </td>
-                                                <td><center>
-                                                    <?php 
-                                                    // jumlah alat dipinjam (per jenis alat)
-                                                    echo "".$rowDetailPeminjaman['loan_amount'].""; ?>
-                                                    </center></td>
                                                 <td>
-
-                                                    Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
-
+                                                    <center>
+                                                        <?php 
+                                                        // jumlah alat dipinjam (per jenis alat)
+                                                        echo "".$rowDetailPeminjaman['loan_amount'].""; ?>
+                                                    </center>
+                                                </td>
+                                                <td>
+                                                     Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?>
+                                                </td>
+                                             
                                                     <?php 
-                                                        // jika level bukan kepala lab (koor p)
-                                                        if ($_SESSION['level_name'] != 'kepala laboratorium') {
+                                                     if ($_SESSION['level_name'] != 'kepala laboratorium' AND $rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN' AND $rowStatusLoan['loan_status'] != 'PERPANJANG' AND $rowStatusLoan['loan_status'] != 'DIKEMBALIKAN') {
                                                      ?>
-<<<<<<< HEAD
-                                                         <?php 
-                                                            if ($_SESSION['level_name'] == 'koordinator penelitian') {   
-                                                             if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN') {                                                      ?>
-                                                           <?php 
-                                                            if ($rowStatusLoan['loan_status'] != 'PERPANJANG') {
-                                                                if ( $rowStatusLoan['loan_status'] != 'DIKEMBALIKAN') {?>
-                                                                
-=======
-                                                     <?php 
-                                                     // jika  level = koordinator (jika status pengajuan selain membayar tagihan, perpanjang, dikembalikan) maka muncul button ubah status pada aksi
-                                                        if ($_SESSION['level_name'] == 'koordinator penelitian') {   
-                                                         if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN') {                                                      ?>
-                                                   <?php 
-                                                    if ($rowStatusLoan['loan_status'] != 'PERPANJANG') {
-                                                        if ( $rowStatusLoan['loan_status'] != 'DIKEMBALIKAN') {
-                                                            
-                                                    ?>
->>>>>>> c2a3362a103ea11fc0e8bbd6dcdaf5b4f8113722
-                                                     <td>
-                                                    <?php 
+                                                        <td>
+                                                          <?php 
                                                         // jika status pengajuan tidak ditolak 
                                                         if ($rowDetailPeminjaman['loan_status_detail'] != 'DITOLAK' AND $rowDetailPeminjaman['loan_status_detail'] !='DITOLAK TANPA PENAWARAN' AND $rowDetailPeminjaman['loan_status_detail'] != 'PENAWARAN DISETUJI') {
                                                      ?>
@@ -282,10 +267,9 @@
                                                                 <a href='index.php?hal=peminjaman/pengajuan/penawaran&rejected_id=<?php echo $roreject['rejected_id']; ?>' class='btn btn-warning dim_about' ><span class="fa fa-edit"></span> Lihat Detail </a> 
 
                                                         <?php  } ?>
-                                                    </td>
-                                                   <?php } ?>
-                                                    <?php }}} ?>
+                                                        </td>
                                                      <?php } ?>
+                                                
                                                 
                                             </tr>
                                             <?php } ?>

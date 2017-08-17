@@ -235,7 +235,9 @@
                                    		 // jika time limit 
                                    		 	$queryLamaPinjam = mysql_query("SELECT trx_loan_application.* , current_date tanggal , datediff(current_date,loan_date_return) selisih , case when datediff(current_date,loan_date_return)>0 then 'Habis' else 'aktif' end status from trx_loan_application where member_id_fk= '".$ubahstatus['member_id_fk']."' AND loan_app_id = '".$ubahstatus['loan_app_id']."' ");
                                    		 	$hariH = mysql_fetch_array($queryLamaPinjam);
+                                   		 	
                                    		 	$sisaHari  = $hariH['selisih']; 
+                                   		 	// hasil dari sishari digunakan untuk crosscek perpanjang,denda,dan pengembalian
                                    		 	if ($sisaHari == 0) {
                                    		 		echo "<a href='index.php?hal=perpanjang/list&id=".$ubahstatus['loan_invoice']."'>INGIN PERPANJANG ALAT ? </a> <br><p>Hari Ini Adalah Waktu Pengembalian Alat, <br>Silahkan Melakukan Pengembalian/Perpanjang Alat, Jika Anda Melewatkan Waktu <br>Pengembalian Alat Maka Anda Akan Dikenakan Denda Sebesar 25% dari Total Peminjaman <br> Dan Kartu Identitas Anda Akan Kami Tahan Sebelum Melakukan Pembayaran Denda,</p>";  	
                                    		 	}else if ($sisaHari < 0 AND $sisaHari == -2 OR $sisaHari == -1 AND $hariH['status'] != 'Habis') {

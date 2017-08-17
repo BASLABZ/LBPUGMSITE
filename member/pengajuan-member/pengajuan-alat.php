@@ -137,7 +137,9 @@
                     <h4 class="modal-title"><span class=""></span> Detail Peminjaman</h4>
                 </div>
                 <div class="modal-body">
-                    <div class="peminjaman-data"></div>
+                    <div class="peminjaman-data">
+                      
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger dim_about" data-dismiss="modal"><span class="fa fa-times"></span> Keluar</button>

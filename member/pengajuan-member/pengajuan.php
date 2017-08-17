@@ -58,7 +58,7 @@
                     </div>
                     <div class="ibox-content dim_about">
                         <div class="row">
-                            <div class="col-md-2"></div>
+                            <div class="col-md-1"></div>
                             <div class="col-md-8 well">
                                 <div class="col-md-2"><p align="right" style="padding-top: 5px;">CARI ALAT</p></div>
                                 <div class="col-md-8">
