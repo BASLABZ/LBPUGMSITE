@@ -92,17 +92,17 @@
                                         <th width="5%">NO</th>
                                         <th width="20%">GAMBAR</th>
                                         <th width="20%">NAMA ALAT</th>
-<<<<<<< HEAD
+
                                         <th width="8%">JUMLAH ALAT</th>
                                         <th width="8%">JUMLAH DIPINJAM</th>
                                         <th width="8%">JUMLAH TERSEDIA</th>
                                         <th width="10%"><center>BIAYA SEWA</center></th>
-=======
+
                                         <th width="8%"> ALAT</th>
                                         <th width="8%"> DIPINJAM</th>
                                         <th width="8%"> TERSEDIA</th>
                                         <th width="10%"><center>HARGA SEWA</center></th>
->>>>>>> c4a39afff56bc6ee28b21793202bfad53c11f037
+
                                         <th width="10%">AKSI</th>    
                                     </tr> 
                                 </thead>
