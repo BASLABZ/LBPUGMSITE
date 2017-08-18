@@ -1,4 +1,9 @@
 <?php 
+  $status = $_POST['status'];
+ ?>
+<?php 
+
+
         if (isset($_GET['batalkan'])) {
                 
               $queryPembatalanPengajuan = mysql_query("UPDATE trx_loan_application set loan_status ='MENUNGGU' where loan_invoice='".$_GET['batalkan']."' ");
@@ -30,11 +35,11 @@
             <div class="ibox">
                 <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class=""></span> Data Pengajuan</div>
                 <div class="ibox-content">
-                    <form class="role well" method="POST" action="index.php?hal=pengajuan-member/hasil_filter_pengajuan">
+                    <form class="role well" method="POST" action="">
                         <div class="form-group row">
                             <label class="col-md-4 text-right" style="padding-top: 5px;">Filter</label>
                             <div class="col-md-4">
-                                <select class="form-control" name="status">
+                                <select class="form-control">
                                 <option value="">Filter Status</option>
                                 <option value="MENUNGGU">MENUNGGU</option>
                                 <option value="ACC">ACC</option>
@@ -44,7 +49,7 @@
                             </select>
                             </div>
                             <div class="col-md-4">
-                              <button class="btn btn-sm btn-primary" name="filter"><span class="fa fa-search"></span></button>
+                              <button class="btn btn-sm btn-primary" name="filter"><span class="fa fa-search"></span> Filter</button>
                             </div>
                         </div>
                     </form>
@@ -63,7 +68,7 @@
                         </thead>
                         <tbody>
                            <?php 
-                            $queryPeminjaman = mysql_query("SELECT * FROM trx_loan_application where member_id_fk  = '".$_SESSION['member_id']."' ORDER BY loan_app_id desc");
+                            $queryPeminjaman = mysql_query("SELECT * FROM trx_loan_application where member_id_fk  = '".$_SESSION['member_id']."' AND loan_status='".$status."' ORDER BY loan_app_id desc");
                             $no=0;
                             $check_baris = mysql_num_rows($queryPeminjaman);
                             if ($check_baris == 0) { ?>
