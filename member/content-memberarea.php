@@ -82,9 +82,16 @@
                         echo "<div class='alert alert-success alert-dismissable dim_about red-bg' style='border-color: #f8ac59; color: white;'>
                           <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
                             <span class='fa fa-check'></span> <b>STATUS PENGAJUAN ALAT :</b></br> 
-                            Hi ".$rowPeringatan['member_name'].", mohon maaf pengajuan peminjaman alat penelitian dengan  NO INVOICE ".$rowPeringatan['loan_invoice']." untuk saat ini tidak dapat kami setujui karena adanya kendala teknis pada alat di Laboratorium. 
+                            Hi ".$rowPeringatan['member_name'].", status pengajuan peminjaman alat penelitian dengan  NO INVOICE ".$rowPeringatan['loan_invoice']." adalah : <b>DITOLAK</b><br/> Karena suatu alasan, alat tersebut tidak dapat kami pinjamkan. <b><a href='index.php?hal=pengajuan-member/pengajuan-alat'> Lihat Data Selengkapnya</a></b>
                          </div>";
-                    } else if($statusKonfirmasi != 'ACC FINAL' && $statusKonfirmasi != 'DITOLAK' && $statusKonfirmasi != 'MENUNGGU' && $statusKonfirmasi != 'MENUNGGU ACC FINAL' && $statusKonfirmasi != 'DIBATALKAN' && $statusKonfirmasi != 'MEMBAYAR TAGIHAN' && $statusKonfirmasi != 'DIPINJAM' && $statusKonfirmasi != 'DIKEMBALIKAN'){
+                    } elseif ($statusKonfirmasi == 'DIKONFORMASI') {
+                      echo "<div class='alert alert-success alert-dismissable dim_about red-bg' style='border-color: #f8ac59; color: white;'>
+                          <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
+                            <span class='fa fa-check'></span> <b>STATUS PENGAJUAN ALAT :</b></br> 
+                            Hi ".$rowPeringatan['member_name'].", status pengajuan peminjaman alat penelitian dengan  NO INVOICE ".$rowPeringatan['loan_invoice']." adalah : <b>DIKONFIRMASI</b><br> Pengajuan yang statusnya masih dikonfirmasi belum bisa melanjutkan langkah selanjutnya. Untuk informasi lebih lengkap silahkan klik link <b><a href='index.php?hal=pengajuan-member/pengajuan-alat'> Lihat Detail</a></b>
+                         </div>";
+                    } 
+                    else if($statusKonfirmasi != 'ACC FINAL' && $statusKonfirmasi != 'DITOLAK' && $statusKonfirmasi != 'MENUNGGU' && $statusKonfirmasi != 'MENUNGGU ACC FINAL' && $statusKonfirmasi != 'DIBATALKAN' && $statusKonfirmasi != 'MEMBAYAR TAGIHAN' && $statusKonfirmasi != 'DIPINJAM' && $statusKonfirmasi != 'DIKEMBALIKAN'){
                         echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
                           <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
                             <span class=''></span> Selamat Datang Di Website Peminjaman Alat Penelitian Antropologi Laboratorium Bio- & Paleoantropologi UGM

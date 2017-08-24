@@ -86,7 +86,12 @@
                                                   echo "<label class='label label-warning'>MENUNGGU KONFIRMASI</label>"; // kuning
                                               } elseif ($status_peminjaman == 'DIBATALKAN') {
                                                   echo "<label class='label label-danger'>DIBATALKAN</label>"; // merah
-                                              } elseif ($status_peminjaman == 'MENUNGGU ACC FINAL') {
+                                              } elseif ($status_peminjaman == 'DITOLAK') {
+                                                  echo "<label class='label label-danger'>DITOLAK</label>";
+                                              } elseif ($status_peminjaman == 'DIKONFORMASI') {
+                                                  echo "<label class='label label-warning'>DIKONFIRMASI</label>";
+                                              }
+                                              elseif ($status_peminjaman == 'MENUNGGU ACC FINAL') {
                                                   echo "<label class='label label-default'>MENUNGGU ACC FINAL</label>"; // abu2
                                               } elseif ($status_peminjaman == 'ACC FINAL') {
                                                   echo "<label class='label label-info'>ACC FINAL</label>"; // biru muda                                         
@@ -96,8 +101,6 @@
                                                   echo "<label class='label label-success'>DIPINJAM</label>"; // hijau
                                               } elseif ($status_peminjaman == 'DIKEMBALIKAN') {
                                                   echo "<label class='label label-default'>DIKEMBALIKAN</label>"; // abu2
-                                              } else {
-                                                  echo "<label class='label label-danger'>DIKONFIRMASI</label>";
                                               }
                                               ?>
                                           </center>

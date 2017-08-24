@@ -63,8 +63,8 @@
                                                                 echo "<label class='label label-default'>MENUNGGU ACC FINAL</label>";
                                                             } elseif ($row_status == 'ACC FINAL') {
                                                                echo "<label class='label label-info'>ACC FINAL</label>";
-                                                            } elseif ($row_status == 'DIKONFORMASI & ADA INSTRUMEN YANG DI TOLAK') {
-                                                                echo "<label class='label label-danger'>DIKONFORMASI & ADA INSTRUMEN YANG DI TOLAK</label>";
+                                                            } elseif ($row_status == 'DIKONFORMASI') {
+                                                                echo "<label class='label label-danger'>DIKONFIRMASI</label>";
                                                             } elseif ($row_status == 'MEMBAYAR TAGIHAN') {
                                                                 echo "<label class='label label-success'>MEMBAYAR TAGIHAN</label>";
                                                             } elseif ($row_status == 'DIPINJAM') {
@@ -74,7 +74,7 @@
                                                             } elseif ($row_status == 'DIKEMBALIKAN') {
                                                                 echo "<label class='label label-default'>DIKEMBALIKAN</label>";
                                                             }elseif ($row_status == 'DITOLAK') {
-                                                                echo "<label class='label label-default'>DITOLAK</label>";
+                                                                echo "<label class='label label-danger'>DITOLAK</label>";
                                                             }
                                                             ?>
                                                          </td>

@@ -1,15 +1,15 @@
 <div class="row wrapper border-bottom white-bg page-heading">
     <div class="col-lg-10">
-        <h2>PEMBAYARAN</h2>
+    <br/>
         <ol class="breadcrumb">
             <li>
                 <a href="index-2.html">Home</a>
             </li>
             <li>
-                <a>DATA PEMBAYARAN</a>
+                <a>Pembayaran</a>
             </li>
             <li class="active">
-                <strong>Daftar Pengajuan</strong>
+                <strong>Rekap Pembayaran</strong>
             </li>
         </ol>
     </div>
@@ -18,7 +18,7 @@
     <div class="row animated fadeInRight">
         <div class="col-md-12">
             <div class="ibox">
-                <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class=""></span> Daftar Transaksi Pembayaran</div>
+                <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class=""></span> Data Pembayaran</div>
                 <div class="ibox-content">
                     <form class="role well" method="POST">
                         <div class="form-group row">

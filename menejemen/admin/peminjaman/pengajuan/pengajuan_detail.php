@@ -53,9 +53,9 @@
                                 <div class="panel-body dim_about">
 
                                 <div class="row" style="padding-top: 10px; padding-right: 10px; padding-left: 10px;">
-                                <div class="col-md-2"></div>
-                                    
-                                    <div class="col-md-8">
+                                
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-10">
                                         <div class="row well">
                                             <?php 
                                                 $detail = mysql_query("SELECT * from trx_loan_application a join tbl_member b on a.member_id_fk=b.member_id where a.loan_invoice = '".$invoice."'");
@@ -65,35 +65,38 @@
                                              <tr>
                                                  <td><b>Nama Member</b></td>
                                                  <td><b>:</b></td>
-                                                 <td><b><?php echo $rundetail['member_name']; ?></b></td>
-                                             </tr>
-                                             <tr>
-                                                 <td><b>Program Studi / Bidang</b></td>
-                                                 <td><b>:</b></td>
-                                                 <td><b><?php echo $rundetail['member_faculty']; ?></b></td>
-                                             </tr>
-                                             <tr>
-                                                 <td><b>Instansi</b></td>
-                                                 <td><b>:</b></td>
-                                                 <td><b><?php echo $rundetail['member_institution']; ?></b></td>
-                                             </tr>
-                                             <tr>
+                                                 <td><b><?php echo $rundetail['member_name']; ?></b></td> 
+                                                 <td></td> 
                                                  <td><b>Tanggal Pinjam</b></td>
                                                  <td><b>:</b></td>
                                                  <td><b><?php echo $rundetail['loan_date_start']; ?></b></td>
                                              </tr>
                                              <tr>
+                                                 <td><b>Program Studi / Bidang</b></td>
+                                                 <td><b>:</b></td>
+                                                 <td><b><?php echo $rundetail['member_faculty']; ?></b></td> 
+                                                 <td></td>
                                                  <td><b>Tanggal Harus Kembali</b></td>
                                                  <td><b>:</b></td>
                                                  <td><b><?php echo $rundetail['loan_date_return']; ?></b></td>
                                              </tr>
+
                                              <tr>
+                                                 <td><b>Instansi</b></td>
+                                                 <td><b>:</b></td>
+                                                 <td><b><?php echo $rundetail['member_institution']; ?></b></td>
+                                                <td></td>
                                                  <td><b>Lama Pinjam</b></td>
                                                  <td><b>:</b></td>
                                                  <td><b><?php echo $rundetail['long_loan']; ?> Minggu</b></td>
                                              </tr>
-                                             </table>
+                                            </table>
+                                             <tr>
+                                                 
+                                             </tr>
+                                             
                                         </div>
+
                                     </div>
                                     
                                 </div>
@@ -156,7 +159,7 @@
                                             }else{ ?>
                                             <div class="col-md-10">
                                                 <div class="well">
-                                                    <center><h4>SATATUS : <?php echo $rowStatusLoan['loan_status']; ?></h4></center>
+                                                    <center><h4>STATUS : <?php echo $rowStatusLoan['loan_status']; ?></h4></center>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -202,13 +205,13 @@
                                                             if ($rowDetailPeminjaman['loan_status_detail'] == 'MENUNGGU') {
                                                                 echo "<span class='label label-warning'>MENUNGGU</span>";
                                                             } elseif ($rowDetailPeminjaman['loan_status_detail'] == 'DITOLAK') {
-                                                                echo "<span class='label label-danger'>DITOLAK</span>";
+                                                                echo "<span class='label label-default'>DIKONFIRMASI</span>";
                                                             } elseif ($rowDetailPeminjaman['loan_status_detail'] == 'PENAWARAN DISETUJI') {
                                                                 echo "<span class='label label-primary'>PENAWARAN DISETUJUI</span>";
                                                             } else if ($rowDetailPeminjaman['loan_status_detail'] == 'DITOLAK TANPA PENAWARAN') {
-                                                                echo "<span class='label label-danger'>".$rowDetailPeminjaman['loan_status_detail']."</span>";
+                                                                echo "<span class='label label-danger'>DITOLAK</span>";
                                                             }
-                                                            else {
+                                                            else if ($rowDetailPeminjaman == 'ACC'){
                                                                 echo "<span class='label label-success'>ACC</span>";
                                                             }
                                                         ?>

@@ -31,9 +31,11 @@
 							echo "<span class='label label-primary'>ACC</span>";
 						} elseif ($status =='PENAWARAN DISETUJI') {
 							echo "<span class='label label-info'>PENAWARAN DISETUJUI</span>";
-						} else {
+						} else if($status == 'DITOLAK'){
+							echo "<span class='label label-default'>DIKONFIRMASI</span>";
+						} elseif ($status == 'DITOLAK TANPA PENAWARAN') {
 							echo "<span class='label label-danger'>DITOLAK</span>";
-							}?>
+						} ?>
 					</center>
 				</td>
 				<td>Rp <?php echo rupiah($rowDetailPeminjaman['instrument_fee']); ?></td>
@@ -42,7 +44,7 @@
 
 				<td>
 					<?php if ($status == 'DITOLAK' ) {
-						echo "<a style='margin-left:10px;' href='index.php?hal=pengajuan-member/lihat_penawaran&id=".$rowDetailPeminjaman['loan_app_detail_id']."&idpengajuan=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-info btn-xs dim_about'><span class='fa fa-eye'></span></a>";
+						echo "<a style='margin-left:10px;' href='index.php?hal=pengajuan-member/lihat_penawaran&id=".$rowDetailPeminjaman['loan_app_detail_id']."&idpengajuan=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-info btn-xs dim_about'><span class='fa fa-eye'> Lihat Detail</span></a>";
 						// echo "<a style='margin-left:10px;' href='index.php?hal=members/list&hapus=".$rowDetailPeminjaman['loan_app_detail_id']."&jumlah=".$rowDetailPeminjaman['loan_amount']."&subtotal=".$rowDetailPeminjaman['loan_subtotal']."&invoice=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-danger'><span class='fa fa-trash'></span></a>";
 						
 						
@@ -91,7 +93,7 @@
 			</tr>
 			<tr>
 				<td colspan="5"><b>Subtotal </b></td>
-				<td>Rp.<?php echo rupiah($sub); ?></td>
+				<td>Rp <?php echo rupiah($sub); ?></td>
 			</tr> <br/>
 			<?php 
 					if ($roTotal['category_id_fk']==1) { // Mhs s1 kedokteran ugm
@@ -101,15 +103,15 @@
 			
 			<tr>
 				<td colspan="5"><b>Total = (Lama Pinjam x Subtotal)</b> </td>
-				<td>Rp.<?php echo rupiah($roTotal['long_loan'] * $sub ); ?></td>
+				<td>Rp <?php echo rupiah($roTotal['long_loan'] * $sub ); ?></td>
 			</tr> <br/>
 			<tr>
 				<td colspan="5"><b>Potongan (50%)</b></td>
-				<td>Rp.<?php echo rupiah($roTotal['long_loan'] * $sub/2);  ?></td>
+				<td>Rp <?php echo rupiah($roTotal['long_loan'] * $sub/2);  ?></td>
 			</tr> <br/>
 			<tr>
 				<td colspan="5"><b>Total Bayar = (Total - Potongan)</b></td>
-				<td><b>Rp.<?php echo  rupiah ($roTotal['long_loan'] * $sub/2); ?></b></td>
+				<td><b>Rp <?php echo  rupiah ($roTotal['long_loan'] * $sub/2); ?></b></td>
 			</tr> <br/>
 			<?php } else if ($roTotal['category_id_fk']==5) { // mhs s2 ugm
 				
@@ -117,7 +119,7 @@
 			
 			<tr>
 				<td colspan="5"><b>Total = (Lama Pinjam x Subtotal)</b></td>
-				<td>Rp.<?php echo rupiah($totals2);?></td>
+				<td>Rp <?php echo rupiah($totals2);?></td>
 			</tr>
 			<tr>
 				<td colspan="5"><b>Potongan (25%)</b></td>
@@ -125,29 +127,29 @@
 			</tr>
 			<tr>
 				<td colspan="5"><b>Total Bayar = (Total - Potongan)</b></td>
-				<td><b>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></b></td>
+				<td><b>Rp <?php echo rupiah($roTotal['loan_total_fee']); ?></b></td>
 			</tr>
 			<?php }elseif ($roTotal['category_id_fk']==6) { // mhs s3 ugm
 				
 			 ?>
 			<tr>
 				<td colspan="5"><b>Total = (Lama Pinjam x Subtotal)</b></td>
-				<td>Rp.<?php echo rupiah($totals3); ?></td>
+				<td>Rp <?php echo rupiah($totals3); ?></td>
 			</tr>
 			<tr>
 				<td colspan="5"><b>Potongan (25%)</b></td>
-				<td>Rp.<?php echo rupiah($roTotal['loan_total_fee']);  ?></td>
+				<td>Rp <?php echo rupiah($roTotal['loan_total_fee']);  ?></td>
 			</tr>
 			
 			<tr>
 				<td colspan="5"><b>Total Bayar = (Total - Potongan)</b></td>
-				<td><b>Rp.<?php echo rupiah($hasil_akhirs3); ?></b></td>
+				<td><b>Rp <?php echo rupiah($hasil_akhirs3); ?></b></td>
 			</tr> 
 			 <?php }else {
 			 	?>
 			 	<tr>
 					<td colspan="5"><b>Total = (Lama Pinjam x Subtotal)</b></td>
-					<td>Rp.<?php echo rupiah($roTotal['loan_total_fee']); ?></td>
+					<td>Rp <?php echo rupiah($roTotal['loan_total_fee']); ?></td>
 				</tr>
 			 	<?php
 			 } ?>

@@ -283,7 +283,7 @@ include '../../inc/inc-db.php';
                                              </div>
                                         </div>
                                         <div class="form-group row">
-                                          <label class="col-md-3">KETERANGAN</label>
+                                          <label class="col-md-3">KETERANGAN</label> 
                                           <div class="col-md-9">
                                             <textarea class="form-control" name="payment_info"></textarea>
                                           </div>

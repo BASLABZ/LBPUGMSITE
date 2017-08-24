@@ -102,7 +102,6 @@
 			$nilai_pengurangan = mysql_fetch_array(mysql_query("SELECT * FROM trx_loan_application_detail where loan_app_detail_id ='".$alat_dipinjam."' "));
 
 			$queryAmbil_ditolak = "SELECT rejected_id,instrument_id_fk from trx_rejected where loan_app_detail_id_fk = '".$alat_dipinjam."'  AND instrument_id_fk='".$nilai_pengurangan['instrument_id_fk']."'";
-			print_r($queryAmbil_ditolak);
 			$rowIditolak = mysql_fetch_array(mysql_query($queryAmbil_ditolak));
 			$idditolak = $rowIditolak['rejected_id'];
 

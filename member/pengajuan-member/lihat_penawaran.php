@@ -73,11 +73,17 @@
 <div class="wrapper wrapper-content">
     <div class="row animated fadeInRight">
         <div class="col-md-12">
+        <div class='alert alert-success alert-dismissable navy-bg' style='color: white;'>
+        </span>
+                <b>KETERANGAN </b> <br/>
+                        Data dibawah merupakan alat yang Anda ajukan untuk dipinjam, namun karena suatu alasan alat tersebut tidak dapat kami pinjamkan. Oleh karena itu kami berikan alternatif untuk mengganti alat tersebut dengan alat lain. Alat yang kami sarankan merupakan alat yang memiliki fungsi sama dengan alat yang ingin Anda pinjam.
+        </div>
             <div class="ibox">
                 <div class="ibox-title dim_about" style="background-color: #1ab394; border-color: #1ab394; color: white;"><span class=""></span> Data Penolakan dan Penawaran Alat</div>
                 <div class="ibox-content">
                    <div class="row">
-                       <div class="col-md-6">
+                       <div class="col-md-12">
+                       
                            <label>Data Alat Yang Ditolak</label><hr>
                          
                        </div>
@@ -115,13 +121,11 @@
 
                        </div>
                        <hr>
-
+                       <br/>
                        <div class="col-md-12">
                        
                        <label>Data Alat Yang Disarankan</label><hr>
-                         
-                           <br>
-                           <table class="table table-responsive table-bordered table-stripped">
+                         <table class="table table-responsive table-bordered table-stripped">
                                     <thead>
                                         <th>Nama Alat</th>
                                         <th>Biaya Alat</th>
@@ -151,7 +155,7 @@
                                         <?php } ?>
                                     </tbody>
                                 </table> <br/>
-                               <span class="fa fa-twitch"></span> Klik button Terima jika Anda setuju merubah alat yang akan dipinjam <br/><br/>
+                               <span class="fa fa-twitch"></span> Klik button Terima jika Anda setuju untuk mengubah alat. <br/><br/>
                             <form class="role" method="POST">          
                                 <input type="hidden" name="idreject" value="<?php echo $rowdetail['rejected_detail_id']; ?>">
                                     <button type="submit" name="setujuipenawaran" class="btn btn-warning"><span class="fa fa-save"></span> Terima</button>
@@ -165,4 +169,4 @@
         </div>
     </div>
 </div>
-  
+   

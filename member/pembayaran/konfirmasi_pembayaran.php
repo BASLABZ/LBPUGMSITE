@@ -302,7 +302,7 @@
                                         </tr>
                                          <tr>
                                             <td colspan="3"> Total Bayar = (Total - Potongan)</td>
-                                            <td>Rp <?php echo rupiah($roTotal['loan_total_fee']); ?></td>
+                                            <td>Rp <?php echo rupiah($roTota['long_loan']*$sub/2); ?></td>
                                         </tr>
                                         <?php }elseif ($category_member == '5') { // mhs ugm s2
                                           ?>
