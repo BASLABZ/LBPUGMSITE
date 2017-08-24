@@ -41,7 +41,7 @@
                                                          $querypengajuan = mysql_query("SELECT * FROM trx_loan_application a  JOIN tbl_member m on a.member_id_fk = m.member_id where a.loan_status != 'DIBATALKAN'   ORDER BY a.loan_app_id DESC");    
                                                     } else if ($_SESSION['level_name']=='kepala laboratorium') {
                                                          // jika level kepala, tampilkan data peminjaman yg statusnya hanya menunggu acc final   
-                                                        $querypengajuan = mysql_query("SELECT * FROM trx_loan_application a  JOIN tbl_member m on a.member_id_fk = m.member_id where a.loan_status ='MENUNGGU ACC FINAL' ORDER BY a.loan_app_id DESC");
+                                                        $querypengajuan = mysql_query("SELECT * FROM trx_loan_application a JOIN tbl_member m on a.member_id_fk = m.member_id where a.loan_status ='MENUNGGU ACC FINAL' OR a.loan_status = 'ACC FINAL' OR a.loan_status='DIPINJAM' OR a.loan_status='DIPERPANJANG' OR a.loan_status='DIKEMBALIKAN' ORDER BY a.loan_app_id DESC");
                                                     }
                                                     
                                                     while ($roPeminjaman = mysql_fetch_array($querypengajuan)) {

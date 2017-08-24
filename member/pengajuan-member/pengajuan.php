@@ -197,7 +197,15 @@
                                 </tbody>
                                 </table>
                             <div class="form-group">
-                                <button type="submit" name="pinjam" class="btn btn-info pull-right dim_about"> <span class="fa fa-shopping-cart"></span> Pinjam Alat</button>
+                                <?php
+                                    $row_cek_peminjaman = mysql_fetch_array(mysql_query("SELECT count(*) as JUMLAH_PEMINJAMAN FROM trx_loan_application where loan_status = 'DIPINJAM' "));
+                                    if ($row_cek_peminjaman['JUMLAH_PEMINJAMAN'] > 0) {
+                                        echo "<p align='right'><b>ANDA DALAM MASA PEMINJAMAN ALAT</b></p>";
+                                 ?>
+
+                                 <?php }else{ ?>
+                                 <button type="submit" name="pinjam" class="btn btn-info pull-right dim_about"> <span class="fa fa-shopping-cart"></span> Pinjam Alat</button>
+                                 <?php } ?>
                                 <br>
                             </div>
                       </form>
