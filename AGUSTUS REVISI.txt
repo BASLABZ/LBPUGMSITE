@@ -4,7 +4,7 @@
 
 3. member, pembayaran lebih dr 3 jam tetep bisa. padahal harusnya dibatalkan otomatis. terus kalo udah dibatalin otomatis, jumlah alatnya kembali seperti semula nggak?
 
-4. kategori s1 ugm
+4. kategori s1 ugm(fixed)
 
 5. member, pengajuan hanya bisa dilakukan 1x, atau peminjaman yg sebelumnya harus sudah dikembalikan(FIX)
 

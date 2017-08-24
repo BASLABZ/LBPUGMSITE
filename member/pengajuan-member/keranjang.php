@@ -209,7 +209,17 @@
                                     <br>
                                     <label>Total Bayar : </label>
                                     <input type='text' disabled  class='form-control' id='hasilakahir'>";
-                            }else if($kategori_member['category_id']=='2'){
+                            }else if ($kategori_member['category_id'] == '7') {
+                                    echo "Anda Mendapat Potongan 25 %";
+                                    echo "<br>
+                                    <label>Potongan : </label>
+                                    <input type='hidden' name='category_member' value='".$kategori_member['category_id']."' id='mhs_s1'>
+                                    <input type='text' disabled  class='form-control' id='potongan'>
+                                    <br>
+                                    <label>Total Bayar : </label>
+                                    <input type='text' disabled  class='form-control' id='hasilakahir'>";
+                            }
+                            else if($kategori_member['category_id']=='2'){
                               echo "<br>
                                     <input type='hidden' name='category_member' value='".$kategori_member['category_id']."' id='mhs_s1'>
                                     <input type='hidden' disabled  class='form-control' id='hasilakahir'>";
@@ -384,7 +394,15 @@ function hitungFIX() {
         hasilakahir_s3 = totalBayarFIX-potongans3ugm;
         $('#hasilakahir').val(hasilakahir_s3);
         $('#potongan').val(potongans3ugm);
-      }else if (categori == 2) {
+      }
+      else if (categori == 7) {
+           hitungdiskons3ugm = totalBayarFIX*0.25;  
+        var potongans3ugm = totalBayarFIX*0.25;
+        hasilakahir_s3 = totalBayarFIX-potongans3ugm;
+        $('#hasilakahir').val(hasilakahir_s3);
+        $('#potongan').val(potongans3ugm);
+      }
+      else if (categori == 2) {
         
         $('#hasilakahir').val(totalBayarFIX);
         

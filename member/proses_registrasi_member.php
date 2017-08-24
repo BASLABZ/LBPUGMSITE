@@ -21,9 +21,7 @@
 		$member_idcard_photo = $_FILES['member_idcard_photo']['name'];
 		$queryEmail  = mysql_query("SELECT * FROM tbl_member where member_email ='".$member_email."' ");
 		$cekEMail = mysql_num_rows($queryEmail);
-		print_r($member_email);
-		print_r($cekEMail);
-		print_r($category_id_fk);
+		
 		$kode = 'm4nd4lbpugm';
         $ency = base64_encode($kode);
 		if ($cekEMail != 0) {
@@ -49,7 +47,7 @@
 										VALUES ('".$member_name."', '', '', '', '', 
 												'".$username."', MD5('".$password."'),
 												'".$member_hint_question."', '".$member_answer_question."', 'UGM', 'Mahasiswa Kedokteran  S1 UGM', '".$member_email."','".$member_idcard_photo."','' ,'PENDING', 'N',NOW(), '".$category_id_fk."','".$ency."')";
-												print_r($queryTES);
+												
 
 			$register = mysql_query($queryTES);
 			
@@ -128,7 +126,7 @@
                  	if ($register) {
 				  echo "<script> alert('Terimakasih Data Berhasil Disimpan'); location.href='SENDEMAIL/sendEmailDebug.php?id=".$ency."&email=".$member_email."' </script>";exit;
 			}
-			}else if ($category_id_fk==6 or $category_id_fk==5) {
+			}else if ($category_id_fk==6 or $category_id_fk==5 or $category_id_fk==7) {
 				$queryTES = "INSERT INTO tbl_member 
 												(
 														member_name, member_birth_date, member_gender,

@@ -122,7 +122,42 @@
                                              '".$jumlahalatinstruments."','".$suv."','MENUNGGU')";
                                              $runSQLINSERT_detail = mysql_query($queryInsertDetail_loan);
                   }
-                }else { // selain mahasiswa ugm (tidak ada potongan)
+                }
+                else if ($category_member == 7) { // jika kategori 6 -> mahasiswa s1 ugm
+                    $potongan_s1 = $totalFee*0.25; // jumlah bayar sebenarnya * 25%
+                    $hasil_akhir_s1=  $totalFee-$potongan_s1; // hasil akhir=jumlah sebenarnya- potongan
+                    $queryInsert_loan_app = "INSERT INTO trx_loan_application 
+                                            (loan_app_id,loan_invoice,
+                                            loan_date_input,loan_date_start,
+                                            loan_date_return,loan_file,
+                                            loan_total_item,loan_total_fee,
+                                            long_loan,
+                                            loan_status,member_id_fk
+                                            ) 
+                              VALUES ('".$kode."','".$invoice."',NOW(),'". $tgl_pjm ."','". $tgl_kmb ."',
+                                      '".$fileName."','".$total_loan."','".$hasil_akhir_s1."','".$_POST['totalbayarpenajuan']."','MENUNGGU','".$_SESSION['member_id']."')";
+                                       
+                      $runSQLINSERT = mysql_query($queryInsert_loan_app);
+                   // post dr keranjang
+                  $kodealats  = $_POST['instrument_id_fk'];
+                  $jumlahalats = $_POST['jumlah'];
+                  $subtotalpinjams = $_POST['subtotal'];
+
+                  // menghitung alat yg dipilih
+                  $banyaks        = count($kodealats);
+                    for ($ulang=0; $ulang <  $banyaks ; $ulang++) { 
+                   $kodeInstruments = $kodealats[$ulang];
+                   $jumlahalatinstruments = $jumlahalats[$ulang];
+                   $suv = $subtotalpinjams[$ulang];
+                   $queryInsertDetail_loan = "INSERT INTO trx_loan_application_detail 
+                                                        (loan_app_id_fk,instrument_id_fk,loan_amount,loan_subtotal,loan_status_detail)
+                                             VALUES 
+                                             ('".$kode."','".$kodeInstruments."',
+                                             '".$jumlahalatinstruments."','".$suv."','MENUNGGU')";
+                                             $runSQLINSERT_detail = mysql_query($queryInsertDetail_loan);
+                  }
+                }
+                else { // selain mahasiswa ugm (tidak ada potongan)
                    $queryInsert_loan_app = "INSERT INTO trx_loan_application 
                                             (loan_app_id,loan_invoice,
                                             loan_date_input,loan_date_start,

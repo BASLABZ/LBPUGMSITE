@@ -169,6 +169,10 @@
           $('#kat1').hide();
           $('#kat2').hide();
           $('#kat3').show();
+        }else if(this.value == "7") {
+          $('#kat1').hide();
+          $('#kat2').hide();
+          $('#kat3').show();
         }else if (this.value == "2") {
           $('#kat1').show();
           $('#kat2').hide();
