@@ -76,7 +76,7 @@
                                                <?php 
                                                     if ($rowRekap['payment_valid']=='VALID') {
                                                         
-                                                echo "<a href='index.php?hal=pembayaran/preview_rekappembayaran_perinvoice&id=<?php echo ".$rowRekap['loan_invoice']."; ?>' class='btn btn-default dim_about' target='_BLANK'>
+                                                echo "<a href='index.php?hal=pembayaran/preview_rekappembayaran_perinvoice&id=".$rowRekap['loan_invoice']."' class='btn btn-default dim_about' target='_BLANK'>
                                                     <span class='fa fa-print'></span> Cetak</a>";
                                                  }else if  ($rowRekap['payment_valid']=='TIDAK VALID'){
                                                         echo "<a class='btn btn-info dim_about' href='index.php?hal=pembayaran/konfirmasi_kekurangan&id=$invoice' >Konfirmasi Ulang</a>";
