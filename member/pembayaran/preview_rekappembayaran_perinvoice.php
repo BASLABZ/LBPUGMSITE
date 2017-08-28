@@ -29,7 +29,7 @@
             <div class="col-lg-12">
                 <div class="wrapper wrapper-content animated fadeInRight">
                     <div class="ibox-content p-xl">
-                    <img src="../img/landing/UGM.jpg" width="100px" height="100px">
+                    <!-- <img src="../img/landing/UGM.jpg" width="100px" height="100px"> -->
                         <center><b><font size="4">FAKULTAS KEDOKTERAN UNIVERSITAS GADJAH MADA</font></b></center>
                         <center><b><font size="3">LABORATORIUM BIAONTROPOLOGI & PALEOANTROPOLOGI</font></b></center>
                         <center>Jl. Medika, Sekip, Yogyakarta 55281, Indonesia</center>

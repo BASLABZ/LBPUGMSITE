@@ -208,7 +208,7 @@
                                       <div class="form-group row">
                                         <label class="col-md-4">Nama Lengkap</label>
                                         <div class="col-md-6">
-                                          <input type="text" class="form-control" name="member_name" value="<?php echo $rowMember['member_name']; ?>" required >
+                                          <input type="text" class="form-control validate[required,custom[onlyLetterSp]] text-input" name="member_name" value="<?php echo $rowMember['member_name']; ?>" required >
                                         </div>
                                       </div>
                                       <div class="form-group row">
@@ -249,7 +249,7 @@
                                       <div class="form-group row">
                                         <label class="col-md-4">No. Telp</label>
                                         <div class="col-md-6">
-                                          <input type="number" class="form-control" name="member_phone_number"  value="<?php echo $rowMember['member_phone_number']; ?>" required >
+                                          <input type="number" class="form-control validate[required,custom[onlyNumberSp]] text-input" name="member_phone_number"  value="<?php echo $rowMember['member_phone_number']; ?>" required >
                                         </div>
                                       </div>
                                       <div class="form-group row">

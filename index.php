@@ -24,6 +24,8 @@
     <link rel="stylesheet" type="text/css" href="includes/css/plugins/dataTables/datatables.min.css">
      <link rel="stylesheet" href="menejemen/admin/assets/css/bootstrap-fileupload.min.css" /> 
      <link href="includes/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+     <link rel="stylesheet" href="menejemen/admin/assets/plugins/validationengine/css/validationEngine.jquery.css" type="text/css"/>
+    <link rel="stylesheet" href="menejemen/admin/assets/plugins/validationengine/css/template.css"/>
     <style type="text/css">
              .dim_about {box-shadow: inset 0 0 0 rgba(30, 172, 174, 0.39), 0 10px 0 0 rgba(30, 172, 174, 0), 0 8px 10px rgba(123, 83, 83, 0.58);}
 
@@ -129,7 +131,12 @@
 <script src="includes/notify.min.js"></script>
 <script src="js-bas.js"></script>
 <script src="includes/js/plugins/toastr/toastr.min.js"></script>
-<script>
+    
+<script src="menejemen/admin/assets/plugins/validationengine/js/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8">
+    </script>
+    <script src="menejemen/admin/assets/plugins/validationengine/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8">
+</script>
+    <script>
 
 $(document).ready(function(){
     $('[data-toggle="tooltip"]').tooltip(); 
@@ -184,6 +191,7 @@ $(document).ready(function() {
             });
          });
     });
+
 </script>
 
 
@@ -194,4 +202,11 @@ $(document).ready(function() {
 
 <?php include 'modal-login.php'; ?>
 <?php include 'registrasi_member.php'; ?>
+
 <?php include 'modal-lupa-password.php'; ?>
+<script type="text/javascript">
+    jQuery(document).ready(function(){
+            // binds form submission and fields to the validation engine
+            jQuery("#formID").validationEngine();
+        });
+</script>

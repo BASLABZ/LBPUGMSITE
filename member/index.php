@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="../menejemen/admin/assets/css/bootstrap-fileupload.min.css" /> 
         <link rel="stylesheet" type="text/css" href="../includes/jquery-ui.css">
     <link rel="stylesheet" type="text/css" href="../includes/css/plugins/datapicker/datepicker3.css">
+     <link rel="stylesheet" href="../menejemen/admin/assets/plugins/validationengine/css/validationEngine.jquery.css" type="text/css"/>
+    <link rel="stylesheet" href="../menejemen/admin/assets/plugins/validationengine/css/template.css"/>
     <style type="text/css">
         .dim_about {box-shadow: inset 0 0 0 rgba(30, 172, 174, 0.39), 0 10px 0 0 rgba(30, 172, 174, 0), 0 8px 10px rgba(123, 83, 83, 0.58);}
         .ui-datepicker-month{
@@ -78,6 +80,11 @@
     <script src="../includes/js/demo/sparkline-demo.js"></script>
     <script src="../includes/js/plugins/toastr/toastr.min.js"></script>
     <script src="../menejemen/admin/assets/plugins/jasny/js/bootstrap-fileupload.js"></script>
+
+<script src="../menejemen/admin/assets/plugins/validationengine/js/languages/jquery.validationEngine-en.js" type="text/javascript" charset="utf-8">
+    </script>
+    <script src="../menejemen/admin/assets/plugins/validationengine/js/jquery.validationEngine.js" type="text/javascript" charset="utf-8">
+</script>
    <script type="text/javascript">
      $('[data-toggle="tooltip"]').tooltip();
        $(document).ready(function(){

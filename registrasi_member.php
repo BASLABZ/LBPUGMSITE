@@ -1,9 +1,9 @@
 <?php 
         // sementara ditutup dahulu sebelum online
-        // $secret = '6LeVCRkUAAAAAPFhq6nB47IsHcrEAdeixz3f-qKd';
-        // //get verify response data
-        // $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
-        // $responseData = json_decode($verifyResponse);
+        $secret = '6LeVCRkUAAAAAPFhq6nB47IsHcrEAdeixz3f-qKd';
+        //get verify response data
+        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
+        $responseData = json_decode($verifyResponse);
  ?>
 <div id="registrasi" class="modal fade" role="dialog">
   <div class="modal-dialog modal-lg">
@@ -13,13 +13,13 @@
         <h4 class="modal-title" style="color:white;"><span class="fa fa-user-plus"></span> REGISTRASI MEMBER </h4>
       </div>
       <div class="modal-body">
-        <form class="role" method="POST" id="frmAjaxregis" action="member/proses_registrasi_member.php" enctype="multipart/form-data">
-          <div class="well"> <b>*Semua Data Wajib diisi </b></br> </br>
+        <form class="role" method="POST" id="formID" action="member/proses_registrasi_member.php" enctype="multipart/form-data" onsubmit="return validasi_input(this)">
+          <div class="well"> <b> </b></br> </br>
             <div class="form-group row">
             <div class="col-md-6"> 
               <label class="col-md-4">Nama Lengkap</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" placeholder="Nama Lengkap"  name="member_name" id="nama"   required>
+                <input type="text" class="form-control validate[required,custom[onlyLetterSp]] text-input" placeholder="Nama Lengkap"  name="member_name" id="nama"   required>
               </div>
             </div>
             <div class="col-md-6">
@@ -34,17 +34,17 @@
             <div class="col-md-6">
               <label class="col-md-4">Username</label>
               <div class="col-md-8">
-                <input type="text" class="form-control" required placeholder="Username"  name="member_username">
+                <input type="text" id="name" class="form-control validate[required,custom[onlyLetterSp]] text-input" required   name="member_username">
               </div>
             </div>
             <div class="col-md-6">
                <div class="form-group row">
               <label class="col-md-2">Password</label>
               <div class="col-md-8">
-                <input type="password" class="form-control" required placeholder="Password" maxlength="8" minlength="6" name="member_password" id="password1"> </br>
-                <input type="password" class='form-control' id="password2" required placeholder="Re-Type Password" maxlength="8" minlength="6" name="member_re_password" onkeyup="checkPass(); return false;">
+                <input type="password" class="form-control validate[required,custom[onlyLetterNumber]] text-input" required placeholder="Password" maxlength="8" minlength="6" name="member_password" id="password1"> </br>
+                <input type="password" class='form-control validate[required,custom[onlyLetterNumber]] text-input' id="password2" required placeholder="Re-Type Password" maxlength="8" minlength="6" name="member_re_password" onkeyup="checkPass(); return false;">
                 <span id="confirmMessage" class="confirmMessage"></span><br>
-                <i>Password Min 6 Karakter Max 8 Karakter</i>
+                <i></i>
               </div>
             </div>   
             </div>
@@ -68,13 +68,13 @@
                <div class="col-md-6">
               <label class="col-md-5">NAMA INSTITUSI</label>
               <div class="col-md-7">
-                <input type="text" class="form-control"  name="member_institution_mahasiswa" placeholder="NAMA INSTITUSI" name="intitusi" reqiured>
+                <input type="text" class="form-control  "   name="member_institution_mahasiswa" placeholder="NAMA INSTITUSI" name="intitusi" reqiured>
               </div>
             </div>
             <div class="col-md-6">
               <label class="col-md-4">FAKULTAS</label>
               <div class="col-md-8">
-                <input type="text" class="form-control"  name="member_faculty_mahasiswa" placeholder="FAKULTAS" name="fakultas" reqiured>
+                <input type="text" class="form-control "  name="member_faculty_mahasiswa" placeholder="FAKULTAS" name="fakultas" reqiured>
               </div>
             </div>
             </div>
@@ -134,9 +134,9 @@
                   <input type="file" name="member_idcard_photo" required="true" accept="image/*">
                 </div>
               </div>
-              <!-- <div class="col-md-6">
+              <div class="col-md-6">
                 <div class="g-recaptcha" data-sitekey="6LeVCRkUAAAAAF9YlXrR8MPtkY6ehneWuc3VsfXr"></div>
-              </div> -->
+              </div>
             </div>
             <div class="form-group">
             <div class="col-md-12">
@@ -213,4 +213,22 @@
 } 
     
 </script>
-<!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<!-- validasi inputan -->
+<script>
+  function validasi_input(form){
+   pola_username=/^[a-zA-Z]/;
+   pola_nama_lengkap = /^[a-zA-Z]/;
+   if (!pola_username.test(form.username.value)){
+      alert ('Username Harus Diisi Dengan Huruf!');
+      form.username.focus();
+      return false;
+   }else
+   if (!pola_nama_lengkap.test(form.member_name.value)) {
+      alert('Nama Lengkap Harus Diisi Dengan Huruf');
+      form.member_name.focus();
+      return false;
+   }
+return (true);
+}
+</script>

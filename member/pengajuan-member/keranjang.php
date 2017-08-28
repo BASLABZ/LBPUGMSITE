@@ -424,6 +424,15 @@ function hitungTotalNIlai() {
   var hitungsemuaData = document.getElementById('hitungsemua');
   hitungsemuaData.click(); 
 }
+
+$('input[name="number"]').keyup(function(e)
+                                {
+  if (/\D/g.test(this.value))
+  {
+    // Filter non-digits from input value.
+    this.value = this.value.replace(/\D/g, '');
+  }
+});
 </script>
 <?php }else{
               echo "<script> alert('Lengkapi Data Anda Terlebih Dahulu'); location.href='index.php?hal=akun/profil';</script>  ";exit;

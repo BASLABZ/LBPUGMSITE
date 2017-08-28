@@ -17,7 +17,7 @@ $mail->Username = "lbpugmsite@gmail.com";
 $mail->Password = "k3d0kt3r4n";
 $mail->setFrom('lbpugmsite@gmail.com', 'LBP UGM');
 $namaPenerimaEmail  = "$emails";
-$mail->addAddress($emails, 'John Doe');
+$mail->addAddress($emails, 'Penerima');
 function get_include_contents($filename) {
 
     if (is_file($filename)) {
