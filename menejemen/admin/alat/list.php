@@ -39,7 +39,7 @@
                                             <th>GAMBAR</th>
                                             <th>NAMA ALAT</th>
                                             <th>MERK</th>  
-                                            <th><center>HARGA SEWA</center></th>
+                                            <th>HARGA SEWA</th>
                                             <th>JUMLAH</th>
                                             <th>STATUS</th>
                                             <th>AKSI</th>

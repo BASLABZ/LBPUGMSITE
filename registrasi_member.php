@@ -10,7 +10,7 @@
     <div class="modal-content">
       <div class="modal-header"  style="background-color: #1ab394;">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title" style="color:white;"><span class="fa fa-user-plus"></span> REGISTRASI SISTEM LBP - UGM </h4>
+        <h4 class="modal-title" style="color:white;"><span class="fa fa-user-plus"></span> REGISTRASI MEMBER </h4>
       </div>
       <div class="modal-body">
         <form class="role" method="POST" id="frmAjaxregis" action="member/proses_registrasi_member.php" enctype="multipart/form-data">
@@ -51,7 +51,7 @@
             </div>
             <hr>
               <div class="form-group row">
-              <label class="col-md-2">KATEGORI</label>
+              <label class="col-md-2">Kategori</label>
              <div class="col-md-5">
                 <select class="form-control" required name="category_id_fk" id="cat_id" reqiured>
                   <option value="0">Pilih Kategori</option>
@@ -109,7 +109,7 @@
             
             <hr>
             <div class="form-group row">
-                <label class="col-md-2">Hint Questions</label>
+                <label class="col-md-2">Pertanyaan Keamanan</label>
                 <div class="col-md-6">
                   <select class="form-control" required name="member_hint_question" reqiured>
                     <option value="">Pilih Pertanyaan</option>
@@ -121,7 +121,7 @@
                 </div>
             </div>
             <div class="form-group row">
-                  <label class="col-md-2">Answers</label>
+                  <label class="col-md-2">Jawaban Keamanan</label>
                   <div class="col-md-6">
                     <input type="text" class="form-control" required name="member_answer_question" placeholder="Hint Answers" reqiured>
                   </div>    
@@ -129,21 +129,22 @@
           <hr>
             <div class="form-group row">
               <div class="col-md-6">
-                <label class="col-md-4">FOTO KTM / IDENTITAS PRIBADI</label>
+                <label class="col-md-4">Foto KTM / Identitas Pribadi</label>
                 <div class="col-md-8">
                   <input type="file" name="member_idcard_photo" required="true" accept="image/*">
                 </div>
               </div>
-              <div class="col-md-6">
-                <!-- <div class="g-recaptcha" data-sitekey="6LeVCRkUAAAAAF9YlXrR8MPtkY6ehneWuc3VsfXr"></div> -->
-              </div>
+              <!-- <div class="col-md-6">
+                <div class="g-recaptcha" data-sitekey="6LeVCRkUAAAAAF9YlXrR8MPtkY6ehneWuc3VsfXr"></div>
+              </div> -->
+            </div>
+            <div class="form-group">
+            <div class="col-md-12">
+              <button type="submit" name="simpanregistrasi" class="btn btn-primary btn-sm pull-right dim_about"><span class=""></span> DAFTAR</button>
             </div>
           </div>
-          <div class="form-group row well">
-            <div class="col-md-10">
-              <button type="submit" name="simpanregistrasi" class="btn btn-success btn-sm pull-right dim_about"><span class="fa fa-save"></span> SIMPAN</button>
-            </div>
           </div>
+          
         </form>
       </div>
       <div class="modal-footer">

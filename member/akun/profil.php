@@ -1,3 +1,5 @@
+
+
 <?php  
         // ganti password akun member
         if (isset($_POST['gantipassword'])) {
@@ -119,7 +121,9 @@
                 <div class="col-md-4">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Informasi Akun</h5>
+                        <h5>
+                            
+                        </h5>
                         </div>
                         <div>
                             <div class="ibox-content no-padding border-left-right">
@@ -164,7 +168,6 @@
                 <div class="col-md-8">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Activites</h5>
                             <div class="ibox-tools">
                                 <a class="collapse-link">
                                     <i class="fa fa-chevron-up"></i>
@@ -267,14 +270,6 @@
                                           <input type="text" class="form-control" value="<?php echo $rowMember['member_status']; ?>" disabled >
                                         </div>
                                       </div>  
-                                      <div class="form-group row">
-                                        <label class="col-md-4">ID CARD</label>
-                                        <div class="col-md-6">
-                                          <input type="file" name="member_idcard_photo" >
-                                          <hr>
-                                          <img src="../img/<?php echo $rowMember['member_idcard_photo']; ?>" class="ig-responsive img-thumbnail" width='100' height='100'>
-                                        </div>
-                                      </div>
                                         <div class="form-group row">
                                         
                                         <div class="col-md-12">

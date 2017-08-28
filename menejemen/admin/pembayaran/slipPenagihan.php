@@ -42,12 +42,12 @@
 				$totalBiaya = $biaya['totalBiaya'];
 			 ?>
 				<td colspan="3"><label>Tagihan</label></td>
-				<td><label>Rp. <?php echo rupiah($rowPenagihan['payment_bill']); ?></label></td>
+				<td><label>Rp <?php echo rupiah($rowPenagihan['payment_bill']); ?></label></td>
 			</tr>
 			<tr>
 				<td colspan="3"><label>Jumlah Pembayaran</label></td>
 				<td>
-					<label>Pembayaran Transfer : Rp. <?php echo rupiah($rowPenagihan['payment_amount_transfer']); ?> 
+					<label>Pembayaran Transfer <br/> Rp <?php echo rupiah($rowPenagihan['payment_amount_transfer']); ?> 
 					<?php 
 
 							// ambil data saldo
@@ -71,7 +71,7 @@
 			</tr>
 			<tr>
 				<td colspan="3"><label>Kelebihan Pembayaran</label></td>
-				<td><label>Rp. <?php echo rupiah ($rowPenagihan['payment_amount_saldo']); ?>  * Sisa pembayaran akan dimasukkan ke dalam saldo member</label></td>
+				<td><label>Rp <?php echo rupiah ($rowPenagihan['payment_amount_saldo']); ?>  * Sisa pembayaran akan dimasukkan ke dalam saldo member</label></td>
 			</tr>
 			<tr>
 				<td colspan="3"><label>Kategori Pembayaran</label></td>
@@ -81,10 +81,10 @@
 				<td colspan="3"><label>Keterangan Pembayaran</label></td>
 				<td><?php echo $rowPenagihan['payment_info']; ?></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td colspan="3"><label>Jenis Pembayaran</label></td>
-				<td><?php echo $rowPenagihan['payment_status']; ?></td>
-			</tr>
+				<td><?php //echo $rowPenagihan['payment_status']; ?></td>
+			</tr> -->
 			<tr>
 				<td colspan="3"><label>Tanggal Konfirmasi</label></td>
 				<td><?php echo $rowPenagihan['payment_date']; ?></td>
@@ -98,17 +98,17 @@
 				</td>
 				<td><img src="../../surat/<?php echo $rowPenagihan['payment_photo']; ?>" width='400px'></td>
 			</tr>
-			<tr>
+			<!-- <tr>
 				<td colspan="3"><label>STATUS</label></td>
 				<td>
 					<label>
-						PEMBAYARAN <?php echo $rowPenagihan['payment_status']; ?>
+						PEMBAYARAN <?php //echo $rowPenagihan['payment_status']; ?>
 					</label>
 					<p>
-						<?php echo $rowPenagihan['payment_notif']; ?>
+						<?php //echo $rowPenagihan['payment_notif']; ?>
 					</p>
 				</td>
-			</tr>
+			</tr> -->
 
 
 		</tfoot>

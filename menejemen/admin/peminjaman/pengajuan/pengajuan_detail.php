@@ -4,15 +4,19 @@
         $rowStatusLoan = mysql_fetch_array(mysql_query("SELECT loan_app_id,loan_status,member_id_fk,loan_invoice FROM trx_loan_application where loan_invoice = '".$invoice."' "));
         $idmember = $rowStatusLoan['member_id_fk'];
         if (isset($_POST['ubah'])) {
+            // mengambil email member
             $selectQuery = mysql_query("SELECT * FROM tbl_member where member_id = '".$idmember."'");
             $runq = mysql_fetch_array($selectQuery);
             $email = $runq['member_email'];
-            if ($_POST['loan_status'] != 'MENUNGGU' ) {
-                    $queryUpdateStatusLoanAPP = mysql_query("UPDATE trx_loan_application set loan_status = '".$_POST['loan_status']."' where loan_app_id = '".$_POST['loan_app_id']."'");
+            if ($_POST['loan_status'] != 'MENUNGGU' ) { // jika status pengajuan selain menunggu
+                // update status
+                    $queryUpdateStatusLoanAPP = mysql_query("UPDATE trx_loan_application set loan_status = '".$_POST['loan_status']."' where loan_app_id = '".$_POST['loan_app_id']."'"); // value hidden
                  // echo "<script>  location.href='index.php?hal=peminjaman/pengajuan/list' </script>";exit;
+                // kirim ke email
                  echo "<script>  location.href='peminjaman/pengajuan/SENDEMAIL/sendEmailDebug.php?invoice=".$invoice."&email=".$email."' </script>";exit;    
             }
-            else{
+            else{  
+                    // ttp update menunggu tp tidak kirim email (status tidak berubah)
                     $queryUpdateStatusLoanAPP_menunggu = mysql_query("UPDATE trx_loan_application set loan_status = '".$_POST['loan_status']."' where loan_app_id = '".$_POST['loan_app_id']."'");
                     if ($queryUpdateStatusLoanAPP_menunggu) {
                         
@@ -170,13 +174,13 @@
                                         <thead>
                                             <th>No</th>
                                             <th>Nama Alat</th>
-                                            <th>Status Alat</th>
+                                                <th>Status Alat</th>
                                             <th>Jumlah Alat Tersedia</th>
                                             <th>Jumlah Pinjam</th>
                                             <th>Subtotal</th>
                                             <?php 
                                                 if ($_SESSION['level_name'] != 'kepala laboratorium') {
-                                                    if ($_SESSION['level_name'] = 'koordinator penelitian') {
+                                                    if ($_SESSION['level_name'] == 'koordinator penelitian') {
 
                                                         if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN') {  
                                                         if ($rowStatusLoan['loan_status'] !='PERPANJANG') {
@@ -195,6 +199,8 @@
                                         while ($rowDetailPeminjaman = mysql_fetch_array($sqldetail)) { 
                                                 $Temp_tersedia = $rowDetailPeminjaman['intrument_quantity_temp'];
                                                 $total_intruments = $rowDetailPeminjaman['instrument_quantity'];
+
+                                                // stok =  quantity - temp
                                                 $stokTersedia  =  $total_intruments - $Temp_tersedia;
                                             ?>
                                             <tr>
@@ -211,7 +217,7 @@
                                                             } else if ($rowDetailPeminjaman['loan_status_detail'] == 'DITOLAK TANPA PENAWARAN') {
                                                                 echo "<span class='label label-danger'>DITOLAK</span>";
                                                             }
-                                                            else if ($rowDetailPeminjaman == 'ACC'){
+                                                            else if ($rowDetailPeminjaman['loan_status_detail'] == 'ACC'){
                                                                 echo "<span class='label label-success'>ACC</span>";
                                                             }
                                                         ?>
@@ -223,7 +229,7 @@
                                                     if ($stokTersedia != 0 ) {
                                                     echo "".$stokTersedia."";
                                                     }else{
-                                                    echo "<label class='btn btn-warning btn-xs'>ALAT TELAH DI BOOK SEMUA</label>";
+                                                    echo "<label class='btn btn-warning btn-xs'>ALAT TELAH DIPINJAM SEMUA</label>";
                                                     }  ?>
                                                     </center>
                                                 </td>
@@ -238,6 +244,7 @@
                                                         if ($_SESSION['level_name'] != 'kepala laboratorium') {
                                                      ?>
                                                      <?php 
+                                                     // jika  level = koordinator (jika status pengajuan selain membayar tagihan, perpanjang, dikembalikan) maka muncul button ubah status pada aksi
                                                         if ($_SESSION['level_name'] == 'koordinator penelitian') {   
                                                          if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN') {                                                      ?>
                                                    <?php 
@@ -250,8 +257,7 @@
                                                         // jika status pengajuan tidak ditolak 
                                                         if ($rowDetailPeminjaman['loan_status_detail'] != 'DITOLAK' AND $rowDetailPeminjaman['loan_status_detail'] !='DITOLAK TANPA PENAWARAN' AND $rowDetailPeminjaman['loan_status_detail'] != 'PENAWARAN DISETUJI') {
                                                      ?>
-                                                     <a href='#ubahstatuspengajuan' class='btn btn-info dim_about' id='custId' data-toggle='modal' 
-                                                        data-id='<?php echo $rowDetailPeminjaman['loan_app_detail_id']; ?>'><span class="fa fa-edit"></span> Ubah Status </a> 
+                                                     <a href='#ubahstatuspengajuan' class='btn btn-info dim_about' id='custId' data-toggle='modal' data-id='<?php echo $rowDetailPeminjaman['loan_app_detail_id']; ?>'><span class="fa fa-edit"></span> Ubah Status </a> 
 
                                                         <?php  }
                                                                  else{ 
