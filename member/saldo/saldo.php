@@ -35,10 +35,13 @@
 						 <?php 
 			    $querySaldo = mysql_query("SELECT sum(saldo_total) as total_saldo FROM trx_saldo where member_id_fk='".$_SESSION['member_id']."'");
 			    $total_saldo = mysql_fetch_array($querySaldo);
+			    $query_saldo_terakhir = mysql_fetch_array(mysql_query("SELECT * FROM trx_saldo where member_id = '".$_SESSION['member_id']."' ORDER BY member_id DESC"));
+			    $saldo_terakhir = $query_saldo_terakhir['saldo_total'];
+			    
 			    if ($total_saldo['total_saldo']=='') {
 			      echo "Rp.0";
 			    }
-			    echo "<h1>Rp.".rupiah($total_saldo['total_saldo'])."</h1>";
+			    echo "<h1>Rp.".rupiah($saldo_terakhir)."</h1>";
 			 ?></center>
 					</div>
 				</div>

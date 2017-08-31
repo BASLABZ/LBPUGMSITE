@@ -31,7 +31,7 @@
         $queryHapusPenawaran_detail_disetujui = mysql_query("DELETE FROM trx_rejected_detail where rejected_detail_id='".$_POST['idreject']."'");
           $queryInstrument_ditolak = mysql_query("DELETE FROM trx_loan_application_detail where loan_app_detail_id = '".$rowdetail['loan_app_detail_id']."' ");
         if ($queryInstrument_ditolak) {
-            echo "<script>alert ('Data Penawaran Telah Dihapus'); location.href='index.php?hal=pengajuan-member/pengajuan-alat'</script>";
+            echo "<script>alert ('Data Penawaran Telah Disetujui'); location.href='index.php?hal=pengajuan-member/pengajuan-alat'</script>";
         }
 
 
