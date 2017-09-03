@@ -15,7 +15,7 @@
                  echo "<script>  location.href='peminjaman/pengajuan/SENDEMAIL/sendEmailDebug.php?invoice=".$invoice."&email=".$email."' </script>";exit;    
             }
             else{  
-                    // ttp update menunggu tp tidak kirim email (status tidak berubah)
+     
                     $queryUpdateStatusLoanAPP_menunggu = mysql_query("UPDATE trx_loan_application set loan_status = '".$_POST['loan_status']."' where loan_app_id = '".$_POST['loan_app_id']."'");
                     if ($queryUpdateStatusLoanAPP_menunggu) {
                         
@@ -23,6 +23,14 @@
                     }
             }
             
+        }
+        // pembatalan
+        if (isset($_POST['ubahdibatalkan'])) {
+            $selectQuery_batal = mysql_query("SELECT * FROM tbl_member where member_id = '".$idmember."'");
+            $runq_batal = mysql_fetch_array($selectQuery_batal);
+            $email_batal = $runq_batal['member_email'];
+            $queryUpdateStatusLoanAPP = mysql_query("UPDATE trx_loan_application set loan_status = 'KONFIRMASI PEMBATALAN' where loan_app_id = '".$_POST['loan_app_id']."' and loan_invoice='".$invoice."'"); 
+                 echo "<script>  location.href='peminjaman/pengajuan/SENDEMAIL/sendEmailDebug.php?invoice=".$invoice."&email=".$email_batal."' </script>";exit;    
         }
         
        ?>
@@ -109,7 +117,7 @@
                                         
                                         <?php 
                                         
-                                            if ($rowStatusLoan['loan_status'] == 'MENUNGGU' OR $rowStatusLoan['loan_status']=='MENUNGGU ACC FINAL') {
+                                            if ($rowStatusLoan['loan_status'] == 'MENUNGGU' OR $rowStatusLoan['loan_status']=='MENUNGGU ACC FINAL' OR $rowStatusLoan['loan_status']=='KONFIRMASI PEMBATALAN') {
 
                                          ?>
                                         <div class="col-md-10" align="center">
@@ -140,6 +148,10 @@
                                                                 <?php if($rowStatusLoan['loan_status']=='DIKONFORMASI'){echo "selected=selected";}?>>
                                                                     DITOLAK
                                                             </option>
+                                                            <option value="KONFIRMASI PEMBATALAN"
+                                                                <?php if($rowStatusLoan['loan_status']=='KONFIRMASI PEMBATALAN'){echo "selected=selected";}?>>
+                                                                    KONFIRMASI PEMBATALAN
+                                                            </option>
                                                             <?php }else{ ?>
                                                             <!-- bu ketua lab -->
                                                             <option value="ACC FINAL"
@@ -165,6 +177,11 @@
                                             <div class="col-md-10">
                                                 <div class="well">
                                                     <center><h4>STATUS : <?php echo $rowStatusLoan['loan_status']; ?></h4></center>
+                                                    <form class="role" method="POST">
+                                                        <input type="hidden" value="<?php echo $rowStatusLoan['loan_app_id']; ?>" name='loan_app_id'>
+                                                        <input type="hidden" value="<?php echo $invoice; ?>" name='loan_invoice'>
+                                                        <center><button type="submit" name="ubahdibatalkan" class="btn btn-danger btn-md dim_about"> <span class="fa fa-check"></span> Konfirmasi Pembatalan</button></center>
+                                                    </form>
                                                 </div>
                                             </div>
                                         <?php } ?>
@@ -187,13 +204,13 @@
                                                         if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN') {  
                                                         if ($rowStatusLoan['loan_status'] !='PERPANJANG') {
                                                         if ($rowStatusLoan['loan_status'] !='DIKEMBALIKAN') {
-                                                        if ($rowStatusLoan['loan_status'] !='ACC FINAL') {
+                                                        // if ($rowStatusLoan['loan_status'] !='ACC FINAL') {
                                                         if ($rowStatusLoan['loan_status'] !='DIPINJAM') {
                                                                 
 
                                              ?>
                                             <th>Aksi</th>
-                                            <?php }}}}}} ?>
+                                            <?php }}}}} ?>
                                         </thead>
                                         <tbody>
                                         <?php 
@@ -253,7 +270,7 @@
                                              
                                                           <?php 
                                                      if ($_SESSION['level_name'] != 'kepala laboratorium' AND 
-                                                        $rowStatusLoan['loan_status'] != 'ACC FINAL' AND
+                                                        // $rowStatusLoan['loan_status'] != 'ACC FINAL' AND
                                                         $rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN' AND $rowStatusLoan['loan_status'] != 'PERPANJANG' AND $rowStatusLoan['loan_status'] != 'DIKEMBALIKAN' AND $rowStatusLoan['loan_status'] != 'DIPINJAM') {
 
                                                      ?>

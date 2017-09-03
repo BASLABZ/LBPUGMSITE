@@ -19,7 +19,7 @@
             <div class="col-md-6"> 
               <label class="col-md-4">Nama Lengkap</label>
               <div class="col-md-8">
-                <input type="text" class="form-control validate[required,custom[onlyLetterSp]] text-input" placeholder="Nama Lengkap"  name="member_name" id="nama"   required>
+                <input type="text" class="form-control validate[required,custom[onlyLetterSp]] text-input" placeholder="Nama Lengkap" minlength="3"  name="member_name" id="nama"   required>
               </div>
             </div>
             <div class="col-md-6">

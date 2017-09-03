@@ -37,12 +37,13 @@
                 <th>NAMA</th>
                 <th>INSTANSI</th>
                 <th>TANGGAL PENGAJUAN</th>
+                <th>STATUS</th>
             </tr>
         </thead>
         <tbody>
             <?php
                 $no =1;
-                $show = mysql_query("SELECT * from trx_loan_application A join trx_loan_application_detail B on A.loan_app_id = B.loan_app_id_fk join tbl_member C on C.member_id = A.member_id_fk join ref_instrument D on D.instrument_id = B.instrument_id_fk GROUP BY c.member_id ");
+                $show = mysql_query("SELECT * from trx_loan_application A join tbl_member C on C.member_id = A.member_id_fk");
                 while ($runshow = mysql_fetch_array($show)) {
                 ?>
                 <tr>
@@ -51,9 +52,13 @@
                     <td><?php echo $runshow['member_name']; ?></td>
                     <td><?php echo $runshow['member_institution']; ?></td>
                     <td><?php echo $runshow['loan_date_input']; ?></td>
+                     <td><?php echo $runshow['loan_status']; ?></td>
+                </tr>
+
                 <?php
                 }
             ?>
+           
         </tbody>
     </table>
     </center>
@@ -61,10 +66,9 @@
 
     <table  class="table table-responsive table-borderd">
         
+            <br/>
             <tr>
                 <td><b>Keterangan</b></td>
-                <td>:</td>
-                <td></td>
             </tr>
             <?php 
                 // $query_jumlah_alat_dipinjam = mysql_query("SELECT * from trx_loan_application A join trx_loan_application_detail B on A.loan_app_id = B.loan_app_id_fk join tbl_member C on C.member_id = A.member_id_fk join ref_instrument D on D.instrument_id = B.instrument_id_fk");
@@ -81,10 +85,18 @@
                  <td><?php echo $row_count_status['jumlah_status']; ?></td>
              </tr>
              <?php } ?>
-        
+             <br/>
+            
     </table>
+        <p align="right">
+                Yogyakarta, <?php $tanggal =  date('d F Y'); 
+                echo $tanggal?>
+        </p>
+        <br/><br/>
+        <p align="right">Dra. Neni Rahmawati</p>
+        <p align="right">Kepala Laboratorium</p>
 
-                                </div>
+    </div>
 
 </body>
 </html>

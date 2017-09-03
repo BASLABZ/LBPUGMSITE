@@ -61,7 +61,10 @@
                                                                 echo "<label class='label label-warning'>MENUNGGU</label>";
                                                             } elseif ($row_status == 'DIBATALKAN') {
                                                                 echo "<label class='label label-danger'>DIBATALKAN</label>";
-                                                            } elseif ($row_status == 'MENUNGGU ACC FINAL') {
+                                                            } elseif ($row_status == 'KONFIRMASI PEMBATALAN') {
+                                                                echo "<label class='label label-danger'>KONFIRMASI PEMBATALAN</label>;";
+                                                            } 
+                                                            elseif ($row_status == 'MENUNGGU ACC FINAL') {
                                                                 echo "<label class='label label-default'>MENUNGGU ACC FINAL</label>";
                                                             } elseif ($row_status == 'ACC FINAL') {
                                                                echo "<label class='label label-info'>ACC FINAL</label>";

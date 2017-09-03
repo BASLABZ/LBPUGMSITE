@@ -104,6 +104,8 @@
                                                   echo "<label class='label label-success'>DIPINJAM</label>"; // hijau
                                               } elseif ($status_peminjaman == 'DIKEMBALIKAN') {
                                                   echo "<label class='label label-default'>DIKEMBALIKAN</label>"; // abu2
+                                              } elseif ($status_peminjaman == 'KONFIRMASI PEMBATALAN') {
+                                                  echo "<label class='label label-danger'>KONFIRMASI PEMBATALAN</label>"; // abu2
                                               }
                                               ?>
                                           </center>
