@@ -28,7 +28,7 @@ function get_include_contents($filename) {
     return false;
 }
 $mail->IsHTML(true);
-$mail->Subject = "You have an event today";
+$mail->Subject = "KONFIRMASI PEMINJAMAN";
 $mail->Body = get_include_contents('content\invoice.php');
 if (!$mail->send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;

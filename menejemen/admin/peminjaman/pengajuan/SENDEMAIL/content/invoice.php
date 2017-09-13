@@ -50,7 +50,7 @@ $email = $_GET['email'];
                                             		if ($roPeminjaman['loan_status']=='MENUNGGU ACC FINAL') {
                                             			echo "SILAHKAN MELAKUKAN PEMBAYARAN , WAKTU PEMBAYARAN HANYA 3 JAM  DARI DITERIMANYA EMAIL INI. JIKA TIDAK MELAKUKAN PEMBAYARAN MAKA TRANSAKSI PEMINJAMAN ANDA AKAN KAMI BATALKAN SECARA OTOMATIS";
                                             		}else if($roPeminjaman['loan_status']=='ACC FINAL') {
-                                                        echo "PENGAJUAN ANDA TELAH DI ACC OLEH KEPALA LAPORATORIUM , SILAHKAN MELAKUKAN PENGAMBILAN ALAT DI LAPORATORIUM";
+                                                        echo "PENGAJUAN ANDA TELAH DI ACC OLEH KEPALA LAPORATORIUM , SILAHKAN MELAKUKAN PEMBAYARAN PEMINJAMAN, WAKTU PEMBAYARAN HANYA 3 JAM  DARI DITERIMANYA EMAIL INI. JIKA TIDAK MELAKUKAN PEMBAYARAN MAKA TRANSAKSI PEMINJAMAN ANDA AKAN KAMI BATALKAN SECARA OTOMATIS ";
                                                     } 
                                             		?>
                                                         </td>

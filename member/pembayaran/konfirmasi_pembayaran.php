@@ -31,11 +31,11 @@
                     
                     $querySimpanPayment1 = "INSERT INTO trx_payment (payment_bankname, payment_bill,
                                                                   payment_amount_transfer,
-                                                                  payment_amount_saldo,payment_date,
-                                                                  payment_confirm_date,payment_photo,
-                                                                  payment_info,loan_app_id_fk,
-                                                                  member_id_fk,payment_notif,payment_status,
-                                                                  payment_category,payment_verification_date,
+                                                                  payment_amount_saldo, payment_date,
+                                                                  payment_confirm_date, payment_photo,
+                                                                  payment_info, loan_app_id_fk,
+                                                                  member_id_fk, payment_notif,payment_status,
+                                                                  payment_category, payment_verification_date,
                                                                   payment_valid)
                                                  VALUES
                                                         ('".$_POST['payment_bankname']."',
@@ -248,7 +248,7 @@
                                         <td><?php echo $no++; ?></td>
                                         <td><?php echo $rowDetailPeminjaman['instrument_name']; ?></td>
                                         <td><center><?php echo $rowDetailPeminjaman['loan_amount']; ?></center></td>
-                                        <td>Rp.<?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
+                                        <td>Rp <?php echo rupiah($rowDetailPeminjaman['loan_subtotal']); ?></td>
                                       </tr>
                                 <?php } ?>
                                     </tbody>
@@ -302,7 +302,7 @@
                                         </tr>
                                          <tr>
                                             <td colspan="3"> Total Bayar = (Total - Potongan)</td>
-                                            <td>Rp <?php echo rupiah($roTota['long_loan']*$sub/2); ?></td>
+                                            <td>Rp <?php echo rupiah($roTotal['long_loan']*$sub/2); ?></td>
                                         </tr>
                                         <?php }elseif ($category_member == '5') { // mhs ugm s2
                                           ?>

@@ -80,22 +80,19 @@
                         <th>BIAYA SEWA</th>
                         <th>SUBTOTAL</th>
                         <th>AKSI</th>
-            </thead>
+            </thead> <!--// mengambil data alat yg dipilih berdasarkan id member -->
             <tbody>
                 <?php 
                             $no = 0;
-                            // mengambil data alat yg dipilih berdasarkan id member
                             $query = mysql_query("SELECT instrument_id_fk, instrument_name, instrument_quantity,intrument_quantity_temp , instrument_fee, count(instrument_id) AS jumlah FROM ref_instrument LEFT JOIN trx_loan_temp ON ref_instrument.instrument_id=trx_loan_temp.instrument_id_fk WHERE member_id_fk='".$_SESSION['member_id']."' GROUP BY instrument_id_fk");
                                 $number = 1;
                             while ($row = mysql_fetch_array($query)) {
                                     $biaya = $row['instrument_fee'];
                                     $jumlah = $row['jumlah'];
                                     $subtotal = $number*$biaya; 
-                                    $totaljumlah = $totaljumlah+$jumlah; // total alat
+                                    $totaljumlah = $totaljumlah+$jumlah; 
                                     $totalbayar = $totalbayar+($biaya*$jumlah); 
                                     $batasQuantity = $row['instrument_quantity']-$row['intrument_quantity_temp'];
-                                    // $batasQuantity;
-                                    // echo $row['intrument_quantity_temp'];
                                     echo "<tr>
                                             <td >".++$no."</td>
                                             <td><input type='hidden' name='instrument_id_fk[]' value='".$row['instrument_id_fk']."' />".$row['instrument_name']."</td>
@@ -113,8 +110,7 @@
                                                 <label id='subtotalf".$no."'>".rupiah($subtotal)."</label>
                                             </td>
                                             <td><a href='index.php?hal=pengajuan-member/keranjang&hapusitem=".$row['instrument_id_fk']."' class='btn btn-sm btn-danger dim_about'><span class='fa fa-trash'></span></a></td>
-                                            
-                                        </tr>";
+                                          </tr>";
                         }
                          ?>
                         

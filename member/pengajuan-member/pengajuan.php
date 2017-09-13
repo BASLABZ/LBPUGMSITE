@@ -95,7 +95,7 @@
                                         <th width="8%">JUMLAH ALAT</th>
                                         <th width="8%">JUMLAH DIPINJAM</th>
                                         <th width="8%">JUMLAH TERSEDIA</th>
-                                        <th width="10%"><center>HARGA SEWA</center></th>
+                                        <th width="10%"><center>BIAYA SEWA</center></th>
                                         <th width="10%">AKSI</th>    
                                     </tr> 
                                 </thead>
@@ -180,7 +180,7 @@
                                                         }
                                                  ?>
                                             </td>
-                                            <td width="10%">Rp.<?php echo rupiah($rowI['instrument_fee']); ?></td>
+                                            <td width="10%">Rp <?php echo rupiah($rowI['instrument_fee']); ?></td>
                                             <td width="10%">
                                                 <a href='#myModal' class='btn btn-info btn-sm dim_about' id='custId' data-toggle='modal' data-id="<?php echo $rowI['instrument_id']; ?>"><span class='fa fa-eye'></span> Detail</a>
                                             </td> 

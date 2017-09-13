@@ -20,15 +20,15 @@
 				
 				$querySubmit = mysql_query("INSERT INTO trx_saldo (saldo_bankname, saldo_accountnumber, saldo_cashout_amount, saldo_status,member_id_fk) VALUES ('".$_POST['bank_name']."', '".$_POST['bank_account']."', '".$_POST['cashout_amount']."','REQUEST','".$_SESSION['member_id']."')");
 				if ($querySubmit) {
-					echo "<script> alert('Silahkan Tunggu Konfirmasi dari Admin'); location.href='index.php?hal=saldo/saldo' </script>";exit;	
+					echo "<script> alert('Data berhasil dikirim. Silahkan tunggu konfirmasi dari Admin'); location.href='index.php?hal=saldo/saldo' </script>";exit;	
 				}
 				
 
 			}else{
-				echo "<script> alert('PASSWORD AKUN ANDA SALAH'); location.href='index.php?hal=saldo/saldo' </script>";exit;
+				echo "<script> alert('Password Akun Anda Salah!'); location.href='index.php?hal=saldo/saldo' </script>";exit;
 			}
 		}else{
-			echo "<script> alert('SALDO ANDA TIDAK CUKUP UNTUK PENARIKAN SALDO'); location.href='index.php?hal=saldo/saldo' </script>";exit;
+			echo "<script> alert('Nominal pencairan tidak boleh melebihi jumlah saldo! '); location.href='index.php?hal=saldo/saldo' </script>";exit;
 		}
 
 

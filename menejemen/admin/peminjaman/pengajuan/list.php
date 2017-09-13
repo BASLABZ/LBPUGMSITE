@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-primary" style="border-color: white;">
-                        <div class="panel-heading"><span class="fa fa-list"></span> Data Pengajuan</div>
+                        <div class="panel-heading"><span class=""></span> Data Peminjaman</div>
                         <div class="panel-body dim_about">
                              <table class="table table-striped table-hover"  id="dataTables-example">
                                                 <thead>
@@ -37,9 +37,11 @@
                                                     $no = 1;
                                                     // menampilkan semua data pengajuan kecuali yg statusnya dibatalkan
                                                     if ($_SESSION['level_name']=='koordinator penelitian') {
-                                                            $querypengajuan = mysql_query("SELECT * FROM trx_loan_application a  JOIN tbl_member m on a.member_id_fk = m.member_id where a.loan_status != 'DIBATALKAN'   ORDER BY a.loan_app_id DESC");    
-                                                    }else if ($_SESSION['level_name']=='kepala laboratorium') {
-                                                     $querypengajuan = mysql_query("SELECT * FROM trx_loan_application a  JOIN tbl_member m on a.member_id_fk = m.member_id where a.loan_status ='MENUNGGU ACC FINAL' ORDER BY a.loan_app_id DESC");
+                                                        // jika level koordinator, tampilkan data peminjaman kecuali yg statusnya dibatalkan
+                                                         $querypengajuan = mysql_query("SELECT * FROM trx_loan_application a  JOIN tbl_member m on a.member_id_fk = m.member_id where a.loan_status != 'DIBATALKAN'   ORDER BY a.loan_app_id DESC");    
+                                                    } else if ($_SESSION['level_name']=='kepala laboratorium') {
+                                                         // jika level kepala, tampilkan data peminjaman yg statusnya hanya menunggu acc final   
+                                                        $querypengajuan = mysql_query("SELECT * FROM trx_loan_application a  JOIN tbl_member m on a.member_id_fk = m.member_id where a.loan_status ='MENUNGGU ACC FINAL' ORDER BY a.loan_app_id DESC");
                                                     }
                                                     
                                                     while ($roPeminjaman = mysql_fetch_array($querypengajuan)) {

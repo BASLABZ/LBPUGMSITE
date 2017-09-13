@@ -13,8 +13,8 @@ $data = mysql_fetch_array($hasil);
 if ($password == $data['operator_password'])
 {
 echo "<script> alert('Login Sukses');</script>";
-    // menyimpan username dan level ke dalam session
-    $_SESSION['operator_id']       = $data['operator_id']; //
+    
+    $_SESSION['operator_id']       = $data['operator_id']; 
     $_SESSION['level_id']    = $data['level_id'];
     $_SESSION['level_name']  = $data['level_name'];
     $_SESSION['operator_username']   = $data['operator_username'];

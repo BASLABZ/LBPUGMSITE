@@ -174,7 +174,7 @@
                                         <thead>
                                             <th>No</th>
                                             <th>Nama Alat</th>
-                                                <th>Status Alat</th>
+                                            <th>Status Alat</th>
                                             <th>Jumlah Alat Tersedia</th>
                                             <th>Jumlah Pinjam</th>
                                             <th>Subtotal</th>
