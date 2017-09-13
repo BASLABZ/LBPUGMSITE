@@ -44,12 +44,27 @@
 
 				<td>
 					<?php if ($status == 'DITOLAK' ) {
+
 						echo "<a style='margin-left:10px;' href='index.php?hal=pengajuan-member/lihat_penawaran&id=".$rowDetailPeminjaman['loan_app_detail_id']."&idpengajuan=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-info btn-xs dim_about'><span class='fa fa-eye'> Lihat Detail</span></a>";
 						// echo "<a style='margin-left:10px;' href='index.php?hal=members/list&hapus=".$rowDetailPeminjaman['loan_app_detail_id']."&jumlah=".$rowDetailPeminjaman['loan_amount']."&subtotal=".$rowDetailPeminjaman['loan_subtotal']."&invoice=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-danger'><span class='fa fa-trash'></span></a>";
 						
 						
 					}else if ($status == 'PENAWARAN') {
 						echo "<a href='index.php?hal=members/list&hapus=".$rowDetailPeminjaman['loan_app_detail_id']."&jumlah=".$rowDetailPeminjaman['loan_amount']."&subtotal=".$rowDetailPeminjaman['loan_subtotal']."&invoice=".$rowDetailPeminjaman['loan_invoice']."' class='btn btn-danger dim_about'><span class='fa fa-trash'></span></a>";
+					}elseif ($status == 'DITOLAK TANPA PENAWARAN') {
+	                        $queryPermintaan = mysql_query("SELECT * FROM trx_rejected_detail de join trx_rejected re 
+	                        ON de.rejected_id_fk = re.rejected_id
+	                        JOIN trx_loan_application_detail dl 
+	                        ON re.loan_app_detail_id_fk = dl.loan_app_detail_id
+	                        JOIN ref_instrument i
+	                        ON dl.instrument_id_fk = i.instrument_id
+	                        where dl.loan_app_detail_id = '".$rowDetailPeminjaman['loan_app_detail_id']."'");
+
+                            while ($rowPenolakan = mysql_fetch_array($queryPermintaan)) {
+                            	
+                            	echo "Ket : "; echo $rowPenolakan['rejected_text'];
+                            }
+                                         
 					}
 					else{
 						echo "<center><button class='btn btn-success dim_about btn-xs'><span class='fa fa-check'></span></button></center>";
@@ -220,7 +235,9 @@
                                    		 // jika time limit 
                                    		 	$queryLamaPinjam = mysql_query("SELECT trx_loan_application.* , current_date tanggal , datediff(current_date,loan_date_return) selisih , case when datediff(current_date,loan_date_return)>0 then 'Habis' else 'aktif' end status from trx_loan_application where member_id_fk= '".$ubahstatus['member_id_fk']."' AND loan_app_id = '".$ubahstatus['loan_app_id']."' ");
                                    		 	$hariH = mysql_fetch_array($queryLamaPinjam);
+                                   		 	
                                    		 	$sisaHari  = $hariH['selisih']; 
+                                   		 	// hasil dari sishari digunakan untuk crosscek perpanjang,denda,dan pengembalian
                                    		 	if ($sisaHari == 0) {
                                    		 		echo "<a href='index.php?hal=perpanjang/list&id=".$ubahstatus['loan_invoice']."'>INGIN PERPANJANG ALAT ? </a> <br><p>Hari Ini Adalah Waktu Pengembalian Alat, <br>Silahkan Melakukan Pengembalian/Perpanjang Alat, Jika Anda Melewatkan Waktu <br>Pengembalian Alat Maka Anda Akan Dikenakan Denda Sebesar 25% dari Total Peminjaman <br> Dan Kartu Identitas Anda Akan Kami Tahan Sebelum Melakukan Pembayaran Denda,</p>";  	
                                    		 	}else if ($sisaHari < 0 AND $sisaHari == -2 OR $sisaHari == -1 AND $hariH['status'] != 'Habis') {

@@ -15,9 +15,11 @@
       // menghitung waktu
       $tgl_pjm = date('Y-m-d',strtotime($_POST['tgl_pinjam']));
       $tgl_kmb = date('Y-m-d',strtotime($_POST['tanggal_kembali']));
+
    if (!empty($_FILES) && $_FILES['frm_file']['error'] == 0) {
               $fileName = $_FILES['frm_file']['name'];
               $move = move_uploaded_file($_FILES['frm_file']['tmp_name'], '../surat/'.$fileName);
+              // UPLOAD FILE PDF
             if ($move) {
 
                  
@@ -74,7 +76,8 @@
                   $subtotalpinjams = $_POST['subtotal'];
 
                   // menghitung alat yg dipilih
-                  $banyaks        = count($kodealats);
+                  $banyaks        = count($kodealats);//3
+                  
                     for ($ulang=0; $ulang <  $banyaks ; $ulang++) { 
                    $kodeInstruments = $kodealats[$ulang];
                    $jumlahalatinstruments = $jumlahalats[$ulang];

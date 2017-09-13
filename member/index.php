@@ -1,5 +1,6 @@
 <?php 
     session_start();
+    error_reporting(0);
     include '../menejemen/inc/inc-db.php';
     if (isset($_GET['logout'])) {
 

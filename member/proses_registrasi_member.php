@@ -4,14 +4,15 @@
 	session_start();
 	if (isset($_POST['simpanregistrasi'])) {
 		   if (!empty($_FILES) && $_FILES['member_idcard_photo']['size'] >0 && $_FILES['member_idcard_photo']['error'] == 0) {
+		
 		$member_name 	= $_POST['member_name'];
 		$member_email	= $_POST['member_email'];
 		$username 		= $_POST['member_username'];
 		$password 		= $_POST['member_password'];
 		$member_institution_mahasiswa = $_POST['member_institution_mahasiswa'];
 		$member_faculty_mahasiswa = $_POST['member_faculty_mahasiswa'];
-		$member_institution = $_POST['member_institution'];
-		$member_faculty = $_POST['member_faculty'];
+		// $member_institution = $_POST['member_institution'];
+		// $member_faculty = $_POST['member_faculty'];
 		$member_hint_question = $_POST['member_hint_question'];
 		$member_answer_question = $_POST['member_answer_question'];
 		$category_id_fk = $_POST['category_id_fk'];
@@ -20,8 +21,11 @@
 		$member_idcard_photo = $_FILES['member_idcard_photo']['name'];
 		$queryEmail  = mysql_query("SELECT * FROM tbl_member where member_email ='".$member_email."' ");
 		$cekEMail = mysql_num_rows($queryEmail);
-		$kode = 'b4ss4y4ngm4nd4';
-            $ency = base64_encode($kode);
+		print_r($member_email);
+		print_r($cekEMail);
+		print_r($category_id_fk);
+		$kode = 'm4nd4lbpugm';
+        $ency = base64_encode($kode);
 		if ($cekEMail != 0) {
 			 	 echo "<script> alert('Email Sudah Digunakan'); location.href='../index.php' </script>";exit;
 		}else{
@@ -39,12 +43,13 @@
 														member_answer_question, member_institution,
 														member_faculty, member_email, member_idcard_photo,
 														member_photo, member_status, member_login,
-														member_register_date, member_confirm_date,
+														member_register_date,
 														category_id_fk,kode
 												) 
 										VALUES ('".$member_name."', '', '', '', '', 
 												'".$username."', MD5('".$password."'),
-												'".$member_hint_question."', '".$member_answer_question."', 'UGM', 'Mahasiswa Kedokteran  S1 UGM', '".$member_email."','".$member_idcard_photo."','' ,'PENDING', 'N',NOW(),'', '".$category_id_fk."','".$ency."')";
+												'".$member_hint_question."', '".$member_answer_question."', 'UGM', 'Mahasiswa Kedokteran  S1 UGM', '".$member_email."','".$member_idcard_photo."','' ,'PENDING', 'N',NOW(), '".$category_id_fk."','".$ency."')";
+												print_r($queryTES);
 
 			$register = mysql_query($queryTES);
 			
@@ -63,7 +68,7 @@
 														member_answer_question, member_institution,
 														member_faculty, member_email, member_idcard_photo,
 														member_photo, member_status, member_login,
-														member_register_date, member_confirm_date,
+														member_register_date, 
 														category_id_fk,kode
 												) 
 										VALUES ('".$member_name."', '', '', '', '', 
@@ -71,7 +76,7 @@
 												'".$member_hint_question."','".$member_answer_question."','".$member_institution_mahasiswa."','".$member_faculty_mahasiswa."', 
 												'".$member_email."',
 												'".$member_idcard_photo."', 
-												'','PENDING','N',NOW(),'',
+												'','PENDING','N',NOW(),
 												'".$category_id_fk."','".$ency."')";
                   
                   $register = mysql_query($queryTES);
@@ -90,12 +95,12 @@
 														member_answer_question, member_institution,
 														member_faculty, member_email, member_idcard_photo,
 														member_photo, member_status, member_login,
-														member_register_date, member_confirm_date,
+														member_register_date,
 														category_id_fk,kode
 												) 
 										VALUES ('".$member_name."', '', '', '', '', 
 												'".$username."', MD5('".$password."'),
-												'".$member_hint_question."', '".$member_answer_question."', '".$member_institution_peneliti."','".$member_faculty_peneliti."', '".$member_email."','".$member_idcard_photo."','', 'PENDING','N',NOW(),'','".$category_id_fk."','".$ency."')";
+												'".$member_hint_question."', '".$member_answer_question."', '".$member_institution_peneliti."','".$member_faculty_peneliti."', '".$member_email."','".$member_idcard_photo."','', 'PENDING','N',NOW(),'".$category_id_fk."','".$ency."')";
 
                   $register = mysql_query($queryTES);
                  	if ($register) {
@@ -112,12 +117,12 @@
 														member_answer_question, member_institution,
 														member_faculty, member_email, member_idcard_photo,
 														member_photo, member_status, member_login,
-														member_register_date, member_confirm_date,
+														member_register_date,
 														category_id_fk,kode
 												) 
 										VALUES ('".$member_name."', '', '', '', '', 
 												'".$username."', MD5('".$password."'),
-												'".$member_hint_question."', '".$member_answer_question."', '".$member_institution_peneliti."', '".$member_faculty_peneliti."', '".$member_email."','".$member_idcard_photo."', '','PENDING','N',NOW(),'','".$category_id_fk."','".$ency."')";
+												'".$member_hint_question."', '".$member_answer_question."', '".$member_institution_peneliti."', '".$member_faculty_peneliti."', '".$member_email."','".$member_idcard_photo."', '','PENDING','N',NOW(),'".$category_id_fk."','".$ency."')";
 											
                   $register = mysql_query($queryTES);
                  	if ($register) {
@@ -132,12 +137,12 @@
 														member_answer_question, member_institution,
 														member_faculty, member_email, member_idcard_photo,
 														member_photo, member_status, member_login,
-														member_register_date, member_confirm_date,
+														member_register_date,
 														category_id_fk,kode
 												) 
 										VALUES ('".$member_name."', '', '', '', '', 
 												'".$username."', MD5('".$password."'),
-												'".$member_hint_question."', '".$member_answer_question."', '".$_POST['member_s2']."', '".$_POST['member_jurusan']."', '".$member_email."','".$member_idcard_photo."', '','PENDING','N',NOW(),'','".$category_id_fk."','".$ency."')";
+												'".$member_hint_question."', '".$member_answer_question."', '".$_POST['member_s2']."', '".$_POST['member_jurusan']."', '".$member_email."','".$member_idcard_photo."', '','PENDING','N',NOW(),'".$category_id_fk."','".$ency."')";
 											
                   $register = mysql_query($queryTES);
                  	if ($register) {
