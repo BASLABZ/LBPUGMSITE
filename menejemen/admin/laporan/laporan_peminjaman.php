@@ -70,12 +70,14 @@
                                             <th>INSTANSI</th>
                                             <th>TANGGAL PINJAM</th>
                                             <th>TANGGAL KEMBALI</th>
+                                            <th>NAMA ALAT</th>
+                                            <th>JUMLAH</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php
                                             $no =1;
-                                            $show = mysql_query("SELECT * from trx_loan_application A join tbl_member C on C.member_id = A.member_id_fk");
+                                            $show = mysql_query("SELECT * from trx_loan_application A join trx_loan_application_detail B on A.loan_app_id = B.loan_app_id_fk join tbl_member C on C.member_id = A.member_id_fk join ref_instrument D on D.instrument_id = B.instrument_id_fk WHERE  A.loan_status='DIPINJAM'");
                                             while ($runshow = mysql_fetch_array($show)) {
                                             ?>
                                             <tr>
@@ -85,6 +87,8 @@
                                                 <td><?php echo $runshow['member_institution']; ?></td>
                                                 <td><?php echo $runshow['loan_date_start']; ?></td>
                                                 <td><?php echo $runshow['loan_date_return']; ?></td>
+                                                <td><?php echo $runshow['instrument_name']; ?></td>
+                                                <td><?php echo $runshow['loan_amount']; ?></td>
                                             </tr> 
                                             <?php
                                             }
@@ -94,7 +98,11 @@
                                 <div align="center">
                                     <table  class="table table-responsive table-borderd">
                                         
-                                            
+                                            <tr>
+                                                <td><b>Nama Alat</b></td>
+                                                <td>:</td>
+                                                <td></td>
+                                            </tr>
                                             <?php 
                                                 $query_jumlah_alat_dipinjam = mysql_query("SELECT * from trx_loan_application A join trx_loan_application_detail B on A.loan_app_id = B.loan_app_id_fk join tbl_member C on C.member_id = A.member_id_fk join ref_instrument D on D.instrument_id = B.instrument_id_fk where A.loan_status='DIPINJAM'");
                                                 while ($row_alat = mysql_fetch_array($query_jumlah_alat_dipinjam)) {
@@ -112,8 +120,8 @@
 
                                 </div>
                             <div align="center">
-                                <a href="laporan/export_laporan_pengajuan_excel.php" class="btn btn-success"><span class="fa fa-file-excel-o"></span> Export to Excel</a>
-                                <a href="laporan/cetak_laporan_pengajuan.php" target="_BLANK" class="btn btn-warning"><span class="fa fa-file-pdf-o"></span> Export to PDF</a>
+                                <a href="laporan/export_laporan_rekap_data_peminjaman_exel.php" class="btn btn-success"><span class="fa fa-file-excel-o"></span> Export to Excel</a>
+                                <a href="laporan/cetak_laporan_peminjaman_alat.php" target="_BLANK" class="btn btn-warning"><span class="fa fa-file-pdf-o"></span> Export to PDF</a>
                             </div>
                         </div>   
                     </div>

@@ -1,4 +1,5 @@
 <?php 
+error_reporting(0);
         $id = $_GET['id'];
         $row = mysql_fetch_array(mysql_query("SELECT * FROM ref_level where level_id = '".$id."'"));
         $idlevel = $row['level_id'];
@@ -54,6 +55,7 @@
                             <div class="col-md-12">
                                 <form method="post" class="form-horizontal">
                                     <?php 
+                                            $var_newid = 0;
                                             $tampil     = "SELECT level_name FROM ref_level WHERE level_id='".$id."'";
                                             $run1       = mysql_query($tampil);
                                             $var_data   = mysql_fetch_array($run1);

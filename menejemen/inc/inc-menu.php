@@ -1,4 +1,4 @@
-<?php
+ <?php
 // include 'inc-db.php';
 // session_start();
 //--tampilkan menu 
@@ -91,3 +91,5 @@ while($datamenu1=mysql_fetch_array($resultmenu1)){
 <?php
 } // tutup while datamenu 1
 ?>
+
+

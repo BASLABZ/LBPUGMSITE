@@ -1,0 +1,34 @@
+1. koordinator, status pengajuan setelah diganti menunggu acc final ttep combo box to tampilannya? enggak yg disabled itu?
+
+2. kepala, data peminjman yg muncul cuma yg menunggu acc final to? setelah di acc kok gak tampil datanya?
+
+3. member, pembayaran lebih dr 3 jam tetep bisa. padahal harusnya dibatalkan otomatis. terus kalo udah dibatalin otomatis, jumlah alatnya kembali seperti semula nggak?
+
+4. kategori s1 ugm
+
+5. member, pengajuan hanya bisa dilakukan 1x, atau peminjaman yg sebelumnya harus sudah dikembalikan
+
+6. member, javascript utk input angka, jika kurang dr tagihan langsung hilang yg diinputkan
+
+7. member, data pembayaran yg masih menunggu konfirmasi emang gak muncul di menu rekap pembayaran to?????
+
+8. notifikasi email erorr
+
+9. query, gimana menampilkan peminjaman yg telat pengembaliannya
+
+10. validasi di konfirmasi pembayaran utk perpanjangan
+
+11. pembayaran perpanjangan dg saldo 
+
+12. perpanjangan
+
+
+===========================================================================================================================================================
+manda : 
+cek jumlah notifikasi email udah lengkap blm
+nda jangan lupa lambang kalkulator di keranjang perpanjangan di hidden
+payment status (tanpa saldo) fungsinya untuk apa
+tanggal pembayaran dan tanggal konfirmasi pembayaran sama atau tidak di bayar denda, soalnya tidak dibatasi waktu
+minus di detail pembayaran, admin
+cek laporan
+tampilkan no rekening lab pada sistem (utk pembayaran)
