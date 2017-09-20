@@ -41,20 +41,20 @@
                                 Hi ".$rowPeringatan['member_name'].", status pengajuan peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah <b>: ACC FINAL</b> <br/>Pengajuan Anda telah disetujui oleh Kepala Laboratorium. Silahkan melakukan pembayaran dan konfirmasi pembayaran dalam waktu 3 jam setelah pengajuan Anda disetujui. Apabila dalam waktu tempo yang diberikan Anda belum melakukan konfirmasi pembayaran maka pengajuan peminjaman alat Anda dibatalkan secara otomatis. <b><a href='index.php?hal=pengajuan-member/pengajuan-alat'>Lihat Data Selengkapnya</a></b> 
                              </div>";
                     } elseif ($statusKonfirmasi == 'MEMBAYAR TAGIHAN') {
-                          if ($rowPeringatan['payment_valid'] == 'MENUNGGU KONFIRMASI' ) {
-                            
-                          
+                    	// status pembayaran
+                                $pembayaran = mysql_query("SELECT payment_valid, payment_notif from trx_payment where loan_app_id_fk ='".$idPeminjaman."' AND member_id_fk ='".$_SESSION['member_id']."' ");
+                                $run_pembayaran = mysql_fetch_array($pembayaran);
+                                $keterangan = $run_pembayaran['payment_valid'];
+                          if ($keterangan == 'MENUNGGU KONFIRMASI' ) {
+
                           echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
                                <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
                                   <span class='fa fa-bookmark'></span> <b>KETERANGAN PEMBAYARAN</b></br>
                                 Hi ".$rowPeringatan['member_name'].", data pembayaran peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." telah terkirim. <br/>Mohon tunggu verifikasi pembayaran dari kami. Pembayaran yang sudah diverifikasi akan mengarahkan Anda menuju langkah selanjutnya. 
                                 </div> ";
                               }
-                                // status pembayaran
-                                $pembayaran = mysql_query("SELECT payment_valid, payment_notif from trx_payment where loan_app_id_fk ='".$idPeminjaman."' AND member_id_fk ='".$_SESSION['member_id']."' ");
-                                $run_pembayaran = mysql_fetch_array($pembayaran);
-                                $keterangan = $run_pembayaran['payment_valid'];
-                                if ($keterangan == 'VALID') {
+                                
+                                elseif ($keterangan == 'VALID') {
                                   echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
                                        <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
                                           <span class='fa fa-bookmark'></span> <b>STATUS PEMBAYARAN</b></br>
@@ -62,7 +62,7 @@
                                         </div> ";
                                 } elseif ($keterangan == 'TIDAK VALID'){
                                     echo "<div class='alert alert-success alert-dismissable dim_about lazur-bg' style='border-color: #f8ac59; color: white;'>
-                                       <button aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
+                                       <butto n aria-hidden='true' data-dismiss='alert' class='close' type='button' style='color: white;'>×</button>
                                           <span class='fa fa-bookmark'></span> <b>STATUS PEMBAYARAN</b></br>
                                         Hi ".$rowPeringatan['member_name'].", status pembayaran peminjaman alat penelitian dengan No Invoice ".$rowPeringatan['loan_invoice']." adalah <b>: TIDAK VALID</b> <br/>Keterangan Tidak Valid : <b>".$run_pembayaran['payment_notif']."</b><br/>Pembayaran yang dinyatakan tidak valid tidak bisa melanjutkan proses selanjutnya. Silahkan melakukan pembayaran kekurangan dan konfirmasi ulang.<b><a href='index.php?hal=pembayaran/konfirmasi_kekurangan'> Lihat Data Selengkapnya</a></b> 
                                         </div> ";

@@ -5,7 +5,7 @@
  <!DOCTYPE html>
  <html>
  <head>
-     <title>LAPORAN REKAP DATA MEMBER</title>
+     <title></title>
  </head>
  <body onload="window.print()"> 
        <center>
@@ -28,14 +28,14 @@
        </center>
        <hr>
         <center>
-            <h2>LAPORAN REKAP DATE MEMBER</h2>
+            <h4>LAPORAN REKAP DATA MEMBER</h4>
             <table border="1">
                     <thead>
                         <th>NO</th>
                         <th>NAMA</th>
-                        <th>TANGGAL DAFTAR</th>
+                        <th>TANGGAL PENDAFTARAN</th>
                         <th>INSTANSI</th>
-                        <th>FAKULTAS / BIDANG</th>
+                        <th>BIDANG</th>
                         <th>EMAIL</th>
                         <th>STATUS</th>
                     </thead>
