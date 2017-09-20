@@ -16,9 +16,8 @@
                 <th ALIGN="CENTER" WIDTH="60%">
                     <p align="left">
                         <center>
-                            <h3>LABORATORIUM BIO & PALEONTROPOLOGI <br>FAKULTAS KEDOKTERAN UNIVERSITAS GADJAH MADA </h3>
-                            <h3></h3>
-                            <h5><i>Alamat : Jalan Medika Sekip , Yogyakarta , 55281, Indonesia</i><br>
+                            <h5>LABORATORIUM BIO & PALEONTROPOLOGI <br>FAKULTAS KEDOKTERAN UNIVERSITAS GADJAH MADA </h5>
+                            <h5>Alamat : Jalan Medika Sekip , Yogyakarta , 55281, Indonesia<br>
                                 Telp/ FAX: +62-274-552577; Email: lab-biopaleo.fk@ugm.ac.id<br> http://lab-biopaleoantropologi.fk.ugm.ac.id/
                             </h5>
                         </center>

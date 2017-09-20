@@ -12,7 +12,7 @@
 
 7. member, data pembayaran yg masih menunggu konfirmasi emang gak muncul di menu rekap pembayaran to?????
 
-8. notifikasi email erorr
+8. notifikasi email erorr 
 
 9. query, gimana menampilkan peminjaman yg telat pengembaliannya
 

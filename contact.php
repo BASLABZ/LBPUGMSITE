@@ -1,4 +1,3 @@
-
 <section id="contact" class="gray-section contact" style="padding-top:0px; ">
     <div class="container">
         <div class="row m-b-lg">

@@ -27,13 +27,13 @@
                                 <form method="POST" action="index.php?hal=laporan/hasil_filter_lap_pembayaran">
                                     <div class="col-md-4">
                                         <div class="from-group">
-                                            <label>Periode Pertama</label>
+                                            <label>Periode (Dari)</label>
                                             <input type="date" class="form-control" value="<?php echo date('Y-m-d'); ?>" name='periode1'>
                                         </div> 
                                     </div>
                                     <div class="col-md-4">
                                         <div class="from-group">
-                                            <label>Periode Akhir</label>
+                                            <label>Periode(Sampai)</label>
                                             <input type="date" class="form-control" value="<?php echo date('Y-m-d'); ?>" name='periode2'>
                                         </div>
                                     </div>
