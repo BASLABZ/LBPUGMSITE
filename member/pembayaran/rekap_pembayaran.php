@@ -48,7 +48,7 @@
                             <tbody>
                                 <?php 
                                     $no = 0;
-                                    $query_rekap_pembayaran = mysql_query("SELECT * FROM trx_loan_application p JOIN trx_payment t ON t.loan_app_id_fk = p.loan_app_id where t.payment_status != 'TANPA SALDO & MEMBAYAR DENDA' AND t.payment_status != 'SALDO & MEMBAYAR DENDA' AND t.payment_valid != 'MENUNGGU KONFIRMASI' AND p.member_id_fk = '".$_SESSION['member_id']."'");
+                                    $query_rekap_pembayaran = mysql_query("SELECT * FROM trx_loan_application p JOIN trx_payment t ON t.loan_app_id_fk = p.loan_app_id where t.payment_status != 'TANPA SALDO & MEMBAYAR DENDA' AND t.payment_status != 'SALDO & MEMBAYAR DENDA' AND p.member_id_fk = '".$_SESSION['member_id']."'");
                                     while ($rowRekap = mysql_fetch_array($query_rekap_pembayaran)) {
                                         $invoice = $rowRekap['loan_invoice'];
                                  ?>

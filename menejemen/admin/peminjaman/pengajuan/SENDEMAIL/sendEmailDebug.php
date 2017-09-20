@@ -28,11 +28,11 @@ function get_include_contents($filename) {
     return false;
 }
 $mail->IsHTML(true);
-<<<<<<< HEAD
+
 $mail->Subject = "KONFIRMASI PEMINJAMAN";
-=======
+
 $mail->Subject = "Konfirmasi Pengajuan Peminjaman Alat";
->>>>>>> c4a39afff56bc6ee28b21793202bfad53c11f037
+
 $mail->Body = get_include_contents('content\invoice.php');
 if (!$mail->send()) {
     echo "Mailer Error: " . $mail->ErrorInfo;

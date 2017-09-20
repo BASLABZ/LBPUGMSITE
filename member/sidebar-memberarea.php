@@ -36,9 +36,23 @@
                         </a>
                     </li>
                     <li>
-                        <a href="layouts.html"><i class="fa fa-tags"></i> <span class="nav-label">PEMBAYARAN</span>
-                        <span class="label label-warning pull-right"><span class="fa fa-exclamation-triangle"></span> 1 </span>
-
+                        <a href="layouts.html" ><i class="fa fa-tags"></i> <span class="nav-label">PEMBAYARAN</span>
+                        <?php 
+                            
+                            $per_peminjaman_pembayaran_valid = mysql_fetch_array(mysql_query("SELECT count(*) as jumlah_peringatan_valid FROM trx_payment p join trx_loan_application l on p.loan_app_id_fk = l.loan_app_id where p.payment_valid = 'VALID' AND p.member_id_fk = '".$_SESSION['member_id']."' and l.loan_status='MEMBAYAR TAGIHAN'"));
+                            $per_peminjaman_pembayaran_tidak_valid = mysql_fetch_array(mysql_query("SELECT count(*) as jumlah_peringatan_valid FROM trx_payment p join trx_loan_application l on p.loan_app_id_fk = l.loan_app_id where p.payment_valid = 'TIDAK VALID' AND p.member_id_fk = '".$_SESSION['member_id']."' and l.loan_status='MEMBAYAR TAGIHAN'"));
+                            if ($per_peminjaman_pembayaran_valid['jumlah_peringatan_valid'] > 0) {
+                                
+                         ?>
+                        <span class="label label-warning pull-right" data-toggle="tooltip" title="<?php echo $per_peminjaman_pembayaran_valid['jumlah_peringatan_valid']; ?> KONFIRMASI PEMBAYARAN VALID"><span class="fa fa-exclamation-triangle" ></span> <?php echo $per_peminjaman_pembayaran_valid['jumlah_peringatan_valid']; ?> </span>
+                        <?php } ?>
+                        <?php
+                            if ($per_peminjaman_pembayaran_tidak_valid['jumlah_peringatan_valid'] > 0) {
+                                
+                         ?>
+                        <span class="label label-warning pull-right" data-toggle="tooltip" title="<?php echo $per_peminjaman_pembayaran_tidak_valid['jumlah_peringatan_valid']; ?> KONFIRMASI PEMBAYARAN VALID"><span class="fa fa-exclamation-triangle" ></span> <?php echo $per_peminjaman_pembayaran_tidak_valid['jumlah_peringatan_valid']; ?> </span>
+                        <?php } ?>
+                        
                         </a>
                          <ul class="nav nav-second-level collapse">
                             <li><a href="index.php?hal=pembayaran/rekap_pembayaran">REKAP PEMBAYARAN</a></li>

@@ -93,6 +93,11 @@
 					$totals3 = $sub *  $lama;
 					$diskons3= $totals3*0.25;
 					$hasil_akhirs3 = $totals3-$diskons3;
+
+					$totals1 = $sub *  $lama;
+					$diskons1= $totals1*0.25;
+					$hasil_akhirs1 = $totals1-$diskons1;
+							
 		 ?>
 	
 		<tfoot>		 
@@ -153,12 +158,26 @@
 			</tr>
 			<tr>
 				<td colspan="5"><b>Potongan (25%)</b></td>
-				<td>Rp <?php echo rupiah($roTotal['loan_total_fee']);  ?></td>
+				<td>Rp <?php echo rupiah($diskons3);  ?></td>
 			</tr>
 			
 			<tr>
 				<td colspan="5"><b>Total Bayar = (Total - Potongan)</b></td>
 				<td><b>Rp <?php echo rupiah($hasil_akhirs3); ?></b></td>
+			</tr> 
+			<?php  }elseif ($roTotal['category_id_fk']==7) { ?>
+			<tr>
+				<td colspan="5"><b>Total = (Lama Pinjam x Subtotal)</b></td>
+				<td>Rp <?php echo rupiah($totals1); ?></td>
+			</tr>
+			<tr>
+				<td colspan="5"><b>Potongan (25%)</b></td>
+				<td>Rp <?php echo rupiah($diskons1);  ?></td>
+			</tr>
+			
+			<tr>
+				<td colspan="5"><b>Total Bayar = (Total - Potongan)</b></td>
+				<td><b>Rp <?php echo rupiah($hasil_akhirs1); ?></b></td>
 			</tr> 
 			 <?php }else {
 			 	?>
