@@ -18,7 +18,7 @@
 8. notifikasi email erorr(FIXED)
 >>>>>>> 81937dd4cb001f98e3eec8b143f2dd664cc7d83b
 
-9. query, gimana menampilkan peminjaman yg telat pengembaliannya
+9. query, gimana menampilkan peminjaman yg telat pengembaliannya(fixed)
 
 10. validasi di konfirmasi pembayaran utk perpanjangan
 
@@ -30,8 +30,9 @@
 ===========================================================================================================================================================
 manda : 
 cek jumlah notifikasi email udah lengkap blm
-nda jangan lupa lambang kalkulator di keranjang perpanjangan di hidden
-payment status (tanpa saldo) fungsinya untuk apa
+nda jangan lupa lambang kalkulator di keranjang perpanjangan di hidden (fix)
+payment status (tanpa
+ saldo) fungsinya untuk apa
 tanggal pembayaran dan tanggal konfirmasi pembayaran sama atau tidak di bayar denda, soalnya tidak dibatasi waktu
 minus di detail pembayaran, admin
 cek laporan
