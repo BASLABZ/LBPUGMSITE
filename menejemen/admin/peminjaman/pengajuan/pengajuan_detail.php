@@ -187,11 +187,12 @@
                                                         if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN') {  
                                                         if ($rowStatusLoan['loan_status'] !='PERPANJANG') {
                                                         if ($rowStatusLoan['loan_status'] !='DIKEMBALIKAN') {
+                                                        if ($rowStatusLoan['loan_status'] !='ACC FINAL') {
                                                                 
 
                                              ?>
                                             <th>Aksi</th>
-                                            <?php }}}} ?>
+                                            <?php }}}}} ?>
                                         </thead>
                                         <tbody>
                                         <?php 

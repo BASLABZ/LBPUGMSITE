@@ -135,9 +135,11 @@
                   </div>
                   
                   <div class="col-md-4">
-                        <button type="button" data-toggle="tooltip" data-placement="top"
-                         title="HITUNG PINJAMAN" onclick="hitungFIX()" class="btn btn-primary dim btn-small-dim" id="hitungsemua"><span class="fa fa-calculator"> </span> </button>
+                       <div hidden="">
+                          <button type="button" data-toggle="tooltip" data-placement="top"
+                         title="HITUNG PINJAMAN" onclick="hitungFIX()" class="btn btn-primary dim btn-small-dim" id="hitungsemua" ><span class="fa fa-calculator"> </span> </button>
                          <br>
+                       </div>
                         <label>Total Peminjaman (Rp.)</label>
                         <input type="text" readonly="" id="totalpenyewaan" name="totalpenyewaanBayar" class="form-control">
                         <br>
@@ -306,5 +308,6 @@ function hitungTotalNIlai() {
   var hitungsemuaData = document.getElementById('hitungsemua');
   hitungsemuaData.click(); 
 }
+
 </script>
  
