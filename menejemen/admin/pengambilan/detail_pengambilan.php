@@ -33,7 +33,10 @@
 						echo "<b>ALAT TELAH DIKEMBALIKAN</b>";
 					}else if ($status_loan == 'DIPINJAM') {
 						echo "<b>ALAT TELAH DI BERIKAN KEPADA MEMBER</b>";
-					} else{
+					}else if ($status_loan == 'PERPANJANG') {
+						echo "<b>ALAT MASIH DI PINJAM MEMBER</b>";
+					}
+					 else{
 						echo "<button type='submit' class='btn btn-block btn-info dim_about'> <span class='fa fa-check'></span> KONFIRMASI PEMBERIAN ALAT</button>";
 						} ?>
 				</div>

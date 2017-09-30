@@ -173,9 +173,14 @@
                                             <?php 
                                                 if ($_SESSION['level_name'] != 'kepala laboratorium') {
                                                     if ($_SESSION['level_name'] = 'koordinator penelitian') {
+
+                                                        if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN') {  
+                                                        if ($rowStatusLoan['loan_status'] !='PERPANJANG') {
+                                                             
+
                                              ?>
                                             <th>Aksi</th>
-                                            <?php }} ?>
+                                            <?php }}}} ?>
                                         </thead>
                                         <tbody>
                                         <?php 
@@ -225,8 +230,12 @@
                                                         if ($_SESSION['level_name'] != 'kepala laboratorium') {
                                                      ?>
                                                      <?php 
-                                                        if ($_SESSION['level_name'] == 'koordinator penelitian') {                                                      ?>
-                                                    <td>
+                                                        if ($_SESSION['level_name'] == 'koordinator penelitian') {   
+                                                         if ($rowStatusLoan['loan_status'] != 'MEMBAYAR TAGIHAN') {                                                      ?>
+                                                   <?php 
+                                                    if ($rowStatusLoan['loan_status'] != 'PERPANJANG') {
+                                                    ?>
+                                                     <td>
                                                     <?php 
                                                         // jika status pengajuan tidak ditolak 
                                                         if ($rowDetailPeminjaman['loan_status_detail'] != 'DITOLAK' AND $rowDetailPeminjaman['loan_status_detail'] != 'PENAWARAN DISETUJI') {
@@ -242,7 +251,8 @@
                                                                 <a href='index.php?hal=peminjaman/pengajuan/penawaran&rejected_id=<?php echo $roreject['rejected_id']; ?>' class='btn btn-warning dim_about' ><span class="fa fa-edit"></span> Lihat Detail </a> 
                                                         <?php  } ?>
                                                     </td>
-                                                    <?php } ?>
+                                                   <?php } ?>
+                                                    <?php }} ?>
                                                      <?php } ?>
                                                 
                                             </tr>
