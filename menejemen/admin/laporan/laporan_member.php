@@ -73,8 +73,8 @@
                                     <tbody>
                                         <?php
                                             $no =1;
-                                            $show = print_r("SELECT count(member_id) as total_member from tbl_member A join ref_category B on A.category_id_fk = B.category_id");
-                                            $total = $show['total_member'];
+                                            $showTotal = mysql_fetch_array(mysql_query("SELECT count(*) as total_member from tbl_member A join ref_category B on A.category_id_fk = B.category_id"));
+                                            $show = mysql_query("SELECT * from tbl_member A join ref_category B on A.category_id_fk = B.category_id");
                                             while ($runshow = mysql_fetch_array($show)) {
                                             ?>
                                             <tr>

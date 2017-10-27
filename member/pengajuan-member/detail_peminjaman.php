@@ -211,7 +211,7 @@
                     					$query_cek_status_perpanjangan = mysql_query("SELECT longtime_status from trx_longtime where loan_app_id_fk= '".$ubahstatus['loan_app_id']."'");
                     					while ($status_perpanjangan = mysql_fetch_array($query_cek_status_perpanjangan)) {
                     					             	if ($status_perpanjangan['longtime_status'] == 'ACC PERPANJANGAN') {
-                    					             		echo "<a href='index.php?hal=perpanjang/list&id=".$invoice."' h class='btn  btn-info dim_about'><span class='fa fa-print'></span> CETAK INVOICE</a>"; 
+                    					             		echo "<a href='index.php?hal=pembayaran/pembayaran&id=".$invoice."' h class='btn  btn-info dim_about'><span class='fa fa-money'></span> KONFIRMASI PEMBAYARAN</a>"; 
                     					             	}
                     					             }             
                                   
