@@ -19,10 +19,16 @@
                     $queryUpdateStatusLoanAPP_menunggu = mysql_query("UPDATE trx_loan_application set loan_status = '".$_POST['loan_status']."' where loan_app_id = '".$_POST['loan_app_id']."'");
                     if ($queryUpdateStatusLoanAPP_menunggu) {
                         
-                         echo "<script>alert ('Data berhasil disimpan'); location.href='index.php?hal=peminjaman/pengajuan/pengajuan_detail&invoice=".$invoice."'</script>";
+                         echo "<script>alert ('Data berhasil disimpan'); location.href='index.php?hal=peminjaman/perpanjang/pengajuan_detail&invoice=".$invoice."'</script>";
                     }
             }
             
+        }
+        if (isset($_POST['ubahstatus'])) {
+            $queryINsertPerpanjang = mysql_query("UPDATE trx_longtime set longtime_status = '".$_POST['status']."' where longtime_id = '".$_POST['longtime_id']."'" );
+            if ($queryINsertPerpanjang) {
+                echo "<script>alert ('Data berhasil disimpan'); location.href='index.php?hal=peminjaman/perpanjangan/pengajuan_detail&invoice=".$invoice."'</script>";
+            }
         }
         
        ?>
@@ -61,7 +67,9 @@
                                     <div class="col-md-10">
                                         <div class="row well">
                                             <?php 
-                                                $detail = mysql_query("SELECT * from trx_loan_application a join tbl_member b on a.member_id_fk=b.member_id where a.loan_invoice = '".$invoice."'");
+                                                $detail = mysql_query("SELECT * from trx_loan_application a 
+                                                    join  trx_longtime l on a.loan_app_id = l.loan_app_id_fk
+                                                    join tbl_member b on a.member_id_fk=b.member_id where a.loan_invoice = '".$invoice."'");
                                                 $rundetail = mysql_fetch_array($detail);  
                                              ?>
                                             <table>
@@ -72,7 +80,7 @@
                                                  <td></td> 
                                                  <td><b>Tanggal Pinjam</b></td>
                                                  <td><b>:</b></td>
-                                                 <td><b><?php echo $rundetail['loan_date_start']; ?></b></td>
+                                                 <td><b><?php echo $rundetail['longtime_date_start']; ?></b></td>
                                              </tr>
                                              <tr>
                                                  <td><b>Program Studi / Bidang</b></td>
@@ -81,7 +89,7 @@
                                                  <td></td>
                                                  <td><b>Tanggal Harus Kembali</b></td>
                                                  <td><b>:</b></td>
-                                                 <td><b><?php echo $rundetail['loan_date_return']; ?></b></td>
+                                                 <td><b><?php echo $rundetail['longtime_date_return']; ?></b></td>
                                              </tr>
 
                                              <tr>
@@ -91,7 +99,7 @@
                                                 <td></td>
                                                  <td><b>Lama Pinjam</b></td>
                                                  <td><b>:</b></td>
-                                                 <td><b><?php echo $rundetail['long_loan']; ?> Minggu</b></td>
+                                                 <td><b><?php echo $rundetail['longtime_long']; ?> Hari</b></td>
                                              </tr>
                                             </table>
                                              <tr>
@@ -106,68 +114,29 @@
 
                                     <div class="row">
                                        <div class="col-md-1"></div>
-                                        
-                                        <?php 
-                                        
-                                            if ($rowStatusLoan['loan_status'] == 'MENUNGGU' OR $rowStatusLoan['loan_status']=='MENUNGGU ACC FINAL') {
-
-                                         ?>
-                                        <div class="col-md-10" align="center">
-                                            <div class="row well dim_about">
-                                            <form class="role" method="POST">
-                                                <div class="col-md-2" style="padding-top: 5px; margin-right: 1px;" ><b>Status  </b></div> 
-                                                <input type="hidden" value="<?php echo $rowStatusLoan['loan_app_id']; ?>" name='loan_app_id'>
-                                                <input type="hidden" value="<?php echo $invoice; ?>" name='loan_invoice'>
-                                                <div class="col-md-7">
-                                                        <p align="left">
-                                                                <select class="form-control" name="loan_status">
-                                                            <?php 
-                                                                if ($_SESSION['level_name'] != 'kepala laboratorium'){ // jika level bukan kepala lab tampilkan opsi
+                                       <div class="col-md-10">
+                                           <form class="role" method="POST">
+                                           <div class="col-md-2"></div>
+                                               <div class="col-md-6">
+                                                    <input type="hidden" name="longtime_id" value="<?php echo $rundetail['longtime_id']; ?>">
+                                                   <select class="form-control" name="status">
+                                                   <?php 
+                                                                if ($_SESSION['level_name'] != 'kepala laboratorium'){ 
                                                              ?>
-                                                            <option value="MENUNGGU"
-                                                                <?php if($rowStatusLoan['loan_status']=='MENUNGGU'){echo "selected=selected";}?>>
-                                                                    MENUNGGU
+                                                            <option value="MENUNGGU KONFIRMASI"
+                                                                <?php if($rundetail['longtime_status']=='MENUNGGU KONFIRMASI'){echo "selected=selected";}?>>
+                                                                    MENUNGGU KONFIRMASI
                                                             </option>
-                                                            <option value="MENUNGGU ACC FINAL"
-                                                                <?php if($rowStatusLoan['loan_status']=='MENUNGGU ACC FINAL'){echo "selected=selected";}?>>
-                                                                    MENUNGGU ACC FINAL
+                                                            <option value="ACC PERPANJANGAN"
+                                                                <?php if($rundetail['longtime_status']=='ACC PERPANJANGAN'){echo "selected=selected";}?>>
+                                                                    ACC PERPANJANGAN
                                                             </option>
-                                                            <option value="DIKONFORMASI"
-                                                                <?php if($rowStatusLoan['loan_status']=='DIKONFORMASI'){echo "selected=selected";}?>>
-                                                                    DIKONFORMASI & ADA INSTRUMEN YANG DI TOLAK
-                                                            </option>
-                                                            <option value="DITOLAK"
-                                                                <?php if($rowStatusLoan['loan_status']=='DIKONFORMASI'){echo "selected=selected";}?>>
-                                                                    DITOLAK
-                                                            </option>
-                                                            <?php }else{ ?>
-                                                            <!-- bu ketua lab -->
-                                                            <option value="ACC FINAL"
-                                                                <?php if($rowStatusLoan['loan_status']=='ACC FINAL'){echo "selected=selected";}?>>
-                                                                    ACC FINAL
-                                                            </option>
-                                                            <!-- end bu ketu -->
                                                             <?php } ?>
-                                                </select>
-                                                         </p>
-                                                </div>
-                                                
-                                                    <button type="submit" name="ubah" class="btn btn-primary btn-md dim_about"> <span class="fa fa-check"></span> Konfirmasi Pengajuan</button>
-                                                    
-                                               
-                                                <div class="col-md-1"></div>  
-                                                </form>
-                                                
-                                            </div>
-                                        </div>
-                                        <?php     
-                                            }else{ ?>
-                                            <div class="col-md-10">
-                                                <div class="well">
-                                                    <center><h4>STATUS : <?php echo $rowStatusLoan['loan_status']; ?></h4></center>
-                                                </div>
-                                            </div>
-                                        <?php } ?>
+                                                   </select>
+                                               </div>
+                                               <div class="col-md-1"><button class="btn btn-warning" type="submit" name="ubahstatus">Simpan</button></div>
+                                           </form>
+                                       </div>
                                     </div>
 
                                     <div class="row">

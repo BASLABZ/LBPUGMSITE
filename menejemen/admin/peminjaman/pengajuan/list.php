@@ -81,7 +81,14 @@
                                                             ?>
                                                          </td>
                                                         <td>
-                                                        <a href="index.php?hal=peminjaman/pengajuan/pengajuan_detail&invoice=<?php echo $roPeminjaman['loan_invoice']; ?>" class='btn btn-info btn-sm dim_about'><span class="fa fa-eye"></span> Detail Pangajuan</a>
+                                                        <?php 
+                                                            if ($row_status == 'PERPANJANG') {
+                                                            
+                                                         ?>
+                                                         <a href="index.php?hal=peminjaman/perpanjangan/pengajuan_detail&invoice=<?php echo $roPeminjaman['loan_invoice']; ?>" class='btn btn-info btn-sm dim_about'><span class="fa fa-eye"></span> Detail Pangajuan</a>
+                                                         <?php }else{ ?>
+                                                         <a href="index.php?hal=peminjaman/pengajuan/pengajuan_detail&invoice=<?php echo $roPeminjaman['loan_invoice']; ?>" class='btn btn-info btn-sm dim_about'><span class="fa fa-eye"></span> Detail Pangajuan</a>
+                                                         <?php } ?>
                                                         </td>
                                                     </tr>
                                                     <?php } ?>

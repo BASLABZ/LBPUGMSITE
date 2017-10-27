@@ -4,7 +4,7 @@
 	    $query_saldo_terakhir = mysql_fetch_array(mysql_query("SELECT * FROM trx_saldo where member_id_fk = '".$_SESSION['member_id']."' ORDER BY member_id_fk DESC"));
 	    $saldo_terakhir = $query_saldo_terakhir['saldo_total']; 
 
-	    $query_saldo_penarikan  = mysql_query("SELECT SUM(saldo_cashout_amount) as total_penarikan FROM trx_saldo where member_id_fk = '".$_SESSION['member_id']."'");
+	    $query_saldo_penarikan  = mysql_query("SELECT SUM(saldo_cashout_amount) as total_penarikan FROM trx_saldo where member_id_fk = '".$_SESSION['member_id']."' ");
 	    $row_saldo_penarikan  = mysql_fetch_array($query_saldo_penarikan);
 
 	    $total_penarikan = $total_saldo['total_saldo'] - $row_saldo_penarikan['total_penarikan'];
@@ -18,10 +18,12 @@
 		if ($jumlah_penarikan <= $total_saldo_cek ) {
 			if ($passwordakun == $password) {
 				
-				$querySubmit = mysql_query("INSERT INTO trx_saldo (saldo_bankname, saldo_accountnumber, saldo_cashout_amount, saldo_status,member_id_fk) VALUES ('".$_POST['bank_name']."', '".$_POST['bank_account']."', '".$_POST['cashout_amount']."','REQUEST','".$_SESSION['member_id']."')");
-				if ($querySubmit) {
-					echo "<script> alert('Data berhasil dikirim. Silahkan tunggu konfirmasi dari Admin'); location.href='index.php?hal=saldo/saldo' </script>";exit;	
-				}
+				$querySubmit = "INSERT INTO trx_saldo (saldo_bankname, saldo_accountnumber, saldo_cashout_amount, saldo_status,member_id_fk) VALUES ('".$_POST['bank_name']."', '".$_POST['bank_account']."', '".$_POST['cashout_amount']."','REQUEST','".$_SESSION['member_id']."')";
+				print_r($querySubmit);
+				die();
+				// if ($querySubmit) {
+				// 	echo "<script> alert('Data berhasil dikirim. Silahkan tunggu konfirmasi dari Admin'); location.href='index.php?hal=saldo/saldo' </script>";exit;	
+				// }
 				
 
 			}else{

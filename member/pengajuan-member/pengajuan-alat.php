@@ -110,7 +110,7 @@
 
                                           <?php 
                                                 if ($rowPeminjaman['loan_status'] == 'PERPANJANG') {
-                                                    $queryPerpanjang = mysql_fetch_array(mysql_query("SELECT * FROM  trx_longtime WHERE loan_app_id_fk = '".$rowPeminjaman['loan_app_id']."'"));
+                                                    $queryPerpanjang = mysql_fetch_array(mysql_query("SELECT * FROM   trx_longtime WHERE loan_app_id_fk = '".$rowPeminjaman['loan_app_id']."'"));
                                                     echo "Tanggal Perpanjang Awal : "; echo $queryPerpanjang['longtime_date_start'];
                                                     echo "<br>";
                                                     echo "Tanggal Akhir Perpanjang"; echo $queryPerpanjang['longtime_date_return'];

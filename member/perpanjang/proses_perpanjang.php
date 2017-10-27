@@ -1,5 +1,8 @@
 <?php 
 
+        $tgl_pjm = date('Y-m-d',strtotime($_POST['tgl_pinjam']));
+        $tgl_kmb = date('Y-m-d',strtotime($_POST['tanggal_kembali']));
+
         $tanggawalperpanjang = jin_date_sql($_POST['tgl_pinjam']);
         $tanggalperpanjang = jin_date_sql($_POST['tanggal_kembali']);
         $lamapinjam = $_POST['lamapinjam'];
@@ -16,9 +19,9 @@
         																longtime_long,
         																longtime_date_input)
         													 VALUES ('".$invoice."',
-        													 			'PERPANJANG',
-        													 		'".$tanggawalperpanjang."',
-        													 		'".$tanggalperpanjang."',
+        													 			'MENUNGGU KONFIRMASI',
+        													 		'".$tgl_pjm."',
+        													 		'".$tgl_kmb."',
         													 		'".$totalitem."',
         													 		'".$totalbayar."',
         													 		'".$lamapinjam."',
@@ -29,7 +32,7 @@
        $queryupdatestatusloan = mysql_query("UPDATE trx_loan_application set loan_status = 'PERPANJANG' where loan_invoice = '".$invoice."'");
        
         if ($queryupdatestatusloan) {
-            echo "<script> alert('Terimakasih Data Berhasil Disimpan & Tunggu Konfirmasi Dari Kami'); location.href='index.php?hal=perpanjang/list&id=".$invoice."' </script>";exit;
+            echo "<script> alert('Terimakasih Data Berhasil Disimpan & Tunggu Konfirmasi Dari Kami'); location.href='index.php?hal=pengajuan-member/pengajuan-alat ' </script>";exit;
         }
 
  ?>
