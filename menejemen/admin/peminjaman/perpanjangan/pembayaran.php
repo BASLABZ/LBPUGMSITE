@@ -1,9 +1,7 @@
 <?php 
             // preview tagihan
             $invoice = $_GET['id'];
-            $rowPenagihan = mysql_fetch_array(mysql_query("SELECT * from trx_loan_application a 
-                                                    join  trx_longtime l on a.loan_app_id = l.loan_app_id_fk
-                                                    join tbl_member b on a.member_id_fk=b.member_id where a.loan_invoice = '".$invoice."'"));
+            $rowPenagihan = mysql_fetch_array(mysql_query("SELECT * FROM trx_loan_application a JOIN tbl_member m on a.member_id_fk = m.member_id where loan_invoice = '".$invoice."'"));
             $kodePeminjaman = $rowPenagihan['loan_app_id'];
  ?>
  <?php 
@@ -55,6 +53,11 @@
                                                         '','MENUNGGU KONFIRMASI')";
                                                         
                              $runQueryPayment = mysql_query($querySimpanPayment1);
+                             // $saldobertambah = $hasilkondisi_sisa_saldo+$saldoAwal; 
+                             // saldo awal + sisa pembayaran (saldo baru)
+                             // $querySimpanSaldo = "INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
+                             // ('".$saldobertambah."','','','','DEPOSIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
+                             // ";
                              $runquerysimpansaldo = mysql_query($querySimpanSaldo);
                              $updateStatusPeminjaman = "UPDATE trx_loan_application set loan_status = 'MEMBAYAR TAGIHAN' where loan_app_id='".$_POST['loan_app_id_fk']."'";
                              $runqueryupdatestatuspengajuan = mysql_query($updateStatusPeminjaman);
@@ -103,6 +106,12 @@
                                                         '','MENUNGGU KONFIRMASI')";
 
                              $runQueryPayment2 = mysql_query($querySimpanPayment2);
+
+
+                             // $querySimpanSaldo2 = "INSERT INTO trx_saldo (saldo_total,saldo_cashout_amount,saldo_cashout_date,saldo_photo,saldo_status,loan_app_id_fk,member_id_fk) VALUES
+                             // ('".$nominalkesaldo."','','','','DEPOSIT','".$_POST['loan_app_id_fk']."','".$_SESSION['member_id']."')
+                             // ";
+                             // $runquerysimpansaldo2 = mysql_query($querySimpanSaldo2);
                              $updateStatusPeminjaman2 = "UPDATE trx_loan_application set loan_status = 'MEMBAYAR TAGIHAN' where loan_app_id='".$_POST['loan_app_id_fk']."'";
                              $runqueryupdatestatuspengajuan2 = mysql_query($updateStatusPeminjaman2);
                              if ($runqueryupdatestatuspengajuan2) {
@@ -110,6 +119,43 @@
                              }
                     }
                     }
+                    
+                   
+                  //  if ($totalPembayarandgSaldo < $_POST['payment_bill']) {
+                  //    echo "KURANG";
+                  //    print_r($totalPembayarandgSaldo);
+                  //    print_r($_POST['payment_bill']);
+                  //     // echo "<script> alert('Jumlah Transfer Anda Kurang Dari Tagihan'); location.href='index.php?hal=pembayaran/konfirmasi_pembayaran&id=".$invoice."' </script>";exit;
+
+                  // }else if ($totalPembayarandgSaldo > $_POST['payment_bill']){
+                  //   echo "PAS DAN LEBIH";
+                  //   print_r($totalPembayarandgSaldo);
+                  //   print_r($_POST['payment_bill']);
+                   
+                  //   $querySimpanPayment = "INSERT INTO trx_payment (payment_bankname,payment_bill,
+                  //                                                 payment_amount_transfer,
+                  //                                                 payment_amount_saldo,payment_date,
+                  //                                                 payment_confirm_date,payment_photo,
+                  //                                                 payment_info,loan_app_id_fk,
+                  //                                                 member_id_fk,payment_notif,payment_status,
+                  //                                                 payment_category,payment_verification_date,
+                  //                                                 payment_valid)
+                  //                                VALUES
+                  //                                       ('".$_POST['payment_bankname']."',
+                  //                                       '".$_POST['payment_bill']."',
+                  //                                       '".$_POST['payment_amount_transfer']."',
+                  //                                       '".$hasilkondisi_sisa_saldo."',
+                  //                                       NOW(),NOW(),
+                  //                                       '".$fileName."',
+                  //                                       '".$_POST['payment_info']."',
+                  //                                       '".$_POST['loan_app_id_fk']."',
+                  //                                       '".$_SESSION['member_id']."',
+                  //                                       '',
+                  //                                       'TANPA SALDO',
+                  //                                       '".$_POST['payment_category']."',
+                  //                                       '','MENUNGGU KONFIRMASI')";
+                  //                                       print_r($querySimpanPayment); die();
+                  // }
                 }
                
              }
@@ -190,7 +236,6 @@
                                                                   "SELECT a.loan_invoice,i.instrument_name,
                                                                           d.loan_amount,d.loan_subtotal 
                                                                     FROM trx_loan_application a
-                                                                     join  trx_longtime l on a.loan_app_id = l.loan_app_id_fk
                                                                     JOIN trx_loan_application_detail d 
                                                                     ON a.loan_app_id = d.loan_app_id_fk
                                                                     JOIN ref_instrument i 
@@ -212,14 +257,12 @@
                                                   on d.loan_app_id_fk = x.loan_app_id  where x.loan_invoice ='".$invoice."' ");
                                             $xs = mysql_fetch_array($rowjumlahsubtotal);
                                             $sub = $xs['sub'];
-                                            $queryTotal = mysql_query("SELECT *
-                                                                    FROM trx_loan_application a
-                                                                     join  trx_longtime l on a.loan_app_id = l.loan_app_id_fk where a.loan_invoice ='".$invoice."'");
+                                            $queryTotal = mysql_query("SELECT loan_total_item,loan_total_fee, long_loan FROM trx_loan_application where loan_invoice ='".$invoice."'");
                                             while ($roTotal = mysql_fetch_array($queryTotal)){ 
-                                            $potongan = $roTotal['longtime_total_fee'];
+                                            $potongan = $roTotal['loan_total_fee'];
                                                 $hasil_akhirs1 = $potongan+$potongan;
                                                 // hitung potongan/diskon s2 
-                                                $lama =  $roTotal['longtime_long'];
+                                                $lama =  $roTotal['long_loan'];
                                                 $totals2 = $sub *  $lama;
                                                 $diskons2 = $totals2*0.25;
                                                 $hasil_akhirs2 = $potongan-$diskons2;
@@ -340,7 +383,7 @@
                                         <div class="form-group row">
                                           <label class="col-md-5">JENIS PEMBAYARAN</label>
                                           <div class="col-md-6">
-                                              <input type="text" class="form-control" name="payment_category" value="PERPANJANG ALAT" readonly>
+                                              <input type="text" class="form-control" name="payment_category" value="PEMINJAMAN ALAT" readonly>
                                           </div>
                                         </div>
                                         <div class="form-group row">
