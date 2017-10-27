@@ -36,8 +36,7 @@
                 <th>INVOICE</th>
                 <th>NAMA</th>
                 <th>INSTANSI</th>
-                <th>TANGGAL PINJAM</th>
-                <th>TANGGAL KEMBALI</th>
+                <th>TANGGAL PENGAJUAN</th>
             </tr>
         </thead>
         <tbody>
@@ -51,8 +50,7 @@
                     <td><?php echo $runshow['loan_invoice']; ?></td>
                     <td><?php echo $runshow['member_name']; ?></td>
                     <td><?php echo $runshow['member_institution']; ?></td>
-                    <td><?php echo $runshow['loan_date_start']; ?></td>
-                    <td><?php echo $runshow['loan_date_return']; ?></td>
+                    <td><?php echo $runshow['loan_date_input']; ?></td>
                 <?php
                 }
             ?>

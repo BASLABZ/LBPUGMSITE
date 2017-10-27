@@ -16,7 +16,42 @@
                     </div>
                     
                 </div>
+                 <div class="row">
+                      <div class="col-lg-12">
+                    <div class="panel panel-primary" style="border-color:#f8f8f8;">
+                        <div class="panel-heading">
+                            <span class=""></span>
+                        </div>
+                        <div class="panel-body dim_about">
+                            <div class="row">
+                                <form method="POST" action="index.php?hal=laporan/hasil_filter_lap_member">
+                                    <div class="col-md-4">
+                                        <div class="from-group">
+                                            <label>Periode (Dari)</label>
+                                            <input type="date" class="form-control" value="<?php echo date('Y-m-d'); ?>" name='periode1'>
+                                        </div> 
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="from-group">
+                                            <label>Periode(Sampai)</label>
+                                            <input type="date" class="form-control" value="<?php echo date('Y-m-d'); ?>" name='periode2'>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="from-group">
+                                        <br>
+                                            <button type="submit" name="filter" class="btn btn-primary"> 
+                                            <span class="fa fa-search"></span> Filter
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>    
+                        </div>
+                </div>
             </div>
+                </div>
                 <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-primary" style="border-color:#f8f8f8;">
@@ -38,7 +73,8 @@
                                     <tbody>
                                         <?php
                                             $no =1;
-                                            $show = mysql_query("SELECT * from tbl_member A join ref_category B on A.category_id_fk = B.category_id");
+                                            $show = print_r("SELECT count(member_id) as total_member from tbl_member A join ref_category B on A.category_id_fk = B.category_id");
+                                            $total = $show['total_member'];
                                             while ($runshow = mysql_fetch_array($show)) {
                                             ?>
                                             <tr>
@@ -55,6 +91,7 @@
                                         ?>
                                     </tbody>
                                 </table>
+                                Total : <?php echo $total; ?>
                              <div align="center">
                                 <a href="laporan/export_laporan_rekap_data_member_exel.php" class="btn btn-success"><span class="fa fa-file-excel-o"></span> Export to Excel</a>
                                 <a class="btn btn-warning" href="laporan/cetak_laporan_member_pdf.php" target="_BLANK"><span class="fa fa-file-pdf-o"></span> Export to PDF</a>

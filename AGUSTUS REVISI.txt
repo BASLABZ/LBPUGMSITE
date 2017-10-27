@@ -12,7 +12,11 @@
 
 7. member, data pembayaran yg masih menunggu konfirmasi emang gak muncul di menu rekap pembayaran to?????(FIXED)
 
+<<<<<<< HEAD
+8. notifikasi email erorr 
+=======
 8. notifikasi email erorr(FIXED)
+>>>>>>> 81937dd4cb001f98e3eec8b143f2dd664cc7d83b
 
 9. query, gimana menampilkan peminjaman yg telat pengembaliannya(fixed)
 

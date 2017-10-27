@@ -48,7 +48,7 @@
                                     <tbody>
                                     <?php 
                                         $no = 1;
-                                        $query = mysql_query("SELECT * from ref_instrument order by instrument_id DESC");
+                                        $query = mysql_query("SELECT * from ref_instrument order by instrument_id ASC");
                                         while ($row = mysql_fetch_array($query)) {
                                                 $var_gambar     = "../image/".$row['instrument_picture'];
                                      ?>
