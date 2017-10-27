@@ -75,6 +75,7 @@
                                             $no =1;
                                             $showTotal = mysql_fetch_array(mysql_query("SELECT count(*) as total_member from tbl_member A join ref_category B on A.category_id_fk = B.category_id"));
                                             $show = mysql_query("SELECT * from tbl_member A join ref_category B on A.category_id_fk = B.category_id");
+
                                             while ($runshow = mysql_fetch_array($show)) {
                                             ?>
                                             <tr>
@@ -91,7 +92,7 @@
                                         ?>
                                     </tbody>
                                 </table>
-                                Total : <?php echo $total; ?>
+                                Total : <?php echo $total = $showTotal['total_member']; ?>
                              <div align="center">
                                 <a href="laporan/export_laporan_rekap_data_member_exel.php" class="btn btn-success"><span class="fa fa-file-excel-o"></span> Export to Excel</a>
                                 <a class="btn btn-warning" href="laporan/cetak_laporan_member_pdf.php" target="_BLANK"><span class="fa fa-file-pdf-o"></span> Export to PDF</a>
